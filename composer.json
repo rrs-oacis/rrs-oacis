@@ -1,0 +1,14 @@
+{
+	"name" : "adf/server",
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "k14041kk",
+			"email" : "k14041kk@aitech.ac.jp"
+		}
+	],
+	"autoload" : {
+		"psr-4" : {
+			"adf\\" : "src"
+		}
+	}
+}
