@@ -18,7 +18,7 @@ $test->hello ();
 
 ?>
 
-<form enctype="multipart/form-data" action="./FileUpload.php" method="POST">
+<form enctype="multipart/form-data" action="./agent/upload" method="POST">
     <!-- MAX_FILE_SIZE は、必ず "file" input フィールドより前になければなりません -->
     <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
     <!-- input 要素の name 属性の値が、$_FILES 配列のキーになります -->

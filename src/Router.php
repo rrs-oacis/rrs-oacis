@@ -6,9 +6,8 @@ use Phroute\Phroute\RouteCollector;
 use Phroute\Phroute\Dispatcher;
 
 class Router {
-	
 	function routing() {
-		//ルーティング用ライブラリの読み込み
+		// ルーティング用ライブラリの読み込み
 		$router = new RouteCollector ();
 		
 		$router->any ( '/example', function () {
@@ -18,6 +17,12 @@ class Router {
 		$router->any ( '/', function () {
 			// トップページ
 			include ('./controller/Home.php');
+			return;
+		} );
+		
+		$router->any ( '/agent/upload', function () {
+			// zipを受け取る
+			include ('./controller/FileUpload.php');
 			return;
 		} );
 		

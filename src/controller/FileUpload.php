@@ -1,13 +1,14 @@
 <?php
-require '../../vendor/autoload.php';
 
 use adf\Config;
 
-$uploadDir = "../../" . Config::UPLOAD_DIR_NAME;
+$uploadDir = "../" . Config::UPLOAD_DIR_NAME;
 
 if (! file_exists ( $uploadDir )) {
 	mkdir ( $uploadDir );
 }
+
+echo realpath($uploadDir) . " : ";
 
 echo $_FILES ['userfile'] ['name'] ." : ";
 
