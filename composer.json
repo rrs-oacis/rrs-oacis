@@ -10,5 +10,8 @@
 		"psr-4" : {
 			"adf\\" : "src"
 		}
+	},
+	"require": {
+		"phroute/phroute": "^2.1"
 	}
 }
