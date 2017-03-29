@@ -4,6 +4,9 @@ namespace adf;
 
 use Phroute\Phroute\RouteCollector;
 use Phroute\Phroute\Dispatcher;
+use Phroute\Phroute\Exception\HttpRouteNotFoundException;
+use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
+use adf\Config;
 
 class Router {
 	function routing() {
@@ -16,28 +19,29 @@ class Router {
 		
 		$router->any ( '/', function () {
 			// トップページ
-			include ('./controller/Home.php');
+			include (Config::SRC_REAL_URL . 'controller/Home.php');
 			return;
 		} );
 		
 		$router->any ( '/agent/upload', function () {
 			// zipを受け取る
-			include ('./controller/FileUpload.php');
+			include (Config::SRC_REAL_URL . 'controller/FileUpload.php');
 			return;
 		} );
 		
 		// Print out the value returned from the dispatched function
 		try {
+			echo '  bb  :: ';
 			$dispatcher = new Dispatcher ( $router->getData () );
 			$response = $dispatcher->dispatch ( $_SERVER ['REQUEST_METHOD'], $_SERVER ['REQUEST_URI'] );
 			echo $response;
 			exit ();
-		} catch ( Phroute\Phroute\Exception\HttpRouteNotFoundException $e ) {
+		} catch ( HttpRouteNotFoundException $e ) {
 			print '<pre>';
 			print_r ( $e );
 			print '</pre>';
 			exit ();
-		} catch ( Phroute\Phroute\Exception\HttpMethodNotAllowedException $e ) {
+		} catch ( HttpMethodNotAllowedException $e ) {
 			print '<pre>';
 			print_r ( $e );
 			print '</pre>';
