@@ -6,11 +6,11 @@ use Phroute\Phroute\RouteCollector;
 use Phroute\Phroute\Dispatcher;
 use Phroute\Phroute\Exception\HttpRouteNotFoundException;
 use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
-use adf\Config;
 use adf\controller\IndexController;
 
 class Router {
 	function routing() {
+		
 		// ルーティング用ライブラリの読み込み
 		$router = new RouteCollector ();
 		
@@ -24,19 +24,24 @@ class Router {
 			return;
 		} );
 		
-		$router->any ( '/', function () {
-			// トップページ
-			// include (Config::SRC_REAL_URL . 'controller/Home.php');
-			// Controller::dispatch(new IndexController);
-			IndexController::render ();
-			return;
-		} );
+		/*
+		 * $router->any ( '/', function () {
+		 * // トップページ
+		 * // include (Config::SRC_REAL_URL . 'controller/Home.php');
+		 * // Controller::dispatch(new IndexController);
+		 * IndexController::render ();
+		 * return;
+		 * } );?
+		 */
 		
-		$router->any ( '/agent/upload', function () {
+		$router->controller ( '/', 'adf\\controller\\IndexController' );
+		
+		/*$router->any ( '/agent/upload', function () {
 			// zipを受け取る
 			include (Config::SRC_REAL_URL . 'controller/FileUpload.php');
 			return;
-		} );
+		} );*/
+		$router->controller('/agent/upload', 'adf\\controller\\FileUploadController');
 		
 		// Print out the value returned from the dispatched function
 		try {
