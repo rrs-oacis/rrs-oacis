@@ -1,4 +1,4 @@
-# rcrs-oacis
+# rrs-oacis
 
 ADFとOACISのソフト
 
