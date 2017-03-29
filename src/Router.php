@@ -1,5 +1,4 @@
 <?php
-
 namespace adf;
 
 use Phroute\Phroute\RouteCollector;
@@ -17,6 +16,12 @@ class Router {
 			return 'This route responds to any method (POST, GET, DELETE etc...) at the URI /example';
 		} );
 		
+		//静的ファイルのルーティングテスト
+		$router->any ( '/test', function () {
+			include ('./test.html');
+			return;
+		} );
+		
 		$router->any ( '/', function () {
 			// トップページ
 			include (Config::SRC_REAL_URL . 'controller/Home.php');
@@ -31,7 +36,6 @@ class Router {
 		
 		// Print out the value returned from the dispatched function
 		try {
-			echo '  bb  :: ';
 			$dispatcher = new Dispatcher ( $router->getData () );
 			$response = $dispatcher->dispatch ( $_SERVER ['REQUEST_METHOD'], $_SERVER ['REQUEST_URI'] );
 			echo $response;
