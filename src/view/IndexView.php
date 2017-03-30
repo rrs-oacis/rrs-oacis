@@ -47,10 +47,10 @@ use adf\Config;
             <form id="post-form" action="./agent/upload" method="POST"  class="form-horizontal" enctype="multipart/form-data">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">タイトル</label>
+                  <label for="inputEmail3" class="col-sm-2 control-label">エージェント名</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="title" id="inputTitle" placeholder="title" required>
+                    <input type="text" class="form-control" name="title" id="inputTitle" placeholder="name" required>
                   </div>
                 </div>
                 <div class="form-group">
@@ -65,27 +65,7 @@ use adf\Config;
   					</div>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Foo</label>
-
-                  <div class="col-sm-10">
-                    <textarea  class="form-control" id="inputPassword3" name="body" placeholder="content" rows="6"></textarea>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputPassword4" class="col-sm-2 control-label">場所</label>
-
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" name="translation" id="inputPassword4" placeholder="translation">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputPassword5" class="col-sm-2 control-label">日付</label>
-
-                  <div class="col-sm-10">
-                    <input type="datetime-local" class="form-control" name="date" id="inputPassword5" placeholder="date">
-                  </div>
-                </div>  
+                
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
