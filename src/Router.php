@@ -35,6 +35,7 @@ class Router {
 		 */
 		
 		$router->controller ( '/', 'adf\\controller\\IndexController' );
+		$router->controller ( '/hoge', 'adf\\controller\\IndexController' );
 		
 		/*$router->any ( '/agent/upload', function () {
 			// zipを受け取る
@@ -46,9 +47,12 @@ class Router {
 		// Print out the value returned from the dispatched function
 		try {
 			
-			$url = dirname($_SERVER["SCRIPT_NAME"]);
-			$url = $replace = str_replace($url, '', $_SERVER ['REQUEST_URI']);
-			//echo $url;
+			$url = $_SERVER ['REQUEST_URI'];
+		
+			if(dirname($_SERVER["SCRIPT_NAME"])!="/"){
+				$url = str_replace(dirname($_SERVER["SCRIPT_NAME"]), '', $url);
+			}
+			
 			$dispatcher = new Dispatcher ( $router->getData () );
 			$response = $dispatcher->dispatch ( $_SERVER ['REQUEST_METHOD'], $url);
 			echo $response;
