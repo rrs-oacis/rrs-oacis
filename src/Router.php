@@ -45,8 +45,12 @@ class Router {
 		
 		// Print out the value returned from the dispatched function
 		try {
+			
+			$url = dirname($_SERVER["SCRIPT_NAME"]);
+			$url = $replace = str_replace($url, '', $_SERVER ['REQUEST_URI']);
+			//echo $url;
 			$dispatcher = new Dispatcher ( $router->getData () );
-			$response = $dispatcher->dispatch ( $_SERVER ['REQUEST_METHOD'], $_SERVER ['REQUEST_URI'] );
+			$response = $dispatcher->dispatch ( $_SERVER ['REQUEST_METHOD'], $url);
 			echo $response;
 			exit ();
 		} catch ( HttpRouteNotFoundException $e ) {
