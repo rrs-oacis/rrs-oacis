@@ -19,10 +19,12 @@ class Config{
 	//エージェントデータを保管するDir
 	const AGENTS_DIR_NAME=  "agents";
 	
-	//起点(public/index.html)からのsrcの位置
-	const SRC_REAL_URL = "../src/";
+	//起点(public/_app.html)からのsrcの位置
+	static $SRC_REAL_URL = "./src/";
 	
 	static $RESOURCE_PATH = "/";
+	
+	static $ROUTER_PATH = "/";
 	
 }
 

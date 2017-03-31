@@ -35,6 +35,7 @@ class Router {
 		 */
 		
 		$router->controller ( '/', 'adf\\controller\\IndexController' );
+		$router->controller ( '/index.php', 'adf\\controller\\IndexController' );
 		$router->controller ( '/hoge', 'adf\\controller\\IndexController' );
 		
 		/*$router->any ( '/agent/upload', function () {

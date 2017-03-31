@@ -7,7 +7,7 @@ use adf\controller\AbstractController;
 class IndexController extends AbstractController{
 	
 	public function get(){
-		include (Config::SRC_REAL_URL . 'view/IndexView.php');
+		include (Config::$SRC_REAL_URL . 'view/IndexView.php');
 	}
 	
 }
