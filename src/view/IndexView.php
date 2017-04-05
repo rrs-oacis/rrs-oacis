@@ -1,6 +1,3 @@
-<?php 
-use adf\Config;
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,6 +77,9 @@ use adf\Config;
             </div>   
           </div>
           <!-- /.box -->
+          
+          <!-- エージェントリストのbox  -->
+          <?php include 'component/box-agentlist.php';?>
 
     </section>
     <!-- /.content -->
@@ -113,70 +113,4 @@ $(".readonly").keydown(function(e){
   });
 </script>
 
-<script type="text/javascript">
-
-/*
-$("#post-form").submit(function(e){
-
-	$('#form-overlay').show();
-	e.preventDefault(); 
-	var form = document.querySelector('#post-form');
-	fetch('<?=$_SERVER["PHP_SELF"] ?>/../action.php', {
-	    method: 'POST',
-	    body: new FormData(form)
-	  })
-	  .then(function(response) {
-	    return response.json()
-	  })
-	  .then(function(json) {
-		  $('#form-overlay').hide();
-      if(json["result"]=="success"){
-    	  toastr.success(json["title"],"登録完了");
-    	  var form = document.querySelector('#post-form');
-    	  $(form).find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
-      }
-	    console.log(json);
-	    
-	  });
-    
-	
- });
-*/
-
-
-</script>
-</body>
-</html>
-
-
-<?php 
-/*
-<!DOCTYPE htmm">
-<html>
-<head>
-<title>RRS - ADF</title>
-</head>
-
-<body>
-
-Hello World!
-
-
-
-//$test = new adf\test\Test2 ();
-
-//$test->hello ();
-
 ?>
-
-<form enctype="multipart/form-data" action="./agent/upload" method="POST">
-    <!-- MAX_FILE_SIZE は、必ず "file" input フィールドより前になければなりません -->
-    <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-    <!-- input 要素の name 属性の値が、$_FILES 配列のキーになります -->
-    このファイルをアップロード: <input name="userfile" type="file" />
-    <input type="submit" value="ファイルを送信" />
-</form>
-</body>
-</html>
-
- */?>

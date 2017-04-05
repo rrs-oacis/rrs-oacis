@@ -1,5 +1,6 @@
 <?php 
 ini_set ( 'display_errors', 1 );
+date_default_timezone_set('asia/tokyo');
 
 $ROUTER_PATH = "";
 $SRC_REAL_URL = "";

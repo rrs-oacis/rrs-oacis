@@ -17,7 +17,7 @@
     <ul class="sidebar-menu">
       <li class="header">MAIN NAVIGATION</li>
       <li><a href="./index.php"><i class="fa fa-dashboard"></i> <span>ダッシュボード</span></a></li>
-      <li><a href="./plans.php"><i class="fa fa-book"></i> <span>予定一覧</span></a></li>
+      <li><a href="/agents"><i class="fa fa-book"></i> <span>エージェント一覧</span></a></li>
       
       <li><a href="./week.php"> <i class="fa fa-table"></i> <span>予定</span> <span class="pull-right-container"> 
             <small id="sidebar-week-label-green" class="label pull-right bg-green">-</small>

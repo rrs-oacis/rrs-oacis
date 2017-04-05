@@ -45,6 +45,8 @@ class Router {
 		} );*/
 		$router->controller('/agent/upload', 'adf\\controller\\FileUploadController');
 		
+		$router->controller('/agents', 'adf\\controller\\AgentListController');
+		
 		// Print out the value returned from the dispatched function
 		try {
 			
