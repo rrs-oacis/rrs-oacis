@@ -8,7 +8,7 @@ ADFとOACISのソフト
 
 ライブラリのインストール
 ```
-$ composer install
+$ ./setup.sh
 ```
 
 サーバーの起動
