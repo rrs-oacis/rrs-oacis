@@ -41,7 +41,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form id="post-form" action="./agent/upload" method="POST"  class="form-horizontal" enctype="multipart/form-data">
+            <form id="post-form" action="./agent_upload" method="POST"  class="form-horizontal" enctype="multipart/form-data">
               <div class="box-body">
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">エージェント名</label>

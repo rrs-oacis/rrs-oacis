@@ -34,18 +34,31 @@ class Router {
 		 * } );?
 		 */
 		
+		
+		
+		
 		$router->controller ( '/', 'adf\\controller\\IndexController' );
 		$router->controller ( '/index.php', 'adf\\controller\\IndexController' );
-		$router->controller ( '/hoge', 'adf\\controller\\IndexController' );
+		
+		$router->controller('/agent_upload', 'adf\\controller\\FileUploadController');
+		
+		$router->controller('/agents', 'adf\\controller\\AgentListController');
+		
+		$router->controller('/agent', 'adf\\controller\\AgentController');
+		
 		
 		/*$router->any ( '/agent/upload', function () {
 			// zipを受け取る
 			include (Config::SRC_REAL_URL . 'controller/FileUpload.php');
 			return;
 		} );*/
-		$router->controller('/agent/upload', 'adf\\controller\\FileUploadController');
 		
-		$router->controller('/agents', 'adf\\controller\\AgentListController');
+		
+		
+		
+		
+		
+		
 		
 		// Print out the value returned from the dispatched function
 		try {

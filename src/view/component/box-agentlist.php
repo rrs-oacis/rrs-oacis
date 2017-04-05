@@ -1,3 +1,6 @@
+<?php
+use adf\Config;
+?>
 <div class="row">
   <div class="col-xs-12">
     <div class="box">
@@ -24,16 +27,29 @@
             <th>UUID</th>
             <th>エージェント名</th>
             <th>アップロード日</th>
-            <th>Status</th>
+            <th>ステータス</th>
+            <th>リンク</th>
           </tr>
                 <?php foreach($agents as $agent){?>
+                
                 <tr>
-                  <td><?= $agent["uuid"]?></td>
+                  <td>
+                  <?= $agent["uuid"]?>
+                  </td>
                   <td><?= $agent["name"]?></td>
                   <td><?= $agent["upload_date"]?></td>
                   <td><span class="label label-success">Approved</span></td>
+                  <td>
+                  <a href="<?=Config::$TOP_PATH ?>agent/<?= $agent["uuid"]?>">
+                  詳細情報
+                  </a>
+                  </td>
+                  
                 </tr>
+                
                 <?php }?>
+                
+                
                 
               </table>
       </div>

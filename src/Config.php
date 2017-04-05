@@ -27,6 +27,8 @@ class Config{
 	
 	static $RESOURCE_PATH = "/";
 	
+	static $TOP_PATH = "/";
+	
 	static $ROUTER_PATH = "/";
 	
 }

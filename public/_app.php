@@ -27,7 +27,8 @@ if(mb_substr(dirname($_SERVER["SCRIPT_NAME"]), -1)!="/"){
 	$resourcePath = $resourcePath . "/";
 }
 
-Config::$RESOURCE_PATH = $_SERVER['HTTP_HOST'].$resourcePath;
+Config::$RESOURCE_PATH =  (empty($_SERVER["HTTPS"]) ? "http://" : "https://"). $_SERVER['HTTP_HOST'].$resourcePath;
+Config::$TOP_PATH = Config::$RESOURCE_PATH;
 
 //PHPのビルトインウェブサーバー用
 if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css|html)$/', $_SERVER["REQUEST_URI"])) {
