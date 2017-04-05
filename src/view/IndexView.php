@@ -1,3 +1,6 @@
+<?php
+use adf\Config;
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,9 +30,8 @@
         <small>操作画面</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Index</a></li>
-        <li><a href="#">ダッシュボード</a></li>
-        <li class="active">エージェントを追加</li>
+        <li><a href="<?= Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i> Index</a></li>
+        <li class="active">ダッシュボード</li>
       </ol>
     </section>
 
@@ -112,5 +114,3 @@ $(".readonly").keydown(function(e){
     $('#photoCover').val($(this).val());
   });
 </script>
-
-?>
