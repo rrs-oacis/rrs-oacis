@@ -4,3 +4,12 @@ RewriteCond %{REQUEST_FILENAME} !-f
 #RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . _app.php [L]
 </IfModule>
+
+#メモリ使用量の制限
+php_value memory_limit "1000M"
+ 
+#POSTデータに許可される最大サイズ
+php_value post_max_size "1000M"
+ 
+#1つのファイルアップロードに許可される最大サイズ
+php_value upload_max_filesize "1000M"

@@ -57,7 +57,7 @@ use adf\Config;
                   <label for="inputPassword3" class="col-sm-2 control-label">ファイル</label>
 
                   <div class="col-sm-10">
-                  	<input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                  	<input type="hidden" name="MAX_FILE_SIZE" value="1073741824" />
                     <input id="lefile" type="file" class="form-control" name="userfile" style="display:none"  />
                     <div class="input-group">
                     <input type="text" id="photoCover" class="form-control readonly" placeholder="選択されていません" required>
