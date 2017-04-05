@@ -49,6 +49,8 @@ class FileUploadController extends AbstractController {
 		
 		$uploadFile = Config::$ROUTER_PATH. Config::UPLOAD_DIR_NAME . "/" . $uuid. ".zip";
 		
+		$fileName = $_POST['agent_name'];
+		
 		// ZIPファイルをオープン
 		$res = $zip->open($uploadFile);
 		
@@ -56,10 +58,20 @@ class FileUploadController extends AbstractController {
 		if ($res === true) {
 			
 			// 圧縮ファイル内の全てのファイルを指定した解凍先に展開する
-			$zip->extractTo($agentDir . "/" . $uuid . "/");
+			
+			$fileDir = $agentDir . "/" .$fileName."_" . $uuid;
+			
+			$zip->extractTo($fileDir. "/");
 			
 			// ZIPファイルをクローズ
 			$zip->close();
+			
+			$metaData = [];
+			$metaData['name'] =$fileName;
+			$metaData['uuid'] =$uuid;
+			$metaData['upload_date'] = time();
+			$arr = json_encode($metaData);
+			file_put_contents($fileDir . "/" . Config::AGENT_META_JSON , $arr);
 			
 		}
 		

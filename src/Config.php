@@ -19,6 +19,9 @@ class Config{
 	//エージェントデータを保管するDir
 	const AGENTS_DIR_NAME=  "agents";
 	
+	//エージェントのデータを管理するメタJson
+	const AGENT_META_JSON = "agent_meta.json";
+	
 	//起点(public/_app.html)からのsrcの位置
 	static $SRC_REAL_URL = "./src/";
 	

@@ -50,7 +50,7 @@ use adf\Config;
                   <label for="inputEmail3" class="col-sm-2 control-label">エージェント名</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="title" id="inputTitle" placeholder="name" required>
+                    <input type="text" class="form-control" name="agent_name" id="inputTitle" placeholder="name" required>
                   </div>
                 </div>
                 <div class="form-group">
