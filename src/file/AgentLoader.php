@@ -9,6 +9,11 @@ class AgentLoader {
 		
 		// ファイルの取得
 		$agentDir = Config::$ROUTER_PATH . Config::AGENTS_DIR_NAME;
+		
+		if (! file_exists ( $agentDir)) {
+			mkdir ( $agentDir);
+		}
+		
 		$files = scandir ( $agentDir );
 		$files = array_filter ( $files, function ($file) { // 注(1)
 			return ! in_array ( $file, array (
