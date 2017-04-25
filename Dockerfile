@@ -11,6 +11,7 @@ RUN wget https://www.dotdeb.org/dotdeb.gpg
 RUN apt-key add dotdeb.gpg
 RUN apt-get update -y
 RUN apt-get install -y php
+RUN apt-get -y install php-mbstring
 
 #ADF
 RUN mkdir /adf
@@ -21,14 +22,17 @@ RUN mkdir /adf/public
 COPY public /adf/public/
 COPY composer.json /adf/
 COPY setup.sh /adf/
-COPY server.sh /adf/
+COPY docker_php_server.sh /adf/
 COPY php.ini /adf/
 
-
+#PHP Setup
+USER root
 WORKDIR /adf
 RUN ./setup.sh
 WORKDIR /
 
-CMD ["/adf/server.sh"]
+VOLUME /adf/src
+
+CMD ["/adf/docker_php_server.sh"]
 
 EXPOSE 6040
