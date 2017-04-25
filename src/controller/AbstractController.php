@@ -15,17 +15,25 @@ abstract class AbstractController{
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
 			self::post();
 		}else{
-			self::get($param);
+			if($param!=null){
+				self::getP($param);
+			}else{
+				self::get();
+			}
 		}
 		
 	}
 	
-	public function get($param= null){
-		throw new HttpMethodNotAllowedException('get : ' .$_SERVER ['REQUEST_URI']);
+	public function getP($param= null){
+		throw new HttpMethodNotAllowedException('[AbstractController] getP() : ' .$_SERVER ['REQUEST_URI']);
+	}
+	
+	public function get(){
+		throw new HttpMethodNotAllowedException('[AbstractController] get() : ' .$_SERVER ['REQUEST_URI']);
 	}
 	
 	public function post(){
-		throw new HttpMethodNotAllowedException('post : ' .$_SERVER ['REQUEST_URI']);
+		throw new HttpMethodNotAllowedException('[AbstractController] post() : ' .$_SERVER ['REQUEST_URI']);
 	}
 	
 }
