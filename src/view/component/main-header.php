@@ -46,17 +46,21 @@ var PAGESIZE = 1;
           </ul></li> -->
           
         <!-- ユーザーUser Account: style can be found in dropdown.less -->
+        <!-- 
         <li class="dropdown user user-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="./dist/img/avatar04.png" class="user-image"
             alt="User Image"> <span class="hidden-xs"><?= USER_NAME ?></span>
         </a>
           <ul class="dropdown-menu">
+           -->
             <!-- User image -->
+            <!-- 
             <li class="user-header"><img src="./dist/img/avatar04.png" class="img-circle" alt="User Image">
               <p>
 <?= USER_NAME ?>
 <small>Hoge</small>
               </p></li>
             <!-- Menu Footer-->
+            <!-- 
             <li class="user-footer">
               <div class="pull-right">
                 <form action="./action.php" method="post">
@@ -65,7 +69,9 @@ var PAGESIZE = 1;
                 </form>
               </div>
             </li>
+            
           </ul></li>
+           -->
       </ul>
     </div>
   </nav>
