@@ -74,14 +74,19 @@ class Router {
 			echo $response;
 			exit ();
 		} catch ( HttpRouteNotFoundException $e ) {
-			print '<pre>';
-			print_r ( $e );
-			print '</pre>';
+			
+			include (Config::$SRC_REAL_URL . 'view/404ErrorView.php');
+			//echo 'bb';
+			//print '<pre>';
+			//print_r ( $e );
+			//print '</pre>';
 			exit ();
 		} catch ( HttpMethodNotAllowedException $e ) {
-			print '<pre>';
-			print_r ( $e );
-			print '</pre>';
+			
+			include (Config::$SRC_REAL_URL . 'view/404ErrorView.php');
+			//print '<pre>';
+			//print_r ( $e );
+			//print '</pre>';
 			exit ();
 		}
 	}
