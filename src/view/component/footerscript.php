@@ -16,6 +16,12 @@ use adf\Config;
 <!-- Toastr -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js'></script>  
 
+<!-- 必要化ちょっと不明　 -->
+<!-- SlimScroll -->
+<script src="<?= Config::$RESOURCE_PATH?>plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="<?= Config::$RESOURCE_PATH?>plugins/fastclick/fastclick.js"></script>
+
 <?php if(!strpos($_SERVER["REQUEST_URI"],'login.php')){?>
 
 <!-- <script src='./common.js'></script> -->  
