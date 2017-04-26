@@ -19,6 +19,9 @@ RUN mkdir /adf
 RUN mkdir /adf/src
 COPY src /adf/src/
 
+RUN mkdir /adf/ruby
+COPY ruby /adf/ruby/
+
 RUN mkdir /adf/public
 COPY public /adf/public/
 COPY composer.json /adf/
@@ -34,6 +37,7 @@ WORKDIR /
 
 VOLUME /adf/src
 VOLUME /adf/public
+VOLUME /adf/ruby
 
 
 CMD ["/adf/docker_php_server.sh"]
