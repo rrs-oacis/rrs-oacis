@@ -35,11 +35,12 @@ WORKDIR /adf
 RUN ./setup.sh
 WORKDIR /
 
+EXPOSE 6040
+
 VOLUME /adf/src
 VOLUME /adf/public
 VOLUME /adf/ruby
 
+WORKDIR /adf
+CMD ["./docker_php_server.sh"]
 
-CMD ["/adf/docker_php_server.sh"]
-
-EXPOSE 6040
