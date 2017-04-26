@@ -15,6 +15,7 @@ class Router {
 		// ルーティング用ライブラリの読み込み
 		$router = new RouteCollector ();
 		
+		/*
 		$router->any ( '/example', function () {
 			return 'This route responds to any method (POST, GET, DELETE etc...) at the URI /example';
 		} );
@@ -23,7 +24,7 @@ class Router {
 		$router->any ( '/test', function () {
 			include ('./test.html');
 			return;
-		} );
+		} );*/
 		
 		/*
 		 * $router->any ( '/', function () {
@@ -37,14 +38,17 @@ class Router {
 		
 		
 		
-		
+		//トップページ　
 		$router->controller ( '/', 'adf\\controller\\IndexController' );
 		$router->controller ( '/index.php', 'adf\\controller\\IndexController' );
 		
+		//Zipアップロード(Post)
 		$router->controller('/agent_upload', 'adf\\controller\\FileUploadController');
 		
+		//エージェントのリスト
 		$router->controller('/agents', 'adf\\controller\\AgentListController');
 		
+		//エージェントの詳細画面
 		$router->controller('/agent', 'adf\\controller\\AgentController');
 		
 		
@@ -53,12 +57,6 @@ class Router {
 			include (Config::SRC_REAL_URL . 'controller/FileUpload.php');
 			return;
 		} );*/
-		
-		
-		
-		
-		
-		
 		
 		
 		// Print out the value returned from the dispatched function
