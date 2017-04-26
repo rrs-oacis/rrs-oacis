@@ -114,3 +114,4 @@ $(".readonly").keydown(function(e){
     $('#photoCover').val($(this).val());
   });
 </script>
+</body>

@@ -56,13 +56,6 @@ use adf\Config;
 <!-- ./wrapper -->
 
 <?php include 'component/footerscript.php';?>
-<!-- SlimScroll -->
-<script src="./plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="./plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE for demo purposes -->
-
-<!-- <script src="./dist/js/demo.js"></script> -->
 
 <script>
 $(".readonly").keydown(function(e){
@@ -72,3 +65,4 @@ $(".readonly").keydown(function(e){
     $('#photoCover').val($(this).val());
   });
 </script>
+</body>
