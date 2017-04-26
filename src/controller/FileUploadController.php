@@ -6,6 +6,7 @@ use ZipArchive;
 
 use adf\Config;
 use adf\controller\AbstractController;
+use adf\Agent;
 
 class FileUploadController extends AbstractController {
 	
@@ -66,11 +67,19 @@ class FileUploadController extends AbstractController {
 			// ZIPファイルをクローズ
 			$zip->close();
 			
-			$metaData = [];
+			$agent = new Agent();
+			
+			/*$metaData = [];
 			$metaData['name'] =$fileName;
 			$metaData['uuid'] =$uuid;
 			$metaData['upload_date'] = time();
-			$arr = json_encode($metaData);
+			$arr = json_encode($metaData);*/
+			
+			$agent->setName($fileName);
+			$agent->setUUID($uuid);
+			$agent->setUploadDate(time());
+			$arr = $agent->getJson();
+			
 			file_put_contents($fileDir . "/" . Config::AGENT_META_JSON , $arr);
 			
 		}
