@@ -56,12 +56,14 @@ use adf\Config;
                   <label for="inputPassword3" class="col-sm-2 control-label">ファイル</label>
 
                   <div class="col-sm-10">
+                    <div style="position:relative;">
                   	<input type="hidden" name="MAX_FILE_SIZE" value="1073741824" />
-                    <input id="lefile" type="file" class="form-control" name="userfile" style="display:none"  />
-                    <div class="input-group">
-                    <input type="text" id="photoCover" class="form-control readonly" placeholder="選択されていません" required>
+                    <input id="lefile" type="file" class="form-control" name="userfile" style="position:absolute;" required  />
+                    <div class="input-group" style="position:absolute;">
+                    <input  type="text" id="photoCover" class="form-control readonly" placeholder="選択されていません" disabled>
   					<span class="input-group-btn"><button type="button" class="btn btn-info" onclick="$('input[id=lefile]').click();">Browse</button></span>
   					</div>
+                    </div>
                   </div>
                 </div>
                 
@@ -115,6 +117,8 @@ $(".readonly").keydown(function(e){
   });
 
   $("#post-form").submit(function(e){
+
+	    
 
 		$('#form-overlay').show();
 		e.preventDefault(); 
