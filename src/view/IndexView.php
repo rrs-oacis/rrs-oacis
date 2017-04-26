@@ -113,5 +113,32 @@ $(".readonly").keydown(function(e){
   $('input[id=lefile]').change(function() {
     $('#photoCover').val($(this).val());
   });
+
+  $("#post-form").submit(function(e){
+
+		$('#form-overlay').show();
+		e.preventDefault(); 
+		var form = document.querySelector('#post-form');
+		fetch('./agent_upload', {
+		    method: 'POST',
+		    body: new FormData(form)
+		  })
+		  .then(function(response) {
+		    return response.json()
+		  })
+		  .then(function(json) {
+			  console.log(json);
+			  $('#form-overlay').hide();
+	      if(json["result"]=="success"){
+	    	  //toastr.success(json["title"],"登録完了");
+	    	  //var form = document.querySelector('#post-form');
+	    	  //$(form).find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
+	      }
+		    console.log(json);
+		    
+		  });
+	    
+		
+	 });
 </script>
 </body>

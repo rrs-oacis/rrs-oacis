@@ -21,6 +21,8 @@ class FileUploadController extends AbstractController {
 		
 		self::extractZip($uuid);
 		
+		//TODO オアシスに登録処理
+		
 	}
 	
 	private function receivePost($uuid){
@@ -32,11 +34,17 @@ class FileUploadController extends AbstractController {
 		}
 		//phpinfo();
 		
-		echo realpath ( $uploadDir ) . " : ";
+		$echoDate = [];
 		
-		echo $_FILES ['userfile'] ['name'] . " : ";
+		$echoDate['uploadDir']  = realpath ( $uploadDir );
 		
-		echo $_FILES ['userfile'] ['tmp_name'];
+		$echoDate['name'] = $_FILES ['userfile'] ['name'];
+		
+		$echoDate['tmp_name'] = $_FILES ['userfile'] ['tmp_name'];
+		
+		echo json_encode($echoDate);
+		
+		
 		
 		//move_uploaded_file ( $_FILES ['userfile'] ['tmp_name'], $uploadDir . "/" . $_FILES ['userfile'] ['name'] );
 		move_uploaded_file ( $_FILES ['userfile'] ['tmp_name'], $uploadDir . "/" . $uuid. ".zip");
