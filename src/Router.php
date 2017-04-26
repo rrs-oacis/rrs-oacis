@@ -7,6 +7,7 @@ use Phroute\Phroute\Dispatcher;
 use Phroute\Phroute\Exception\HttpRouteNotFoundException;
 use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
 use adf\controller\IndexController;
+use adf\error\AgentNotFoundException;
 
 class Router {
 	function routing() {
@@ -87,6 +88,9 @@ class Router {
 			//print '<pre>';
 			//print_r ( $e );
 			//print '</pre>';
+			exit ();
+		} catch (AgentNotFoundException $e){
+			include (Config::$SRC_REAL_URL . 'view/404ErrorView.php');
 			exit ();
 		}
 	}

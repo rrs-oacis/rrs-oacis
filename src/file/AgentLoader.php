@@ -4,6 +4,7 @@ namespace adf\file;
 
 use adf\Config;
 use adf\Agent;
+use adf\error\AgentNotFoundException;
 
 class AgentLoader {
 	
@@ -78,6 +79,8 @@ class AgentLoader {
 			}
 			
 		}
+		
+		throw new AgentNotFoundException('Not Found Agent : UUID = '.$uuid);
 		
 		return null;
 	}
