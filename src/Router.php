@@ -76,6 +76,7 @@ class Router {
 			exit ();
 		} catch ( HttpRouteNotFoundException $e ) {
 			
+			header("HTTP/1.0 404 Not Found");
 			include (Config::$SRC_REAL_URL . 'view/404ErrorView.php');
 			//echo 'bb';
 			//print '<pre>';
@@ -84,12 +85,15 @@ class Router {
 			exit ();
 		} catch ( HttpMethodNotAllowedException $e ) {
 			
+			header("HTTP/1.0 404 Not Found");
 			include (Config::$SRC_REAL_URL . 'view/404ErrorView.php');
 			//print '<pre>';
 			//print_r ( $e );
 			//print '</pre>';
 			exit ();
 		} catch (AgentNotFoundException $e){
+			
+			header("HTTP/1.0 404 Not Found");
 			include (Config::$SRC_REAL_URL . 'view/404ErrorView.php');
 			exit ();
 		}
