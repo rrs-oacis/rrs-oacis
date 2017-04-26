@@ -10,7 +10,7 @@ abstract class AbstractController{
 	
 	public function anyIndex($param= null){
 		
-		$resource_uri = self::$resource_uri;
+		$resource_uri = $this->resource_uri;
 		
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
 			self::post();
