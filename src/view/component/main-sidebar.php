@@ -23,6 +23,7 @@ use adf\Config;
       <li class="header">MAIN NAVIGATION</li>
       <li><a href="<?=Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i> <span>ダッシュボード</span></a></li>
       <li><a href="<?=Config::$TOP_PATH ?>agents"><i class="fa fa-book"></i> <span>エージェント一覧</span></a></li>
+      <li><a href="<?=Config::$TOP_PATH ?>setting"><i class="fa fa-gear"></i> <span>設定</span></a></li>
       
       <!-- 
       <li><a href="./week.php"> <i class="fa fa-table"></i> <span>予定</span> <span class="pull-right-container"> 
