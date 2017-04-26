@@ -21,7 +21,7 @@ use adf\Config;
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu">
       <li class="header">MAIN NAVIGATION</li>
-      <li><a href="<?=Config::$TOP_PATH ?>index.php"><i class="fa fa-dashboard"></i> <span>ダッシュボード</span></a></li>
+      <li><a href="<?=Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i> <span>ダッシュボード</span></a></li>
       <li><a href="<?=Config::$TOP_PATH ?>agents"><i class="fa fa-book"></i> <span>エージェント一覧</span></a></li>
       
       <!-- 
