@@ -32,6 +32,8 @@ RUN ./setup.sh
 WORKDIR /
 
 VOLUME /adf/src
+VOLUME /adf/public
+
 
 CMD ["/adf/docker_php_server.sh"]
 
