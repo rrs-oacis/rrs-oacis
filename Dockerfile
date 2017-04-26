@@ -12,6 +12,7 @@ RUN apt-key add dotdeb.gpg
 RUN apt-get update -y
 RUN apt-get install -y php
 RUN apt-get -y install php-mbstring
+RUN apt-get -y install php7.0-zip
 
 #ADF
 RUN mkdir /adf
