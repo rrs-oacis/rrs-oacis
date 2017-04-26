@@ -42,6 +42,8 @@ class Router {
 		$router->controller ( '/', 'adf\\controller\\IndexController' );
 		$router->controller ( '/index.php', 'adf\\controller\\IndexController' );
 		
+		$router->controller ( '/setting', 'adf\\controller\\SettingController' );
+		
 		//Zipアップロード(Post)
 		$router->controller('/agent_upload', 'adf\\controller\\FileUploadController');
 		
