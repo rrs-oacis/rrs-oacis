@@ -1,4 +1,6 @@
 <?php 
+//phpinfo();
+
 ini_set ( 'display_errors', 1 );
 date_default_timezone_set('asia/tokyo');
 
@@ -17,6 +19,7 @@ require $ROUTER_PATH.'vendor/autoload.php';
 
 use adf\Router;
 use adf\Config;
+use adf\Localize;
 
 Config::$ROUTER_PATH = $ROUTER_PATH;
 Config::$SRC_REAL_URL = $SRC_REAL_URL;
@@ -35,11 +38,21 @@ if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css|html)$/', $_SERVER["REQUEST_URI"])
 	return false;    // リクエストされたリソースをそのままの形式で扱います。
 }
 
+Localize::init();
+
 //URLを元にルーティング
 $router = new Router();
 $router->routing();
 
 
+
+?>
+
+<?php 
+
+function _l($s){
+	return Localize::getI18N($s);
+}
 
 ?>
 

@@ -26,11 +26,11 @@ use adf\Config;
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <small>操作画面</small>
+        <small><?= _l("adf.operation_screen"); ?></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?=Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i> Index</a></li>
-        <li><a href="<?=Config::$TOP_PATH ?>agents"><i class="fa fa-dashboard"></i> エージェントリスト</a></li>
+        <li><a href="<?=Config::$TOP_PATH ?>agents"><i class="fa fa-dashboard"></i> <?= _l("adf.agent_list"); ?></a></li>
         <li class="active"><?= $agent["name"] ?></li>
       </ol>
     </section>

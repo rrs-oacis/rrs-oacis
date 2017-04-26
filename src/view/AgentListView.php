@@ -23,11 +23,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <small>操作画面</small>
+        <small><?= _l("adf.operation_screen"); ?></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Index</a></li>
-        <li class="active">エージェントリスト</li>
+        <li class="active"><?= _l("adf.agent_list"); ?></li>
       </ol>
     </section>
 
