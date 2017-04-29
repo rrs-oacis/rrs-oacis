@@ -5,7 +5,7 @@ namespace adf;
 class Config{
 	
 	//アプリの名前
-	const APP_NAME = "RRS-OASIC";
+	const APP_NAME = "RRS-OACIS";
 	
 	//アプリの略称
 	const APP_MIN_NAME = "RO";
