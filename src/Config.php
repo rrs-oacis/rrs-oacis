@@ -16,8 +16,11 @@ class Config{
 	//アップロードされたZpiを保存するDirの名前
 	const UPLOAD_DIR_NAME=  "zip_agents";
 	
-	//エージェントデータを保管するDir
+	//エージェントデータを保管するDir 未使用
 	const AGENTS_DIR_NAME=  "agents";
+	
+	//エージェントを管理するDir 絶対パス
+	const AGENTS_DIR=  "/home/oacis/adf/rrsenv/AGENT";
 	
 	//エージェントのデータを管理するメタJson
 	const AGENT_META_JSON = "agent_meta.json";

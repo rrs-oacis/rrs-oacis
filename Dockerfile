@@ -41,6 +41,10 @@ USER root
 RUN /home/oacis/adf/setup.sh
 WORKDIR /
 
+RUN mkdir /home/oacis/adf/rrsenv
+RUN mkdir /home/oacis/adf/rrsenv/MAP
+RUN mkdir /home/oacis/adf/rrsenv/AGENT
+
 EXPOSE 6040
 
 VOLUME /home/oacis/adf/src

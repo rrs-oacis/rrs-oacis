@@ -56,7 +56,7 @@ class FileUploadController extends AbstractController {
 		
 		$zip = new ZipArchive();
 		
-		$agentDir = Config::$ROUTER_PATH. Config::AGENTS_DIR_NAME;
+		$agentDir = Config::AGENTS_DIR;//Config::$ROUTER_PATH. Config::AGENTS_DIR_NAME;
 		
 		$uploadFile = Config::$ROUTER_PATH. Config::UPLOAD_DIR_NAME . "/" . $uuid. ".zip";
 		
