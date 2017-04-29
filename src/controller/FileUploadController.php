@@ -22,6 +22,8 @@ class FileUploadController extends AbstractController {
 		self::extractZip($uuid);
 		
 		//TODO オアシスに登録処理
+		$output = shell_exec("sh ". Config::$ROUTER_PATH. "ruby/add_agent.sh test " . $uuid);
+		
 		
 	}
 	
