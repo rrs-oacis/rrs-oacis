@@ -2,6 +2,8 @@ FROM oacis/oacis
 
 MAINTAINER kamiya <k14041kk@aitech.ac.jp>
 
+ENV DEBIAN_FRONTEND noninteractive
+
 #PHP install
 RUN apt-get -y -f remove libzip2
 
@@ -11,11 +13,11 @@ RUN apt-get update -y
 RUN echo deb http://packages.dotdeb.org jessie all >> /etc/apt/sources.list
 RUN wget https://www.dotdeb.org/dotdeb.gpg
 RUN apt-key add dotdeb.gpg
-RUN apt-get update -y
+RUN apt-get -y update 
 RUN apt-get -y install php
 RUN apt-get -y install php-mbstring
 RUN apt-get -y install libzip2
-RUN /bin/sh -c apt-get -y install php7.0-zip
+RUN apt-get -y install php7.0-zip
 
 #ADF
 RUN mkdir /home/oacis/adf
@@ -31,6 +33,7 @@ COPY composer.json /home/oacis/adf/
 COPY setup.sh /home/oacis/adf/
 COPY docker_php_server.sh /home/oacis/adf/
 COPY php.ini /home/oacis/adf/
+COPY server_r_p.sh /home/oacis/adf/
 
 #PHP Setup
 USER root
