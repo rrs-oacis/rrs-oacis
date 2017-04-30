@@ -48,5 +48,5 @@ VOLUME /home/oacis/adf/public
 VOLUME /home/oacis/adf/ruby
 
 WORKDIR /home/oacis/adf
-CMD ["./docker_php_server.sh"]
+CMD ["./server.sh"]
 
