@@ -28,7 +28,9 @@ RUN mkdir /home/oacis/adf/public
 COPY public /home/oacis/adf/public/
 COPY composer.json /home/oacis/adf/
 COPY setup.sh /home/oacis/adf/
+RUN chmod a+x /home/oacis/adf/setup.sh
 COPY server.sh /home/oacis/adf/
+RUN chmod a+x /home/oacis/adf/server.sh
 COPY php.ini /home/oacis/adf/
 
 #PHP Setup
