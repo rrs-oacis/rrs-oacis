@@ -41,7 +41,7 @@ RUN mkdir /home/oacis/adf/rrsenv
 RUN mkdir /home/oacis/adf/rrsenv/MAP
 RUN mkdir /home/oacis/adf/rrsenv/AGENT
 
-EXPOSE 6040
+EXPOSE 3080
 
 VOLUME /home/oacis/adf/src
 VOLUME /home/oacis/adf/public
