@@ -1,13 +1,16 @@
-FROM oacis/oacis
+FROM oacis/oacis:latest
+#FROM ruby:2.3.3
 
 MAINTAINER kamiya <k14041kk@aitech.ac.jp>
 
 ENV DEBIAN_FRONTEND noninteractive
 
 #PHP install
-RUN apt-get -y -f remove libzip2
+USER root
+#RUN apt-get -y -f remove libzip2
 
 RUN apt-get update -y
+RUN apt-get  -y install apt-utils
 
 #URL=>http://obel.hatenablog.jp/entry/20160311/1457644814
 RUN echo deb http://packages.dotdeb.org jessie all >> /etc/apt/sources.list
@@ -52,5 +55,5 @@ VOLUME /home/oacis/adf/public
 VOLUME /home/oacis/adf/ruby
 
 WORKDIR /home/oacis/adf
-CMD ["./docker_php_server.sh"]
+CMD ["./server_r_p.sh"]
 
