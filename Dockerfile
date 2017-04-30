@@ -16,39 +16,38 @@ RUN apt-get -y install php
 RUN apt-get -y install php-mbstring
 RUN apt-get -y install php7.0-zip
 
-#ADF
-RUN mkdir /home/oacis/adf
-RUN mkdir /home/oacis/adf/src
-COPY src /home/oacis/adf/src/
+#RRS-OACIS
+RUN mkdir /home/oacis/rrs-oacis
+RUN mkdir /home/oacis/rrs-oacis/src
+COPY src /home/oacis/rrs-oacis/src/
 
-RUN mkdir /home/oacis/adf/ruby
-COPY ruby /home/oacis/adf/ruby/
+RUN mkdir /home/oacis/rrs-oacis/ruby
+COPY ruby /home/oacis/rrs-oacis/ruby/
 
-RUN mkdir /home/oacis/adf/public
-COPY public /home/oacis/adf/public/
-COPY composer.json /home/oacis/adf/
-COPY setup.sh /home/oacis/adf/
-RUN chmod a+x /home/oacis/adf/setup.sh
-COPY server.sh /home/oacis/adf/
-RUN chmod a+x /home/oacis/adf/server.sh
-COPY php.ini /home/oacis/adf/
+RUN mkdir /home/oacis/rrs-oacis/public
+COPY public /home/oacis/rrs-oacis/public/
+COPY composer.json /home/oacis/rrs-oacis/
+COPY setup.sh /home/oacis/rrs-oacis/
+RUN chmod a+x /home/oacis/rrs-oacis/setup.sh
+COPY server.sh /home/oacis/rrs-oacis/
+RUN chmod a+x /home/oacis/rrs-oacis/server.sh
+COPY php.ini /home/oacis/rrs-oacis/
+
+WORKDIR /home/oacis/rrs-oacis
+RUN git clone https://github.com/tkmnet/rrsenv.git
+RUN ./rrsenv/init.sh
 
 #PHP Setup
 USER root
-#WORKDIR /home/oacis/adf
-RUN /home/oacis/adf/setup.sh
+RUN /home/oacis/rrs-oacis/setup.sh
 WORKDIR /
-
-RUN mkdir /home/oacis/adf/rrsenv
-RUN mkdir /home/oacis/adf/rrsenv/MAP
-RUN mkdir /home/oacis/adf/rrsenv/AGENT
 
 EXPOSE 3080
 
-VOLUME /home/oacis/adf/src
-VOLUME /home/oacis/adf/public
-VOLUME /home/oacis/adf/ruby
+VOLUME /home/oacis/rrs-oacis/src
+VOLUME /home/oacis/rrs-oacis/public
+VOLUME /home/oacis/rrs-oacis/ruby
 
-WORKDIR /home/oacis/adf
+WORKDIR /home/oacis/rrs-oacis
 CMD ["./server.sh"]
 
