@@ -54,5 +54,10 @@ function _l($s){
 	return Localize::getI18N($s);
 }
 
+function getOacisURL(){
+	//OacisのURL とりあえずポート番号は固定
+	return (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["SERVER_NAME"] . ":3000";
+}
+
 ?>
 

@@ -9,6 +9,7 @@ class en{
 			"adf.agent_list"  => "Agent list",
 			"adf.agent"  => "Agent",
 			"adf.setting"  => "Setting",
+			"adf.oacis"  => "Oacis",
 			"adf.operation_screen" => "Operation Screen",
 			"adf.index"  => "Index",
 			//Box add-agent
