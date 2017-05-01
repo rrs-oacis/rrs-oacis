@@ -58,3 +58,11 @@ use adf\Config;
     <!-- /.box -->
   </div>
 </div>
+
+
+<script>
+document.addEventListener("adf_add_agent", function(){
+  alert("custom event fire!!");
+}, false);
+
+</script>

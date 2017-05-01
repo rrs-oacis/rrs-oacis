@@ -89,9 +89,19 @@ $(".readonly").keydown(function(e){
 	    	  //$(form).find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
 	      }
 		    console.log(json);
+
+		    dispatchAddAgentEvent();
 		    
 		  });
 	    
 		
 	 });
+
+
+function dispatchAddAgentEvent(){
+	var customEvent = document.createEvent("HTMLEvents");
+	customEvent.initEvent("adf_add_agent", true, false);
+	//fire!!
+	document.dispatchEvent(customEvent); 
+}
 </script>
