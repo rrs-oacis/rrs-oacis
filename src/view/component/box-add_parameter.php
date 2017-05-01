@@ -33,6 +33,15 @@ use adf\Config;
         </div>
       </div>
       <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label"><?= _l("adf.add_agent_box.parameter_host_id"); ?></label>
+
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="parameter_host_id"
+            placeholder="<?= _l("adf.add_agent_box.input_no_required"); ?>"
+            >
+        </div>
+      </div>
+      <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label"><?= _l("adf.add_agent_box.parameter_map"); ?></label>
 
         <div class="col-sm-10">
@@ -84,6 +93,7 @@ $(".readonly").keydown(function(e){
   
   $("#add_parameter-form").submit(function(e){
 
+        
 		$('#add_parameter-form-overlay').show();
 		e.preventDefault(); 
 		var form = document.querySelector('#add_parameter-form');
