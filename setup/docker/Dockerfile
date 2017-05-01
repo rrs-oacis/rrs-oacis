@@ -2,7 +2,7 @@ FROM oacis/oacis:latest
 
 #MAINTAINER kamiya <k14041kk@aitech.ac.jp> ##deprecated
 
-EXPOSE 3080
+EXPOSE 3080 3000
 
 ENV DEBIAN_FRONTEND noninteractive
 
