@@ -16,6 +16,7 @@ class en{
 			"adf.add_agent_box.add_parameter" => "Add Parameter",
 			"adf.add_agent_box.parameter_name" => "Name",
 			"adf.add_agent_box.parameter_simulator_id" => "Simulator ID",
+			"adf.add_agent_box.parameter_host_id" => "Host ID",
 			"adf.add_agent_box.parameter_map" => "Map",
 			"adf.add_agent_box.parameter_agent" => "Agent",
 			"adf.add_agent_box.input_no_required" => "not required",
