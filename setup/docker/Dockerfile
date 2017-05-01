@@ -22,7 +22,9 @@ RUN apt-get -y install php7.0-zip
 USER oacis
 WORKDIR /home/oacis
 RUN git clone https://github.com/tkmnet/rrs-oacis.git
-COPY supplement/server.sh ./rrs-oacis/
+RUN chmod a+x ./rrs-oacis/setup.sh
+RUN cp ./rrs-oacis/setup/docker/supplement/server.sh ./rrs-oacis/server.sh
+RUN chmod a+x ./rrs-oacis/server.sh
 
 WORKDIR /home/oacis/rrs-oacis
 RUN git clone https://github.com/tkmnet/rrsenv.git
