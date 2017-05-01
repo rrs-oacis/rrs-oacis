@@ -1,44 +1,11 @@
 # rrs-oacis
 
-ADFとOACISのソフト
+A simulation manager for the RoboCupRescue Simulation that extended the OACIS.
 
-## ビルド
-ライブラリの管理にcomposerを使用しています。
-
-
-ライブラリのインストール
+# Run on Docker
+Firstly, start up the server: 
 ```
-$ ./setup.sh
+docker run --rm --name rrsoacis -p 3080:3080 -p 3000:3000 -dt rrsoacis/rrsoacis
 ```
 
-サーバーの起動
-```
-$ ./server.sh
-```
-
-## ビルド(Docker)
-
-ImageFileを作成
-```
-$ ./docker_build.sh
-```
-
-ImageFileからサーバーを起動
-```
-$ ./docker_run.sh
-```
-
-サーバーの起動(Docker内で使用)
-```
-$ ./docker_php_server.sh
-```
-
-## テスト
-
-ポート番号は6040で起動します
-
-## コントリビューター
-コミットメッセージは自由です。
-
-
-コミットは出来るだけ小さく、プルリクエストは機能単位でしてください。
+Next, Access to **http://localhost:3080/** using a web browser.
