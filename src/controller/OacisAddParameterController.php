@@ -15,8 +15,9 @@ class OacisAddParameterController extends AbstractController {
 		
 		$simulatorID = "590463aee4dec200d962035a";
 		
-		if(isset($_POST['parameter_simulator_id'])){
+		if($_POST['parameter_simulator_id']!=""){
 			$simulatorID = $_POST['parameter_simulator_id'];
+			
 		}
 		
 		$name = $_POST['parameter_name'];
