@@ -33,10 +33,6 @@ USER root
 RUN /home/oacis/rrs-oacis/setup.sh
 WORKDIR /
 
-VOLUME /home/oacis/rrs-oacis/src
-VOLUME /home/oacis/rrs-oacis/public
-VOLUME /home/oacis/rrs-oacis/ruby
-
 USER root
 WORKDIR /home/oacis
 CMD ["/home/oacis/rrs-oacis/server.sh"]
