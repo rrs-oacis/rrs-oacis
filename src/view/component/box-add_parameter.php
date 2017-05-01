@@ -24,7 +24,7 @@ use adf\Config;
 
         <div class="col-sm-10">
           <input type="text" class="form-control" name="parameter_simulator_id"
-            placeholder="<?= _l("adf.add_agent_box.input_name"); ?>"
+            placeholder="<?= _l("adf.add_agent_box.input_no_required"); ?>"
             >
         </div>
       </div>
@@ -62,7 +62,7 @@ use adf\Config;
     <!-- /.box-footer -->
     <input type="hidden" name="action" value="create">
   </form>
-  <div id="form-overlay" class="overlay" style="display: none;">
+  <div id="add_parameter-form-overlay" class="overlay" style="display: none;">
     <i class="fa fa-refresh fa-spin"></i>
   </div>
 </div>
@@ -80,7 +80,7 @@ $(".readonly").keydown(function(e){
   
   $("#add_parameter-form").submit(function(e){
 
-		$('#form-overlay').show();
+		$('#add_parameter-form-overlay').show();
 		e.preventDefault(); 
 		var form = document.querySelector('#add_parameter-form');
 		fetch('./add_parameter', {
@@ -92,13 +92,16 @@ $(".readonly").keydown(function(e){
 		  })
 		  .then(function(json) {
 			  console.log(json);
-			  $('#form-overlay').hide();
+			  $('#add_parameter-form-overlay').hide();
 	      if(json["result"]=="success"){
 	    	  //toastr.success(json["title"],"登録完了");
 	    	  //var form = document.querySelector('#post-form');
 	    	  //$(form).find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
 	      }
 		    console.log(json);
+		    toastr["success"](
+                    "<?= _l("adf.add_agent_box.toastr_addparameter"); ?>",
+		    		"<?= _l("adf.add_agent_box.toastr_success"); ?>");
 
 		    //dispatchAddAgentEvent();
 		    

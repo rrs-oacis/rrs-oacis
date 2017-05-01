@@ -90,6 +90,9 @@ $(".readonly").keydown(function(e){
 	      }
 		    console.log(json);
 
+		    toastr["success"](
+                    "<?= _l("adf.add_agent_box.toastr_addagent"); ?>",
+		    		"<?= _l("adf.add_agent_box.toastr_success"); ?>");
 		    dispatchAddAgentEvent();
 		    
 		  });
