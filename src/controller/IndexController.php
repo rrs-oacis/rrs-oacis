@@ -10,7 +10,7 @@ class IndexController extends AbstractController{
 	public function get(){
 		
 		//エージェントのリストを取得
-		$agents = AgentLoader::getAgents();
+		//$agents = AgentLoader::getAgents();
 		
 		include (Config::$SRC_REAL_URL . 'view/IndexView.php');
 	}

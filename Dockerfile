@@ -1,11 +1,13 @@
-FROM oacis/oacis
+FROM oacis/oacis:latest
+#FROM ruby:2.3.3
 
 MAINTAINER kamiya <k14041kk@aitech.ac.jp>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-#PHP install
+USER root
 RUN apt-get update -y
+RUN apt-get  -y install apt-utils
 
 #URL=>http://obel.hatenablog.jp/entry/20160311/1457644814
 RUN echo deb http://packages.dotdeb.org jessie all >> /etc/apt/sources.list
@@ -17,6 +19,7 @@ RUN apt-get -y install php-mbstring
 RUN apt-get -y install php7.0-zip
 
 #RRS-OACIS
+USER oacis
 RUN mkdir /home/oacis/rrs-oacis
 RUN mkdir /home/oacis/rrs-oacis/src
 COPY src /home/oacis/rrs-oacis/src/

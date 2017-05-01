@@ -24,6 +24,7 @@ use adf\Config;
       <li><a href="<?=Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i> <span><?= _l("adf.dashboard"); ?></span></a></li>
       <li><a href="<?=Config::$TOP_PATH ?>agents"><i class="fa fa-book"></i> <span><?= _l("adf.agent_list"); ?></span></a></li>
       <li><a href="<?=Config::$TOP_PATH ?>setting"><i class="fa fa-gear"></i> <span><?= _l("adf.setting"); ?></span></a></li>
+       <li><a href="<?=getOacisURL();?>" target="_blank"><i class="fa fa-external-link"></i> <span><?= _l("adf.oacis"); ?></span></a></li>
       
       <!-- 
       <li><a href="./week.php"> <i class="fa fa-table"></i> <span>予定</span> <span class="pull-right-container"> 

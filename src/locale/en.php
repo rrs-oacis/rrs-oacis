@@ -9,8 +9,18 @@ class en{
 			"adf.agent_list"  => "Agent list",
 			"adf.agent"  => "Agent",
 			"adf.setting"  => "Setting",
+			"adf.oacis"  => "Oacis",
 			"adf.operation_screen" => "Operation Screen",
 			"adf.index"  => "Index",
+			//Box add-parameter
+			"adf.add_agent_box.add_parameter" => "Add Parameter",
+			"adf.add_agent_box.parameter_name" => "Name",
+			"adf.add_agent_box.parameter_simulator_id" => "Simulator ID",
+			"adf.add_agent_box.parameter_map" => "Map",
+			"adf.add_agent_box.parameter_agent" => "Agent",
+			"adf.add_agent_box.input_no_required" => "not required",
+			"adf.add_agent_box.toastr_success" => "Success",
+			"adf.add_agent_box.toastr_addparameter" => "Add Parameter!",
 			//Box add-agent
 			"adf.add_agent_box.add_agent" => "Add agent",
 			"adf.add_agent_box.agent_name" => "Agent Name",
@@ -20,6 +30,8 @@ class en{
 			"adf.add_agent_box.input_browse" => "Browse",
 			"adf.add_agent_box.input_add" => "Add",
 			"adf.add_agent_box.input_cancel" => "Cancel",
+			"adf.add_agent_box.toastr_success" => "Success",
+			"adf.add_agent_box.toastr_addagent" => "Add agent",
 			//Box agent-list
 			"adf.agents_list_box.uuid" => "UUID",
 			"adf.agents_list_box.name" => "AgentName",

@@ -50,9 +50,15 @@ class Router {
 		//エージェントのリスト
 		$router->controller('/agents', 'adf\\controller\\AgentListController');
 		
+		//エージェントのリスト
+		$router->controller('/agents_get', 'adf\\controller\\AgentListGetController');
+		
 		//エージェントの詳細画面
 		$router->controller('/agent', 'adf\\controller\\AgentController');
 		
+		
+		//パラメーターをOacisに登録
+		$router->controller('/add_parameter', 'adf\\controller\\OacisAddParameterController');
 		
 		/*$router->any ( '/agent/upload', function () {
 			// zipを受け取る

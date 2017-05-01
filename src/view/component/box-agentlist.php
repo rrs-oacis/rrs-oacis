@@ -22,7 +22,8 @@ use adf\Config;
       </div>
       <!-- /.box-header -->
       <div class="box-body table-responsive no-padding">
-        <table class="table table-hover">
+        <table id="agent_list" class="table table-hover">
+        <thead>
           <tr>
             <th><?= _l("adf.agents_list_box.uuid"); ?></th>
             <th><?= _l("adf.agents_list_box.name"); ?></th>
@@ -30,31 +31,91 @@ use adf\Config;
             <th><?= _l("adf.agents_list_box.status"); ?></th>
             <th><?= _l("adf.agents_list_box.link"); ?></th>
           </tr>
-                <?php foreach($agents as $agent){?>
+          </thead>
+          <tbody>
                 
+                
+                
+                
+                </tbody>
+                <template id="agent_list_template">
                 <tr>
-                  <td>
-                  <?= $agent["uuid"]?>
+                  <td class="agent_list_uuid">
                   </td>
-                  <td><?= $agent["name"]?></td>
-                  <td><?= $agent["upload_date"]?></td>
+                  <td class="agent_list_name"></td>
+                  <td class="agent_list_upload_date"></td>
                   <td><span class="label label-success">Approved</span></td>
                   <td>
-                  <a href="<?=Config::$TOP_PATH ?>agent/<?= $agent["uuid"]?>">
+                  <a href="<?= "" //Config::$TOP_PATH ?>agent/<?= "" //$agent["uuid"]?>">
                   <?= _l("adf.agents_list_box.details"); ?>
                   </a>
                   </td>
                   
                 </tr>
-                
-                <?php }?>
-                
-                
-                
+                </template>
               </table>
       </div>
       <!-- /.box-body -->
+      <div id="agent_list-overlay" class="overlay" style="display: none;">
+      <i class="fa fa-refresh fa-spin"></i>
+      </div>
     </div>
     <!-- /.box -->
+    
   </div>
 </div>
+
+
+<script>
+document.addEventListener("adf_add_agent", function(){
+  //alert("custom event fire!!");
+	getAgentList();
+}, false);
+
+$(function(){
+  // 処理
+  getAgentList();
+    
+});
+
+function getAgentList(){
+
+	$('#agent_list-overlay').show();
+  
+	fetch('<?= Config::$TOP_PATH ?>agents_get', {
+        method: 'GET'
+      })
+      .then(function(response) {
+        return response.json()
+      })
+      .then(function(json) {
+          
+        $('#agent_list-overlay').hide();
+        
+        setTableData(json);
+
+      });
+}
+
+function setTableData(date){
+
+	var tb = document.querySelector('#agent_list tbody');
+  while (child = tb.lastChild) tb.removeChild(child);
+
+  for(var i=0;i<date.length;i++){
+    
+	  
+	  var t = document.querySelector('#agent_list_template');
+    
+	  t.content.querySelector('.agent_list_uuid').textContent = date[i]['uuid'];
+	  t.content.querySelector('.agent_list_name').textContent = date[i]['name'];
+	  t.content.querySelector('.agent_list_upload_date').textContent = date[i]['upload_date'];
+	  t.content.querySelector('a').href = '<?= Config::$TOP_PATH ?>agent/'+date[i]['uuid'];
+
+	  var clone = document.importNode(t.content, true);
+	  tb.appendChild(clone);
+	  }
+	  
+}
+
+</script>
