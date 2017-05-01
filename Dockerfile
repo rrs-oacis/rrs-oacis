@@ -51,6 +51,7 @@ VOLUME /home/oacis/rrs-oacis/src
 VOLUME /home/oacis/rrs-oacis/public
 VOLUME /home/oacis/rrs-oacis/ruby
 
-WORKDIR /home/oacis/rrs-oacis
-CMD ["./server.sh"]
+USER root
+WORKDIR /home/oacis
+CMD ["/home/oacis/rrs-oacis/server.sh"]
 
