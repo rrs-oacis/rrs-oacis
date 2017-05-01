@@ -57,6 +57,9 @@ class Router {
 		$router->controller('/agent', 'adf\\controller\\AgentController');
 		
 		
+		//パラメーターをOacisに登録
+		$router->controller('/add_parameter', 'adf\\controller\\OacisAddParameterController');
+		
 		/*$router->any ( '/agent/upload', function () {
 			// zipを受け取る
 			include (Config::SRC_REAL_URL . 'controller/FileUpload.php');

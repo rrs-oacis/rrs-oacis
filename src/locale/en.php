@@ -12,6 +12,12 @@ class en{
 			"adf.oacis"  => "Oacis",
 			"adf.operation_screen" => "Operation Screen",
 			"adf.index"  => "Index",
+			//Box add-parameter
+			"adf.add_agent_box.add_parameter" => "Add Parameter",
+			"adf.add_agent_box.parameter_name" => "Name",
+			"adf.add_agent_box.parameter_simulator_id" => "Simulator ID",
+			"adf.add_agent_box.parameter_map" => "Map",
+			"adf.add_agent_box.parameter_agent" => "Agent",
 			//Box add-agent
 			"adf.add_agent_box.add_agent" => "Add agent",
 			"adf.add_agent_box.agent_name" => "Agent Name",

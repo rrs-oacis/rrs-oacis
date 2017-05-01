@@ -23,7 +23,7 @@ class FileUploadController extends AbstractController {
 		
 		//TODO オアシスに登録処理
 		$fileName = $_POST['agent_name'];
-		$output = shell_exec("sh ". Config::$ROUTER_PATH. "ruby/add_agent.sh test " .$fileName."_".$uuid);
+		//$output = shell_exec("sh ". Config::$ROUTER_PATH. "ruby/add_agent.sh test " .$fileName."_".$uuid);
 		
 		
 	}

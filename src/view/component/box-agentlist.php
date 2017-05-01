@@ -23,6 +23,7 @@ use adf\Config;
       <!-- /.box-header -->
       <div class="box-body table-responsive no-padding">
         <table id="agent_list" class="table table-hover">
+        <thead>
           <tr>
             <th><?= _l("adf.agents_list_box.uuid"); ?></th>
             <th><?= _l("adf.agents_list_box.name"); ?></th>
@@ -30,6 +31,7 @@ use adf\Config;
             <th><?= _l("adf.agents_list_box.status"); ?></th>
             <th><?= _l("adf.agents_list_box.link"); ?></th>
           </tr>
+          </thead>
           <tbody>
                 
                 

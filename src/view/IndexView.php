@@ -37,6 +37,9 @@ use adf\Config;
 
     <!-- Main content -->
     <section class="content">
+    
+          <!-- シミュレータのパラメータ追加のbox  -->
+          <?php include 'component/box-add_parameter.php';?>
       
           <!-- エージェント追加のbox  -->
           <?php include 'component/box-add_agent.php';?>
