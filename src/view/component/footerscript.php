@@ -2,8 +2,6 @@
 use adf\Config;
 ?>
 
-<!-- jQuery 2.2.3 -->
-<script src="<?= Config::$RESOURCE_PATH?>plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="<?= Config::$RESOURCE_PATH?>bootstrap/js/bootstrap.min.js"></script>
 
