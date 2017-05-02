@@ -44,6 +44,9 @@ use adf\Config;
           <!-- エージェント追加のbox  -->
           <?php include 'component/box-add_agent.php';?>
           
+          <!-- マップ追加のbox  -->
+          <?php include 'component/box-add_map.php';?>
+          
           <!-- エージェントリストのbox  -->
           <?php include 'component/box-agentlist.php';?>
 

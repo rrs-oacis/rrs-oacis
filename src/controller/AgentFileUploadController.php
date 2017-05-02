@@ -8,7 +8,7 @@ use adf\Config;
 use adf\controller\AbstractController;
 use adf\Agent;
 
-class FileUploadController extends AbstractController {
+class AgentFileUploadController extends AbstractController {
 	
 	public function post() {
 		
@@ -57,7 +57,7 @@ class FileUploadController extends AbstractController {
 		
 		$zip = new ZipArchive();
 		
-		$agentDir = Config::AGENTS_DIR;//Config::$ROUTER_PATH. Config::AGENTS_DIR_NAME;
+		$agentDir = Config::$ROUTER_PATH. Config::AGENTS_DIR_NAME;
 		
 		$uploadFile = Config::$ROUTER_PATH. Config::UPLOAD_DIR_NAME . "/" . $uuid. ".zip";
 		

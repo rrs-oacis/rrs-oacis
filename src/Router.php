@@ -45,7 +45,10 @@ class Router {
 		$router->controller ( '/setting', 'adf\\controller\\SettingController' );
 		
 		//Zipアップロード(Post)
-		$router->controller('/agent_upload', 'adf\\controller\\FileUploadController');
+		$router->controller('/agent_upload', 'adf\\controller\\AgentFileUploadController');
+		
+		//Zipアップロード(Post)
+		$router->controller('/map_upload', 'adf\\controller\\MapFileUploadController');
 		
 		//エージェントのリスト
 		$router->controller('/agents', 'adf\\controller\\AgentListController');
