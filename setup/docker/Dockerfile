@@ -34,6 +34,13 @@ RUN ./rrsenv/init.sh
 USER root
 RUN /home/oacis/rrs-oacis/setup.sh
 
+#Mount host
+VOLUME ["/home/oacis/rrs-oacis/data"]
+VOLUME ["/home/oacis/rrs-oacis/rrsenv/workspace"]
+VOLUME ["/home/oacis/rrs-oacis/rrsenv/AGENT"]
+VOLUME ["/home/oacis/rrs-oacis/rrsenv/MAP"]
+VOLUME ["/home/oacis/rrs-oacis/rrsenv/LOG"]
+
 WORKDIR /home/oacis
 CMD ["/home/oacis/rrs-oacis/server.sh"]
 
