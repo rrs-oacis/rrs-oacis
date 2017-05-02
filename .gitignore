@@ -120,3 +120,6 @@ $RECYCLE.BIN/
 
 agents/
 zip_agents/
+
+# rrsenv
+rrsenv/
