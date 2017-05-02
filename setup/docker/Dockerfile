@@ -30,16 +30,16 @@ WORKDIR /home/oacis/rrs-oacis
 RUN git clone https://github.com/tkmnet/rrsenv.git
 RUN ./rrsenv/init.sh
 
-#Setup
-USER root
-RUN /home/oacis/rrs-oacis/setup.sh
-
-#Mount host
+#Mount host volumes
 VOLUME ["/home/oacis/rrs-oacis/data"]
 VOLUME ["/home/oacis/rrs-oacis/rrsenv/workspace"]
 VOLUME ["/home/oacis/rrs-oacis/rrsenv/AGENT"]
 VOLUME ["/home/oacis/rrs-oacis/rrsenv/MAP"]
 VOLUME ["/home/oacis/rrs-oacis/rrsenv/LOG"]
+
+#Setup
+USER root
+RUN /home/oacis/rrs-oacis/setup.sh
 
 WORKDIR /home/oacis
 CMD ["/home/oacis/rrs-oacis/server.sh"]
