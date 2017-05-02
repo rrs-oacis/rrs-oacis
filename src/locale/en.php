@@ -50,6 +50,9 @@ class en{
 			"adf.maps_list_box.status" => "Status",
 			"adf.maps_list_box.link" => "Link",
 			"adf.maps_list_box.details" => "Details",
+			"adf.add_map_box.toastr_addmap" => "Add Map",
+			"adf.add_map_box.toastr_success" => "Success",
+			
 			//
 			"adf.agent_box.agent" => "Agent",
 			"adf.agent_box.name" => "Name"

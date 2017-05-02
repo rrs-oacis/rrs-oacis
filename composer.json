@@ -11,8 +11,8 @@
 			"adf\\" : "src"
 		}
 	},
-	"require": {
-		"phroute/phroute": "^2.1",
-		"gettext/gettext": "^4.3"
+	"require" : {
+		"phroute/phroute" : "^2.1",
+		"symfony/finder" : "^3.2"
 	}
 }

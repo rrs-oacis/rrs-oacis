@@ -3,6 +3,7 @@
 namespace adf\controller;
 
 use ZipArchive;
+use Symfony\Component\Finder\Finder;
 
 use adf\Config;
 use adf\controller\AbstractController;
@@ -110,14 +111,17 @@ class AgentFileUploadController extends AbstractController {
 		//Zipの使用で深くなっている場合
 		$files = $this->getFileList($fileDir);
 		if(count($files)==1 && $files[0]){
-			return $files[0];
+			//return $files[0];
 		}
+		
+		$finder = new Finder();
 		
 		$judgment = 0;
 		
-		if(count(glob($fileDir. '/light.png'))>0)$judgment++;
+		if(count($finder->in($fileDir)->files()->name('compile.sh'))>0)$judgment++;
+		if(count($finder->in($fileDir)->files()->name('start.sh'))>0)$judgment++;
 		
-		return $judgment>0;
+		return $judgment>1;
 		
 		/*$files = getFileList($fileDir);
 		
