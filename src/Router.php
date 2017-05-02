@@ -59,6 +59,9 @@ class Router {
 		//エージェントの詳細画面
 		$router->controller('/agent', 'adf\\controller\\AgentController');
 		
+		//マップのリスト
+		$router->controller('/maps_get', 'adf\\controller\\MapListGetController');
+		
 		
 		//パラメーターをOacisに登録
 		$router->controller('/add_parameter', 'adf\\controller\\OacisAddParameterController');

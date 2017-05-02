@@ -6,7 +6,7 @@ use adf\Config;
 use adf\Agent;
 use adf\error\AgentNotFoundException;
 
-class AgentLoader {
+class MapLoader {
   
   /**
    * マップ一覧をFileから取得する
