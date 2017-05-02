@@ -12,7 +12,7 @@ RUN apt-get  -y install apt-utils
 RUN echo deb http://packages.dotdeb.org jessie all >> /etc/apt/sources.list
 RUN wget -qO - https://www.dotdeb.org/dotdeb.gpg | apt-key add -
 RUN apt-get -y update 
-RUN apt-get -y install php php-mbstring php7.0-zip sqlite3 php7.0-sqlite3
+RUN apt-get -y install php php-mbstring php7.0-zip sqlite3 php7.0-sqlite3 perl
 
 #Updater
 COPY supplement/update-rrsoacis /usr/local/bin/
