@@ -41,11 +41,17 @@ use adf\Config;
           <!-- シミュレータのパラメータ追加のbox  -->
           <?php include 'component/box-add_parameter.php';?>
       
+          <div class="row">
+          <div class="col-md-6">
           <!-- エージェント追加のbox  -->
           <?php include 'component/box-add_agent.php';?>
-          
+          </div>
+          <div class="col-md-6">
           <!-- マップ追加のbox  -->
           <?php include 'component/box-add_map.php';?>
+          </div>
+          
+          </div>
           
           <!-- エージェントリストのbox  -->
           <?php include 'component/box-agentlist.php';?>

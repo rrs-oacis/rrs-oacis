@@ -1,7 +1,7 @@
 <?php
 use adf\Config;
 ?>
-<div class="box box-info">
+<div class="box box-primary">
   <div class="box-header with-border">
     <h3 class="box-title"><?= _l("adf.add_agent_box.add_parameter"); ?></h3>
     <div class="box-tools pull-right">

@@ -41,6 +41,8 @@ class en{
 			"adf.agents_list_box.link" => "Link",
 			"adf.agents_list_box.details" => "Details",
 			//
+			"adf.add_agent_box.add_map" => "Add map",
+			//
 			"adf.agent_box.agent" => "Agent",
 			"adf.agent_box.name" => "Name"
 			

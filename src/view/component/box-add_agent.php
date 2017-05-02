@@ -69,7 +69,6 @@ $(".readonly").keydown(function(e){
     $('#photoCover').val($(this).val());
   });
 
-  
   $("#post-form").submit(function(e){
 
 	    
@@ -103,6 +102,7 @@ $(".readonly").keydown(function(e){
 	    
 		
 	 });
+
 
 
 function dispatchAddAgentEvent(){

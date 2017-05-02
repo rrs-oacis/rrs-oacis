@@ -1,4 +1,4 @@
-<div class="box box-info">
+<div class="box box-success">
   <div class="box-header with-border">
     <h3 class="box-title"><?= _l("adf.add_agent_box.add_map"); ?></h3>
     <div class="box-tools pull-right">
