@@ -4,15 +4,13 @@ FROM oacis/oacis:latest
 
 EXPOSE 3080 3000
 
-ENV DEBIAN_FRONTEND noninteractive
-
 USER root
+ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -y
 RUN apt-get  -y install apt-utils
 
 RUN echo deb http://packages.dotdeb.org jessie all >> /etc/apt/sources.list
-RUN wget https://www.dotdeb.org/dotdeb.gpg
-RUN apt-key add dotdeb.gpg
+RUN wget -qO - https://www.dotdeb.org/dotdeb.gpg | apt-key add -
 RUN apt-get -y update 
 RUN apt-get -y install php php-mbstring php7.0-zip
 
@@ -35,9 +33,7 @@ RUN ./rrsenv/init.sh
 #Setup
 USER root
 RUN /home/oacis/rrs-oacis/setup.sh
-WORKDIR /
 
-USER root
 WORKDIR /home/oacis
 CMD ["/home/oacis/rrs-oacis/server.sh"]
 
