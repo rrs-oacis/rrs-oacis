@@ -18,6 +18,10 @@ RUN apt-get -y install php
 RUN apt-get -y install php-mbstring
 RUN apt-get -y install php7.0-zip
 
+#Updater
+COPY supplement/update-rrsoacis /usr/local/bin/
+RUN chmod a+x /usr/local/bin/update-rrsoacis
+
 #RRS-OACIS
 USER oacis
 WORKDIR /home/oacis
@@ -30,7 +34,7 @@ WORKDIR /home/oacis/rrs-oacis
 RUN git clone https://github.com/tkmnet/rrsenv.git
 RUN ./rrsenv/init.sh
 
-#Composer
+#Setup
 USER root
 RUN /home/oacis/rrs-oacis/setup.sh
 WORKDIR /

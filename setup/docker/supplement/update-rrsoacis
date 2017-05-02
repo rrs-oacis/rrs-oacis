@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd /home/oacis/rrs-oacis
+su oacis -c 'git pull'
+cd rrsenv
+su oacis -c 'git pull'
+
