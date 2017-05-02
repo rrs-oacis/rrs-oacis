@@ -22,8 +22,16 @@ RUN apt-get -y install php-mbstring
 RUN apt-get -y install libzip2
 RUN apt-get -y install php7.0-zip
 
-#ADF
+#ADF 
 RUN mkdir /home/oacis/adf
+RUN mkdir /home/oacis/adf/rrsenv
+WORKDIR /home/oacis/adf
+RUN git clone https://github.com/tkmnet/rrsenv.git
+RUN ./rrsenv/init.sh
+
+
+#ADF-Oacis
+#RUN mkdir /home/oacis/adf
 RUN mkdir /home/oacis/adf/src
 COPY src /home/oacis/adf/src/
 
@@ -39,18 +47,13 @@ COPY php.ini /home/oacis/adf/
 COPY server_r_p.sh /home/oacis/adf/
 
 #PHP Setup
-USER root
+#USER root
 #WORKDIR /home/oacis/adf
 RUN /home/oacis/adf/setup.sh
-WORKDIR /
 
 #RUN mkdir /home/oacis/adf/rrsenv
 #RUN mkdir /home/oacis/adf/rrsenv/MAP
 #RUN mkdir /home/oacis/adf/rrsenv/AGENT
-
-WORKDIR /home/oacis/adf
-RUN git clone https://github.com/tkmnet/rrsenv.git
-RUN ./rrsenv/init.sh
 
 WORKDIR /home/oacis
 
