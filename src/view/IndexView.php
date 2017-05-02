@@ -55,6 +55,9 @@ use adf\Config;
           
           <!-- エージェントリストのbox  -->
           <?php include 'component/box-agentlist.php';?>
+          
+          <!-- マップリストのbox  -->
+          <?php include 'component/box-maplist.php';?>
 
     </section>
     <!-- /.content -->
