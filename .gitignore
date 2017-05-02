@@ -118,11 +118,9 @@ $RECYCLE.BIN/
 
 # End of https://www.gitignore.io/api/macos,eclipse,windows,composer
 
-agents/
-zip_agents/
+# data
+data/
 
 # rrsenv
 rrsenv/
 
-
-maps/
