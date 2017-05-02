@@ -31,11 +31,11 @@ RUN git clone https://github.com/tkmnet/rrsenv.git
 RUN ./rrsenv/init.sh
 
 #Mount host volumes
-VOLUME ["/home/oacis/rrs-oacis/data"]
-VOLUME ["/home/oacis/rrs-oacis/rrsenv/workspace"]
-VOLUME ["/home/oacis/rrs-oacis/rrsenv/AGENT"]
-VOLUME ["/home/oacis/rrs-oacis/rrsenv/MAP"]
-VOLUME ["/home/oacis/rrs-oacis/rrsenv/LOG"]
+#VOLUME ["/home/oacis/rrs-oacis/data"]
+#VOLUME ["/home/oacis/rrs-oacis/rrsenv/workspace"]
+#VOLUME ["/home/oacis/rrs-oacis/rrsenv/AGENT"]
+#VOLUME ["/home/oacis/rrs-oacis/rrsenv/MAP"]
+#VOLUME ["/home/oacis/rrs-oacis/rrsenv/LOG"]
 
 #Setup
 USER root
