@@ -44,7 +44,7 @@ use adf\Config;
                   </td>
                   <td class="agent_list_name"></td>
                   <td class="agent_list_upload_date"></td>
-                  <td><span class="label label-success">Approved</span></td>
+                  <td><span class="agent_list_status label">Approved</span></td>
                   <td>
                   <a href="<?= "" //Config::$TOP_PATH ?>agent/<?= "" //$agent["uuid"]?>">
                   <?= _l("adf.agents_list_box.details"); ?>
@@ -111,6 +111,16 @@ function setTableData(date){
 	  t.content.querySelector('.agent_list_name').textContent = date[i]['name'];
 	  t.content.querySelector('.agent_list_upload_date').textContent = date[i]['upload_date'];
 	  t.content.querySelector('a').href = '<?= Config::$TOP_PATH ?>agent/'+date[i]['uuid'];
+      if(date[i]['status']){
+        t.content.querySelector('.agent_list_status').classList.add('label-success');
+        t.content.querySelector('.agent_list_status').classList.remove('label-danger');
+        t.content.querySelector('.agent_list_status').textContent = 'Approved';
+      }else{
+    	t.content.querySelector('.agent_list_status').classList.add('label-danger');
+    	t.content.querySelector('.agent_list_status').classList.remove('label-success');
+        t.content.querySelector('.agent_list_status').textContent = 'Invalid';
+      }
+	  
 
 	  var clone = document.importNode(t.content, true);
 	  tb.appendChild(clone);

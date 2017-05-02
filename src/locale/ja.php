@@ -7,6 +7,7 @@ class ja{
 			//Main
 			"adf.dashboard"  => "ダッシュボード",
 			"adf.agent_list"  => "エージェント一覧",
+			"adf.map_list"  => "マップ一覧",
 			"adf.agent"  => "エージェント",
 			"adf.setting"  => "設定",
 			"adf.operation_screen" => "操作画面",
@@ -36,6 +37,15 @@ class ja{
 			"adf.agents_list_box.status" => "ステータス",
 			"adf.agents_list_box.link" => "リンク",
 			"adf.agents_list_box.details" => "詳細情報",
+			//Boax add-map
+			"adf.add_map_box.add_map" => "マップ追加",
+			//Box agent-list
+			"adf.maps_list_box.uuid" => "UUID",
+			"adf.maps_list_box.name" => "マップ名",
+			"adf.maps_list_box.upload_day" => "アップロード日",
+			"adf.maps_list_box.status" => "ステータス",
+			"adf.maps_list_box.link" => "リンク",
+			"adf.maps_list_box.details" => "詳細情報",
 			//
 			"adf.agent_box.agent" => "エージェント",
 			"adf.agent_box.name" => "名前"

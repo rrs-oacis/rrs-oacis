@@ -1,7 +1,7 @@
 <?php
 use adf\Config;
 ?>
-<div class="box box-info">
+<div class="box box-primary">
   <div class="box-header with-border">
     <h3 class="box-title"><?= _l("adf.add_agent_box.add_parameter"); ?></h3>
     <div class="box-tools pull-right">
@@ -47,8 +47,14 @@ use adf\Config;
         <div class="col-sm-10">
           <input type="text" class="form-control" name="parameter_map"
             placeholder="<?= _l("adf.add_agent_box.input_name"); ?>"
-            required>
+            required
+            autocomplete="on" list="map_keyword">
         </div>
+        <datalist id="map_keyword">
+        </datalist>
+        <template id="map_keyword_option">
+          <option value="hoge" />
+        </template>
       </div>
       <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label"><?= _l("adf.add_agent_box.parameter_agent"); ?></label>
@@ -130,10 +136,15 @@ $(".readonly").keydown(function(e){
     getAgentParameterList();
   }, false);
 
+  document.addEventListener("adf_add_map", function(){
+	    getAgentParameterList();
+  }, false);
+
   
 $(function(){
     // 処理
     getAgentParameterList();
+    getMapParameterList();
       
 });
 
@@ -164,6 +175,43 @@ function setAgentListOptionData(date){
       
       
       var t = document.querySelector('#agent_keyword_option');
+      
+      t.content.querySelector('option').value = date[i]['name'] +'_'+ date[i]['uuid'];
+
+      var clone = document.importNode(t.content, true);
+      tb.appendChild(clone);
+      }
+      
+}
+
+//Map
+function getMapParameterList(){
+
+  fetch('<?= Config::$TOP_PATH ?>maps_get', {
+        method: 'GET'
+      })
+      .then(function(response) {
+        return response.json()
+      })
+      .then(function(json) {
+          
+        setMapListOptionData(json);
+
+      });
+    
+}
+
+
+
+function setMapListOptionData(date){
+
+    var tb = document.querySelector('#map_keyword');
+    while (child = tb.lastChild) tb.removeChild(child);
+
+    for(var i=0;i<date.length;i++){
+      
+      
+      var t = document.querySelector('#map_keyword_option');
       
       t.content.querySelector('option').value = date[i]['name'] +'_'+ date[i]['uuid'];
 

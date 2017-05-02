@@ -16,10 +16,10 @@ class AgentLoader {
 	public static function getAgents() {
 		
 		// ファイルの取得
-		$agentDir = Config::AGENTS_DIR;//Config::$ROUTER_PATH . Config::AGENTS_DIR_NAME;
+		$agentDir = Config::$ROUTER_PATH . Config::AGENTS_DIR_NAME;
 		
 		if (! file_exists ( $agentDir)) {
-			mkdir ( $agentDir);
+			mkdir ( $agentDir,0777,true);
 		}
 		
 		$files = scandir ( $agentDir );
@@ -53,7 +53,8 @@ class AgentLoader {
 		return $agents;
 	}
 	public static function getAgent($uuid) {
-		$agentDir = Config::AGENTS_DIR;//Config::$ROUTER_PATH . Config::AGENTS_DIR_NAME;
+		
+		$agentDir = Config::$ROUTER_PATH . Config::AGENTS_DIR_NAME;
 		$agentFile = $agentDir . "/" . $uuid;
 		
 		$files = scandir ( $agentDir );

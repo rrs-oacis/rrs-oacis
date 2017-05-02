@@ -11,6 +11,7 @@ class Agent{
 	private $name;
 	private $uuid;
 	private $upload_date;
+	private $status;
 
 	function __construct() {
 		
@@ -44,6 +45,14 @@ class Agent{
 		return date ( "Y年m月d日 H時i分s秒", $this->upload_date);
 	}
 	
+	public function setStatus($status){
+		$this->status = $status;
+	}
+	
+	public function getStatus(){
+		return $this->status;
+	}
+	
 	
 	public function getJson()
 	{
@@ -52,6 +61,7 @@ class Agent{
 		$metaData['name'] = $this->name;
 		$metaData['uuid'] = $this->uuid;
 		$metaData['upload_date'] = $this->upload_date;
+		$metaData['status'] = $this->status;
 		
 		return json_encode($metaData);
 	}
@@ -62,6 +72,7 @@ class Agent{
 		$this->name = $obj['name'];
 		$this->uuid = $obj['uuid'];
 		$this->upload_date = $obj['upload_date'];
+		$this->status= $obj['status'];
 		
 	}
 	
