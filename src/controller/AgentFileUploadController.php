@@ -89,6 +89,7 @@ class AgentFileUploadController extends AbstractController {
 			$agent->setName($fileName);
 			$agent->setUUID($uuid);
 			$agent->setUploadDate(time());
+			$agent->setStatus($this->checkFile($uuid));
 			$arr = $agent->getJson();
 			
 			file_put_contents($fileDir . "/" . Config::AGENT_META_JSON , $arr);
@@ -97,6 +98,50 @@ class AgentFileUploadController extends AbstractController {
 		
 		
 	}
+	
+	private function checkFile($uuid){
+		
+		$agentDir = Config::$ROUTER_PATH. Config::AGENTS_DIR_NAME;
+		
+		$fileName = $_POST['agent_name'];
+		
+		$fileDir = $agentDir . "/" .$fileName."_" . $uuid;
+		
+		//Zipの使用で深くなっている場合
+		$files = $this->getFileList($fileDir);
+		if(count($files)==1 && $files[0]){
+			return $files[0];
+		}
+		
+		$judgment = 0;
+		
+		if(count(glob($fileDir. '/light.png'))>0)$judgment++;
+		
+		return $judgment>0;
+		
+		/*$files = getFileList($fileDir);
+		
+		//Zipの使用で深くなっている場合
+		if(count($files)==1 && $files[0]){
+			return $files[0];
+		}*/
+		
+	}
+	
+	private function getFileList($fileDir){
+		
+		$files = scandir ( $fileDir);
+		$files = array_filter ( $files, function ($file) { // 注(1)
+			return ! in_array ( $file, array (
+					'.',
+					'..'
+			) );
+		} );
+		
+		return $files;
+		
+	}
+	
 	
 }
 
