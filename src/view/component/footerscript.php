@@ -12,7 +12,7 @@ use adf\Config;
 <script src="<?= Config::$RESOURCE_PATH?>adminlte/js/app.min.js"></script>
 
 <!-- Toastr -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js'></script>  
+<script src='<?= Config::$RESOURCE_PATH?>plugins/toastr/toastr.min.js'></script>  
 
 <!-- 必要化ちょっと不明　 -->
 <!-- SlimScroll -->
