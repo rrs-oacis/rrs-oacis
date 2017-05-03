@@ -22,6 +22,8 @@ class AgentFileUploadController extends AbstractController {
 		
 		self::extractZip($uuid);
 		
+		self::echoFileCheck($uuid);
+		
 		//TODO オアシスに登録処理
 		$fileName = $_POST['agent_name'];
 		//$output = shell_exec("sh ". Config::$ROUTER_PATH. "ruby/add_agent.sh test " .$fileName."_".$uuid);
@@ -46,7 +48,7 @@ class AgentFileUploadController extends AbstractController {
 		
 		$echoDate['tmp_name'] = $_FILES ['userfile'] ['tmp_name'];
 		
-		echo json_encode($echoDate);
+		//echo json_encode($echoDate);
 		
 		
 		
@@ -93,10 +95,32 @@ class AgentFileUploadController extends AbstractController {
 			$agent->setStatus($this->checkFile($uuid));
 			$arr = $agent->getJson();
 			
+			
+			
 			file_put_contents($fileDir . "/" . Config::AGENT_META_JSON , $arr);
 			
 		}
 		
+		
+	}
+	
+	private function echoFileCheck($uuid){
+		
+		$status = $this->checkFile($uuid);
+		
+		if($status){
+			echo '{"status":true}';
+		}else{
+			//ファイルも削除
+			$agentDir = Config::$ROUTER_PATH. Config::AGENTS_DIR_NAME;
+			$fileName = $_POST['agent_name'];
+			
+			$fileDir = $agentDir . "/" .$fileName."_" . $uuid;
+			
+			system("rm -rf {$fileDir}");
+			
+			echo '{"status":false}';
+		}
 		
 	}
 	

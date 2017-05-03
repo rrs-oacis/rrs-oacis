@@ -34,6 +34,8 @@ class en{
 			"adf.add_agent_box.input_cancel" => "Cancel",
 			"adf.add_agent_box.toastr_success" => "Success",
 			"adf.add_agent_box.toastr_addagent" => "Add agent",
+			"adf.add_agent_box.toastr_error" => "Error",
+			"adf.add_agent_box.toastr_invalid_addagent" => "Invalid agent",
 			//Box agent-list
 			"adf.agents_list_box.uuid" => "UUID",
 			"adf.agents_list_box.name" => "AgentName",
@@ -43,6 +45,10 @@ class en{
 			"adf.agents_list_box.details" => "Details",
 			//Boax add-map
 			"adf.add_map_box.add_map" => "Add map",
+			"adf.add_map_box.toastr_addmap" => "Add Map",
+			"adf.add_map_box.toastr_success" => "Success",
+			"adf.add_map_box.toastr_invalid_addmap" => "Invalid Map",
+			"adf.add_map_box.toastr_error" => "Error",
 			//Box agent-list
 			"adf.maps_list_box.uuid" => "UUID",
 			"adf.maps_list_box.name" => "MapName",
@@ -50,8 +56,7 @@ class en{
 			"adf.maps_list_box.status" => "Status",
 			"adf.maps_list_box.link" => "Link",
 			"adf.maps_list_box.details" => "Details",
-			"adf.add_map_box.toastr_addmap" => "Add Map",
-			"adf.add_map_box.toastr_success" => "Success",
+			
 			
 			//
 			"adf.agent_box.agent" => "Agent",

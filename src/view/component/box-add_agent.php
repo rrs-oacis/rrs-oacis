@@ -93,9 +93,16 @@ $(".readonly").keydown(function(e){
 	      }
 		    console.log(json);
 
-		    toastr["success"](
-                    "<?= _l("adf.add_agent_box.toastr_addagent"); ?>",
-		    		"<?= _l("adf.add_agent_box.toastr_success"); ?>");
+            if(json['status']){
+            	toastr["success"](
+                        "<?= _l("adf.add_agent_box.toastr_addagent"); ?>",
+    		    		"<?= _l("adf.add_agent_box.toastr_success"); ?>");
+            }else{
+            	toastr["error"](
+                        "<?= _l("adf.add_agent_box.toastr_invalid_addagent"); ?>",
+    		    		"<?= _l("adf.add_agent_box.toastr_error"); ?>");
+            }
+		    
 		    dispatchAddAgentEvent();
 		    
 		  });

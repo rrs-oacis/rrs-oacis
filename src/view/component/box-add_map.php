@@ -92,9 +92,16 @@ $(".readonly").keydown(function(e){
 	      }
 		    console.log(json);
 
-		    toastr["success"](
-                    "<?= _l("adf.add_map_box.toastr_addmap"); ?>",
-		    		"<?= _l("adf.add_map_box.toastr_success"); ?>");
+		    if(json['status']){
+            	toastr["success"](
+            			"<?= _l("adf.add_map_box.toastr_addmap"); ?>",
+    		    		"<?= _l("adf.add_map_box.toastr_success"); ?>");
+            }else{
+            	toastr["error"](
+                        "<?= _l("adf.add_map_box.toastr_invalid_addmap"); ?>",
+    		    		"<?= _l("adf.add_map_box.toastr_error"); ?>");
+            }
+	        
 		    dispatchAddMapEvent();
 		    
 		  });
