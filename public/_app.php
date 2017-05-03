@@ -33,8 +33,25 @@ if(mb_substr(dirname($_SERVER["SCRIPT_NAME"]), -1)!="/"){
 Config::$RESOURCE_PATH =  (empty($_SERVER["HTTPS"]) ? "http://" : "https://"). $_SERVER['HTTP_HOST'].$resourcePath;
 Config::$TOP_PATH = Config::$RESOURCE_PATH;
 
+$__postfix = 'png|jpg|jpeg|gif|js|css|html|eot|svg|ttf|woff|woff2|otf';
+
+//$pattern= '/^(.*)(?P<postfix>\.\w*)(\?(.*))*/';
+
+//$url_s = '';
+
+$url = explode('?', $_SERVER["REQUEST_URI"], 2);
+//var_dump($url);
+
+//preg_match($pattern, $url[0], $url_s);
+
+//var_dump( $_SERVER["REQUEST_URI"]);
+
+//var_dump($url_s);
+
 //PHPのビルトインウェブサーバー用
-if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css|html)$/', $_SERVER["REQUEST_URI"])) {
+//if (preg_match('/\.(?:'.$__postfix.')$/', $_SERVER["REQUEST_URI"])) {
+if (preg_match('/\.(?:'.$__postfix.')$/', $url[0])) {
+//if(file_exists($_SERVER["REQUEST_FILENAME"])){
 	return false;    // リクエストされたリソースをそのままの形式で扱います。
 }
 
