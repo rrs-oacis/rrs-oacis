@@ -26,7 +26,7 @@ use adf\Config;
 <link rel="stylesheet" href="<?= Config::$RESOURCE_PATH?>adminlte/css/skins/_all-skins.min.css">
 
 <!-- Toaster -->
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css' />  
+<link rel='stylesheet' href='<?= Config::$RESOURCE_PATH?>plugins/toastr/toastr.min.css' />  
 
 <!-- jQuery 2.2.3 -->
 <script src="<?= Config::$RESOURCE_PATH?>plugins/jQuery/jquery-2.2.3.min.js"></script>
