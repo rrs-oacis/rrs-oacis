@@ -132,12 +132,6 @@ class AgentFileUploadController extends AbstractController {
 		
 		$fileDir = $agentDir . "/" .$fileName."_" . $uuid;
 		
-		//Zipの使用で深くなっている場合
-		$files = $this->getFileList($fileDir);
-		if(count($files)==1 && $files[0]){
-			//return $files[0];
-		}
-		
 		$finder = new Finder();
 		
 		$judgment = 0;
@@ -146,13 +140,6 @@ class AgentFileUploadController extends AbstractController {
 		if(count($finder->in($fileDir)->files()->name('start.sh'))>0)$judgment++;
 		
 		return $judgment>1;
-		
-		/*$files = getFileList($fileDir);
-		
-		//Zipの使用で深くなっている場合
-		if(count($files)==1 && $files[0]){
-			return $files[0];
-		}*/
 		
 	}
 	

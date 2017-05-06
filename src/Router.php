@@ -15,29 +15,6 @@ class Router {
 		// ルーティング用ライブラリの読み込み
 		$router = new RouteCollector ();
 		
-		/*
-		$router->any ( '/example', function () {
-			return 'This route responds to any method (POST, GET, DELETE etc...) at the URI /example';
-		} );
-		
-		// 静的ファイルのルーティングテスト
-		$router->any ( '/test', function () {
-			include ('./test.html');
-			return;
-		} );*/
-		
-		/*
-		 * $router->any ( '/', function () {
-		 * // トップページ
-		 * // include (Config::SRC_REAL_URL . 'controller/Home.php');
-		 * // Controller::dispatch(new IndexController);
-		 * IndexController::render ();
-		 * return;
-		 * } );?
-		 */
-		
-		
-		
 		//トップページ　
 		$router->controller ( '/', 'adf\\controller\\IndexController' );
 		$router->controller ( '/index.php', 'adf\\controller\\IndexController' );
@@ -62,16 +39,8 @@ class Router {
 		//マップのリスト
 		$router->controller('/maps_get', 'adf\\controller\\MapListGetController');
 		
-		
 		//パラメーターをOacisに登録
 		$router->controller('/add_parameter', 'adf\\controller\\OacisAddParameterController');
-		
-		/*$router->any ( '/agent/upload', function () {
-			// zipを受け取る
-			include (Config::SRC_REAL_URL . 'controller/FileUpload.php');
-			return;
-		} );*/
-		
 		
 		// Print out the value returned from the dispatched function
 		try {
@@ -90,18 +59,11 @@ class Router {
 			
 			header("HTTP/1.0 404 Not Found");
 			include (Config::$SRC_REAL_URL . 'view/404ErrorView.php');
-			//echo 'bb';
-			//print '<pre>';
-			//print_r ( $e );
-			//print '</pre>';
 			exit ();
 		} catch ( HttpMethodNotAllowedException $e ) {
 			
 			header("HTTP/1.0 404 Not Found");
 			include (Config::$SRC_REAL_URL . 'view/404ErrorView.php');
-			//print '<pre>';
-			//print_r ( $e );
-			//print '</pre>';
 			exit ();
 		} catch (AgentNotFoundException $e){
 			
