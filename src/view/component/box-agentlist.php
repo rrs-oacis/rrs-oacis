@@ -73,9 +73,7 @@ document.addEventListener("adf_add_agent", function(){
 }, false);
 
 $(function(){
-  // 処理
   getAgentList();
-    
 });
 
 function getAgentList(){

@@ -12,7 +12,7 @@
     class="form-horizontal" enctype="multipart/form-data">
     <div class="box-body">
       <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label"><?= _l("adf.add_agent_box.agent_name"); ?></label>
+        <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
 
         <div class="col-sm-10">
           <input type="text" class="form-control" name="agent_name"
@@ -22,13 +22,13 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="inputPassword3" class="col-sm-2 control-label"><?= _l("adf.add_agent_box.agent_file"); ?></label>
+        <label for="inputPassword3" class="col-sm-2 control-label">Zip File</label>
 
         <div class="col-sm-10">
           <div style="position: relative;">
             <input type="hidden" name="MAX_FILE_SIZE" value="1073741824" />
             <input id="lefile" type="file" class="form-control"
-              name="userfile" style="position: absolute;" required />
+              name="userfile" accept="application/zip" style="position: absolute;" required />
             <div class="input-group" style="position: absolute;">
               <input type="text" id="photoCover"
                 class="form-control readonly"
@@ -66,7 +66,13 @@ $(".readonly").keydown(function(e){
     e.preventDefault();
 });
   $('input[id=lefile]').change(function() {
-    $('#photoCover').val($(this).val());
+    //$('#photoCover').val($(this).val());
+    $('#photoCover').val($(this).prop('files')[0].name);
+if ($('#inputTitle').val() == '')
+{
+var name = $(this).prop('files')[0].name.match(/(.*)(?:\.([^.]+$))/)[1];
+$('#inputTitle').val(name);
+}
   });
 
   $("#post-form").submit(function(e){

@@ -38,25 +38,22 @@ use adf\Config;
     <!-- Main content -->
     <section class="content">
     
-          <!-- シミュレータのパラメータ追加のbox  -->
+          <!-- simulator submission form  -->
           <?php include 'component/box-add_parameter.php';?>
       
           <div class="row">
           <div class="col-md-6">
-          <!-- エージェント追加のbox  -->
+          <!-- agent submission form  -->
           <?php include 'component/box-add_agent.php';?>
           </div>
           <div class="col-md-6">
-          <!-- マップ追加のbox  -->
+          <!-- map submission form  -->
           <?php include 'component/box-add_map.php';?>
           </div>
           
           </div>
           
-          <!-- エージェントリストのbox  -->
           <?php include 'component/box-agentlist.php';?>
-          
-          <!-- マップリストのbox  -->
           <?php include 'component/box-maplist.php';?>
 
     </section>
@@ -78,9 +75,7 @@ use adf\Config;
 <script src="./plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="./plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE for demo purposes -->
 
-<!-- <script src="./dist/js/demo.js"></script> -->
 
 <script>
 </script>
