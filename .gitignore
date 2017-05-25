@@ -3,6 +3,7 @@
 
 ### Composer ###
 composer.phar
+composer.lock
 /vendor/
 
 # Commit your application's lock file http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file
@@ -119,8 +120,14 @@ $RECYCLE.BIN/
 # End of https://www.gitignore.io/api/macos,eclipse,windows,composer
 
 # data
+zip_agents/
 data/
 
 # rrsenv
 rrsenv/
+
+/.gitignore
+/server.sh
+/setup.sh
+
 
