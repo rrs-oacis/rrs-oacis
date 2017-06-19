@@ -33,7 +33,7 @@ if(mb_substr(dirname($_SERVER["SCRIPT_NAME"]), -1)!="/"){
 Config::$RESOURCE_PATH =  (empty($_SERVER["HTTPS"]) ? "http://" : "https://"). $_SERVER['HTTP_HOST'].$resourcePath;
 Config::$TOP_PATH = Config::$RESOURCE_PATH;
 
-$__postfix = 'png|jpg|jpeg|gif|js|css|html|eot|svg|ttf|woff|woff2|otf';
+$__postfix = 'php|png|jpg|jpeg|gif|js|css|html|eot|svg|ttf|woff|woff2|otf';
 
 //$pattern= '/^(.*)(?P<postfix>\.\w*)(\?(.*))*/';
 

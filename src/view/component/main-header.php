@@ -6,7 +6,7 @@ var PAGESIZE = 1;
 </script>
 <header class="main-header">
   <!-- Logo -->
-  <a href="<?=Config::$TOP_PATH ?>" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels --> <span class="logo-mini"><?= Config::APP_MIN_NAME?></span> <!-- logo for regular state and mobile devices -->
+  <a href="<?=Config::$TOP_PATH ?>" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels --> <span class="logo-mini"><?= Config::APP_SHORT_NAME?></span> <!-- logo for regular state and mobile devices -->
     <span class="logo-lg"><?= Config::APP_NAME ?></span>
   </a>
   <!-- Header Navbar: style can be found in header.less -->

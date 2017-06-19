@@ -41,9 +41,14 @@ use adf\Config;
 
 <style>
 <!--
-  .toast-top-right {
-    
+.toast-top-right
+{
     top: 64px;
-    }
+}
+
+table th
+{
+    background-color: whitesmoke;
+}
 -->
 </style>

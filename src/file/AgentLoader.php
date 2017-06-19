@@ -2,88 +2,103 @@
 
 namespace adf\file;
 
+use \PDO;
 use adf\Config;
 use adf\Agent;
 use adf\error\AgentNotFoundException;
 
-class AgentLoader {
-	
+class AgentLoader
+{
 	/**
 	 * エージェント一覧をFileから取得する
 	 * @return Agent[] json
 	 * 
 	 * */
-	public static function getAgents() {
-		
-		// ファイルの取得
-		$agentDir = Config::$ROUTER_PATH . Config::AGENTS_DIR_NAME;
-		
-		if (! file_exists ( $agentDir)) {
-			mkdir ( $agentDir,0777,true);
-		}
-		
-		$files = scandir ( $agentDir );
-		$files = array_filter ( $files, function ($file) { // 注(1)
-			return ! in_array ( $file, array (
-					'.',
-					'..' 
-			) );
-		} );
-		
-		// 実際にAgentのデータを詰める
-		$agents = [ ];
-		
-		foreach ( $files as $file ) {
-			
-			if (is_dir ( $agentDir . "/" . $file )) {
-				// Jsonデータを取得
-				$json = file_get_contents ( $agentDir . "/" . $file . "/" . Config::AGENT_META_JSON );
-				$json = mb_convert_encoding ( $json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN' );
-				
-				$obj = json_decode ( $json, true );
-				$obj ['upload_date'] = date ( "Y年m月d日 H時i分s秒", $obj ['upload_date'] );
-				
-				//$agent = new Agent();
-				//$agent->setJson($json);
-				
-				$agents [] = $obj;
-			}
-		}
-		
+	public static function getAgents()
+    {
+        $db = self::connectDB();
+        $sth = $db->query("select * from agent where archived = 0;");
+        $agents = [];
+        while($row = $sth->fetch(PDO::FETCH_ASSOC))
+        {
+            $agents[] = $row;
+        }
+
 		return $agents;
 	}
-	public static function getAgent($uuid) {
-		
-		$agentDir = Config::$ROUTER_PATH . Config::AGENTS_DIR_NAME;
-		$agentFile = $agentDir . "/" . $uuid;
-		
-		$files = scandir ( $agentDir );
-		$files = array_filter ( $files, function ($file) { // 注(1)
-			return ! in_array ( $file, array (
-					'.',
-					'..' 
-			) );
-		} );
-		
-		foreach ( $files as $file ) {
-			
-			//File名のUUIDが一致するか　
-			if(preg_match("/".$uuid."$/",$file)){
-				
-				$json = file_get_contents ( $agentDir . "/" . $file . "/" . Config::AGENT_META_JSON );
-				$json = mb_convert_encoding ( $json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN' );
-				$obj = json_decode ( $json, true );
-				$obj ['upload_date'] = date ( "Y年m月d日 H時i分s秒", $obj ['upload_date'] );
-				
-				return $obj;
-				
-			}
-			
-		}
-		
-		throw new AgentNotFoundException('Not Found Agent : UUID = '.$uuid);
-		
-		return null;
-	}
+
+    public static function getAgent($name)
+    {
+        $db = self::connectDB();
+        $sth = $db->prepare("select * from agent where name=:name;");
+        $sth->bindValue(':name', $name, PDO::PARAM_STR);
+        $sth->execute();
+        $agent = [];
+        while($row = $sth->fetch(PDO::FETCH_ASSOC))
+        {
+            $agent = $row;
+        }
+
+        return $agent;
+    }
+
+    public static function getAgentByAlias($alias)
+    {
+        $db = self::connectDB();
+        $sth = $db->prepare("select * from agent where archived = 0 and alias=:alias;");
+        $sth->bindValue(':alias', $alias, PDO::PARAM_STR);
+        $sth->execute();
+        $agent = [];
+        while($row = $sth->fetch(PDO::FETCH_ASSOC))
+        {
+            $agent = $row;
+        }
+
+        return $agent;
+    }
+
+    /**
+     *
+     * */
+    public static function addAgent($name, $alias)
+    {
+        $db = self::connectDB();
+        $sth = $db->prepare("update agent set archived=1 where alias=:alias;");
+        $sth->bindValue(':alias', $alias, PDO::PARAM_STR);
+        $sth->execute();
+        $sth = $db->prepare("insert into agent(name, alias) values(:name, :alias);");
+        $sth->bindValue(':name', $name, PDO::PARAM_STR);
+        $sth->bindValue(':alias', $alias, PDO::PARAM_STR);
+        $sth->execute();
+    }
+
+    /**
+     *
+     * */
+    private static function connectDB()
+    {
+        $db = new PDO('sqlite:'.Config::$ROUTER_PATH.Config::MAIN_DATABASE);
+        $connectedAppVersion = 0;
+        $sth = $db->query("select value from system where name='agentVersion';");
+        while($row = $sth->fetch(PDO::FETCH_ASSOC))
+        {
+            $connectedAppVersion = $row['value'];
+        }
+
+        switch ($connectedAppVersion)
+        {
+            case 0:
+                $db->query("insert into system(name,value) values('agentVersion', 1);");
+                $db->query("create table agent(name,alias,archived default 0,timestamp default (DATETIME('now','localtime')));");
+                $version = 1;
+
+                $sth = $db->prepare("update system set value=:value where name='agentVersion';");
+                $sth->bindValue(':value', $version, PDO::PARAM_INT);
+                $sth->execute();
+            default:
+        }
+
+        return $db;
+    }
 }
 

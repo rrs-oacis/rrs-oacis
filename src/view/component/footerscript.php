@@ -12,7 +12,16 @@ use adf\Config;
 <script src="<?= Config::$RESOURCE_PATH?>adminlte/js/app.min.js"></script>
 
 <!-- Toastr -->
-<script src='<?= Config::$RESOURCE_PATH?>plugins/toastr/toastr.min.js'></script>  
+<script src='<?= Config::$RESOURCE_PATH?>plugins/toastr/toastr.min.js'></script>
+
+
+<!-- linked-row -->
+<script type="text/javascript">
+    $(document).ready(function($){
+        $(".linked-row").click(function() { location.href = $(this).data("href"); });
+    });
+</script>
+
 
 <!-- 必要化ちょっと不明　 -->
 <!-- SlimScroll -->
@@ -21,8 +30,6 @@ use adf\Config;
 <script src="<?= Config::$RESOURCE_PATH?>plugins/fastclick/fastclick.js"></script>
 
 <?php if(!strpos($_SERVER["REQUEST_URI"],'login.php')){?>
-
-<!-- <script src='./common.js'></script> -->  
 
 <?php }?>
 

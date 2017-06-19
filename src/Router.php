@@ -2,6 +2,7 @@
 
 namespace adf;
 
+use adf\file\AppLoader;
 use Phroute\Phroute\RouteCollector;
 use Phroute\Phroute\Dispatcher;
 use Phroute\Phroute\Exception\HttpRouteNotFoundException;
@@ -9,50 +10,56 @@ use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
 use adf\controller\IndexController;
 use adf\error\AgentNotFoundException;
 
-class Router {
-	function routing() {
-		
-		// ルーティング用ライブラリの読み込み
-		$router = new RouteCollector ();
-		
-		//トップページ　
-		$router->controller ( '/', 'adf\\controller\\IndexController' );
-		$router->controller ( '/index.php', 'adf\\controller\\IndexController' );
-		
-		$router->controller ( '/setting', 'adf\\controller\\SettingController' );
-		
-		//Zipアップロード(Post)
-		$router->controller('/agent_upload', 'adf\\controller\\AgentFileUploadController');
-		
-		//Zipアップロード(Post)
+class Router
+{
+	function routing()
+	{
+		$router = new RouteCollector();
+
+		// Index (dashboard)
+		$router->controller( '/', 'adf\\controller\\IndexController' );
+		$router->controller( '/index.php', 'adf\\controller\\IndexController' );
+
+		// Settings
+		$router->controller( '/settings', 'adf\\controller\\SettingsController' );
+		$router->controller( '/settings-apps', 'adf\\controller\\SettingsAppsListController');
+        $router->controller( '/settings-app', 'adf\\controller\\SettingsAppController');
+        $router->controller( '/settings-app_enable', 'adf\\controller\\SettingsAppEnableController');
+        $router->controller( '/settings-clusters', 'adf\\controller\\SettingsClustersListController');
+        $router->controller( '/settings-cluster_update', 'adf\\controller\\SettingsClusterUpdateController');
+
+        // Maps
+        $router->controller('/maps', 'adf\\controller\\MapsListController');
+        $router->controller('/maps_get', 'adf\\controller\\MapListGetController');
 		$router->controller('/map_upload', 'adf\\controller\\MapFileUploadController');
 		
-		//エージェントのリスト
+		// Agents
 		$router->controller('/agents', 'adf\\controller\\AgentListController');
-		
-		//エージェントのリスト
-		$router->controller('/agents_get', 'adf\\controller\\AgentListGetController');
-		
-		//エージェントの詳細画面
-		$router->controller('/agent', 'adf\\controller\\AgentController');
-		
-		//マップのリスト
-		$router->controller('/maps_get', 'adf\\controller\\MapListGetController');
-		
-		//パラメーターをOacisに登録
-		$router->controller('/add_parameter', 'adf\\controller\\OacisAddParameterController');
-		
+        $router->controller('/agents_get', 'adf\\controller\\AgentListGetController');
+        $router->controller('/agent', 'adf\\controller\\AgentController');
+        $router->controller('/agent_upload', 'adf\\controller\\AgentFileUploadController');
+
+		// auto-register connected apps
+		foreach ( AppLoader::getConnectedApps() as $app)
+		{
+            $router->controller('/'.$app['package'], $app['main_controller']);
+            foreach ($app['sub_controller'] as $controller)
+			{
+                $router->controller('/'.$app['package'].'-'.$controller[0], $controller[1]);
+			}
+		}
+
 		// Print out the value returned from the dispatched function
 		try {
 			
-			$url = $_SERVER ['REQUEST_URI'];
+			$url = $_SERVER['REQUEST_URI'];
 		
 			if(dirname($_SERVER["SCRIPT_NAME"])!="/"){
 				$url = str_replace(dirname($_SERVER["SCRIPT_NAME"]), '', $url);
 			}
 			
 			$dispatcher = new Dispatcher ( $router->getData () );
-			$response = $dispatcher->dispatch ( $_SERVER ['REQUEST_METHOD'], $url);
+			$response = $dispatcher->dispatch ( $_SERVER['REQUEST_METHOD'], $url);
 			echo $response;
 			exit ();
 		} catch ( HttpRouteNotFoundException $e ) {

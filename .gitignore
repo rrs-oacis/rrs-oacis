@@ -11,7 +11,7 @@ composer.lock
 # composer.lock
 
 ### Eclipse ###
-
+.idea/
 .metadata
 bin/
 tmp/

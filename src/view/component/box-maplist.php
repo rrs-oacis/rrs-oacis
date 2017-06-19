@@ -7,6 +7,7 @@ use adf\Config;
       <div class="box-header">
         <h3 class="box-title"><?= _l("adf.map_list"); ?></h3>
 
+          <!--
         <div class="box-tools">
           <div class="input-group input-group-sm" style="width: 150px;">
             <input type="text" name="table_search"
@@ -19,17 +20,16 @@ use adf\Config;
             </div>
           </div>
         </div>
+        -->
       </div>
       <!-- /.box-header -->
       <div class="box-body table-responsive no-padding">
         <table id="map_list" class="table table-hover">
         <thead>
           <tr>
-            <th><?= _l("adf.maps_list_box.uuid"); ?></th>
-            <th><?= _l("adf.maps_list_box.name"); ?></th>
-            <th><?= _l("adf.maps_list_box.upload_day"); ?></th>
-            <th><?= _l("adf.maps_list_box.status"); ?></th>
-            <th><?= _l("adf.maps_list_box.link"); ?></th>
+              <th>Name</th>
+              <th>FullName</th>
+              <th>Timestamp</th>
           </tr>
           </thead>
           <tbody>
@@ -40,17 +40,9 @@ use adf\Config;
                 </tbody>
                 <template id="map_list_template">
                 <tr>
-                  <td class="map_list_uuid">
-                  </td>
-                  <td class="map_list_name"></td>
-                  <td class="map_list_upload_date"></td>
-                  <td><span class="map_list_status label">Approved</span></td>
-                  <td>
-                  <a href="<?= "" //Config::$TOP_PATH ?>map/<?= "" //$map["uuid"]?>">
-                  <?= _l("adf.maps_list_box.details"); ?>
-                  </a>
-                  </td>
-                  
+                    <td class="map_list_name"></td>
+                    <td class="map_list_fullname"></td>
+                    <td class="map_list_timestamp"></td>
                 </tr>
                 </template>
               </table>
@@ -97,35 +89,26 @@ function getMapList(){
       });
 }
 
-function setMapTableData(date){
+function setMapTableData(data)
+{
+    var tb = document.querySelector('#map_list tbody');
+    while (child = tb.lastChild)
+    {
+        tb.removeChild(child);
+    }
 
-	var tb = document.querySelector('#map_list tbody');
-  while (child = tb.lastChild) tb.removeChild(child);
+    for(var i=0;i<data.length;i++)
+    {
+        var t = document.querySelector('#map_list_template');
 
-  for(var i=0;i<date.length;i++){
-    
-	  
-	  var t = document.querySelector('#map_list_template');
-    
-	  t.content.querySelector('.map_list_uuid').textContent = date[i]['uuid'];
-	  t.content.querySelector('.map_list_name').textContent = date[i]['name'];
-	  t.content.querySelector('.map_list_upload_date').textContent = date[i]['upload_date'];
-	  t.content.querySelector('a').href = '<?= Config::$TOP_PATH ?>map/'+date[i]['uuid'];
-      if(date[i]['status']){
-        t.content.querySelector('.map_list_status').classList.add('label-success');
-        t.content.querySelector('.map_list_status').classList.remove('label-danger');
-        t.content.querySelector('.map_list_status').textContent = 'Approved';
-      }else{
-    	t.content.querySelector('.map_list_status').classList.add('label-danger');
-    	t.content.querySelector('.map_list_status').classList.remove('label-success');
-        t.content.querySelector('.map_list_status').textContent = 'Invalid';
-      }
-	  
+        t.content.querySelector('.map_list_name').textContent = data[i]['alias'];
+        t.content.querySelector('.map_list_fullname').textContent = data[i]['name'];
+        t.content.querySelector('.map_list_timestamp').textContent = data[i]['timestamp'];
 
-	  var clone = document.importNode(t.content, true);
-	  tb.appendChild(clone);
-	  }
-	  
+        var clone = document.importNode(t.content, true);
+        tb.appendChild(clone);
+    }
+
 }
 
 </script>

@@ -1,0 +1,11 @@
+{
+    "name" : "Competition",
+    "version" : "0.0.1",
+    "description" : "competition",
+    "icon" : "fa-star",
+    "main_controller" : "adf\\apps\\competition\\MainController",
+    "sub_controller" : [
+        ["add_session","adf\\apps\\competition\\AddSessionController"],
+        ["add_map","adf\\apps\\competition\\AddMapController"]
+    ]
+}

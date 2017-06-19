@@ -26,12 +26,12 @@ use adf\Config;
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <?= _l("adf.dashboard"); ?>
-        <small><?= _l("adf.operation_screen"); ?></small>
+          Dashboard
+        <small></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?= Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i> <?= _l("adf.index"); ?></a></li>
-        <li class="active"><?= _l("adf.dashboard"); ?></li>
+        <li><a href="<?= Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i>RRS-OACIS</a></li>
+        <li class="active">Dashboard</li>
       </ol>
     </section>
 

@@ -1,0 +1,8 @@
+{
+    "name" : "Manual Post (mHG)",
+    "version" : "0.0.1",
+    "description" : "manual post(test : post to main HostGroup)",
+    "icon" : "fa-upload",
+    "main_controller" : "adf\\apps\\manual_post2\\ManualPostMainController",
+    "sub_controller" : [["add_parameter","adf\\apps\\manual_post2\\OacisAddParameterController"]]
+}

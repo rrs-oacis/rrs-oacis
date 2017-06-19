@@ -35,6 +35,7 @@
     <section class="content">
 
 		<!-- エージェントリストのbox  -->
+        <?php include 'component/box-add_agent.php';?>
 		<?php include 'component/box-agentlist.php';?>
 
     </section>
