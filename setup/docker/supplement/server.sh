@@ -11,5 +11,5 @@ touch /home/oacis/rrs-oacis/data/.rrs-oacis.initialized
 /etc/init.d/php7.0-fpm restart
 /etc/init.d/nginx restart
 
-su oacis -c /home/oacis/oacis_start.sh
+/home/oacis/oacis_start.sh
 
