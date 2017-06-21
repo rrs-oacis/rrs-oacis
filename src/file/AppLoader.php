@@ -9,7 +9,7 @@ use adf\error\AgentNotFoundException;
 
 class AppLoader
 {
-    const APPS_DIR = "./apps";
+    const APPS_DIR = "apps";
     const APPS_MANIFEST_FILE = "manifest.json";
 
 	/**
@@ -28,19 +28,19 @@ class AppLoader
         }
 
 
-		if (! file_exists(self::APPS_DIR))
+		if (! file_exists(Config::$SRC_REAL_URL.self::APPS_DIR))
 		{
-			mkdir(self::APPS_DIR,0777,true);
+			mkdir(Config::$SRC_REAL_URL.self::APPS_DIR,0777,true);
 		}
 
-		$files = scandir(self::APPS_DIR);
+		$files = scandir(Config::$SRC_REAL_URL.self::APPS_DIR);
 
 		$apps = [];
 		foreach ($files as $file)
 		{
             if ($file === '.' || $file === '..' ) { continue; }
 
-            $manifestFile = self::APPS_DIR."/".$file."/".self::APPS_MANIFEST_FILE;
+            $manifestFile = Config::$SRC_REAL_URL.self::APPS_DIR."/".$file."/".self::APPS_MANIFEST_FILE;
 			if (file_exists($manifestFile))
 			{
 				// Jsonデータを取得
@@ -76,7 +76,7 @@ class AppLoader
         {
             if ($packageName === '.' || $packageName === '..' ) { continue; }
 
-            $manifestFile = self::APPS_DIR."/".$packageName."/".self::APPS_MANIFEST_FILE;
+            $manifestFile = Config::$SRC_REAL_URL.self::APPS_DIR."/".$packageName."/".self::APPS_MANIFEST_FILE;
             if (file_exists($manifestFile))
             {
                 // Jsonデータを取得
@@ -104,12 +104,12 @@ class AppLoader
      * */
     public static function getApp($packageName)
     {
-        if (! file_exists(self::APPS_DIR))
+        if (! file_exists(Config::$SRC_REAL_URL.self::APPS_DIR))
         {
-            mkdir(self::APPS_DIR,0777,true);
+            mkdir(Config::$SRC_REAL_URL.self::APPS_DIR,0777,true);
         }
 
-        $manifestFile = self::APPS_DIR."/".$packageName."/".self::APPS_MANIFEST_FILE;
+        $manifestFile = Config::$SRC_REAL_URL.self::APPS_DIR."/".$packageName."/".self::APPS_MANIFEST_FILE;
         if (file_exists($manifestFile))
         {
             // Jsonデータを取得

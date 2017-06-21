@@ -1,0 +1,8 @@
+{
+    "name" : "Competition Results 2017",
+    "version" : "0.0.1",
+    "description" : "Competition Results 2017",
+    "icon" : "fa-list-alt",
+    "main_controller" : "adf\\apps\\results\\ResultsMainController",
+    "sub_controller" : []
+}

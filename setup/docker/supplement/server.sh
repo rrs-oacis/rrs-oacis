@@ -2,12 +2,14 @@
 
 cd `dirname $0`
 
-if [ /rrsoacis-init.sh -a ! -e /home/oacis/rrs-oacis/data/.rrs-oacis.initialized ] ; then
-    chmod a+x /rrsoacis-init.sh
-    /rrsoacis-init.sh
+if [ /etc/rrsoacis-init.sh -a ! -e /home/oacis/rrs-oacis/data/.rrs-oacis.initialized ] ; then
+    chmod a+x /etc/rrsoacis-init.sh
+    su oacis -c /etc/rrsoacis-init.sh
 fi
 touch /home/oacis/rrs-oacis/data/.rrs-oacis.initialized
 
-/home/oacis/oacis_start.sh &
-php -S 0.0.0.0:3080 -t public -c php.ini public/_app.php
+/etc/init.d/php7.0-fpm restart
+/etc/init.d/nginx restart
+
+su oacis -c /home/oacis/oacis_start.sh
 

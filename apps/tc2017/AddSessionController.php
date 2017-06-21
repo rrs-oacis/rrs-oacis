@@ -32,6 +32,6 @@ class AddSessionController extends AbstractController
 
         SessionManager::addSession($alias, $agents);
 
-        header('location: '.Config::$TOP_PATH.'tc2017');
+        header('location: '.Config::$TOP_PATH.'competition');
     }
 }

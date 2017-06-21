@@ -19,6 +19,8 @@ class Config{
 
     const MAIN_DATABASE=  "data/main.db";
 
+    const MAP_LOG = 'img_log';
+
 	//エージェントを管理するDir 絶対パス
 	//const AGENTS_DIR=  "/home/oacis/adf/rrsenv/AGENT";
 	
@@ -30,7 +32,6 @@ class Config{
 	
 	//起点(public/_app.html)からのsrcの位置
     static $SRC_REAL_URL = "./src/";
-    static $APPS_REL_PATH = "./apps/";
 
 	static $RESOURCE_PATH = "/";
 	
@@ -40,6 +41,8 @@ class Config{
 
     static $PUBLICKEY_PATH = "/home/oacis/.ssh/id_rsa.pub";
     static $OACISCLI_PATH = "/home/oacis/oacis/bin/oacis_cli ";
+
+
 }
 
 ?>

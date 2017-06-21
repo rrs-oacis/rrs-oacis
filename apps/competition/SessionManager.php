@@ -152,7 +152,7 @@ class SessionManager
         $simulator['parameter_definitions'][] = $parameter1;
 
         file_put_contents($tmpFileIn, json_encode($simulator));
-        system(Config::$OACISCLI_PATH." create_simulator -i ".$tmpFileIn." -o ".$tmpFileOut);
+        system("su oacis -c '".Config::$OACISCLI_PATH." create_simulator -i ".$tmpFileIn." -o ".$tmpFileOut."'");
         system("rm -f ".$tmpFileIn);
         $simulatorId = json_decode ( file_get_contents($tmpFileOut), true )['simulator_id'];
         system("rm -f ".$tmpFileOut);

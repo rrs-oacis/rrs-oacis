@@ -39,6 +39,13 @@ class Router
         $router->controller('/agent', 'adf\\controller\\AgentController');
         $router->controller('/agent_upload', 'adf\\controller\\AgentFileUploadController');
 
+        //$router->controller('/result', 'adf\\controller\\ResultController');
+        $router->controller('/result_final', 'adf\\controller\\ResultFinalController');
+        $router->controller('/result_json', 'adf\\controller\\ResultJsonController');
+        $router->controller('/result_simple', 'adf\\controller\\ResultSimpleController');
+        $router->controller('/result_map', 'adf\\controller\\ResultMapController');
+        $router->controller('/result_download', 'adf\\controller\\ResultDownloadController');
+
 		// auto-register connected apps
 		foreach ( AppLoader::getConnectedApps() as $app)
 		{

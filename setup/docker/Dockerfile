@@ -12,7 +12,12 @@ RUN apt-get  -y install apt-utils
 RUN echo deb http://packages.dotdeb.org jessie all >> /etc/apt/sources.list
 RUN wget -qO - https://www.dotdeb.org/dotdeb.gpg | apt-key add -
 RUN apt-get -y update 
-RUN apt-get -y install php php-mbstring php7.0-zip sqlite3 php7.0-sqlite3 php7.0-mongodb perl
+RUN apt-get -y install php php-mbstring php7.0-zip sqlite3 php7.0-sqlite3 php7.0-mongodb perl nginx php-fpm
+
+#Config files
+COPY supplement/rrsoacis_fpm.conf /etc/php/7.0/fpm/pool.d/
+COPY supplement/rrsoacis_nginx.conf /etc/nginx/conf.d/
+RUN sed -iE 's/www-data/oacis/' /etc/nginx/nginx.conf
 
 #Updater
 COPY supplement/update-rrsoacis /usr/local/bin/
@@ -38,9 +43,10 @@ RUN ./rrsenv/init.sh
 #VOLUME ["/home/oacis/rrs-oacis/rrsenv/LOG"]
 
 #Setup
-USER root
+USER oacis
 RUN /home/oacis/rrs-oacis/setup.sh
 
+USER root
 WORKDIR /home/oacis
 CMD ["/home/oacis/rrs-oacis/server.sh"]
 
