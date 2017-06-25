@@ -39,20 +39,25 @@ use adf\Config;
     <section class="content">
     
           <!-- simulator submission form  -->
-          <?php include 'component/box-add_parameter.php';?>
-      
+          <?php //include 'component/box-add_parameter.php';?>
+
+        <!--
           <div class="row">
           <div class="col-md-6">
+        -->
           <!-- agent submission form  -->
-          <?php include 'component/box-add_agent.php';?>
+        <!--
+          <?php //include 'component/box-add_agent.php';?>
           </div>
           <div class="col-md-6">
+        -->
           <!-- map submission form  -->
-          <?php include 'component/box-add_map.php';?>
+          <?php //include 'component/box-add_map.php';?>
+        <!--
           </div>
-          
           </div>
-          
+        -->
+
           <?php include 'component/box-agentlist.php';?>
           <?php include 'component/box-maplist.php';?>
 

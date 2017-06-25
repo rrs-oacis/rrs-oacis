@@ -118,7 +118,7 @@ class SessionManager
     {
         $tmpFileOut = '/tmp/rrsoacis-out-'.uniqid();
         $tmpFileIn = '/tmp/rrsoacis-in-'.uniqid();
-        system(Config::$OACISCLI_PATH." simulator_template -o ".$tmpFileOut);
+        system("sudo -i -u oacis ".Config::$OACISCLI_PATH." simulator_template -o ".$tmpFileOut." 2>&1");
         $simulator = json_decode ( file_get_contents($tmpFileOut), true );
         system("rm -f ".$tmpFileOut);
         $simulator['name'] = "RO_".$name."_".uniqid();
@@ -152,7 +152,7 @@ class SessionManager
         $simulator['parameter_definitions'][] = $parameter1;
 
         file_put_contents($tmpFileIn, json_encode($simulator));
-        system("su oacis -c '".Config::$OACISCLI_PATH." create_simulator -i ".$tmpFileIn." -o ".$tmpFileOut."'");
+        system("sudo -i -u oacis ".Config::$OACISCLI_PATH." create_simulator -i ".$tmpFileIn." -o ".$tmpFileOut);
         system("rm -f ".$tmpFileIn);
         $simulatorId = json_decode ( file_get_contents($tmpFileOut), true )['simulator_id'];
         system("rm -f ".$tmpFileOut);
@@ -231,19 +231,16 @@ class SessionManager
         switch ($connectedAppVersion)
         {
             case 0:
-                $version = 1;
                 $db->query("insert into system(name,value) values('version', 1);");
                 $db->query("create table session(name, alias, precursor);");
                 $db->query("create table linkedAgent(session, agentAlias);");
             case 1:
-                $version++;
                 $db->query("create table linkedMap(session, map);");
             case 2:
-                $version++;
                 $db->query("create table run(session, map, agent, paramId, runId);");
             case 3:
-                $version++;
                 $db->query("alter table run add name;");
+                $version = 4;
 
                 $sth = $db->prepare("update system set value=:value where name='version';");
                 $sth->bindValue(':value', $version, PDO::PARAM_INT);

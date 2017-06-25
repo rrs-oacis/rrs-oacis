@@ -25,11 +25,11 @@ use adf\Config;
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        <small>Settings</small>
+      <h1>Settings
+        <small></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?=Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i> Index</a></li>
+        <li><a href="<?=Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i> RRS-OACIS</a></li>
         <li class="active">Settings</li>
       </ol>
     </section>
@@ -37,7 +37,8 @@ use adf\Config;
     <!-- Main content -->
     <section class="content">
         <a href="/settings-apps"><button class="btn-block btn">Apps</button></a><br>
-        <a href="/settings-clusters"><button class="btn-block btn">Clusters</button></a>
+        <a href="/settings-clusters"><button class="btn-block btn">Clusters</button></a><br>
+        <a href="/settings-restrict"><button class="btn-block btn">Restrict access</button></a><br>
     </section>
     <!-- /.content -->
   </div>

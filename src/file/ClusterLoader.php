@@ -210,7 +210,6 @@ class ClusterLoader
                 $db->query("insert into system(name,value) values('clusterVersion', 1);");
                 $db->query("insert into system(name,value) values('mainHostGroupName', '');");
                 $db->query("create table cluster(name, a_host, f_host, p_host);");
-                $version = 1;
             case 1:
                 $db->query("alter table cluster add s_host;");
                 $version = 2;

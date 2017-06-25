@@ -4,5 +4,6 @@
     "description" : "RRS 2017 TechnicalChallenge Coordinator",
     "icon" : "fa-refresh",
     "main_controller" : "adf\\apps\\tc2017\\MixerMainController",
-    "sub_controller" : [["add_session","adf\\apps\\tc2017\\AddSessionController"]]
+    "sub_controller" : [["add_session","adf\\apps\\tc2017\\AddSessionController"]],
+    "dependon" : [["competition","1.0.0"]]
 }
