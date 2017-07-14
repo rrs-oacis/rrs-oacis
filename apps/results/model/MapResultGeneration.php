@@ -1,7 +1,7 @@
 <?php
-namespace adf\model;
+namespace adf\apps\results\model;
 
-use \adf\model\ResultTeam;
+use adf\apps\results\model\ResultTeam;
 use adf\Config;
 
 

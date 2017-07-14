@@ -1,8 +1,8 @@
 <?php
-namespace adf\model;
+namespace adf\apps\results\model;
 
-use \adf\model\ResultTeam;
-use \adf\model\MapScoreTest;
+use adf\apps\results\model\ResultTeam;
+use adf\apps\results\model\MapScoreTest;
 use adf\Config;
 
 class ResultHelper{

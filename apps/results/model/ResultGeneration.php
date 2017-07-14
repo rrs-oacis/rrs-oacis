@@ -1,7 +1,7 @@
 <?php
-namespace adf\model;
+namespace adf\apps\results\model;
 
-use \adf\model\ResultTeam;
+use adf\apps\results\model\ResultTeam;
 use adf\Config;
 
 
@@ -71,10 +71,10 @@ class ResultGeneration{
 			
 			if(!$download){
 				$head .= 
-				'  <th colspan="2"><a target="_blank" href="'.Config::$RESOURCE_PATH.'result_map/'.$simulatorID.'/'.$mapName.'">'.$mapName.'</a></th>  '. "\n";
+				'  <th colspan="2"><a target="_blank" href="'.Config::$RESOURCE_PATH.'results-map/'.$simulatorID.'/'.$mapName.'">'.$mapName.'</a></th>  '. "\n";
 			}else{
 				$head .=
-				'  <th colspan="2"><a target="_blank" href="./result_map/'.$simulatorID.'/'.$mapName.'/index.html">'.$mapName.'</a></th>  '. "\n";
+				'  <th colspan="2"><a target="_blank" href="./results_map/'.$simulatorID.'/'.$mapName.'/index.html">'.$mapName.'</a></th>  '. "\n";
 			}
 		}
 		

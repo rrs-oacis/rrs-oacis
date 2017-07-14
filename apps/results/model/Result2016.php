@@ -1,13 +1,14 @@
 <?php
-namespace adf\model;
+namespace adf\apps\results\model;
 
-use \adf\model\ResultTeam;
+use adf\apps\results\model\ResultTeam;
 
 class Result2016{
 	
 	public static function getMaps(){
 		
-		return ['NY2','Joao2','Istanbul2','Paris2','Eindhoven2','Kobe3','Mexico2','Berlin2','Presentation'];
+		return 
+		['NY2','Joao2','Istanbul2','Paris2','Eindhoven2','Kobe3','Mexico2','Berlin2','Presentation'];
 		
 	}
 	

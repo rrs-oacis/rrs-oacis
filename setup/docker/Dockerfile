@@ -12,10 +12,12 @@ RUN apt-get  -y install apt-utils
 RUN echo deb http://packages.dotdeb.org jessie all >> /etc/apt/sources.list
 RUN wget -qO - https://www.dotdeb.org/dotdeb.gpg | apt-key add -
 RUN apt-get -y update 
-RUN apt-get -y install php php-mbstring php7.0-zip sqlite3 php7.0-sqlite3 php7.0-mongodb perl nginx php-fpm
+RUN apt-get -y install php php-mbstring php7.0-zip sqlite3 php7.0-sqlite3 php7.0-mongodb sudo perl nginx php-fpm
 RUN apt-get -y remove apache2
 RUN apt-get -y autoremove
 RUN apt-get -y autoclean
+
+RUN usermod -aG sudo oacis
 
 #Perl
 ENV PERL_MM_USE_DEFAULT 1
@@ -24,6 +26,7 @@ RUN cpan -i DBD::SQLite
 
 #Config files
 COPY supplement/rrsoacis_fpm.conf /etc/php/7.0/fpm/pool.d/
+COPY supplement/rrsoacis_fpm_php.ini /etc/php/7.0/fpm/conf.d/
 COPY supplement/rrsoacis_nginx.conf /etc/nginx/conf.d/
 RUN sed -iE 's/www-data/oacis/' /etc/nginx/nginx.conf
 

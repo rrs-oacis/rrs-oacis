@@ -1,11 +1,11 @@
 <?php
-namespace adf\model;
+namespace adf\apps\results\model;
 
 use ZipArchive;
 use adf\Config;
-use adf\controller\ResultController;
-use adf\model\ResultHelper;
-use adf\controller\ResultMapController;
+use adf\apps\results\ResultController;
+use adf\apps\results\model\ResultHelper;
+use adf\apps\results\ResultMapController;
 
 class ResultDownload{
 	
@@ -18,7 +18,10 @@ class ResultDownload{
 		// Zipファイル名
 		$zipFileName = 'result_'.$simulationID.'.zip';
 		// Zipファイル一時保存ディレクトリ
-		$zipTmpDir = '/oasis/tmp/zip/download/';
+		//$zipTmpDir = '/home/oacis/rrs-oacis/data/tmp/zip/download/';
+		$zipTmpDir = '/home/oacis/rrs-oacis/data/tmp/';
+
+		//echo $zipTmpDir;
 		
 		if(!file_exists($zipTmpDir)){
 			
@@ -89,7 +92,7 @@ class ResultDownload{
 				
 				$zip->addEmptyDir($map_a_map);
 				
-				$mapurl = $value->getMapLogURI($mapName).'/snapshot-init';
+				$mapurl = $value->getMapLogURI($mapName).'/snapshot-init.png';
 				
 				$png_text = @file_get_contents($mapurl);
 				
@@ -103,7 +106,7 @@ class ResultDownload{
 				//Step Image
 				for($j=0;$j<count($step);$j++){
 					
-					$URL_S = $mapurl . '/snapshot-'.$step[$j] . '.png';
+					$URL_S = $value->getMapLogURI($mapName). '/snapshot-'.$step[$j] . '.png';
 				
 					$png_step_text = @file_get_contents($URL_S);
 					

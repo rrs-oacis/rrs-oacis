@@ -4,5 +4,9 @@
     "description" : "Competition Results 2017",
     "icon" : "fa-list-alt",
     "main_controller" : "adf\\apps\\results\\ResultsMainController",
-    "sub_controller" : []
+    "sub_controller" : [
+    	["result","adf\\apps\\results\\ResultController"],
+		["map","adf\\apps\\results\\ResultMapController"],
+        ["download","adf\\apps\\results\\ResultDownloadController"]
+    ]
 }

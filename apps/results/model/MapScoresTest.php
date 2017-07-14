@@ -1,5 +1,5 @@
 <?php
-namespace adf\model;
+namespace adf\apps\results\model;
 
 class MapScoresTest{
 	

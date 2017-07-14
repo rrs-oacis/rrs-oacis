@@ -1,5 +1,6 @@
 <?php
 use adf\Config;
+use adf\apps\competition\SessionManager;
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,6 +38,20 @@ use adf\Config;
 
     <!-- Main content -->
     <section class="content">
+
+      <?php include 'box-results.php';?>
+
+	<?php
+  /*
+	$data = SessionManager::getSessions();
+
+	echo $data[0]["name"];
+
+	echo('<pre>');
+	var_dump($data);
+	echo('</pre>');
+*/
+	?>
     </section>
     <!-- /.content -->
   </div>
