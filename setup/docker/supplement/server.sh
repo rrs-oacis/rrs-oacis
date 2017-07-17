@@ -2,7 +2,7 @@
 
 cd `dirname $0`
 
-if [ /etc/rrsoacis-init.sh -a ! -e /home/oacis/rrs-oacis/data/.rrs-oacis.initialized ] ; then
+if [ -e /etc/rrsoacis-init.sh -a ! -e /home/oacis/rrs-oacis/data/.rrs-oacis.initialized ] ; then
     chmod a+x /etc/rrsoacis-init.sh
     su oacis -c /etc/rrsoacis-init.sh
 fi
