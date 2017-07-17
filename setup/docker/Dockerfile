@@ -60,6 +60,9 @@ RUN /home/oacis/rrs-oacis/setup.sh
 WORKDIR /home/oacis/rrs-oacis
 RUN git pull
 
+WORKDIR /home/oacis/rrs-oacis/rrsenv
+RUN git pull
+
 USER root
 WORKDIR /home/oacis
 CMD ["/home/oacis/rrs-oacis/server.sh"]
