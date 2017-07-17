@@ -129,5 +129,7 @@ rrsenv/
 /.gitignore
 /server.sh
 /setup.sh
+*.db
+
 
 
