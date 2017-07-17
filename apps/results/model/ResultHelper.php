@@ -24,8 +24,14 @@ class ResultHelper{
 		$maps = [];
 		
 		for ($i = 0 ; $i < count($parameterSets); $i++) {
-			
-			$m = explode("_", $parameterSets[$i]->v->MAP)[0];
+
+			//Fix
+			//$m = explode("_", $parameterSets[$i]->v->MAP)[0];
+			$mn = explode("_", $parameterSets[$i]->v->MAP);
+
+			$uid = $mn[count($mn)-1];
+
+			$m = str_replace("_".$uid,"",$parameterSets[$i]->v->MAP);
 			
 			$maps[] = $m;
 			
@@ -42,9 +48,24 @@ class ResultHelper{
 		
 		for ($i = 0 ; $i < count($parameterSets); $i++) {
 			
-			$m = explode("_", $parameterSets[$i]->v->MAP)[0];
+			//Fix
+			//$m = explode("_", $parameterSets[$i]->v->MAP)[0];
 			
-			$teamName = explode("_", $parameterSets[$i]->v->A)[0];
+			$mn = explode("_", $parameterSets[$i]->v->MAP);
+
+			$uid = $mn[count($mn)-1];
+
+			$m = str_replace("_".$uid,"",$parameterSets[$i]->v->MAP);
+
+
+			//Fix TeamName
+			//$teamName = explode("_", $parameterSets[$i]->v->A)[0];
+
+			$tn = explode("_", $parameterSets[$i]->v->A);
+
+			$uid = $tn[count($tn)-1];
+
+			$teamName = str_replace("_".$uid,"",$parameterSets[$i]->v->A);
 			
 			$team;
 			
