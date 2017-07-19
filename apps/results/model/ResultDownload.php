@@ -19,7 +19,8 @@ class ResultDownload{
 		$zipFileName = 'result_'.$simulationID.'.zip';
 		// Zipファイル一時保存ディレクトリ
 		//$zipTmpDir = '/home/oacis/rrs-oacis/data/tmp/zip/download/';
-		$zipTmpDir = '/home/oacis/rrs-oacis/data/tmp/';
+		//$zipTmpDir = '/home/oacis/rrs-oacis/data/tmp/';
+		$zipTmpDir = '/tmp/';
 
 		//echo $zipTmpDir;
 		
@@ -51,7 +52,7 @@ class ResultDownload{
 		
 		$zip->addFromString('result_'.$simulationID.'/index.html', $rc->downloadHTML($simulationID));
 		
-		$zip->addEmptyDir( 'result_'.$simulationID.'/result_map/'.$simulationID);
+		$zip->addEmptyDir( 'result_'.$simulationID.'/results_map/'.$simulationID);
 		
 		
 		$parameterSets= ResultHelper::getParameterSets($simulationID);
@@ -68,7 +69,7 @@ class ResultDownload{
 			
 			$mapName = $maps[$i];
 			
-			$mapURL = 'result_'.$simulationID.'/result_map/'.$simulationID.'/'.$mapName;
+			$mapURL = 'result_'.$simulationID.'/results_map/'.$simulationID.'/'.$mapName;
 			
 			$zip->addEmptyDir( $mapURL);
 			
