@@ -179,7 +179,8 @@ class ResultGeneration{
 				//Total
 				$total = $value->getTotalScore();
 				$tS= ($total['score']+ ($day1Score=='none' ? 0:$day1Score) );
-				$tP= ($total['points']+($day1point=='none' ? 0:$day1point));
+				//$tP= ($total['points']+($day1point=='none' ? 0:$day1point));
+				$tP= $total['points'];
 				
 				$main .= '  <td>'.$tS.'</td>'.'<td>'.$tP.'</td>'."\n";
 				//$main .= '  <td>'.$tP.'</td>'."\n";
