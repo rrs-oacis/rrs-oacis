@@ -104,7 +104,7 @@ class ResultGeneration{
 		if ($day1ID!=null) { $size = 2; }
 		for ($i = 0 ; $i < count($mapNames) +$size; $i++)
 		{
-			if ($day1ID!=null && count($mapNames)+1 == $i) { 
+			if ($day1ID!=null && count($mapNames) == $i) { 
 				$head .= '  <th>Points</th>'."\n"; 
 			}else{
 				$head .= '  <th>Score</th><th>Points</th>'."\n";

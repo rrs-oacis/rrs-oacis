@@ -9,7 +9,7 @@ use adf\apps\results\ResultMapController;
 
 class ResultDownload{
 	
-	public static function downloadPage($simulationID){
+	public static function downloadPage($simulationID,$preParam= null){
 		
 		//echo 'aaa';
 		//return ;
@@ -50,7 +50,7 @@ class ResultDownload{
 
 		
 		
-		$zip->addFromString('result_'.$simulationID.'/index.html', $rc->downloadHTML($simulationID));
+		$zip->addFromString('result_'.$simulationID.'/index.html', $rc->downloadHTML($simulationID,$preParam));
 		
 		$zip->addEmptyDir( 'result_'.$simulationID.'/results_map/'.$simulationID);
 		

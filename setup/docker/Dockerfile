@@ -57,10 +57,10 @@ RUN ./rrsenv/init.sh
 USER oacis
 RUN /home/oacis/rrs-oacis/setup.sh
 
-WORKDIR /home/oacis/rrs-oacis
+WORKDIR /home/oacis/rrs-oacis/rrsenv
 RUN git pull
 
-WORKDIR /home/oacis/rrs-oacis/rrsenv
+WORKDIR /home/oacis/rrs-oacis
 RUN git pull
 
 USER root

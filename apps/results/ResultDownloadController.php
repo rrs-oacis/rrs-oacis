@@ -11,9 +11,9 @@ use adf\apps\results\model\ResultDownload;
 
 class ResultDownloadController extends AbstractController{
 	
-	public function anyIndex($param= null){
+	public function anyIndex($param= null,$preParam= null){
 		
-		ResultDownload::downloadPage($param);
+		ResultDownload::downloadPage($param,$preParam);
 		
 		//echo 'aaa';
 		

@@ -47,7 +47,7 @@ class ResultController extends AbstractController{
 		
 		ResultHelper::calPoints($teams);
 		
-		ResultHelper::addRank($teams);
+		
 
 
 		$preSession = null;
@@ -71,9 +71,15 @@ class ResultController extends AbstractController{
 			foreach($preTeams as $name => $value)
 			{
 				$prePoint[$name] = $value->getTotalScore()['points'];
+
+
+				$teams[$name]->addPresentation($prePoint[$name]);
+
 			}
 
 		}
+
+		ResultHelper::addRank($teams);
 		
 		//echo ResultGeneration::generateHTML('2018', $maps, $teams, '592fe0a36653ff00f53567c2',null);
 		
