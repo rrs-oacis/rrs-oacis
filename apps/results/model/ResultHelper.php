@@ -346,7 +346,7 @@ class ResultHelper{
 				
 				//echo $tScore . '<br>';
 				
-				if($MSS[$key][1] > $tScore){
+				if($MSS[$key][1] >= $tScore){
 					$point = 1;
 				}
 				
@@ -365,7 +365,11 @@ class ResultHelper{
 								$point = $i1;
 								$old_point[$i1] = true;
 								break;
-							}
+							} else if ($i1 == 1) {
+                                                                $point = 1;
+                                                                $old_point[$i1] = true;
+                                                                break;
+                                                        }
 						}
 						/*
 						if(isset($old_point[$i])){
