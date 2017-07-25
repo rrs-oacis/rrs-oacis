@@ -357,7 +357,7 @@ class ResultHelper{
 					if($point==-1 && $i==$STEP_SIZE){
 						//(5)
 						$point = $STEP_SIZE; 
-					}else if($MSS[$key][$i] < $tScore && $tScore < $MSS[$key][$i+1]){
+					}else if($MSS[$key][$i] <= $tScore && $tScore < $MSS[$key][$i+1]){
 						//(4)
 						
 						for($i1 = $i;$i1>=1;$i1--){
