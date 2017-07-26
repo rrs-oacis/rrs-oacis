@@ -66,7 +66,13 @@ use adf\Config;
                                         foreach ($session['maps'] as $map)
                                         {
                                     ?>
-                                        <th title="<?= $map['name']?> (<?= $map['timestamp']?>)"><?= $map['alias']?></th>
+                                        <th title="<?= $map['name']?> (<?= $map['timestamp']?>)"><?= $map['alias']?>
+<form method="post" action="./competition-remove_map" style="display:inline;">
+<input type="hidden" name="parameter_session" value="<?= $session["name"]?>">
+<input type="hidden" name="parameter_map" value="<?= $map['name']?>">
+                                    <input class="btn-xs btn-warning" type="submit" value="cancel">
+</form>
+                                        </th>
                                     <?php
                                         }
                                     }

@@ -218,6 +218,42 @@ class SessionManager
     /**
      *
      * */
+    public static function removeMap($sessionName, $mapName)
+    {
+        $session = Self::getSession($sessionName);
+        if (count(MapLoader::getMap($mapName)) <= 0) { return false; }
+        if (count($session) <= 0) { return false; }
+
+        $db = self::connectDB();
+        $sth = $db->prepare("select runId from run where session=:session and map=:map;");
+        $sth->bindValue(':session', $sessionName, PDO::PARAM_STR);
+        $sth->bindValue(':map', $mapName, PDO::PARAM_STR);
+        $sth->execute();
+        while($row = $sth->fetch(PDO::FETCH_ASSOC))
+        {
+            $scriptId = uniqid();
+
+            $script = "#!/bin/bash\n\n";
+            $script .= Config::$OACISCLI_PATH." destroy_runs_by_ids";
+            $script .= ' '.$row['runId'];
+            $script .= "\n";
+            $script .= 'php '.realpath(dirname(__FILE__)).'/update_runid.php \''.$scriptId.'\' /tmp/out_'.$scriptId.'.json';
+            file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
+            exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
+        }
+        $db->query("delete from run where session='".$sessionName."' and map='".$mapName."';");
+
+        $sth = $db->prepare("delete from linkedMap where session=:session and map=:map;");
+        $sth->bindValue(':session', $sessionName, PDO::PARAM_STR);
+        $sth->bindValue(':map', $mapName, PDO::PARAM_STR);
+        $sth->execute();
+
+        return true;
+    }
+
+    /**
+     *
+     * */
     private static function connectDB()
     {
         $db = new PDO('sqlite:'.dirname(__FILE__).'/app.db');
