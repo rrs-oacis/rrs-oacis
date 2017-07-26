@@ -19,6 +19,7 @@ class ResultController extends AbstractController{
 	}
 	
 	public function get($param = null,$preParam= null){
+		error_reporting(0);
 		
 		//TODO Access the oasis and bring the results
 		$simulatorID = $param;

@@ -1,4 +1,0 @@
-#!/bin/bash
-
-/home/oacis/oacis/bin/oacis_cli  create_parameter_sets -s 59502dc5fdfcaa03bc752a8d -i '{"MAP":"testmap2_59395643b16ab","F":"test2_59373f5d55902","P":"test2_59373f5d55902","A":"test2_59373f5d55902"}' -r '{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"59502283fdfcaa00183ffc65","host_parameters":null}' -o out.json
-php /home/oacis/rrs-oacis/apps/competition/update_runid.php '59502f5a56f65' ./out.json

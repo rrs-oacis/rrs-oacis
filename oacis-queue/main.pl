@@ -55,7 +55,7 @@ while ($count > 0)
     system('sudo -i -u oacis `dirname $PWD`/scripts/'.$script);
     chdir '..';
     system('rm -rf tmp');
-    system('irm -f scripts/'.$script);
+    system('rm -f scripts/'.$script);
 
     $sth = $dbi->prepare('delete from queue where script=?;');
     $sth->bind_param(1, $script);
