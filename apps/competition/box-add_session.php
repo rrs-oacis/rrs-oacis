@@ -25,6 +25,7 @@ use adf\Config;
         <div class="col-sm-10">
           <input type="text" class="form-control" name="parameter_agents"
             placeholder="sample1,sample2,sample3"
+            value="<?= $agentAliasText ?>"
             required>
         </div>
       </div>
