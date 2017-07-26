@@ -107,29 +107,38 @@ use adf\Config;
 
                                                         echo ("<td>");
 
-							echo ("<a href=\"javascript:void(0);\" onclick=\"window.open('http://'+location.host.replace(location.port,3000)+'/runs/".$runId."');\">");
                                                         if ($status === 'running' || $status === 'submitted')
                                                         {
+							    echo ("<a href=\"javascript:void(0);\" onclick=\"window.open('http://'+location.host.replace(location.port,3000)+'/runs/".$runId."');\">");
                                                             echo ("<span class='label label-primary'>running</span>");
+							    echo ("</a>");
                                                         }
                                                         else if ($status === 'created')
                                                         {
+							    echo ("<a href=\"javascript:void(0);\" onclick=\"window.open('http://'+location.host.replace(location.port,3000)+'/runs/".$runId."');\">");
                                                             echo ("<span class='label label-warning'>reserved</span>");
+							    echo ("</a>");
                                                         }
                                                         else if ($status === 'finished')
                                                         {
+							    echo ("<a href=\"javascript:void(0);\" onclick=\"window.open('http://'+location.host.replace(location.port,3000)+'/runs/".$runId."');\">");
                                                             echo ("<span class='label label-success'>finished</span>");
+							    echo ("</a>");
                                                         }
                                                         else if ($status === 'failed')
                                                         {
+							    echo ("<a href=\"javascript:void(0);\" onclick=\"window.open('http://'+location.host.replace(location.port,3000)+'/runs/".$runId."');\">");
                                                             echo ("<span class='label label-danger'>failed</span>");
+							    echo ("</a>");
+							    echo ("<a href='./competition-rerun/".$runId."'>");
+                                                            echo ("<span class='label label-warning'>rerun</span>");
+							    echo ("</a>");
                                                         }
                                                         else if ($runJson == '')
                                                         {
                                                             echo ("<span class='label label-danger'>FAILED</span>");
                                                         }
 
-                                                        echo ("</a>");
                                                         echo ("</td>");
                                                     }
                                                     else

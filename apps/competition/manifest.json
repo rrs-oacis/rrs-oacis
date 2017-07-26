@@ -7,6 +7,7 @@
     "sub_controller" : [
         ["add_session","adf\\apps\\competition\\AddSessionController"],
         ["add_map","adf\\apps\\competition\\AddMapController"],
-        ["remove_map","adf\\apps\\competition\\RemoveMapController"]
+        ["remove_map","adf\\apps\\competition\\RemoveMapController"],
+        ["rerun","adf\\apps\\competition\\RerunController"]
     ]
 }
