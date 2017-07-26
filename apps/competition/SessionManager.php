@@ -205,9 +205,9 @@ class SessionManager
             $script .= ' -s '.$sessionName;
             $script .= ' -i \'{"MAP":"'.$mapName.'","F":"'.$agent['name'].'","P":"'.$agent['name'].'","A":"'.$agent['name'].'"}\'';
             $script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"'.ClusterLoader::getMainHostGroup().'","host_parameters":null}\'';
-            $script .= ' -o /tmp/out_oq.json';
+            $script .= ' -o /tmp/out_'.$scriptId.'.json';
             $script .= "\n";
-            $script .= 'php '.realpath(dirname(__FILE__)).'/update_runid.php \''.$scriptId.'\' /tmp/out_oq.json';
+            $script .= 'php '.realpath(dirname(__FILE__)).'/update_runid.php \''.$scriptId.'\' /tmp/out_'.$scriptId.'.json';
             file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
             exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
         }

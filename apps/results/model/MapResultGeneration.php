@@ -111,6 +111,9 @@ class MapResultGeneration{
 			$head .= '<th>'.$step[$i].'</th>';
 		}
 		
+		//Final
+		$head .= '<th>Final</th>';
+
 		$head .= '<th>Logfile</th></tr>';
 		
 		return $head;
@@ -165,6 +168,12 @@ class MapResultGeneration{
 				$main .='<img src="'.$URL_S.'" width="100" height="75" alt="Map at turn '.$scores[$i].'" />';
 				$main .='</a><br />'.round($mapScores[$scores[$i]-1],4).'</td>';
 			}
+
+			$URL_S = $mapurl.'/snapshot-final.png';
+                        $main .='<td><a href="'.$URL_S.'">';
+                        $main .='<img src="'.$URL_S.'" width="100" height="75" alt="Map at turn Final" />';
+                        $main .='</a><br />'.round($mapScores[count($mapScores)-1],4).'</td>';
+
 			
 			$main .= '</tr">'. "\n";
 			
