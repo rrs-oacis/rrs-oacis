@@ -31,7 +31,7 @@ use adf\file\AppLoader;
         }
         ?>
       <li><a href="<?=Config::$TOP_PATH ?>settings"><i class="fa fa-gear"></i> <span>Settings</span></a></li>
-       <li><a href="javascript:window.open('http://'+location.host.replace(location.port,3000))"><i class="fa fa-external-link"></i> <span>OACIS</span></a></li>
+       <li><a href="javascript:void(0);" onclick="window.open('http://'+location.host.replace(location.port,3000));"><i class="fa fa-external-link"></i> <span>OACIS</span></a></li>
       
       <!-- 
       <li><a href="./week.php"> <i class="fa fa-table"></i> <span>予定</span> <span class="pull-right-container"> 

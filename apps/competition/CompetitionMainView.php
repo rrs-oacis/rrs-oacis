@@ -99,30 +99,32 @@ use adf\Config;
                                                         $run = json_decode($runJson, true);
                                                         $status = $run['status'];
 
+                                                        echo ("<td>");
+
+							echo ("<a href=\"javascript:void(0);\" onclick=\"window.open('http://'+location.host.replace(location.port,3000)+'/runs/".$runId."');\">");
                                                         if ($status === 'running' || $status === 'submitted')
                                                         {
-                                                            echo ("<td><span class='label label-primary'>running</span></td>");
+                                                            echo ("<span class='label label-primary'>running</span>");
                                                         }
                                                         else if ($status === 'created')
                                                         {
-                                                            echo ("<td><span class='label label-warning'>reserved</span></td>");
+                                                            echo ("<span class='label label-warning'>reserved</span>");
                                                         }
                                                         else if ($status === 'finished')
                                                         {
-                                                            echo ("<td><span class='label label-success'>finished</span></td>");
+                                                            echo ("<span class='label label-success'>finished</span>");
                                                         }
                                                         else if ($status === 'failed')
                                                         {
-                                                            echo ("<td><span class='label label-danger'>failed</span></td>");
+                                                            echo ("<span class='label label-danger'>failed</span>");
                                                         }
                                                         else if ($runJson == '')
                                                         {
-                                                            echo ("<td><span class='label label-danger'>FAILED</span></td>");
+                                                            echo ("<span class='label label-danger'>FAILED</span>");
                                                         }
-                                                        else
-                                                        {
-                                                            echo ("<td></td>");
-                                                        }
+
+                                                        echo ("</a>");
+                                                        echo ("</td>");
                                                     }
                                                     else
                                                     {

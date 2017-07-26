@@ -119,6 +119,18 @@ class ResultDownload{
 					$zip->addFromString($map_a_map . '/snapshot-'.$step[$j] . '.png',$png_step_text);
 					
 				}
+
+				//Final
+				$URL_S = $value->getMapLogURI($mapName). '/snapshot-final.png';
+
+                                $png_step_text = @file_get_contents($URL_S);
+
+                                if($png_step_text==null){
+                                        $png_step_text= 'null';
+                                }
+
+                                $zip->addFromString($map_a_map . '/snapshot-final.png',$png_step_text);
+
 				
 				
 				

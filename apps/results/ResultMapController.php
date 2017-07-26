@@ -12,6 +12,7 @@ class ResultMapController extends AbstractController{
 	}
 	
 	public function get($simulatorID= null,$mapName= null){
+		error_reporting(0);
 		
 		//Getteam
 		$parameterSets= ResultHelper::getParameterSets($simulatorID);
