@@ -59,7 +59,7 @@ class SessionManager
                 {
                     $linkedRuns[$row2['map']] = [];
                 }
-                $linkedRuns[$row2['map']][$row2['agent']] = $row2;
+                $linkedRuns[$row2['map']][substr($row2['agent'], 0, strlen($row2['agent'])-14)] = $row2;
             }
             $row['runs'] = $linkedRuns;
 

@@ -94,7 +94,7 @@ use adf\Config;
                                         {
                                             foreach ($session['maps'] as $map)
                                             {
-                                                $runId = $session['runs'][$map['name']][$agent['name']]['runId'];
+                                                $runId = $session['runs'][$map['name']][substr($agent['name'], 0, strlen($agent['name'])-14)]['runId'];
 
                                                 if (isset($agent['name']))
                                                 {
