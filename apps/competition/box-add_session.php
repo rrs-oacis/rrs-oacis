@@ -33,7 +33,7 @@ use adf\Config;
             <label for="precursor" class="col-sm-2 control-label">Precursor</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" name="parameter_precursor"
-                       placeholder="precursor session">
+                       placeholder='precursor session (like "Day1")'>
             </div>
         </div>
     </div>
