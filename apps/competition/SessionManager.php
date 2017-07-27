@@ -289,18 +289,23 @@ class SessionManager
     public static function rerun($runId)
     {
         $db = self::connectDB();
-        $sth = $db->prepare("select runId from run where runId=:runId;");
+        $sth = $db->prepare("select runId,paramId from run where runId=:runId;");
         $sth->bindValue(':runId', $runId, PDO::PARAM_STR);
         $sth->execute();
         while($row = $sth->fetch(PDO::FETCH_ASSOC))
         {
             $scriptId = uniqid();
 
+            $sth = $db->prepare("update run set name=:name where runId=:runId;");
+            $sth->bindValue(':name', $scriptId, PDO::PARAM_STR);
+            $sth->bindValue(':runId', $runId, PDO::PARAM_STR);
+            $sth->execute();
+
             $script = "#!/bin/bash\n\n";
             $script .= Config::$OACISCLI_PATH." replace_runs_by_ids";
             $script .= ' '.$row['runId'];
             $script .= "\n";
-            $script .= 'php '.realpath(dirname(__FILE__)).'/update_runid.php \''.$scriptId.'\' /tmp/out_'.$scriptId.'.json';
+            $script .= 'php '.realpath(dirname(__FILE__)).'/update_runid_forRerun.php \''.$scriptId.'\' '.$row['paramId'];
             file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
             exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
         }

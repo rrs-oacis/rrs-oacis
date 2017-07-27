@@ -11,7 +11,7 @@ use adf\apps\competition\SessionManager;
 class ResultDownload{
 	
 	public static function downloadPage($simulationID,$preParam= null){
-		
+			
 		//echo 'aaa';
 		//return ;
 		// Zipクラスロード
@@ -96,7 +96,7 @@ class ResultDownload{
 				
 				$zip->addEmptyDir($map_a_map);
 				
-				$mapurl = $value->getMapLogURI($mapName).'/snapshot-init.png';
+				$mapurl = 'http://localhost:3000'.$value->getMapLogURI($mapName).'/snapshot-init.png';
 				
 				$png_text = @file_get_contents($mapurl);
 				
@@ -110,7 +110,7 @@ class ResultDownload{
 				//Step Image
 				for($j=0;$j<count($step);$j++){
 					
-					$URL_S = $value->getMapLogURI($mapName). '/snapshot-'.$step[$j] . '.png';
+					$URL_S = 'http://localhost:3000'.$value->getMapLogURI($mapName). '/snapshot-'.$step[$j] . '.png';
 				
 					$png_step_text = @file_get_contents($URL_S);
 					
@@ -124,7 +124,7 @@ class ResultDownload{
 				}
 
 				//Final
-				$URL_S = $value->getMapLogURI($mapName). '/snapshot-final.png';
+				$URL_S = 'http://localhost:3000'.$value->getMapLogURI($mapName). '/snapshot-final.png';
 
                                 $png_step_text = @file_get_contents($URL_S);
 
@@ -134,7 +134,14 @@ class ResultDownload{
 
                                 $zip->addFromString($map_a_map . '/snapshot-final.png',$png_step_text);
 
-				
+	           		
+/*
+				$log_file_name =  $value->getMapLogURI($mapName). '/simulation_log.7z';
+				$log_data = @file_get_contents($log_file_name);
+
+				$zip->addFromString($map_a . '/simulation_log.7z', $log_data);
+*/
+			
 				
 				
 			}

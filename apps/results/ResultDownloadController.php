@@ -12,6 +12,7 @@ use adf\apps\results\model\ResultDownload;
 class ResultDownloadController extends AbstractController{
 	
 	public function anyIndex($param= null,$preParam= null){
+		error_reporting(0);
 		
 		ResultDownload::downloadPage($param,$preParam);
 		
