@@ -3,7 +3,7 @@ namespace adf\apps\results\model;
 
 use adf\apps\results\model\ResultTeam;
 use adf\Config;
-
+use adf\apps\competition\SessionManager;
 
 class ResultGeneration{
 	
@@ -59,11 +59,13 @@ class ResultGeneration{
 	}
 	
 	private function getTableHeader($simulatorID,array $mapNames, $day1ID = null,$download = false){
-		
+	
+		$sessionName =  SessionManager::getSession($simulatorID)['alias'];
+	
 		$head = '';
 		$head .= 
 			'<table border="2" cellspacing="0" cellpadding="5">  '. "\n".
-			'<tr>'."\n".'  <th rowspan="2">Team</th>  '. "\n";
+			'<tr>'."\n".'  <th rowspan="2">'.$sessionName.'</th>  '. "\n";
 		
 		for ($i = 0 ; $i < count($mapNames); $i++)
 		{

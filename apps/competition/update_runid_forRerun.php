@@ -19,3 +19,4 @@ $sth->bindValue(':paramId', $paramId, PDO::PARAM_STR);
 $sth->bindValue(':runId', $runId, PDO::PARAM_STR);
 $sth->execute();
 
+echo $runId.'\n';

@@ -12,7 +12,7 @@ class ResultTeam implements JsonSerializable{
 	
 	private $maps;
 	
-	private $oldDay;
+	private $oldDay = 0;
 	
 	private $rank;
 	
@@ -45,7 +45,6 @@ class ResultTeam implements JsonSerializable{
 		$this->download =$download;
 
 
-		$this->oldDay = null;
 		
 	}
 	
@@ -74,6 +73,10 @@ class ResultTeam implements JsonSerializable{
 	public function addPresentation($points){
 		$this->presentationPoint= $points;
 	}
+
+	public function addPreSession($points){
+		$this->oldDay = $points;
+	}
 	
 	public function getTotalScore(){
 	
@@ -96,6 +99,10 @@ class ResultTeam implements JsonSerializable{
 		
 		if($this->presentationPoint>0){
 			$result['points'] += $this->presentationPoint;
+		}
+
+		if($this->oldDay>0){
+			$result['points'] += $this->oldDay;
 		}
 		
 		return $result;
@@ -179,4 +186,7 @@ class ResultTeam implements JsonSerializable{
 	}
 	
 }
+
+
+
 

@@ -90,7 +90,7 @@ class MapResultGeneration{
 			}else{
 
 
-				$downloadLinck .= '<a href="'.Config::$RESOURCE_PATH.'results-map_download/'.$simulatorID.'/'.$mapName.'" >Download map</a>';
+				$downloadLinck .= '<a href="'.Config::$RESOURCE_PATH.'results-map_download/'.$simulatorID.'/'.$mapName.'.tar.gz" >Download map</a>';
 
 			}
 			$downloadLinck .= ' (Size: '. $map_size .'KB)';
@@ -205,16 +205,23 @@ class MapResultGeneration{
 			for($i=0;$i<count($scores);$i++){
 				$URL_S = $mapurl.'/snapshot-'.$scores[$i].'.png';
 				$main .='<td><a href="'.$URL_S.'">';
-				$main .='<img src="'.$URL_S.'" width="100" height="75" alt="Map at turn '.$scores[$i].'" />';
-				$main .='</a><br />'.round($mapScores[$scores[$i]-1],4).'</td>';
+				if($score['score']!='')$main .='<img src="'.$URL_S.'" width="100" height="75" alt="Map at turn '.$scores[$i].'" />';
+				if($score['score']!='')$main .='</a><br />'.round($mapScores[$scores[$i]-1],4).'</td>';
+				else $main .='</td>';
 			}
 
 			$URL_S = $mapurl.'/snapshot-final.png';
                         $main .='<td><a href="'.$URL_S.'">';
-                        $main .='<img src="'.$URL_S.'" width="100" height="75" alt="Map at turn Final" />';
-                        $main .='</a><br />'.round($mapScores[count($mapScores)-1],4).'</td>';
-
+                        if($score['score']!='')$main .='<img src="'.$URL_S.'" width="100" height="75" alt="Map at turn Final" />';
+                        if($score['score']!='')$main .='</a><br />'.round($mapScores[count($mapScores)-1],4).'</td>';
+			else $main .='</td>';
 			
+
+			//LogFile Link
+            		$log_link = str_replace('/'.Config::MAP_LOG,'',$value->getMapLogURI($mapName));
+            		if($score['score']!='')$main .= '<td><a href="'.$log_link.'.tar.bz2">Download</a></td>';
+			else $main .= '<td></td>';
+
 			$main .= '</tr">'. "\n";
 			
 		}

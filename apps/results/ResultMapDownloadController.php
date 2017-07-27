@@ -15,11 +15,11 @@ class ResultMapDownloadController extends AbstractController{
 	
 	public function anyIndex($session= null,$mapName= null){
 		
-		$zipDate = self::downloadMap($session,$mapName);
-
+		//$zipDate = self::downloadMap($session,$mapName);
+		$zipDate = self::downloadMap($session,str_replace('.tar.gz','',$mapName));
 		
-		header('Content-Type: application/x-tar; name="' . $mapName . '.tar.gz"');
-		header('Content-Disposition: attachment; filename="' . $mapName . '.tar.gz"');
+		header('Content-Type: application/x-tar; name="' . $mapName);
+		header('Content-Disposition: attachment; filename="' . $mapName);
 		header('Content-Length: '.strlen($zipDate));
 		echo $zipDate;
 		

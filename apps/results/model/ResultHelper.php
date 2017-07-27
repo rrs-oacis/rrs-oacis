@@ -139,7 +139,7 @@ class ResultHelper{
 
 	public static function getMapImageURI($simulatorID, $parameterSetID, $runID){
 		
-		return '/Result_development/'.$simulatorID.'/'.$parameterSetID.'/'.$runID.'/'.Config::MAP_LOG;
+		return 'http://127.0.0.1:3080/Result_development/'.$simulatorID.'/'.$parameterSetID.'/'.$runID.'/'.Config::MAP_LOG;
 		
 	}
 
