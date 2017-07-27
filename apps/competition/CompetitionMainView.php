@@ -145,7 +145,7 @@ use adf\Config;
                                                     {
                                                         echo ("<td>");
                                                         echo ("<span class='label label-info'>pending</span>");
-							echo ("<a href='./competition-repost/".$runId."'>");
+							echo ("<a href='./competition-repost/".$session["name"]."/".$map['name']."/".$agent['name']."'>");
 							echo ("<span class='label label-warning'>repost</span>");
 							echo ("</a>");
                                                         echo ("</td>");
