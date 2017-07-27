@@ -7,6 +7,7 @@
     "sub_controller" : [
     	["result","adf\\apps\\results\\ResultController"],
 		["map","adf\\apps\\results\\ResultMapController"],
-        ["download","adf\\apps\\results\\ResultDownloadController"]
+        ["download","adf\\apps\\results\\ResultDownloadController"],
+	["map_download","adf\\apps\\results\\ResultMapDownloadController"]
     ]
 }

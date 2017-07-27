@@ -143,7 +143,12 @@ use adf\Config;
                                                     }
                                                     else
                                                     {
-                                                        echo ("<td><span class='label label-info'>pending</span></td>");
+                                                        echo ("<td>");
+                                                        echo ("<span class='label label-info'>pending</span>");
+							echo ("<a href='./competition-repost/".$runId."'>");
+							echo ("<span class='label label-warning'>repost</span>");
+							echo ("</a>");
+                                                        echo ("</td>");
                                                     }
                                                 }
                                                 else

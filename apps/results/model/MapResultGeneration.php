@@ -3,6 +3,7 @@ namespace adf\apps\results\model;
 
 use adf\apps\results\model\ResultTeam;
 use adf\Config;
+use adf\apps\results\ResultMapDownloadController;
 
 
 class MapResultGeneration{
@@ -16,6 +17,9 @@ class MapResultGeneration{
 		$html .= '<body>';
 		
 		$html .= '<h1>Results for '. $mapName.'</h1>';
+
+		//MapdownloadLink
+		$html .= self::getDownloadLinck($simulatorID, $teamResult, $mapName);
 		
 		$html .= self::getInitMap($simulatorID, $teamResult, $mapName);
 		
@@ -63,6 +67,42 @@ class MapResultGeneration{
                	'</style>'."\n".
                	'</head>'."\n";
 		
+	}
+
+	private function getDownloadLinck($simulatorID,$teamResult,$mapName){
+
+		$downloadLinck = '';
+
+
+		foreach($teamResult as $name => $value){
+
+			$map_size = strlen(ResultMapDownloadController::downloadMap($simulatorID,$mapName))/1000.0;
+
+
+			$downloadLinck .= '<div>';
+			if($value->isDownload()){
+
+				$downloadURL = './map.tar.gz';
+
+				$downloadLinck .= '<a href="'.$downloadURL.'" >Download map</a>';
+
+			
+			}else{
+
+
+				$downloadLinck .= '<a href="'.Config::$RESOURCE_PATH.'results-map_download/'.$simulatorID.'/'.$mapName.'" >Download map</a>';
+
+			}
+			$downloadLinck .= ' (Size: '. $map_size .'KB)';
+			$downloadLinck .= '</div>';
+			break;
+
+		}
+
+
+		return $downloadLinck;
+
+
 	}
 	
 	private function getInitMap($simulatorID,$teamResult,$mapName){

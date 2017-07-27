@@ -225,27 +225,71 @@ class SessionManager
         if (count($session) <= 0) { return false; }
 
         $db = self::connectDB();
-        $sth = $db->prepare("select runId from run where session=:session and map=:map;");
+        $sth = $db->prepare("insert into linkedMap(session, map) values(:session, :map);");
         $sth->bindValue(':session', $sessionName, PDO::PARAM_STR);
         $sth->bindValue(':map', $mapName, PDO::PARAM_STR);
         $sth->execute();
-        while($row = $sth->fetch(PDO::FETCH_ASSOC))
+
+        foreach ($session['agents'] as $agent)
         {
+            if (!isset($agent['name']) || $agent['name'] == '') { continue; }
+            
             $scriptId = uniqid();
+            $sth = $db->prepare("insert into run(name, session, map, agent) values(:name, :session, :map, :agent);");
+            $sth->bindValue(':name', $scriptId, PDO::PARAM_STR);
+            $sth->bindValue(':session', $sessionName, PDO::PARAM_STR);
+            $sth->bindValue(':map', $mapName, PDO::PARAM_STR);
+            $sth->bindValue(':agent', $agent['name'], PDO::PARAM_STR);
+            $sth->execute();
 
             $script = "#!/bin/bash\n\n";
-            $script .= Config::$OACISCLI_PATH." destroy_runs_by_ids";
-            $script .= ' '.$row['runId'];
-
+            $script .= Config::$OACISCLI_PATH." create_parameter_sets";
+            $script .= ' -s '.$sessionName;
+            $script .= ' -i \'{"MAP":"'.$mapName.'","F":"'.$agent['name'].'","P":"'.$agent['name'].'","A":"'.$agent['name'].'"}\'';
+            $script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"'.ClusterLoader::getMainHostGroup().'","host_parameters":null}\'';
+            $script .= ' -o /tmp/out_'.$scriptId.'.json';
+            $script .= "\n";
+            $script .= 'php '.realpath(dirname(__FILE__)).'/update_runid.php \''.$scriptId.'\' /tmp/out_'.$scriptId.'.json';
             file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
             exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
         }
-        $db->query("delete from run where session='".$sessionName."' and map='".$mapName."';");
 
-        $sth = $db->prepare("delete from linkedMap where session=:session and map=:map;");
+        return true;
+    }
+
+    /**
+     *
+     * */
+    public static function repost($sessionName, $mapName, $agentName)
+    {
+        $session = Self::getSession($sessionName);
+        if (count(MapLoader::getMap($mapName)) <= 0) { return false; }
+        if (count($session) <= 0) { return false; }
+
+        $db = self::connectDB();
+        $sth = $db->prepare("insert into linkedMap(session, map) values(:session, :map);");
         $sth->bindValue(':session', $sessionName, PDO::PARAM_STR);
         $sth->bindValue(':map', $mapName, PDO::PARAM_STR);
         $sth->execute();
+
+	$scriptId = uniqid();
+	$sth = $db->prepare("insert into run(name, session, map, agent) values(:name, :session, :map, :agent);");
+	$sth->bindValue(':name', $scriptId, PDO::PARAM_STR);
+	$sth->bindValue(':session', $sessionName, PDO::PARAM_STR);
+	$sth->bindValue(':map', $mapName, PDO::PARAM_STR);
+	$sth->bindValue(':agent', $agentName, PDO::PARAM_STR);
+	$sth->execute();
+
+	$script = "#!/bin/bash\n\n";
+	$script .= Config::$OACISCLI_PATH." create_parameter_sets";
+	$script .= ' -s '.$sessionName;
+	$script .= ' -i \'{"MAP":"'.$mapName.'","F":"'.$agentName.'","P":"'.$agentName.'","A":"'.$agentName.'"}\'';
+	$script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"'.ClusterLoader::getMainHostGroup().'","host_parameters":null}\'';
+	$script .= ' -o /tmp/out_'.$scriptId.'.json';
+	$script .= "\n";
+	$script .= 'php '.realpath(dirname(__FILE__)).'/update_runid.php \''.$scriptId.'\' /tmp/out_'.$scriptId.'.json';
+	file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
+	exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
 
         return true;
     }
@@ -275,6 +319,62 @@ class SessionManager
         return true;
     }
 
+/*
+	teamScores => [
+		'agent' => score,
+		'agent' => score,
+	]
+*/
+    public static function addPresentation($teamScores, $session)
+    {
+		$db = self::connectDB();
+
+
+		print_r ($teamScores);
+		// get session
+		$sessions = self::getSessions($session);
+		if (count($session) <= 0) { return; }
+
+		// get Presentation
+		$present = self::getPresentations();
+		$prepare = null;
+		if (array_key_exists($session, $present)) {
+			// Update Items
+			$prepare = $db->prepare("UPDATE present SET score=:score WHERE agent=:agent AND session=:session");
+		}
+		else {
+			// update presentation points
+			$prepare = $db->prepare("INSERT INTO present(agent, session, score) VALUES(:agent, :session, :score)");
+		}
+		foreach ($teamScores as $team => $score) {
+			$prepare->bindValue(':session', $session, PDO::PARAM_STR);
+			$prepare->bindValue(':agent', $team, PDO::PARAM_STR);
+			$prepare->bindValue(':score', $score, PDO::PARAM_INT);
+			$prepare->execute();
+		}
+    }
+
+	public static function getPresentations() {
+		$db = self::connectDB();
+		$prepare = $db->query("SELECT * FROM present;");
+		$teamScores = [];
+		while ($row = $prepare->fetch(PDO::FETCH_ASSOC)) {
+			$score = $row['score'];
+			$session = $row['session'];
+			$teamScores[$session][$row['agent']] = $score;
+			/*
+				{
+					'session' => [
+						'agent' => score,
+						'agent' => score,
+					]
+				}
+			*/
+		}
+
+		return $teamScores;
+	}
+
     /**
      *
      * */
@@ -300,7 +400,9 @@ class SessionManager
                 $db->query("create table run(session, map, agent, paramId, runId);");
             case 3:
                 $db->query("alter table run add name;");
-                $version = 4;
+	    case 4:
+		$db->query("create table present(agent, session, score);");
+		$version = 5;
 
                 $sth = $db->prepare("update system set value=:value where name='version';");
                 $sth->bindValue(':value', $version, PDO::PARAM_INT);

@@ -6,6 +6,7 @@ use adf\Config;
 use adf\apps\results\ResultController;
 use adf\apps\results\model\ResultHelper;
 use adf\apps\results\ResultMapController;
+use adf\apps\competition\SessionManager;
 
 class ResultDownload{
 	
@@ -64,6 +65,8 @@ class ResultDownload{
 		ResultHelper::calPoints($teams);
 		
 		ResultHelper::addRank($teams);
+
+		$data = SessionManager::getSessions();
 		
 		for($i=0;$i<count($maps);$i++){
 			
@@ -136,7 +139,41 @@ class ResultDownload{
 				
 			}
 			
-			//Map image Download
+			//Download Map data
+			$mapURL = 'result_'.$simulationID.'/results_map/'.$simulationID.'/'.$mapName;
+
+			for($k=0;$k<count($data);$k++){
+
+				if( $data[$k]["name"]!= $simulationID )continue;
+
+				for($j=0;$j<count($data[$k]["maps"]);$j++){
+
+					$mapDateName= $data[$k]["maps"][$j]["name"];
+					$mapAliasDateName= $data[$k]["maps"][$j]["alias"];
+					if( $mapAliasDateName!= $mapName ) continue;
+
+					//MapのDownload
+
+					$mapDir = Config::$ROUTER_PATH.Config::MAPS_DIR_NAME;
+					$path = $mapDir . '/' . $mapDateName;
+
+					
+					$shell = shell_exec('cd '.$path. ';tar cfvz '.$mapAliasDateName.'.tar.gz .');
+
+					$zipDate = @file_get_contents($path.'/'.$mapAliasDateName.'.tar.gz');
+
+					$zip->addFromString($mapURL . '/map.tar.gz',$zipDate);
+
+					shell_exec('cd '.$path. ';rm '.$mapAliasDateName.'.tar.gz');
+
+					
+
+				}
+
+				
+
+			}
+
 			
 		}
 		
@@ -167,3 +204,5 @@ class ResultDownload{
 	}
 	
 }
+
+
