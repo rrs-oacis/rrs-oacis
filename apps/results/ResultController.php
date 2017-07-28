@@ -43,7 +43,7 @@ class ResultController extends AbstractController{
 			
 		}
 		
-		ResultHelper::calPoints($teams);
+		//ResultHelper::calPoints($teams);
 		
 
 		$data = SessionManager::getSessions();
@@ -91,7 +91,7 @@ class ResultController extends AbstractController{
 
 
 		//TODO presentation function
-		/*$sessionName = SessionManager::getSession($param)['alias'];
+		$sessionName = SessionManager::getSession($param)['alias'];
 
 		$presentationDatas = SessionManager::getPresentations();
 
@@ -106,9 +106,12 @@ class ResultController extends AbstractController{
 		foreach ($presentation as $key => $value){
 			
 			//Add point
-			$teams[$key]->addPresentation($value);
+			//$teams[$key]->addPresentation($value);
+			$teams[$key]->addMapResult('Presentation',$value,1);
 
-		}*/
+		}
+		
+                ResultHelper::calPoints($teams);
 		
 
 		ResultHelper::addRank($teams);
@@ -145,7 +148,6 @@ class ResultController extends AbstractController{
   		
   		}
   	
-  		ResultHelper::calPoints($teams);
 
 
   		$data = SessionManager::getSessions();
@@ -202,9 +204,13 @@ class ResultController extends AbstractController{
 		foreach ($presentation as $key => $value){
 			
 			//Add point
-			$teams[$key]->addPresentation($value);
+		        $teams[$key]->addMapResult('Presentation',$value,1);
+
+			//$teams[$key]->addPresentation($value);
 
 		}
+
+                ResultHelper::calPoints($teams);
 
 		ResultHelper::addRank($teams);
   	
