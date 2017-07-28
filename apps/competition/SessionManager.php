@@ -289,28 +289,11 @@ class SessionManager
     public static function rerun($runId)
     {
         $db = self::connectDB();
-        $sth = $db->prepare("select runId,paramId,agent,map from run where runId=:runId;");
+        $sth = $db->prepare("select runId,paramId,agent,map,session from run where runId=:runId;");
         $sth->bindValue(':runId', $runId, PDO::PARAM_STR);
         $sth->execute();
         while($row = $sth->fetch(PDO::FETCH_ASSOC))
         {
-/*
-            $scriptId = uniqid();
-
-            $sth = $db->prepare("update run set name=:name where runId=:runId;");
-            $sth->bindValue(':name', $scriptId, PDO::PARAM_STR);
-            $sth->bindValue(':runId', $runId, PDO::PARAM_STR);
-            $sth->execute();
-
-            $script = "#!/bin/bash\n\n";
-            $script .= Config::$OACISCLI_PATH." replace_runs_by_ids";
-            $script .= ' '.$row['runId'];
-            $script .= "\n";
-            $script .= 'php '.realpath(dirname(__FILE__)).'/update_runid_forRerun.php \''.$scriptId.'\' '.$row['paramId'];
-            file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
-            exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
-*/
-
             if (!isset($row['agent']) || $row['agent'] == '') { continue; }
             
             $scriptId = uniqid();
@@ -324,11 +307,13 @@ class SessionManager
             $script = "#!/bin/bash\n\n";
             $script .= "/home/oacis/oacis/bin/oacis_ruby /home/oacis/rrs-oacis/ruby/discard.rb ".$row['paramId'];
             $script .= "\n";
+            $script .= "sleep 5";
+            $script .= "\n";
             $script .= Config::$OACISCLI_PATH." create_parameter_sets";
-            $script .= ' -s '.$sessionName;
+            $script .= ' -s '.$row['session'];
             $script .= ' -i \'{"MAP":"'.$row['map'].'","F":"'.$row['agent'].'","P":"'.$row['agent'].'","A":"'.$row['agent'].'"}\'';
             $script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"'.ClusterLoader::getMainHostGroup().'","host_parameters":null}\'';
-            $script .= ' -o /tmp/out_'.$scriptId.'.json';
+            $script .= ' -o /tmp/out_'.$scriptId.'.json >/tmp/e 2>&1';
             $script .= "\n";
             $script .= 'php '.realpath(dirname(__FILE__)).'/update_runid.php \''.$scriptId.'\' /tmp/out_'.$scriptId.'.json';
             file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
