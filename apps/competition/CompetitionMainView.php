@@ -139,7 +139,7 @@ use adf\Config;
                                                         }
                                                         else if ($runJson == '')
                                                         {
-                                                            echo ("<span class='label label-danger'>FAILED</span>");
+                                                            echo ("<span class='label'>N/A</span>");
                                                         }
 
                                                         echo ("</td>");
