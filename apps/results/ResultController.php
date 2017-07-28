@@ -110,6 +110,12 @@ class ResultController extends AbstractController{
 			$teams[$key]->addMapResult('Presentation',$value,1);
 
 		}
+
+
+		//Fix
+		if(count($presentation)>0){
+			$maps[] = 'Presentation';
+		}
 		
                 ResultHelper::calPoints($teams);
 		
@@ -209,6 +215,12 @@ class ResultController extends AbstractController{
 			//$teams[$key]->addPresentation($value);
 
 		}
+
+		//Fix
+                if(count($presentation)>0){
+                        $maps[] = 'Presentation';
+                }
+
 
                 ResultHelper::calPoints($teams);
 

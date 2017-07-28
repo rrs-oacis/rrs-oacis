@@ -70,7 +70,7 @@ use adf\Config;
 <form method="post" action="./competition-remove_map" style="display:inline;">
 <input type="hidden" name="parameter_session" value="<?= $session["name"]?>">
 <input type="hidden" name="parameter_map" value="<?= $map['name']?>">
-                                    <input class="btn-xs btn-warning" type="submit" value="cancel">
+                                    <input class="btn-xs btn-warning" type="submit" value="X">
 </form>
                                         </th>
                                     <?php
@@ -123,6 +123,9 @@ use adf\Config;
                                                         {
 							    echo ("<a href=\"javascript:void(0);\" onclick=\"window.open('http://'+location.host.replace(location.port,3000)+'/runs/".$runId."');\">");
                                                             echo ("<span class='label label-success'>finished</span>");
+							    echo ("</a>");
+							    echo ("<a href='./competition-rerun/".$runId."'>");
+                                                            echo ("<span class='label label-warning'>rerun</span>");
 							    echo ("</a>");
                                                         }
                                                         else if ($status === 'failed')

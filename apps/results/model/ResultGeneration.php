@@ -72,8 +72,14 @@ class ResultGeneration{
 			$mapName= $mapNames[$i];
 			
 			if(!$download){
+				//Fix
+				if($mapName!='Presentation'){
 				$head .= 
 				'  <th colspan="2"><a target="_blank" href="'.Config::$RESOURCE_PATH.'results-map/'.$simulatorID.'/'.$mapName.'">'.$mapName.'</a></th>  '. "\n";
+				}else{
+					$head .= '<th colspan="2">'.$mapName . '</th>';
+				}
+
 			}else{
 				$head .=
 				'  <th colspan="2"><a target="_blank" href="./results_map/'.$simulatorID.'/'.$mapName.'/index.html">'.$mapName.'</a></th>  '. "\n";
