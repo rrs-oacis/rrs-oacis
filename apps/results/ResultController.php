@@ -103,11 +103,15 @@ class ResultController extends AbstractController{
 		}
 
 
+		$presentationTeam = [];
+
 		foreach ($presentation as $key => $value){
 			
 			//Add point
 			//$teams[$key]->addPresentation($value);
-			$teams[$key]->addMapResult('Presentation',$value,1);
+			//if(isset($teams[$key]))$teams[$key]->addMapResult('Presentation',$value,1);
+			$presentationTeam[$key] = new ResultTeam($key);
+			$presentationTeam[$key]->addMapResult('Presentation',$value,1);
 
 		}
 
@@ -118,7 +122,15 @@ class ResultController extends AbstractController{
 		}
 		
                 ResultHelper::calPoints($teams);
+
+		if(count($presentationTeam)>0){
+			ResultHelper::calPoints($presentationTeam);
+		}
 		
+		foreach ($presentationTeam as $key => $value){
+			if(isset($teams[$key]))$teams[$key]->addMapResult('Presentation', $value->getTotalScore()['score'], $value->getTotalScore()['points']);
+		}
+
 
 		ResultHelper::addRank($teams);
 		

@@ -40,7 +40,7 @@ use adf\Config;
             <label for="highlight" class="col-sm-2 control-label">Highlight</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" name="parameter_highlight"
-                       placeholder='number of highlight'>
+                       placeholder='number of highlight (3 or less the ranking mode)'>
             </div>
         </div>
     </div>

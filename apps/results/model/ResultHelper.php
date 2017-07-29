@@ -424,19 +424,24 @@ class ResultHelper{
 
 
 	public static function setResultColor(array $teams, $size){
+		
 		$size = 0 + $size;
-		if($size==3){
+		
+		if($size<=3){
 			foreach ($teams as $key => $value){
-				//
+				
+				//Fix set Rank Color <=3
 				if($value->getRank()==1){
 					$value->setColorType(3);
-				}else if($value->getRank()==2){
+				}else if($value->getRank()==2 && $size<=2){
 					$value->setColorType(2);
-				}else if($value->getRank()==3){
+				}else if($value->getRank()==3 && $size<=3){
 					$value->setColorType(4);
 				}
+
 				
 			}
+
 		}else{
 			foreach ($teams as $key => $value){
 				//

@@ -101,6 +101,8 @@ $('#mapName').val(name);
             	toastr["success"](
             			"<?= _l("adf.add_map_box.toastr_addmap"); ?>",
     		    		"<?= _l("adf.add_map_box.toastr_success"); ?>");
+
+		document.querySelector('#map_post-form').reset();
             }else{
             	toastr["error"](
                         "<?= _l("adf.add_map_box.toastr_invalid_addmap"); ?>",

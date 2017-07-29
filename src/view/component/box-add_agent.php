@@ -103,6 +103,8 @@ $('#inputTitle').val(name);
             	toastr["success"](
                         "<?= _l("adf.add_agent_box.toastr_addagent"); ?>",
     		    		"<?= _l("adf.add_agent_box.toastr_success"); ?>");
+
+		document.querySelector('#post-form').reset();
             }else{
             	toastr["error"](
                         "<?= _l("adf.add_agent_box.toastr_invalid_addagent"); ?>",
