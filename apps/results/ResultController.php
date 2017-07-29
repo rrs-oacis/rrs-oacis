@@ -122,6 +122,9 @@ class ResultController extends AbstractController{
 
 		ResultHelper::addRank($teams);
 		
+		//Fix 0729
+		ResultHelper::setResultColor($teams, SessionManager::getSession($param)['highlight']);
+
 		//echo ResultGeneration::generateHTML('2018', $maps, $teams, '592fe0a36653ff00f53567c2',null);
 		
 		//return ResultGeneration::generateHTML('2018',$simulatorID,$maps, $teams,null,$prePoint);

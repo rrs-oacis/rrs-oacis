@@ -36,6 +36,13 @@ use adf\Config;
                        placeholder='precursor session (like "Day1")'>
             </div>
         </div>
+        <div class="form-group">
+            <label for="highlight" class="col-sm-2 control-label">Highlight</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="parameter_highlight"
+                       placeholder='number of highlight'>
+            </div>
+        </div>
     </div>
     <!-- /.box-body -->
     <div class="box-footer">

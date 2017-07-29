@@ -12,10 +12,11 @@ class AddSessionController extends AbstractController
 		$alias = $_POST['parameter_name'];
 		$agentsText = $_POST['parameter_agents'];
         $precursor = $_POST['parameter_precursor'];
+        $highlight = $_POST['parameter_highlight'];
 
         $agents = explode(',', $agentsText);
 
-		SessionManager::addSession($alias, $agents, $precursor);
+		SessionManager::addSession($alias, $agents, $precursor, $highlight);
 		
 		//$output = shell_exec("sh ". Config::$ROUTER_PATH. "ruby/add_agent.sh ".$simulatorID." ".$hostID." ".$mapName." " . $agentName);
 		

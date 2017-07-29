@@ -147,6 +147,7 @@ class ResultGeneration{
 				case 1: $colorClass = 'qualified';break;
 				case 2: $colorClass = 'second';break;
 				case 3: $colorClass = 'first';break;
+				case 4: $colorClass = 'third';break;
 			}
 			
 			$main .= '<tr class="'.$colorClass.'">'."\n";

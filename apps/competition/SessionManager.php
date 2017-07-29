@@ -114,7 +114,7 @@ class SessionManager
     /**
      *
      * */
-    public static function addSession($name, $agents, $precursor = "")
+    public static function addSession($name, $agents, $precursor = "", $highlight = 0)
     {
         $tmpFileOut = '/tmp/rrsoacis-out-'.uniqid();
         $tmpFileIn = '/tmp/rrsoacis-in-'.uniqid();
@@ -158,10 +158,11 @@ class SessionManager
         system("rm -f ".$tmpFileOut);
 
         $db = self::connectDB();
-        $sth = $db->prepare("insert into session(name, alias, precursor) values(:name, :alias, :precursor);");
+        $sth = $db->prepare("insert into session(name, alias, precursor, highlight) values(:name, :alias, :precursor, :highlight);");
         $sth->bindValue(':name', $simulatorId, PDO::PARAM_STR);
         $sth->bindValue(':alias', $name, PDO::PARAM_STR);
         $sth->bindValue(':precursor', $precursor, PDO::PARAM_STR);
+        $sth->bindValue(':highlight', $highlight, PDO::PARAM_INT);
         $sth->execute();
 
         foreach ($agents as $agent)
@@ -406,7 +407,9 @@ class SessionManager
                 $db->query("alter table run add name;");
 	    case 4:
 		$db->query("create table present(agent, session, score);");
-		$version = 5;
+	    case 5:
+		$db->query("alter table session add highlight;");
+		$version = 6;
 
                 $sth = $db->prepare("update system set value=:value where name='version';");
                 $sth->bindValue(':value', $version, PDO::PARAM_INT);
