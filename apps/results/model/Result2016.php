@@ -1,7 +1,7 @@
 <?php
-namespace adf\apps\results\model;
+namespace rrsoacis\apps\results\model;
 
-use adf\apps\results\model\ResultTeam;
+use rrsoacis\apps\results\model\ResultTeam;
 
 class Result2016{
 	

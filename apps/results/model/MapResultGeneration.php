@@ -1,9 +1,9 @@
 <?php
-namespace adf\apps\results\model;
+namespace rrsoacis\apps\results\model;
 
-use adf\apps\results\model\ResultTeam;
-use adf\Config;
-use adf\apps\results\ResultMapDownloadController;
+use rrsoacis\apps\results\model\ResultTeam;
+use rrsoacis\system\Config;
+use rrsoacis\apps\results\ResultMapDownloadController;
 
 
 class MapResultGeneration{

@@ -3,6 +3,6 @@
     "version" : "0.0.1",
     "description" : "manual post(test)",
     "icon" : "fa-upload",
-    "main_controller" : "adf\\apps\\manual_post\\ManualPostMainController",
-    "sub_controller" : [["add_parameter","adf\\apps\\manual_post\\OacisAddParameterController"]]
+    "main_controller" : "rrsoacis\\apps\\manual_post\\ManualPostMainController",
+    "sub_controller" : [["add_parameter","rrsoacis\\apps\\manual_post\\OacisAddParameterController"]]
 }

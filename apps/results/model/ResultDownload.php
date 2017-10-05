@@ -1,12 +1,12 @@
 <?php
-namespace adf\apps\results\model;
+namespace rrsoacis\apps\results\model;
 
 use ZipArchive;
-use adf\Config;
-use adf\apps\results\ResultController;
-use adf\apps\results\model\ResultHelper;
-use adf\apps\results\ResultMapController;
-use adf\apps\competition\SessionManager;
+use rrsoacis\system\Config;
+use rrsoacis\apps\results\ResultController;
+use rrsoacis\apps\results\model\ResultHelper;
+use rrsoacis\apps\results\ResultMapController;
+use rrsoacis\apps\competition\SessionManager;
 
 class ResultDownload{
 	

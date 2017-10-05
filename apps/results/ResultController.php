@@ -1,13 +1,13 @@
 <?php
-namespace adf\apps\results;
+namespace rrsoacis\apps\results;
 
-use adf\controller\AbstractController;
-use adf\apps\results\model\ResultGeneration;
-use adf\apps\results\model\ResultTeam;
-use adf\apps\results\model\ResultHelper;
-use adf\apps\results\model\Result2016;
-use adf\apps\results\model\esultExcel;
-use adf\apps\competition\SessionManager;
+use rrsoacis\component\common\AbstractController;
+use rrsoacis\apps\results\model\ResultGeneration;
+use rrsoacis\apps\results\model\ResultTeam;
+use rrsoacis\apps\results\model\ResultHelper;
+use rrsoacis\apps\results\model\Result2016;
+use rrsoacis\apps\results\model\esultExcel;
+use rrsoacis\apps\competition\SessionManager;
 
 class ResultController extends AbstractController{
   
@@ -22,7 +22,7 @@ class ResultController extends AbstractController{
 		$simulatorID = $param;
 		
 		
-		//include (Config::$SRC_REAL_URL . 'view/SettingView.php');
+		//include (Config::$SRC_REAL_URL . 'component/setting/SettingView.php');
 		$teams =[];
 		
 		$maps = Result2016::getMaps();
@@ -150,7 +150,7 @@ class ResultController extends AbstractController{
   
   		$simulatorID = $param;
   	
-  		//include (Config::$SRC_REAL_URL . 'view/SettingView.php');
+  		//include (Config::$SRC_REAL_URL . 'component/setting/SettingView.php');
   		$teams =[];
   	
   		$maps = Result2016::getMaps();

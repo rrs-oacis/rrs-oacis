@@ -1,9 +1,9 @@
 <?php
-namespace adf\apps\results;
+namespace rrsoacis\apps\results;
 
-use adf\controller\AbstractController;
-use adf\apps\results\model\MapResultGeneration;
-use adf\apps\results\model\ResultHelper;
+use rrsoacis\component\common\AbstractController;
+use rrsoacis\apps\results\model\MapResultGeneration;
+use rrsoacis\apps\results\model\ResultHelper;
 
 class ResultMapController extends AbstractController{
 	

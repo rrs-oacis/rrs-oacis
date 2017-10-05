@@ -1,15 +1,15 @@
 <?php
-namespace adf\apps\manual_post2;
+namespace rrsoacis\apps\manual_post2;
 
-use adf\Config;
-use adf\controller\AbstractController;
-use adf\file\AppLoader;
+use rrsoacis\system\Config;
+use rrsoacis\component\common\AbstractController;
+use rrsoacis\manager\AppManager;
 
 class ManualPostMainController extends AbstractController
 {
     public function get()
     {
-        $apps = AppLoader::getApps();
+        $apps = AppManager::getApps();
         include(dirname(__FILE__).'/ManualPostMainView.php');
     }
 }

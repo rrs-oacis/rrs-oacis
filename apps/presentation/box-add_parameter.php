@@ -1,11 +1,11 @@
 <?php
-use adf\Config;
-use adf\apps\competition\SessionManager;
-use adf\file\AgentLoader;
+use rrsoacis\system\Config;
+use rrsoacis\apps\competition\SessionManager;
+use rrsoacis\manager\AgentManager;
 ?>
 <div class="box box-primary">
   <div class="box-header with-border">
-    <h3 class="box-title"><?= _l("adf.add_agent_box.add_parameter"); ?></h3>
+    <h3 class="box-title">Presentation</h3>
     <div class="box-tools pull-right">
         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
         </button>
@@ -33,7 +33,7 @@ use adf\file\AgentLoader;
       </div>
 
 	  <?php
-  		$agents = AgentLoader::getAgents();
+  		$agents = AgentManager::getAgents();
 		foreach ($agents as $agent) {
 	  ?>
 		<div class="form-group">
@@ -48,7 +48,7 @@ use adf\file\AgentLoader;
     <!-- /.box-body -->
     <div class="box-footer">
       <!-- <button type="submit" class="btn btn-default">キャンセル</button> -->
-      <button type="submit" class="btn btn-info pull-right"><?= _l("adf.add_agent_box.input_add"); ?></button>
+      <button type="submit" class="btn btn-info pull-right">Add</button>
     </div>
     <!-- /.box-footer -->
     <input type="hidden" name="action" value="create">

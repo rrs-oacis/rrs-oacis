@@ -1,11 +1,11 @@
 <?php
 
-namespace adf\manager;
+namespace rrsoacis\manager;
 
 use \PDO;
-use adf\Config;
-use adf\Agent;
-use adf\error\AgentNotFoundException;
+use rrsoacis\system\Config;
+use rrsoacis\system\Agent;
+use rrsoacis\exception\AgentNotFoundException;
 
 class AccessManager
 {

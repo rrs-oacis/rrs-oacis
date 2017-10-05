@@ -1,9 +1,9 @@
 <?php
 
-namespace adf\apps\manual_post;
+namespace rrsoacis\apps\manual_post;
 
-use adf\Config;
-use adf\controller\AbstractController;
+use rrsoacis\system\Config;
+use rrsoacis\component\common\AbstractController;
 
 class OacisAddParameterController extends AbstractController {
 	

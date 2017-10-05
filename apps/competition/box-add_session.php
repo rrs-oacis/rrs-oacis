@@ -1,5 +1,5 @@
 <?php
-use adf\Config;
+use rrsoacis\system\Config;
 ?>
 <div class="box box-primary">
   <div class="box-header with-border">
@@ -47,7 +47,7 @@ use adf\Config;
     <!-- /.box-body -->
     <div class="box-footer">
       <!-- <button type="submit" class="btn btn-default">キャンセル</button> -->
-      <button type="submit" class="btn btn-primary pull-right"><?= _l("adf.add_agent_box.input_add"); ?></button>
+      <button type="submit" class="btn btn-primary pull-right">Add</button>
     </div>
     <!-- /.box-footer -->
     <input type="hidden" name="action" value="create">

@@ -1,15 +1,15 @@
 <?php
-namespace adf\apps\presentation;
+namespace rrsoacis\apps\presentation;
 
-use adf\Config;
-use adf\controller\AbstractController;
-use adf\file\AppLoader;
+use rrsoacis\system\Config;
+use rrsoacis\component\common\AbstractController;
+use rrsoacis\manager\AppManager;
 
 class PresentationMainController extends AbstractController
 {
     public function get()
     {
-        $apps = AppLoader::getApps();
+        $apps = AppManager::getApps();
         include(dirname(__FILE__).'/PresentationMainView.php');
     }
 }

@@ -1,6 +1,6 @@
 <?php
-use adf\Config;
-use adf\apps\competition\SessionManager;
+use rrsoacis\system\Config;
+use rrsoacis\apps\competition\SessionManager;
 ?>
 
 <?php

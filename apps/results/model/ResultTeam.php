@@ -1,5 +1,5 @@
 <?php
-namespace adf\apps\results\model;
+namespace rrsoacis\apps\results\model;
 
 use JsonSerializable;
 

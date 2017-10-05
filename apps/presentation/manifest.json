@@ -3,6 +3,6 @@
     "version" : "0.0.1",
     "description" : "AAAA",
     "icon" : "fa-upload",
-    "main_controller" : "adf\\apps\\presentation\\PresentationMainController",
-    "sub_controller" : [["set_score","adf\\apps\\presentation\\SetScoreController"]]
+    "main_controller" : "rrsoacis\\apps\\presentation\\PresentationMainController",
+    "sub_controller" : [["set_score","rrsoacis\\apps\\presentation\\SetScoreController"]]
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace adf\apps\competition;
+namespace rrsoacis\apps\competition;
 
-use adf\Config;
-use adf\controller\AbstractController;
+use rrsoacis\system\Config;
+use rrsoacis\component\common\AbstractController;
 
 class AddSessionController extends AbstractController
 {

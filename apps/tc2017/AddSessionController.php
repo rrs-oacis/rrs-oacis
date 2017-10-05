@@ -1,11 +1,11 @@
 <?php
 
-namespace adf\apps\tc2017;
+namespace rrsoacis\apps\tc2017;
 
-use adf\apps\competition\SessionManager;
-use adf\Config;
-use adf\controller\AbstractController;
-use adf\file\AgentLoader;
+use rrsoacis\apps\competition\SessionManager;
+use rrsoacis\system\Config;
+use rrsoacis\component\common\AbstractController;
+use rrsoacis\manager\AgentManager;
 
 class AddSessionController extends AbstractController
 {
@@ -24,8 +24,8 @@ class AddSessionController extends AbstractController
             foreach ($baseAgents as $baseAgent)
             {
                 $agents[] = TCCoordinator::blendTeams(
-                    AgentLoader::getAgentByAlias($baseAgent)['name'],
-                    AgentLoader::getAgentByAlias($tdAgent)['name']
+                    AgentManager::getAgentByAlias($baseAgent)['name'],
+                    AgentManager::getAgentByAlias($tdAgent)['name']
                 )['alias'];
             }
         }

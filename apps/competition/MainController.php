@@ -1,19 +1,19 @@
 <?php
-namespace adf\apps\competition;
+namespace rrsoacis\apps\competition;
 
-use adf\Config;
-use adf\controller\AbstractController;
-use adf\file\AppLoader;
-use adf\file\MapLoader;
-use adf\file\AgentLoader;
+use rrsoacis\system\Config;
+use rrsoacis\component\common\AbstractController;
+use rrsoacis\manager\AppManager;
+use rrsoacis\manager\MapManager;
+use rrsoacis\manager\AgentManager;
 
 class MainController extends AbstractController
 {
     public function get()
     {
         $sessions = SessionManager::getSessions();
-        $maps = MapLoader::getMaps();
-        $agents = AgentLoader::getAgents();
+        $maps = MapManager::getMaps();
+        $agents = AgentManager::getAgents();
 
 	$agentAliasText = "";
 	

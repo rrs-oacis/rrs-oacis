@@ -1,17 +1,17 @@
 <?php
 
-namespace adf\apps\competition;
+namespace rrsoacis\apps\competition;
 
-use adf\file\AgentLoader;
-use adf\file\ClusterLoader;
-use adf\file\MapLoader;
+use rrsoacis\manager\AgentManager;
+use rrsoacis\manager\ClusterManager;
+use rrsoacis\manager\MapManager;
 use \MongoClient;
 use MongoDB\BSON\ObjectID;
 use MongoDB\BSON\UTCDateTime;
 use \PDO;
-use adf\Config;
-use adf\Agent;
-use adf\error\AgentNotFoundException;
+use rrsoacis\system\Config;
+use rrsoacis\system\Agent;
+use rrsoacis\exception\AgentNotFoundException;
 
 class SessionManager
 {
@@ -32,7 +32,7 @@ class SessionManager
             $linkedAgents = [];
             while($row2 = $sth2->fetch(PDO::FETCH_ASSOC))
             {
-                $linkedAgent = AgentLoader::getAgentByAlias($row2['agentAlias']);
+                $linkedAgent = AgentManager::getAgentByAlias($row2['agentAlias']);
                 $linkedAgent['alias'] = $row2['agentAlias'];
                 $linkedAgents[] = $linkedAgent;
             }
@@ -44,7 +44,7 @@ class SessionManager
             $linkedMaps = [];
             while($row2 = $sth2->fetch(PDO::FETCH_ASSOC))
             {
-                $linkedMap = MapLoader::getMap($row2['map']);
+                $linkedMap = MapManager::getMap($row2['map']);
                 $linkedMaps[] = $linkedMap;
             }
             $row['maps'] = $linkedMaps;
@@ -90,7 +90,7 @@ class SessionManager
             $linkedAgents = [];
             while($row2 = $sth2->fetch(PDO::FETCH_ASSOC))
             {
-                $linkedAgent = AgentLoader::getAgentByAlias($row2['agentAlias']);
+                $linkedAgent = AgentManager::getAgentByAlias($row2['agentAlias']);
                 $linkedAgent['alias'] = $row2['agentAlias'];
                 $linkedAgents[] = $linkedAgent;
             }
@@ -102,7 +102,7 @@ class SessionManager
             $linkedMaps = [];
             while($row2 = $sth2->fetch(PDO::FETCH_ASSOC))
             {
-                $linkedMap = AgentLoader::getAgentByAlias($row2['map']);
+                $linkedMap = AgentManager::getAgentByAlias($row2['map']);
                 $linkedMaps[] = $linkedMap;
             }
             $session['maps'] = $linkedMaps;
@@ -123,7 +123,7 @@ class SessionManager
         system("rm -f ".$tmpFileOut);
         $simulator['name'] = "RO_".$name."_".uniqid();
         $simulator['command'] = "/home/oacis/rrs-oacis/rrsenv/script/runNGC_MT.sh";
-        $simulator['executable_on_ids'][] = ClusterLoader::getMainHostGroup();
+        $simulator['executable_on_ids'][] = ClusterManager::getMainHostGroup();
 
         $simulator['parameter_definitions'] = [];
         $parameter1 = [];
@@ -180,7 +180,7 @@ class SessionManager
     public static function addMap($sessionName, $mapName)
     {
         $session = Self::getSession($sessionName);
-        if (count(MapLoader::getMap($mapName)) <= 0) { return false; }
+        if (count(MapManager::getMap($mapName)) <= 0) { return false; }
         if (count($session) <= 0) { return false; }
 
         $db = self::connectDB();
@@ -205,7 +205,7 @@ class SessionManager
             $script .= Config::$OACISCLI_PATH." create_parameter_sets";
             $script .= ' -s '.$sessionName;
             $script .= ' -i \'{"MAP":"'.$mapName.'","F":"'.$agent['name'].'","P":"'.$agent['name'].'","A":"'.$agent['name'].'"}\'';
-            $script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"'.ClusterLoader::getMainHostGroup().'","host_parameters":null}\'';
+            $script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"'.ClusterManager::getMainHostGroup().'","host_parameters":null}\'';
             $script .= ' -o /tmp/out_'.$scriptId.'.json';
             $script .= "\n";
             $script .= 'php '.realpath(dirname(__FILE__)).'/update_runid.php \''.$scriptId.'\' /tmp/out_'.$scriptId.'.json';
@@ -222,7 +222,7 @@ class SessionManager
     public static function removeMap($sessionName, $mapName)
     {
         $session = Self::getSession($sessionName);
-        if (count(MapLoader::getMap($mapName)) <= 0) { return false; }
+        if (count(MapManager::getMap($mapName)) <= 0) { return false; }
         if (count($session) <= 0) { return false; }
 
         $db = self::connectDB();
@@ -257,7 +257,7 @@ class SessionManager
     public static function repost($sessionName, $mapName, $agentName)
     {
         $session = Self::getSession($sessionName);
-        if (count(MapLoader::getMap($mapName)) <= 0) { return false; }
+        if (count(MapManager::getMap($mapName)) <= 0) { return false; }
         if (count($session) <= 0) { return false; }
 
         $db = self::connectDB();
@@ -274,7 +274,7 @@ class SessionManager
 	$script .= Config::$OACISCLI_PATH." create_parameter_sets";
 	$script .= ' -s '.$sessionName;
 	$script .= ' -i \'{"MAP":"'.$mapName.'","F":"'.$agentName.'","P":"'.$agentName.'","A":"'.$agentName.'"}\'';
-	$script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"'.ClusterLoader::getMainHostGroup().'","host_parameters":null}\'';
+	$script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"'.ClusterManager::getMainHostGroup().'","host_parameters":null}\'';
 	$script .= ' -o /tmp/out_'.$scriptId.'.json';
 	$script .= "\n";
 	$script .= 'php '.realpath(dirname(__FILE__)).'/update_runid.php \''.$scriptId.'\' /tmp/out_'.$scriptId.'.json';
@@ -313,7 +313,7 @@ class SessionManager
             $script .= Config::$OACISCLI_PATH." create_parameter_sets";
             $script .= ' -s '.$row['session'];
             $script .= ' -i \'{"MAP":"'.$row['map'].'","F":"'.$row['agent'].'","P":"'.$row['agent'].'","A":"'.$row['agent'].'"}\'';
-            $script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"'.ClusterLoader::getMainHostGroup().'","host_parameters":null}\'';
+            $script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"'.ClusterManager::getMainHostGroup().'","host_parameters":null}\'';
             $script .= ' -o /tmp/out_'.$scriptId.'.json >/tmp/e 2>&1';
             $script .= "\n";
             $script .= 'php '.realpath(dirname(__FILE__)).'/update_runid.php \''.$scriptId.'\' /tmp/out_'.$scriptId.'.json';

@@ -1,23 +1,23 @@
 <?php
-use adf\Config;
+use rrsoacis\system\Config;
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <?php $title="Apps"; ?>
-<?php include Config::$SRC_REAL_URL.'view/component/head.php';?>
+<?php include Config::$SRC_REAL_URL.'component/common/head.php';?>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
 
-  <?php include Config::$SRC_REAL_URL.'view/component/main-header.php';?>
+  <?php include Config::$SRC_REAL_URL.'component/common/main-header.php';?>
 
   <!-- =============================================== -->
 
   <!-- Left side column. contains the sidebar -->
-  <?php include Config::$SRC_REAL_URL.'view/component/main-sidebar.php';?>
+  <?php include Config::$SRC_REAL_URL.'component/common/main-sidebar.php';?>
   
   <!-- =============================================== -->
 
@@ -30,7 +30,7 @@ use adf\Config;
         <small></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="<?=Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i><?= adf\Config::APP_NAME ?></a></li>
+        <li><a href="<?=Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i><?= rrsoacis\system\Config::APP_NAME ?></a></li>
         <li class="active">Manual Post</li>
       </ol>
     </section>
@@ -45,13 +45,13 @@ use adf\Config;
 
   <!-- =============================================== -->
 
-  <?php include Config::$SRC_REAL_URL.'view/component/main-footer.php';?>
+  <?php include Config::$SRC_REAL_URL.'component/common/main-footer.php';?>
   
   <!-- =============================================== -->
 
 </div>
 <!-- ./wrapper -->
 
-<?php include Config::$SRC_REAL_URL.'view/component/footerscript.php';?>
+<?php include Config::$SRC_REAL_URL.'component/common/footerscript.php';?>
 
 </body>

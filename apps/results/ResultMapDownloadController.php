@@ -1,15 +1,15 @@
 <?php
-namespace adf\apps\results;
+namespace rrsoacis\apps\results;
 
-use adf\Config;
-use adf\controller\AbstractController;
-use adf\apps\results\model\ResultGeneration;
-use adf\apps\results\model\ResultTeam;
-use adf\apps\results\model\ResultHelper;
-use adf\apps\results\model\esult2016;
-use adf\apps\results\model\ResultExcel;
-use adf\apps\results\model\ResultDownload;
-use adf\apps\competition\SessionManager;
+use rrsoacis\system\Config;
+use rrsoacis\component\common\AbstractController;
+use rrsoacis\apps\results\model\ResultGeneration;
+use rrsoacis\apps\results\model\ResultTeam;
+use rrsoacis\apps\results\model\ResultHelper;
+use rrsoacis\apps\results\model\esult2016;
+use rrsoacis\apps\results\model\ResultExcel;
+use rrsoacis\apps\results\model\ResultDownload;
+use rrsoacis\apps\competition\SessionManager;
 
 class ResultMapDownloadController extends AbstractController{
 	

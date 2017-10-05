@@ -1,24 +1,24 @@
 <?php
 
-namespace adf\apps\tc2017;
+namespace rrsoacis\apps\tc2017;
 
-use adf\file\AgentLoader;
-use adf\file\ClusterLoader;
-use adf\file\MapLoader;
+use rrsoacis\manager\AgentManager;
+use rrsoacis\manager\ClusterManager;
+use rrsoacis\manager\MapManager;
 use \MongoClient;
 use MongoDB\BSON\ObjectID;
 use MongoDB\BSON\UTCDateTime;
 use \PDO;
-use adf\Config;
-use adf\Agent;
-use adf\error\AgentNotFoundException;
+use rrsoacis\system\Config;
+use rrsoacis\system\Agent;
+use rrsoacis\exception\AgentNotFoundException;
 
 class TCCoordinator
 {
     public static function blendTeams ($baseTeamName, $tdTeamName)
     {
-        $baseTeam = AgentLoader::getAgent($baseTeamName);
-        $tdTeam = AgentLoader::getAgent($tdTeamName);
+        $baseTeam = AgentManager::getAgent($baseTeamName);
+        $tdTeam = AgentManager::getAgent($tdTeamName);
         if (count($baseTeam) <= 0 || count($tdTeam) <= 0)
         {
             return;
@@ -41,9 +41,9 @@ class TCCoordinator
         system('cat '.$tdTeamDir.'/config/module.cfg | awk \'/\s*Tactics(AmbulanceTeam\.Human|PoliceForce\.Road|FireBrigade\.Building)Detector\s*:/{print $0}\' >> '.$tmpDir.'/config/module.cfg');
         system('mv '.$tmpDir.' '.$agentsDir.'/'.$name);
 
-        AgentLoader::addAgent($name, $alias);
+        AgentManager::addAgent($name, $alias);
 
-        return AgentLoader::getAgent($name);
+        return AgentManager::getAgent($name);
     }
 }
 

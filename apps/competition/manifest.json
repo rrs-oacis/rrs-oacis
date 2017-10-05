@@ -3,12 +3,12 @@
     "version" : "0.0.1",
     "description" : "competition",
     "icon" : "fa-star",
-    "main_controller" : "adf\\apps\\competition\\MainController",
+    "main_controller" : "rrsoacis\\apps\\competition\\MainController",
     "sub_controller" : [
-        ["add_session","adf\\apps\\competition\\AddSessionController"],
-        ["add_map","adf\\apps\\competition\\AddMapController"],
-        ["remove_map","adf\\apps\\competition\\RemoveMapController"],
-        ["rerun","adf\\apps\\competition\\RerunController"],
-        ["repost","adf\\apps\\competition\\RepostController"]
+        ["add_session","rrsoacis\\apps\\competition\\AddSessionController"],
+        ["add_map","rrsoacis\\apps\\competition\\AddMapController"],
+        ["remove_map","rrsoacis\\apps\\competition\\RemoveMapController"],
+        ["rerun","rrsoacis\\apps\\competition\\RerunController"],
+        ["repost","rrsoacis\\apps\\competition\\RepostController"]
     ]
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace adf\apps\presentation;
+namespace rrsoacis\apps\presentation;
 
-use adf\Config;
-use adf\controller\AbstractController;
+use rrsoacis\system\Config;
+use rrsoacis\component\common\AbstractController;
 
-use adf\apps\competition\SessionManager;
-use adf\file\AgentLoader;
+use rrsoacis\apps\competition\SessionManager;
+use rrsoacis\manager\AgentManager;
 
 class SetScoreController extends AbstractController {
 	
@@ -22,7 +22,7 @@ class SetScoreController extends AbstractController {
 	
 		foreach ($_POST as $key => $value) {
 			$name = base64_decode($key);
-			$agent = AgentLoader::getAgentByAlias($name);
+			$agent = AgentManager::getAgentByAlias($name);
 			if(count($agent)<=0) { continue; }
 			if (!isset($value) || $value<=0) { continue; }
 			$teamScores[$name] = $value;		

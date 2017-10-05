@@ -1,9 +1,9 @@
 <?php
-namespace adf\apps\results\model;
+namespace rrsoacis\apps\results\model;
 
-use adf\apps\results\model\ResultTeam;
-use adf\apps\results\model\MapScoreTest;
-use adf\Config;
+use rrsoacis\apps\results\model\ResultTeam;
+use rrsoacis\apps\results\model\MapScoreTest;
+use rrsoacis\system\Config;
 
 class ResultHelper{
 	

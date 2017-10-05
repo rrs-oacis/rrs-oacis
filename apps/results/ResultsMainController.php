@@ -1,7 +1,7 @@
 <?php
-namespace adf\apps\results;
+namespace rrsoacis\apps\results;
 
-use adf\controller\AbstractController;
+use rrsoacis\component\common\AbstractController;
 
 class ResultsMainController extends AbstractController
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace adf\apps\manual_post2;
+namespace rrsoacis\apps\manual_post2;
 
-use adf\Config;
-use adf\controller\AbstractController;
-use adf\file\ClusterLoader;
+use rrsoacis\system\Config;
+use rrsoacis\component\common\AbstractController;
+use rrsoacis\manager\ClusterManager;
 
 class OacisAddParameterController extends AbstractController {
 	
@@ -15,7 +15,7 @@ class OacisAddParameterController extends AbstractController {
 		//TODO オアシスに登録処理
 		
 		$simulatorID = "590463aee4dec200d962035a";
-		$hostID = ClusterLoader::getMainHostGroup();
+		$hostID = ClusterManager::getMainHostGroup();
 		
 		if($_POST['parameter_simulator_id']!=""){
 			$simulatorID = $_POST['parameter_simulator_id'];

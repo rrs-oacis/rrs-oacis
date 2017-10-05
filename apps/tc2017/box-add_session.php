@@ -1,5 +1,5 @@
 <?php
-use adf\Config;
+use rrsoacis\system\Config;
 ?>
 <div class="box box-primary">
   <div class="box-header with-border">

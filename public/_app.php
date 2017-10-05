@@ -17,9 +17,9 @@ if (php_sapi_name() == 'cli-server') {
 
 require $ROUTER_PATH.'vendor/autoload.php';
 
-use adf\Router;
-use adf\Config;
-use adf\Localize;
+use rrsoacis\system\Router;
+use rrsoacis\system\Config;
+//use rrsoacis\system\Localize;
 
 Config::$ROUTER_PATH = $ROUTER_PATH;
 Config::$SRC_REAL_URL = $SRC_REAL_URL;
@@ -55,7 +55,7 @@ if (preg_match('/\.(?:'.$__postfix.')$/', $url[0])) {
 	return false;    // リクエストされたリソースをそのままの形式で扱います。
 }
 
-Localize::init();
+//Localize::init();
 
 //URLを元にルーティング
 $router = new Router();
@@ -68,7 +68,7 @@ $router->routing();
 <?php 
 
 function _l($s){
-	return Localize::getI18N($s);
+	return $s;//Localize::getI18N($s);
 }
 
 function getOacisURL(){

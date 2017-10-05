@@ -1,11 +1,11 @@
 <?php
-namespace adf\apps\competition;
+namespace rrsoacis\apps\competition;
 
-use adf\Config;
+use rrsoacis\system\Config;
 
-use adf\controller\AbstractController;
-use adf\apps\results\model\MapResultGeneration;
-use adf\apps\results\model\ResultHelper;
+use rrsoacis\component\common\AbstractController;
+use rrsoacis\apps\results\model\MapResultGeneration;
+use rrsoacis\apps\results\model\ResultHelper;
 
 class RerunController extends AbstractController{
 
