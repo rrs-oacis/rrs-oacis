@@ -23,6 +23,10 @@ use rrsoacis\system\Config;
 </script>
 
 
+<!-- Select2 -->
+<script src="<?= Config::$RESOURCE_PATH?>plugins/select2/select2.full.js"></script>
+
+
 <!-- 必要化ちょっと不明　 -->
 <!-- SlimScroll -->
 <script src="<?= Config::$RESOURCE_PATH?>plugins/slimScroll/jquery.slimscroll.min.js"></script>

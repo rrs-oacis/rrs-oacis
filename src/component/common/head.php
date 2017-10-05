@@ -17,6 +17,10 @@ use rrsoacis\system\Config;
 <link rel="stylesheet" href="<?= Config::$RESOURCE_PATH?>plugins/fontawesome/font-awesome.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="<?= Config::$RESOURCE_PATH?>plugins/ionicons/ionicons.min.css">
+
+<!-- Select2 -->
+<link rel="stylesheet" href="<?= Config::$RESOURCE_PATH?>plugins/select2/select2.css">
+
 <!-- Theme style -->
 <link rel="stylesheet" href="<?= Config::$RESOURCE_PATH?>adminlte/css/AdminLTE.min.css">
 <!-- iCheck -->
@@ -30,7 +34,6 @@ use rrsoacis\system\Config;
 
 <!-- jQuery 2.2.3 -->
 <script src="<?= Config::$RESOURCE_PATH?>plugins/jQuery/jquery-2.2.3.min.js"></script>
-
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

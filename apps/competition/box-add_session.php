@@ -23,10 +23,24 @@ use rrsoacis\system\Config;
       <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label">Agents</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="parameter_agents"
+          <!--<input type="text" class="form-control" name="parameter_agents"
             placeholder="sample1,sample2,sample3"
             value="<?= $agentAliasText ?>"
             required>
+          -->
+
+          <select class="form-control select2" name="parameter_agents[]" multiple="multiple" data-placeholder="select a agent"
+                  style="width: 100%;" required>
+              <?php
+              foreach ($agents as $agent)
+              {
+                  ?>
+                  <option><?= $agent['alias'] ?></option>
+              <?php
+              }
+              ?>
+
+          </select>
         </div>
       </div>
         <div class="form-group">
@@ -60,6 +74,8 @@ use rrsoacis\system\Config;
 
 <script>
 
+
+
 $(".readonly").keydown(function(e){
     e.preventDefault();
 });
@@ -88,6 +104,10 @@ $(function(){
     // 処理
     getAgentParameterList();
     getMapParameterList();
+
+    $(".select2").select2();
+
+    $(".select2-search__field").css({'padding':'0px 6px',"border":"none"});
       
 });
 

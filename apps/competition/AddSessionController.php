@@ -10,11 +10,10 @@ class AddSessionController extends AbstractController
 	public function post()
     {
 		$alias = $_POST['parameter_name'];
-		$agentsText = $_POST['parameter_agents'];
+        $agents = $_POST['parameter_agents'];
         $precursor = $_POST['parameter_precursor'];
         $highlight = $_POST['parameter_highlight'];
 
-        $agents = explode(',', $agentsText);
 
 		SessionManager::addSession($alias, $agents, $precursor, $highlight);
 		
