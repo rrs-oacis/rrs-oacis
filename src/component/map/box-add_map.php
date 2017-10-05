@@ -28,7 +28,7 @@
           <div style="position: relative;">
             <input type="hidden" name="MAX_FILE_SIZE" value="1073741824" />
             <input id="mapfile" type="file" class="form-control"
-              name="userfile" accept="application/zip" style="position: absolute;" required />
+              name="userfile" accept="application/zip,.gz" style="position: absolute;" required />
             <div class="input-group" style="position: absolute;">
               <input type="text" id="map_photoCover"
                 class="form-control readonly"
