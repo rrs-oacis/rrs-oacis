@@ -30,12 +30,60 @@ class ClusterManager
 		return $clusters;
 	}
 
+    public static function getCluster($name)
+    {
+        $db = self::connectDB();
+        $sth = $db->query("select * from cluster where name='".$name."';");
+        $cluster = [];
+        while($row = $sth->fetch(PDO::FETCH_ASSOC))
+        {
+            $cluster  = $row;
+        }
+
+        return $cluster;
+    }
+
+    public static function getClusterRawCheckMessage($name)
+    {
+        $workspace = Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME."/".$name;
+        exec('cd '.$workspace.'; ../../script/rrscluster check', $out, $ret);
+        return implode("\n", $out);
+    }
+
     public static function getMainHostGroup()
     {
         $db = self::connectDB();
         $sth = $db->query("select value from system where name='mainHostGroupName';");
         $name = $sth->fetch(PDO::FETCH_ASSOC)['value'];
         return $name;
+    }
+
+    public static function removeCluster($name)
+    {
+        $db = self::connectDB();
+        $sth = $db->prepare("select count(*) as num from cluster where name=:name;");
+        $sth->bindValue(':name', $name, PDO::PARAM_STR);
+        $sth->execute();
+        $num = $sth->fetch(PDO::FETCH_ASSOC)['num'];
+
+        if ($num > 0)
+        {
+            $sth = $db->prepare("delete from cluster where name=:name;");
+            $sth->bindValue(':name', $name, PDO::PARAM_STR);
+            $sth->execute();
+
+            $workspace = Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME."/".$name;
+            if (file_exists ( $workspace ))
+            { system('rm -rf '.$workspace); }
+
+            /* BEGIN : direct OACIS control */
+            $oacisdb = self::connectOacisDB();
+            $oaciscoll = $oacisdb->selectCollection("hosts");
+            $oaciscoll->deleteMany(array("name" => "RO_".$name));
+            /* END : direct OACIS control */
+        }
+
+        self::updateHostGroup();
     }
 
     /**
@@ -71,6 +119,10 @@ class ClusterManager
             mkdir($myWorkspaceDir);
             $config = "SERVER_SS=\"".$s_host."\"\nSERVER_C1=\"".$f_host."\"\nSERVER_C2=\"".$p_host."\"\nSERVER_C3=\"".$a_host."\"\n";
             file_put_contents($myWorkspaceDir.'/config.cfg', $config);
+            //------------------
+            $config = "{ 'server'=>'".$s_host."', 'fire'=>'".$f_host."', 'police'=>'".$p_host."', 'ambulance'=>'".$a_host."' }";
+            file_put_contents($myWorkspaceDir.'/rrscluster.cfg', $config);
+            //------------------
             system("chown -R oacis:oacis ".Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME);
             $myWorkspaceDir = '~/rrs-oacis/'.Config::WORKSPACE_DIR_NAME.'/'.$name;
 

@@ -13,7 +13,7 @@ foreach ($paramSet['runs'] as $run)
 	$runId = $run['id'];
 }
 
-$db = new PDO('sqlite:'.dirname(__FILE__).'/app.db');
+$db = \rrsoacis\manager\DatabaseManager::getDatabase();
 $sth = $db->prepare("update run set runId=:runId where paramId=:paramId;");
 $sth->bindValue(':paramId', $paramId, PDO::PARAM_STR);
 $sth->bindValue(':runId', $runId, PDO::PARAM_STR);

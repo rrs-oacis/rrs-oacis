@@ -56,7 +56,7 @@ use rrsoacis\system\Config;
                                 <th>Host-P</th>
                             </tr>
                             <?php foreach ($clusters as $cluster) {?>
-                                <tr class="linked-row" data-href="<?= Config::$TOP_PATH."settings-clusters" ?>">
+                                <tr class="linked-row" data-href="<?= Config::$TOP_PATH."settings-cluster/".$cluster["name"] ?>">
                                     <td><?= $cluster["name"]?></td>
                                     <td><?= $cluster["s_host"]?></td>
                                     <td><?= $cluster["a_host"]?></td>
