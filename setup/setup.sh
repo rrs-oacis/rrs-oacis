@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd `dirname $0`
+cd ..
 
 echo 'install composer'
 curl -S https://getcomposer.org/installer | php
