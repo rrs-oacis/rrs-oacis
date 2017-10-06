@@ -7,7 +7,7 @@ use rrsoacis\system\Config;
     <div class="box-tools pull-right">
         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
         </button>
-     </div>
+    </div>
   </div>
   <!-- /.box-header -->
   <!-- form start -->
@@ -83,11 +83,38 @@ $(".readonly").keydown(function(e){
     $('#photoCover').val($(this).val());
   });
 
-  
-  $("#add_parameter-form").submit(function(e){
-      $('#add_parameter-form-overlay').show();
-      $("#add_parameter-form").submit();
-	 });
+
+  //Send to server
+  //$("#add_parameter-form").submit(function(e){
+
+  //    $('#add_parameter-form-overlay').show();
+   //   $("#add_parameter-form").submit();
+
+  //});
+
+$("#add_parameter-form").submit(function (e) {
+
+    $('#add_parameter-form-overlay').show();
+    e.preventDefault();
+    var form = document.querySelector('#add_parameter-form');
+    fetch('./competition-add_session', {
+        method: 'POST',
+        body: new FormData(form)
+    }).then(function (response) {
+
+        return response.json()
+
+    }).then(function (json) {
+
+        console.log(json);
+        location.reload();
+        //$('#add_parameter-form-overlay').hide();
+        
+    });
+
+
+});
+
 
   //inputのList
   
