@@ -75,12 +75,7 @@ class AccessManager
      * */
     private static function connectDB()
 	{
-	    if (! file_exists(dirname(Config::$ROUTER_PATH.Config::MAIN_DATABASE)))
-		{
-			mkdir(dirname(Config::$ROUTER_PATH.Config::MAIN_DATABASE),0777,true);
-		}
-
-        $db = new PDO('sqlite:'.Config::$ROUTER_PATH.Config::MAIN_DATABASE);
+        $db = DatabaseManager::getSystemDatabase();
         $accessVersion = 0;
         $sth = $db->query("select value from system where name='accessVersion';");
         while($row = $sth->fetch(PDO::FETCH_ASSOC))

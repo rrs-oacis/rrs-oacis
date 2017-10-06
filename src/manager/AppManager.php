@@ -158,7 +158,7 @@ class AppManager
      * */
     private static function connectDB()
 	{
-        $db = new PDO('sqlite:'.Config::$ROUTER_PATH.Config::MAIN_DATABASE);
+	    $db = DatabaseManager::getSystemDatabase();
         $connectedAppVersion = 0;
         $sth = $db->query("select value from system where name='connectedAppVersion';");
         while($row = $sth->fetch(PDO::FETCH_ASSOC))

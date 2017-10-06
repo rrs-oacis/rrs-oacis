@@ -17,8 +17,6 @@ class Config{
     const AGENTS_DIR_NAME=  "rrsenv/AGENT";
 	const MAPS_DIR_NAME=  "rrsenv/MAP";
 
-    const MAIN_DATABASE=  "data/main.db";
-
     const MAP_LOG = 'img_log';
 
 	//エージェントを管理するDir 絶対パス

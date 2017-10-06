@@ -37,7 +37,7 @@ RUN chmod a+x /usr/local/bin/update-rrsoacis
 #RRS-OACIS
 USER oacis
 WORKDIR /home/oacis
-RUN git clone https://github.com/tkmnet/rrs-oacis.git
+RUN git clone https://github.com/rrs-oacis/rrs-oacis.git
 RUN chmod a+x ./rrs-oacis/setup.sh
 RUN cp ./rrs-oacis/setup/docker/supplement/server.sh ./rrs-oacis/server.sh
 RUN chmod a+x ./rrs-oacis/server.sh
