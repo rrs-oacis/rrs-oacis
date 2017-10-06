@@ -126,7 +126,6 @@ data/
 # rrsenv
 rrsenv/
 
-/.gitignore
 /server.sh
 /setup.sh
 *.db
