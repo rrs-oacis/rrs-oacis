@@ -24,6 +24,7 @@ use rrsoacis\system\Config;
                 <th>Progress</th>
                 <th>Status</th>
                 <th>Score</th>
+                <th>TimeStamp</th>
                 <th>Log</th>
             </tr>
             </thead>
@@ -31,7 +32,7 @@ use rrsoacis\system\Config;
 
             </tbody>
             <template id="run_list_template">
-                <tr>
+                <tr class="run_list_tr">
                     <td class="run_name">fewnxbcsiern</td>
                     <td class="run_agent">AIT-Rescue</td>
                     <td class="run_map">Sakae39</td>
@@ -43,6 +44,7 @@ use rrsoacis\system\Config;
                     </td>
                     <td><span class="label label-success">Success</span></td>
                     <td class="run_score">3220</td>
+                    <td class="run_time">3220</td>
                     <td ><a class="run_download">Download</a></td>
                 </tr>
             </template>
@@ -58,15 +60,20 @@ use rrsoacis\system\Config;
 
     $(function () {
 
+        //$('#simulation_table').DataTable();
+
         getRunList();
 
-        //$('#simulation_table').DataTable();
+
+
     });
 
 
     function getRunList() {
 
         $('#run_list-overlay').show();
+
+        $('#simulation_table').DataTable().destroy();
 
         fetch('<?= Config::$TOP_PATH ?>run-get_runlist', {
             method: 'GET'
@@ -81,7 +88,23 @@ use rrsoacis\system\Config;
                 setRunTableData(json);
 
 
-                var table = $('#simulation_table').DataTable();
+                var table = $('#simulation_table').DataTable({
+                    destroy: true,
+                    "columnDefs": [
+                        {"targets": 0, "searchable": false},    //検索対象外に設定
+                        {"targets": 1, "searchable": false},
+                        {"targets": 2, "searchable": false},
+                        {"targets": 4, "searchable": false},
+                        {"targets": 5, "searchable": false},
+                        {"targets": 6, "searchable": false},
+                        {"targets": 7, "searchable": false},
+                        {"targets": 8, "searchable": false},
+                        {"targets": [0,3,4,5,8],"orderable": false}
+                    ],
+                    "order": [ 7, 'desc' ]
+                });
+
+                table.draw();
 
                 //table
                     //.rows()
@@ -126,6 +149,8 @@ use rrsoacis\system\Config;
         {
             var t = document.querySelector('#run_list_template');
 
+            t.content.querySelector('.run_list_tr').id = data[i]['name'];
+
             t.content.querySelector('.run_name').textContent = data[i]['name'];
             t.content.querySelector('.run_agent').textContent = data[i]['agent'];
             t.content.querySelector('.run_map').textContent = data[i]['map'];
@@ -133,7 +158,8 @@ use rrsoacis\system\Config;
                 t.content.querySelector('.run_tag').textContent = data[i]['tag'];
             }
 
-            t.content.querySelector('.run_score').textContent = data[i]['runId'];
+            t.content.querySelector('.run_score').textContent = data[i]['score'];
+            t.content.querySelector('.run_time').textContent = data[i]['timestamp'];
 
             var simulation = data[i]['simulation'];
             var runId = data[i]['runId'];
@@ -151,3 +177,11 @@ use rrsoacis\system\Config;
     }
 
 </script>
+
+<style>
+
+    .table>thead:first-child>tr:first-child>th:focus {
+        outline: 0;
+    }
+
+</style>

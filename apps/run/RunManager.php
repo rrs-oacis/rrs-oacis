@@ -36,12 +36,29 @@ class RunManager{
 
     public static function createRunSimulator(){
 
+
+        $db = self::connectDB();
+        $simulatorId = "";
+
+        $sth = $db->query("select * from simulator;");
+        while($row = $sth->fetch(PDO::FETCH_ASSOC))
+        {
+            if(isset($row["name"]) && isset($row["id"])){
+                $simulatorId = $row["id"];
+            }
+        }
+
+        if($simulatorId!="")return;
+
+        $simulatorName = self::SimulatorName .'_'. uniqid();
+
+
         $tmpFileOut = '/tmp/rrsoacis-out-'.uniqid();
         $tmpFileIn = '/tmp/rrsoacis-in-'.uniqid();
         system("sudo -i -u oacis ".Config::$OACISCLI_PATH." simulator_template -o ".$tmpFileOut." 2>&1");
         $simulator = json_decode ( file_get_contents($tmpFileOut), true );
         system("rm -f ".$tmpFileOut);
-        $simulator['name'] = self::SimulatorName;
+        $simulator['name'] = $simulatorName;
         $simulator['command'] = "/home/oacis/rrs-oacis/rrsenv/script/runNGC_MT.sh";
         $simulator['executable_on_ids'][] = ClusterManager::getMainHostGroup();
 
@@ -89,7 +106,7 @@ class RunManager{
             $db = self::connectDB();
 
             $sth = $db->prepare("insert into simulator(name, id) values(:name, :id);");
-            $sth->bindValue(':name', self::SimulatorName, PDO::PARAM_STR);
+            $sth->bindValue(':name', $simulatorName, PDO::PARAM_STR);
             $sth->bindValue(':id', $simulatorId, PDO::PARAM_STR);
             $sth->execute();
 
@@ -125,7 +142,7 @@ class RunManager{
         $sth->bindValue(':name', $scriptId, PDO::PARAM_STR);
         $sth->bindValue(':agent', $agentName, PDO::PARAM_STR);
         $sth->bindValue(':map', $mapName, PDO::PARAM_STR);
-        $sth->bindValue(':tag', $tag, PDO::PARAM_INT);
+        $sth->bindValue(':tag', $tag, PDO::PARAM_STR);
         //$sth->bindValue(':paramId', $highlight, PDO::PARAM_INT);
         //$sth->bindValue(':runId', $scriptId, PDO::PARAM_INT);
         $sth->execute();
@@ -177,7 +194,7 @@ class RunManager{
             case 0:
                 $db->query("insert into system(name,value) values('version', 1);");
                 $db->query("create table simulator(name, id);");
-                $db->query("create table run(simulation, name, agent, map, tag, score, paramId, runId);");
+                $db->query("create table run(simulation, name, agent, map, tag, score, paramId, runId, timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP);");
 
                 $version = 1;
 

@@ -70,7 +70,8 @@ use rrsoacis\system\Config;
                     <input type="number" class="form-control" name="parameter_count"
                            placeholder="simulation count"
                            required
-                           autocomplete="on" list="map_keyword">
+                           autocomplete="on" list="map_keyword"
+                            value="1">
                 </div>
                 <datalist id="map_keyword">
                 </datalist>
