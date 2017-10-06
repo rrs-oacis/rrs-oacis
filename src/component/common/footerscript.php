@@ -5,6 +5,11 @@ use rrsoacis\system\Config;
 <!-- Bootstrap 3.3.6 -->
 <script src="<?= Config::$RESOURCE_PATH?>bootstrap/js/bootstrap.min.js"></script>
 
+<!-- Table -->
+<script src="<?= Config::$RESOURCE_PATH?>plugins/datatables/jquery.dataTables.js"></script>
+<script src="<?= Config::$RESOURCE_PATH?>plugins/datatables/dataTables.bootstrap.js"></script>
+
+
 <!-- <script src="./bootstrap/js/bootstrap2-toggle.min.js"></script> -->
 <!-- iCheck -->
 <script src="<?= Config::$RESOURCE_PATH?>plugins/iCheck/icheck.min.js"></script>

@@ -21,6 +21,9 @@ use rrsoacis\system\Config;
 <!-- Select2 -->
 <link rel="stylesheet" href="<?= Config::$RESOURCE_PATH?>plugins/select2/select2.css">
 
+<!-- DataTables -->
+<link rel="stylesheet" href="<?= Config::$RESOURCE_PATH?>plugins/datatables/dataTables.bootstrap.css">
+
 <!-- Theme style -->
 <link rel="stylesheet" href="<?= Config::$RESOURCE_PATH?>adminlte/css/AdminLTE.min.css">
 <!-- iCheck -->
