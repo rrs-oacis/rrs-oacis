@@ -5,19 +5,19 @@ use rrsoacis\system\Config;
 <html>
 <head>
 <?php $title="AgentList"; ?>
-<?php include '../common/head.php';?>
+<?php include Config::$SRC_REAL_URL . 'component/common/head.php';?>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
 
-  <?php include '../common/main-header.php';?>
+  <?php include Config::$SRC_REAL_URL . 'component/common/main-header.php';?>
 
   <!-- =============================================== -->
 
   <!-- Left side column. contains the sidebar -->
-  <?php include '../common/main-sidebar.php';?>
+  <?php include Config::$SRC_REAL_URL . 'component/common/main-sidebar.php';?>
   
   <!-- =============================================== -->
 
@@ -71,13 +71,13 @@ use rrsoacis\system\Config;
 
   <!-- =============================================== -->
 
-  <?php include '../common/main-footer.php';?>
+  <?php include Config::$SRC_REAL_URL . 'component/common/main-footer.php';?>
   
   <!-- =============================================== -->
 
 </div>
 <!-- ./wrapper -->
 
-<?php include '../common/footerscript.php';?>
+<?php include Config::$SRC_REAL_URL . 'component/common/footerscript.php';?>
 
 </body>

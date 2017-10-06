@@ -5,7 +5,7 @@ use rrsoacis\system\Config;
 <html>
 <head>
 <?php $title="400"; ?>
-<?php include '../common/head.php';?>
+<?php include Config::$SRC_REAL_URL . 'component/common/head.php';?>
 
 </head>
 <body class="transition skin-blue">
@@ -49,11 +49,11 @@ use rrsoacis\system\Config;
 
   <!-- =============================================== -->
 
-  <?php include '../common/main-footer.php';?>
+  <?php include Config::$SRC_REAL_URL . 'component/common/main-footer.php';?>
   
   <!-- =============================================== -->
 
 
-<?php include '../common/footerscript.php';?>
+<?php include Config::$SRC_REAL_URL . 'component/common/footerscript.php';?>
 
 </body>

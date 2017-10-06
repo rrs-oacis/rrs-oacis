@@ -63,7 +63,9 @@ class Router
             foreach (AppManager::getConnectedApps() as $app) {
                 $router->controller('/' . $app['package'], $app['main_controller']);
                 foreach ($app['sub_controller'] as $controller) {
-                    $router->controller('/' . $app['package'] . '-' . $controller[0], $controller[1]);
+                    if(isset($controller[0])&&isset($controller[1])){
+                        $router->controller('/' . $app['package'] . '-' . $controller[0], $controller[1]);
+                    }
                 }
             }
         }
@@ -84,17 +86,17 @@ class Router
 		} catch ( HttpRouteNotFoundException $e ) {
 			
 			header("HTTP/1.0 400 Bad Request");
-			include (Config::$SRC_REAL_URL . 'view/400ErrorView.php');
+			include (Config::$SRC_REAL_URL . 'component/error/400ErrorView.php');
 			exit ();
 		} catch ( HttpMethodNotAllowedException $e ) {
 			
             header("HTTP/1.0 400 Bad Request");
-			include (Config::$SRC_REAL_URL . 'view/400ErrorView.php');
+			include (Config::$SRC_REAL_URL . 'component/error/400ErrorView.php');
 			exit ();
 		} catch (AgentNotFoundException $e){
 			
             header("HTTP/1.0 400 Bad Request");
-			include (Config::$SRC_REAL_URL . 'view/400ErrorView.php');
+			include (Config::$SRC_REAL_URL . 'component/error/400ErrorView.php');
 			exit ();
 		}
 	}
