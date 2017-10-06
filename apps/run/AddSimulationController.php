@@ -6,7 +6,7 @@
  * Time: 15:48
  */
 
-namespace rrsoacis\apps\investigation;
+namespace rrsoacis\apps\run;
 
 use rrsoacis\system\Config;
 use rrsoacis\component\common\AbstractController;
@@ -24,6 +24,7 @@ class AddSimulationController extends AbstractController
         $count = $_POST['parameter_count'];
 
 
+        //
         //SessionManager::addSession($alias, $agents, $precursor, $highlight);
 
         //$output = shell_exec("sh ". Config::$ROUTER_PATH. "ruby/add_agent.sh ".$simulatorID." ".$hostID." ".$mapName." " . $agentName);

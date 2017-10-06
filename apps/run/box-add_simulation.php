@@ -13,7 +13,7 @@ use rrsoacis\system\Config;
     </div>
     <!-- /.box-header -->
     <!-- form start -->
-    <form id="add_simulation-form" action="./investigation-add_simulation" method="POST"
+    <form id="add_simulation-form" action="./run-add_simulation" method="POST"
           class="form-horizontal" enctype="multipart/form-data">
         <div class="box-body">
             <div class="form-group">
@@ -103,7 +103,7 @@ use rrsoacis\system\Config;
         $('#add_simulation-form-overlay').show();
         e.preventDefault();
         var form = document.querySelector('#add_simulation-form');
-        fetch('./investigation-add_simulation', {
+        fetch('./run-add_simulation', {
             method: 'POST',
             body: new FormData(form)
         }).then(function (response) {

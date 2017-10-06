@@ -1,0 +1,8 @@
+{
+    "name" : "Run",
+    "version" : "0.0.1",
+    "description" : "run",
+    "icon" : "fa-upload",
+    "main_controller" : "rrsoacis\\apps\\run\\RunMainController",
+    "sub_controller" : [["add_simulation","rrsoacis\\apps\\run\\AddSimulationController"]]
+}
