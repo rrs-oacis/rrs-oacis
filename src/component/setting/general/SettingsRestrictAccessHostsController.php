@@ -1,5 +1,5 @@
 <?php
-namespace rrsoacis\component\setting\restrict;
+namespace rrsoacis\component\setting\general;
 
 use rrsoacis\system\Config;
 use rrsoacis\manager\AccessManager;
@@ -13,7 +13,7 @@ class SettingsRestrictAccessHostsController extends AbstractController
 
         AccessManager::setUnrestrictedHost($hosts);
 
-        header('location: '.Config::$TOP_PATH.'settings-restrict');
+        header('location: '.Config::$TOP_PATH.'settings-general');
     }
 }
 ?>

@@ -27,25 +27,54 @@ use rrsoacis\manager\AccessManager;
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-          Restrict Access
+          General
           <small>Settings</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?=Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i><?= rrsoacis\system\Config::APP_NAME ?></a></li>
         <li class=""><a href="/settings">Settings</a></li>
-        <li class="active">Restrict Access</li>
+        <li class="active">General</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
+        <!-- Version -->
+        <div class="box box-solid">
+            <div class="box-header">
+                <h3 class="box-title">
+                    Version
+                </h3>
+                <div class="pull-right">
+                    <?php
+                    exec("nohup git fetch", $exec_out, $exec_ret);
+                    exec("test \"`git log -1 HEAD --oneline`\" != \"`git log -1 origin/master HEAD --oneline`\"", $exec_out, $exec_ret);
+                    ?>
+                    <?php if ($exec_ret == 0) { ?>
+                        <a href="<?=Config::$TOP_PATH ?>/settings-version_update">
+                            <button class="btn btn-info">Update</button>
+                        </a>
+                    <?php } else { ?>
+                            <button class="btn">Latest version</button>
+                    <?php } ?>
+                </div>
+                <div class="box-body">
+                    <b> Current version </b>
+                    <pre><?= system("git log -1 HEAD --decorate ; echo") ?></pre>
+
+                    <b> Latest version </b>
+                    <pre><?= system("git log -1 origin/master HEAD --decorate ; echo") ?></pre>
+                </div>
+            </div>
+        </div>
+        <!-- /Version -->
+
+        <!-- Restrict Access -->
         <div class="box box-solid">
             <div class="box-header">
                 <h3 class="box-title">
                     Restrict Access
                 </h3>
-            </div>
-            <div class="box-body">
                 <div class="pull-right">
                     <?php if (AccessManager::filterEnabled()) { ?>
                         <a href="<?=Config::$TOP_PATH ?>/settings-restrict_set/0">
@@ -57,19 +86,13 @@ use rrsoacis\manager\AccessManager;
                         </a>
                     <?php } ?>
                 </div>
-            </div>
-        </div>
-
-        <div class="box box-solid">
-            <div class="box-header">
-                <h3 class="box-title">
-                    Unrestrict hosts
-                    <small>
-                        Current Host: <?=getenv("REMOTE_ADDR") ?>
-                    </small>
-                </h3>
-            </div>
             <div class="box-body">
+                <b>
+                    Unrestrict hosts
+                </b>
+                <small>
+                    Current Host: <?=getenv("REMOTE_ADDR") ?>
+                </small>
                 <form action="./settings-restrict_set_unrestrected" method="post">
                     <div class="input-group pull-right">
                         <input class="form-control" name="hosts" type="text" value="<?=AccessManager::getUnrestrictedHostsText() ?>">
@@ -78,6 +101,7 @@ use rrsoacis\manager\AccessManager;
                 </form>
             </div>
         </div>
+        <!-- /Restrict Access -->
     </section>
     <!-- /.content -->
   </div>

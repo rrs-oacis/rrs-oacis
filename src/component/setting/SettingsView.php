@@ -36,9 +36,9 @@ use rrsoacis\system\Config;
 
     <!-- Main content -->
     <section class="content">
+        <a href="/settings-general"><button class="btn-block btn">General</button></a><br>
         <a href="/settings-apps"><button class="btn-block btn">Apps</button></a><br>
         <a href="/settings-clusters"><button class="btn-block btn">Clusters</button></a><br>
-        <a href="/settings-restrict"><button class="btn-block btn">Restrict access</button></a><br>
     </section>
     <!-- /.content -->
   </div>

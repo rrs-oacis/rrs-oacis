@@ -36,9 +36,9 @@ class Router
             $router->controller('/settings-cluster', 'rrsoacis\\component\\setting\\cluster\\SettingsClusterController');
             $router->controller('/settings-cluster_update', 'rrsoacis\\component\\setting\\cluster\\SettingsClusterUpdateController');
             $router->controller('/settings-cluster_remove', 'rrsoacis\\component\\setting\\cluster\\SettingsClusterRemoveController');
-            $router->controller('/settings-restrict', 'rrsoacis\\component\\setting\\restrict\\SettingsRestrictAccessController');
-            $router->controller('/settings-restrict_set', 'rrsoacis\\component\\setting\\restrict\\SettingsRestrictAccessSetController');
-            $router->controller('/settings-restrict_set_unrestrected', 'rrsoacis\\component\\setting\\restrict\\SettingsRestrictAccessHostsController');
+            $router->controller('/settings-general', 'rrsoacis\\component\\setting\\general\\SettingsGeneralController');
+            $router->controller('/settings-restrict_set', 'rrsoacis\\component\\setting\\general\\SettingsRestrictAccessSetController');
+            $router->controller('/settings-restrict_set_unrestrected', 'rrsoacis\\component\\setting\\general\\SettingsRestrictAccessHostsController');
 
             // Maps
             $router->controller('/maps', 'rrsoacis\\component\\map\\MapsListController');

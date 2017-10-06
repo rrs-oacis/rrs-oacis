@@ -1,5 +1,5 @@
 <?php
-namespace rrsoacis\component\setting\restrict;
+namespace rrsoacis\component\setting\general;
 
 use rrsoacis\system\Config;
 use rrsoacis\manager\AccessManager;
@@ -17,7 +17,7 @@ class SettingsRestrictAccessSetController extends AbstractController
         if ($isEnable == 1) { AccessManager::enableFilter(); }
         else { AccessManager::disableFilter(); }
 
-        header('location: '.Config::$TOP_PATH.'settings-restrict');
+        header('location: '.Config::$TOP_PATH.'settings-general');
     }
 }
 ?>
