@@ -116,6 +116,8 @@ use rrsoacis\system\Config;
             //location.reload();
             $('#add_simulation-form-overlay').hide();
 
+            getRunList();
+
         });
 
 

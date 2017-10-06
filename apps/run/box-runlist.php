@@ -28,46 +28,109 @@ use rrsoacis\system\Config;
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>fewnxbcsiern</td>
-                <td>AIT-Rescue</td>
-                <td>Sakae39</td>
-                <td>ait,test</td>
-                <td>
-                    <div class="progress progress-xs">
-                        <div class="progress-bar progress-bar-danger" style="width: 25%"></div>
-                    </div>
-                </td>
-                <td><span class="label label-success">Success</span></td>
-                <td>3220</td>
-                <td><a>Download</a></td>
-            </tr>
-
-            <tr>
-                <td>rcuniweuiexn</td>
-                <td>Ri-one</td>
-                <td>Kobe1</td>
-                <td>test</td>
-                <td>
-                    <div class="progress progress-xs">
-                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                    </div>
-                </td>
-                <td><span class="label label-success">Error</span></td>
-                <td>2192</td>
-                <td><a>Download</a></td>
-            </tr>
-
 
             </tbody>
+            <template id="run_list_template">
+                <tr>
+                    <td class="run_name">fewnxbcsiern</td>
+                    <td class="run_agent">AIT-Rescue</td>
+                    <td class="run_map">Sakae39</td>
+                    <td class="run_tag">None</td>
+                    <td>
+                        <div class="progress progress-xs">
+                            <div class="progress-bar progress-bar-danger" style="width: 25%"></div>
+                        </div>
+                    </td>
+                    <td><span class="label label-success">Success</span></td>
+                    <td>3220</td>
+                    <td><a>Download</a></td>
+                </tr>
+            </template>
         </table>
+    </div>
+
+    <div id="run_list-overlay" class="overlay" style="display: none;">
+        <i class="fa fa-refresh fa-spin"></i>
     </div>
 </div>
 
 <script>
 
     $(function () {
-        $('#simulation_table').DataTable();
+
+        getRunList();
+
+        //$('#simulation_table').DataTable();
     });
+
+
+    function getRunList() {
+
+        $('#run_list-overlay').show();
+
+        fetch('<?= Config::$TOP_PATH ?>run-get_runlist', {
+            method: 'GET'
+        })
+            .then(function (response) {
+                return response.json()
+            })
+            .then(function (json) {
+
+                $('#run_list-overlay').hide();
+
+                setRunTableData(json);
+
+                $('#simulation_table').DataTable();
+
+                /*$('#simulation_table').DataTable({
+
+                    aoColumns: [
+                        { mData: "name", sDefaultContent: "" },
+                        { mData: "agent", sDefaultContent: "" },
+                        { mData: "map", sDefaultContent: "" }
+                    ],
+
+                    bDeferRender: true,
+
+                    sServerMethod: 'GET',
+
+                    sAjaxDataProp: 'data',
+
+
+
+
+
+
+                });*/
+
+            });
+    }
+
+    function setRunTableData(data)
+    {
+        var tb = document.querySelector('#simulation_table tbody');
+        while (child = tb.lastChild)
+        {
+            tb.removeChild(child);
+        }
+
+        for(var i=0;i<data.length;i++)
+        {
+            var t = document.querySelector('#run_list_template');
+
+            t.content.querySelector('.run_name').textContent = data[i]['name'];
+            t.content.querySelector('.run_agent').textContent = data[i]['agent'];
+            t.content.querySelector('.run_map').textContent = data[i]['map'];
+            if(data[i]['tag']!=null || data[i]['tag']!=0){
+                t.content.querySelector('.run_tag').textContent = data[i]['tag'];
+            }
+            //t.content.querySelector('.map_list_fullname').textContent = data[i]['name'];
+            //t.content.querySelector('.map_list_timestamp').textContent = data[i]['timestamp'];
+
+            var clone = document.importNode(t.content, true);
+            tb.appendChild(clone);
+        }
+
+    }
 
 </script>
