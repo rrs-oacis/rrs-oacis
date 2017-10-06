@@ -5,7 +5,7 @@ use rrsoacis\manager\AccessManager;
 <!DOCTYPE html>
 <html>
 <head>
-<?php $title="Apps"; ?>
+<?php $title="General"; ?>
 <?php include Config::$SRC_REAL_URL.'component/common/head.php';?>
 
 </head>
@@ -47,10 +47,8 @@ use rrsoacis\manager\AccessManager;
                 </h3>
                 <div class="pull-right">
                     <?php
-                    exec("nohup git fetch", $exec_out, $exec_ret);
-                    exec("test \"`git log -1 HEAD --oneline`\" != \"`git log -1 origin/master HEAD --oneline`\"", $exec_out, $exec_ret);
                     ?>
-                    <?php if ($exec_ret == 0) { ?>
+                    <?php if ($gitcheck_ret == 0) { ?>
                         <a href="<?=Config::$TOP_PATH ?>/settings-version_update">
                             <button class="btn btn-info">Update</button>
                         </a>
@@ -60,10 +58,10 @@ use rrsoacis\manager\AccessManager;
                 </div>
                 <div class="box-body">
                     <b> Current version </b>
-                    <pre><?= system("git log -1 HEAD --decorate ; echo") ?></pre>
+                    <pre><?= implode("\n", $gitlog_local); ?></pre>
 
                     <b> Latest version </b>
-                    <pre><?= system("git log -1 origin/master HEAD --decorate ; echo") ?></pre>
+                    <pre><?= implode("\n", $gitlog_remote); ?></pre>
                 </div>
             </div>
         </div>

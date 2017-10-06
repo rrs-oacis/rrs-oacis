@@ -5,7 +5,7 @@ use rrsoacis\system\Config;
 use rrsoacis\component\common\AbstractController;
 use rrsoacis\manager\AgentManager;
 
-class SettingsGeneralController extends AbstractController
+class SettingsVersionUpdateController extends AbstractController
 {
 	
 	public function get()
@@ -21,11 +21,12 @@ class SettingsGeneralController extends AbstractController
             exec("timeout 3 git fetch", $exec_out, $exec_ret);
         }
 
-        exec("test \"`git log -1 HEAD --oneline`\" != \"`git log -1 origin/master HEAD --oneline`\"", $exec_out, $gitcheck_ret);
-        exec("git log -1 HEAD --decorate", $gitlog_local, $exec_ret);
-        exec("git log -1 origin/master HEAD --decorate", $gitlog_remote, $exec_ret);
+        if ($exec_ret == 0)
+        {
+            exec("git pull");
+        }
 
-		include (Config::$SRC_REAL_URL . 'component/setting/general/SettingsGeneralView.php');
+        header('location: '.Config::$TOP_PATH.'settings-general');
 	}
 	
 }
