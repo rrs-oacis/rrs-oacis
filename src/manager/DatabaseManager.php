@@ -8,6 +8,8 @@ class DatabaseManager
 {
     public static function getDatabase($appName)
     {
+        echo "<pre>";
+        print_r(debug_backtrace());
     }
 
     public static function getSystemDatabase()
