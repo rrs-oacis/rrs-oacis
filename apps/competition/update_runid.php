@@ -19,7 +19,8 @@ foreach ($outputs as $out)
         $runId = $run['id'];
     }
 
-    $db = \rrsoacis\manager\DatabaseManager::getDatabase();
+    //$db = \rrsoacis\manager\DatabaseManager::getDatabase();
+    $db = new PDO('sqlite:'.dirname(__FILE__).'../../data/competition.db');
     $sth = $db->prepare("update run set paramId=:paramId, runId=:runId where name=:name;");
     $sth->bindValue(':paramId', $paramId, PDO::PARAM_STR);
     $sth->bindValue(':runId', $runId, PDO::PARAM_STR);
