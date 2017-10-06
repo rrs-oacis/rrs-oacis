@@ -4,6 +4,7 @@ namespace rrsoacis\apps\competition;
 
 use rrsoacis\manager\AgentManager;
 use rrsoacis\manager\ClusterManager;
+use rrsoacis\manager\DatabaseManager;
 use rrsoacis\manager\MapManager;
 use \MongoClient;
 use MongoDB\BSON\ObjectID;
@@ -385,7 +386,7 @@ class SessionManager
      * */
     private static function connectDB()
     {
-        $db = new PDO('sqlite:'.dirname(__FILE__).'/app.db');
+        $db = DatabaseManager::getDatabase();
         $connectedAppVersion = 0;
         $sth = $db->query("select value from system where name='version';");
         while($row = $sth->fetch(PDO::FETCH_ASSOC))
