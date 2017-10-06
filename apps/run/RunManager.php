@@ -71,6 +71,13 @@ class RunManager{
         $parameter1['description'] = '';
         $simulator['parameter_definitions'][] = $parameter1;
 
+        $parameter1 = [];
+        $parameter1['key'] = 'UID';
+        $parameter1['type'] = 'String';
+        $parameter1['default'] = '';
+        $parameter1['description'] = '';
+        $simulator['parameter_definitions'][] = $parameter1;
+
         file_put_contents($tmpFileIn, json_encode($simulator));
         system("sudo -i -u oacis ".Config::$OACISCLI_PATH." create_simulator -i ".$tmpFileIn." -o ".$tmpFileOut);
         system("rm -f ".$tmpFileIn);
@@ -112,17 +119,6 @@ class RunManager{
 
         $scriptId = uniqid();
 
-        $script = "#!/bin/bash\n\n";
-        $script .= Config::$OACISCLI_PATH." create_parameter_sets";
-        $script .= ' -s '.$simulatorId;
-        $script .= ' -i \'{"MAP":"'.$map['name'].'","F":"'.$agent['name'].'","P":"'.$agent['name'].'","A":"'.$agent['name'].'"}\'';
-        $script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"'.ClusterManager::getMainHostGroup().'","host_parameters":null}\'';
-        $script .= ' -o /tmp/out_'.$scriptId.'.json';
-        $script .= "\n";
-        $script .= 'php '.realpath(dirname(__FILE__)).'/update_runid.php \''.$scriptId.'\' /tmp/out_'.$scriptId.'.json';
-        file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
-        exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
-
         $db = self::connectDB();
         $sth = $db->prepare("insert into run(simulation, name, agent, map, tag) values(:simulation, :name, :agent, :map, :tag);");
         $sth->bindValue(':simulation', $simulatorId, PDO::PARAM_STR);
@@ -133,6 +129,19 @@ class RunManager{
         //$sth->bindValue(':paramId', $highlight, PDO::PARAM_INT);
         //$sth->bindValue(':runId', $scriptId, PDO::PARAM_INT);
         $sth->execute();
+
+        $script = "#!/bin/bash\n\n";
+        $script .= Config::$OACISCLI_PATH." create_parameter_sets";
+        $script .= ' -s '.$simulatorId;
+        $script .= ' -i \'{"MAP":"'.$map['name'].'","F":"'.$agent['name'].'","P":"'.$agent['name'].'","A":"'.$agent['name'].'","UID":"'.$scriptId.'"}\'';
+        $script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"'.ClusterManager::getMainHostGroup().'","host_parameters":null}\'';
+        $script .= ' -o /tmp/out_'.$scriptId.'.json';
+        $script .= "\n";
+        $script .= 'php '.realpath(dirname(__FILE__)).'/update_runid.php \''.$scriptId.'\' /tmp/out_'.$scriptId.'.json';
+        file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
+        exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' >/dev/null &');
+
+
 
     }
 

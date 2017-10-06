@@ -42,8 +42,8 @@ use rrsoacis\system\Config;
                         </div>
                     </td>
                     <td><span class="label label-success">Success</span></td>
-                    <td>3220</td>
-                    <td><a>Download</a></td>
+                    <td class="run_score">3220</td>
+                    <td class="run_download"><a>Download</a></td>
                 </tr>
             </template>
         </table>
@@ -80,7 +80,15 @@ use rrsoacis\system\Config;
 
                 setRunTableData(json);
 
-                $('#simulation_table').DataTable();
+
+                var table = $('#simulation_table').DataTable();
+
+                //table
+                    //.rows()
+                    //.invalidate()
+                    //.draw();
+
+                //$('#simulation_table').DataTable();
 
                 /*$('#simulation_table').DataTable({
 
@@ -124,6 +132,10 @@ use rrsoacis\system\Config;
             if(data[i]['tag']!=null || data[i]['tag']!=0){
                 t.content.querySelector('.run_tag').textContent = data[i]['tag'];
             }
+
+            t.content.querySelector('.run_score').textContent = data[i]['runId'];
+
+
             //t.content.querySelector('.map_list_fullname').textContent = data[i]['name'];
             //t.content.querySelector('.map_list_timestamp').textContent = data[i]['timestamp'];
 
