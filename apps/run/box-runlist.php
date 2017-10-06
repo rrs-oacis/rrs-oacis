@@ -43,7 +43,7 @@ use rrsoacis\system\Config;
                     </td>
                     <td><span class="label label-success">Success</span></td>
                     <td class="run_score">3220</td>
-                    <td class="run_download"><a>Download</a></td>
+                    <td ><a class="run_download">Download</a></td>
                 </tr>
             </template>
         </table>
@@ -135,6 +135,11 @@ use rrsoacis\system\Config;
 
             t.content.querySelector('.run_score').textContent = data[i]['runId'];
 
+            var simulation = data[i]['simulation'];
+            var runId = data[i]['runId'];
+            var paramId = data[i]['paramId'];
+
+            t.content.querySelector('.run_download').href = "localhost:3000/Result_development/"+simulation+"/"+paramId+"/"+runId+".tar.bz2";
 
             //t.content.querySelector('.map_list_fullname').textContent = data[i]['name'];
             //t.content.querySelector('.map_list_timestamp').textContent = data[i]['timestamp'];
