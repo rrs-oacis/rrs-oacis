@@ -5,7 +5,7 @@ use rrsoacis\system\Config;
 ?>
 <div class="box box-primary">
     <div class="box-header with-border">
-        <h3 class="box-title">Add Simulation</h3>
+        <h3 class="box-title">Add Run</h3>
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
             </button>
@@ -13,7 +13,7 @@ use rrsoacis\system\Config;
     </div>
     <!-- /.box-header -->
     <!-- form start -->
-    <form id="add_simulation-form" action="./run-add_simulation" method="POST"
+    <form id="add_simulation-form" action="./run-add_run" method="POST"
           class="form-horizontal" enctype="multipart/form-data">
         <div class="box-body">
             <div class="form-group">
@@ -103,7 +103,7 @@ use rrsoacis\system\Config;
         $('#add_simulation-form-overlay').show();
         e.preventDefault();
         var form = document.querySelector('#add_simulation-form');
-        fetch('./run-add_simulation', {
+        fetch('./run-add_run', {
             method: 'POST',
             body: new FormData(form)
         }).then(function (response) {

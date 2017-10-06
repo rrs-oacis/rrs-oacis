@@ -10,7 +10,7 @@ use rrsoacis\system\Config;
 
 <div class="box box-success">
     <div class="box-header">
-        <h3 class="box-title">Simulation List</h3>
+        <h3 class="box-title">Run List</h3>
     </div>
     <!-- /.box-header -->
     <div class="box-body">

@@ -10,8 +10,9 @@ namespace rrsoacis\apps\run;
 
 use rrsoacis\system\Config;
 use rrsoacis\component\common\AbstractController;
+use rrsoacis\apps\run\RunManager;
 
-class AddSimulationController extends AbstractController
+class AddRunController extends AbstractController
 {
     public function post()
     {
@@ -24,7 +25,9 @@ class AddSimulationController extends AbstractController
         $count = $_POST['parameter_count'];
 
 
-        //
+        RunManager::addRuns($agents,$maps,$tags,$count);
+
+
         //SessionManager::addSession($alias, $agents, $precursor, $highlight);
 
         //$output = shell_exec("sh ". Config::$ROUTER_PATH. "ruby/add_agent.sh ".$simulatorID." ".$hostID." ".$mapName." " . $agentName);

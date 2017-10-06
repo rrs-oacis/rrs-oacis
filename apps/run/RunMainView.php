@@ -37,9 +37,9 @@ use rrsoacis\system\Config;
 
     <!-- Main content -->
     <section class="content">
-        <?php include 'box-add_simulation.php';?>
+        <?php include 'box-add_run.php';?>
 
-        <?php include 'box-simulationlist.php';?>
+        <?php include 'box-runlist.php';?>
     </section>
     <!-- /.content -->
   </div>
