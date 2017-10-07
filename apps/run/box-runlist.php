@@ -54,7 +54,7 @@ use rrsoacis\system\Config;
                     <td class="run_status"><span class="label　label-default">None</span></td>
                     <td class="run_score">3220</td>
                     <td class="run_time">3220</td>
-                    <td ><a class="run_download">Download</a></td>
+                    <td ><a class="run_download" target="_blank" download="Log">Download</a></td>
                 </tr>
             </template>
         </table>
@@ -163,9 +163,19 @@ use rrsoacis\system\Config;
         {
             var t = document.querySelector('#run_list_template');
 
+            var simulation = data[i]['simulation'];
+            var runId = data[i]['runId'];
+            var paramId = data[i]['paramId'];
+
+            var bassURL = location.href.split('/')[2];
+            bassURL = bassURL.split(':')[0];
+
+
             t.content.querySelector('.run_list_tr').id = data[i]['name'];
 
-            t.content.querySelector('.run_name').textContent = data[i]['name'];
+            t.content.querySelector('.run_name').innerHTML = '<a target="_blank" href="http://'+bassURL+':3000/runs/'+runId+'">' + data[i]['name'] + '</a>';
+
+
             t.content.querySelector('.run_agent').textContent = data[i]['agent'];
             t.content.querySelector('.run_map').textContent = data[i]['map'];
             if(data[i]['tag']!=null || data[i]['tag']!=0){
@@ -194,11 +204,9 @@ use rrsoacis\system\Config;
 
             t.content.querySelector('.run_time').textContent = data[i]['timestamp'];
 
-            var simulation = data[i]['simulation'];
-            var runId = data[i]['runId'];
-            var paramId = data[i]['paramId'];
 
-            t.content.querySelector('.run_download').href = "localhost:3000/Result_development/"+simulation+"/"+paramId+"/"+runId+".tar.bz2";
+
+            t.content.querySelector('.run_download').href = "http://"+bassURL+":3000/Result_development/"+simulation+"/"+paramId+"/"+runId+".tar.bz2";
 
             //t.content.querySelector('.map_list_fullname').textContent = data[i]['name'];
             //t.content.querySelector('.map_list_timestamp').textContent = data[i]['timestamp'];

@@ -71,7 +71,7 @@ use rrsoacis\system\Config;
                            placeholder="simulation count"
                            required
                            autocomplete="on" list="map_keyword"
-                            value="1">
+                            value="1" min="1" >
                 </div>
                 <datalist id="map_keyword">
                 </datalist>
