@@ -19,11 +19,15 @@ class SettingsVersionUpdateController extends AbstractController
             exec("git remote set-url origin https://github.com/rrs-oacis/rrs-oacis.git");
             exec("git remote set-url --push origin git@github.com:rrs-oacis/rrs-oacis.git");
             exec("timeout 3 git fetch", $exec_out, $exec_ret);
+
+            exec("cd rrsenv; git remote set-url origin https://github.com/tkmnet/rrsenv.git");
+            exec("cd rrsenv; git remote set-url --push origin git@github.com:tkmnet/rrsenv.git");
         }
 
         if ($exec_ret == 0)
         {
             exec("git pull");
+            exec("cd rrsenv; git pull");
         }
 
         header('location: '.Config::$TOP_PATH.'settings-general');
