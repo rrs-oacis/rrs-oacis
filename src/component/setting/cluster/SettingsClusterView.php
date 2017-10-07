@@ -86,6 +86,34 @@ use rrsoacis\system\Config;
         </div>
         <!-- END : Clusters -->
 
+        <!-- BEGIN : Setup -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            Setup
+                        </h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <form action="./isettings-restrict_set_unrestrected" method="post">
+                            <div class="input-group pull-right">
+                                <input class="form-control" placeholder="Host password" name="password" type="password" value="">
+                                <span class="input-group-btn"> <input class="btn" type="submit" value="Run"> </span>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+        <!-- END : Setup -->
+
         <!-- BEGIN : Check Message -->
         <div class="row">
             <div class="col-xs-12">

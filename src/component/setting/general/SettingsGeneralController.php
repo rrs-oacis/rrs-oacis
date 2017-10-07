@@ -7,7 +7,7 @@ use rrsoacis\manager\AgentManager;
 
 class SettingsGeneralController extends AbstractController
 {
-	
+
 	public function get()
     {
         exec("timeout 3 git fetch", $exec_out, $exec_ret);
@@ -16,6 +16,7 @@ class SettingsGeneralController extends AbstractController
             && (strpos($exec_out,'verification') !== false
                 || strpos($exec_out,'Permission') !== false))
         {
+            exec("echo StrictHostKeyChecking no >> ~/.ssh/config");
             exec("git remote set-url origin https://github.com/rrs-oacis/rrs-oacis.git");
             exec("git remote set-url --push origin git@github.com:rrs-oacis/rrs-oacis.git");
             exec("timeout 3 git fetch", $exec_out, $exec_ret);
@@ -27,5 +28,5 @@ class SettingsGeneralController extends AbstractController
 
 		include (Config::$SRC_REAL_URL . 'component/setting/general/SettingsGeneralView.php');
 	}
-	
+
 }

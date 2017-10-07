@@ -134,6 +134,7 @@ use rrsoacis\system\Config;
         <!-- END : Add cluster -->
 
         <!-- BEGIN : PublicKey -->
+        <!--
         <div class="box box-warning">
             <div class="box-header with-border">
                 <h3 class="box-title">
@@ -145,12 +146,12 @@ use rrsoacis\system\Config;
                     </button>
                 </div>
             </div>
-            <!-- /.box-header -->
+
             <div class="box-body">
                 <textarea class="form-control" rows="5" readonly><?php include(Config::$PUBLICKEY_PATH); ?></textarea>
             </div>
-            <!-- /.box-body -->
         </div>
+        -->
         <!-- END : PublicKey -->
 
     </section>
