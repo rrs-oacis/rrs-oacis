@@ -85,9 +85,8 @@ use rrsoacis\system\Config;
 
     function getRunList() {
 
-        $('#run_list-overlay').show();
-
-        $('#simulation_table').DataTable().destroy();
+        //$('#run_list-overlay').show();
+        document.querySelector('#run_list-overlay').style.display = '';
 
         fetch('<?= Config::$TOP_PATH ?>run-get_runlist', {
             method: 'GET'
@@ -97,7 +96,9 @@ use rrsoacis\system\Config;
             })
             .then(function (json) {
 
-                $('#run_list-overlay').hide();
+                //$('#run_list-overlay').hide();
+                document.querySelector('#run_list-overlay').style.display = 'none';
+                $('#simulation_table').DataTable().destroy();
 
                 setRunTableData(json);
 
@@ -189,7 +190,11 @@ use rrsoacis\system\Config;
                 t.content.querySelector('.run_status').innerHTML = "<span class='label label-warning'>created</span>";
                 t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-warning' style='width: 10%'></div>";
                 t.content.querySelector('.run_progress').classList.add('active');
-            }else if(data[i]['status']=='running' || data[i]['status']=='submitted'){
+            }else if(data[i]['status']=='submitted'){
+                t.content.querySelector('.run_status').innerHTML = "<span class='label label-primary'>submitted</span>";
+                t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-primary' style='width: 25%'></div>";
+                t.content.querySelector('.run_progress').classList.add('active');
+            } else if(data[i]['status']=='running'){
                 t.content.querySelector('.run_status').innerHTML = "<span class='label label-primary'>running</span>";
                 t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-primary' style='width: 50%'></div>";
                 t.content.querySelector('.run_progress').classList.add('active');

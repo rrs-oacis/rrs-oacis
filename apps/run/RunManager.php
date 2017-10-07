@@ -246,7 +246,7 @@ class RunManager{
 
     public static function getScores($simulatorID, $parameterSetID, $runID)
     {
-        $rawData = @file_get_contents('http://127.0.0.1:3000/Result_development/'.$simulatorID.'/'.$parameterSetID.'/'.$runID.'/'.Config::MAP_LOG.'/scores.txt');
+        $rawData = @file_get_contents('http://127.0.0.1:3000/Result_development/'.$simulatorID.'/'.$parameterSetID.'/'.$runID.'/'.Config::MAP_LOG.'/final-score.txt');
 
 
         //$score = round((0 + $rawData), 2);
