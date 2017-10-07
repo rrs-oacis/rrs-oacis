@@ -11,6 +11,15 @@ use rrsoacis\system\Config;
 <div class="box box-success">
     <div class="box-header">
         <h3 class="box-title">Run List</h3>
+        <div class="box-tools pull-right">
+            <button id="run_list_update" type="button" class="btn btn-box-tool" data-toggle="tooltip" data-original-title="Reload">
+                <i class="fa fa-refresh"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+
+        </div>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -38,11 +47,11 @@ use rrsoacis\system\Config;
                     <td class="run_map">Sakae39</td>
                     <td class="run_tag">None</td>
                     <td>
-                        <div class="progress progress-xs">
-                            <div class="progress-bar progress-bar-danger" style="width: 25%"></div>
+                        <div class="run_progress progress progress-xs">
+                            <div class="progress-bar progress-bar-danger" style="width: 0%"></div>
                         </div>
                     </td>
-                    <td><span class="label label-success">Success</span></td>
+                    <td class="run_status"><span class="label　label-default">None</span></td>
                     <td class="run_score">3220</td>
                     <td class="run_time">3220</td>
                     <td ><a class="run_download">Download</a></td>
@@ -65,8 +74,13 @@ use rrsoacis\system\Config;
         getRunList();
 
 
+        $('#run_list_update').on('click',function(){
+            getRunList();
+        });
+
 
     });
+
 
 
     function getRunList() {
@@ -159,6 +173,25 @@ use rrsoacis\system\Config;
             }
 
             t.content.querySelector('.run_score').textContent = data[i]['score'];
+
+
+            if(data[i]['status']=='created'){
+                t.content.querySelector('.run_status').innerHTML = "<span class='label label-warning'>created</span>";
+                t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-warning' style='width: 10%'></div>";
+                t.content.querySelector('.run_progress').classList.add('active');
+            }else if(data[i]['status']=='running' || data[i]['status']=='submitted'){
+                t.content.querySelector('.run_status').innerHTML = "<span class='label label-primary'>running</span>";
+                t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-primary' style='width: 50%'></div>";
+                t.content.querySelector('.run_progress').classList.add('active');
+            }else if(data[i]['status']=='failed'){
+                t.content.querySelector('.run_status').innerHTML = "<span class='label label-danger'>failed</span>";
+                t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-danger' style='width: 100%'></div>";
+            }else if(data[i]['status']=='finished'){
+                t.content.querySelector('.run_status').innerHTML = "<span class='label label-success'>finished</span>";
+                t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-success' style='width: 100%'></div>";
+            }
+
+
             t.content.querySelector('.run_time').textContent = data[i]['timestamp'];
 
             var simulation = data[i]['simulation'];

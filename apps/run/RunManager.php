@@ -172,11 +172,87 @@ class RunManager{
         $runs = [];
         while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 
+            $status = '';
+
+            if(isset($row['status']) && ($row['status'] == 'failed' || $row['status'] == 'finished') ) {
+
+                $status = $row["status"];
+
+            }else{
+
+                $runRawJson = @file_get_contents('http://localhost:3000/runs/' . $row["runId"] . '.json');
+                $runJson = json_decode($runRawJson, true);
+                $status = $runJson['status'];
+
+                $row["status"] = $status;
+
+                //Update
+                $sthU = $db->prepare("update run set status=:status where name=:name;");
+                $sthU->bindValue(':status', $status, PDO::PARAM_STR);
+                $sthU->bindValue(':name', $row['name'], PDO::PARAM_STR);
+                $sthU->execute();
+
+
+            }
+
+            if(!isset($row["score"])){
+
+
+                $score = false;
+
+                if($status == 'failed' || $status == 'finished'){
+
+                    $score = self::getScores($row["simulation"],$row["paramId"],$row["runId"]);
+
+                    if($status == 'failed' && !$score){
+                        $score = -1;
+
+                        //Update
+                        $sthU = $db->prepare("update run set score=:score where name=:name;");
+                        $sthU->bindValue(':score', $score, PDO::PARAM_INT);
+                        $sthU->bindValue(':name', $row['name'], PDO::PARAM_STR);
+
+                    }else if($score){
+
+                        //Update
+                        $sthU = $db->prepare("update run set score=:score where name=:name;");
+                        $sthU->bindValue(':score', $score, PDO::PARAM_INT);
+                        $sthU->bindValue(':name', $row['name'], PDO::PARAM_STR);
+
+                    }else if(!$score){
+                        $score = 'none';
+                    }
+
+
+                    $row["score"] = $score;
+
+                }else{
+
+                    $row["score"] = 'none';
+
+                }
+
+
+
+            }
+
             $runs[] = $row;
+
         }
         //data,  id agent　map　tag status score log
         //Test data
         return $runs;
+    }
+
+    public static function getScores($simulatorID, $parameterSetID, $runID)
+    {
+        $rawData = @file_get_contents('http://127.0.0.1:3000/Result_development/'.$simulatorID.'/'.$parameterSetID.'/'.$runID.'/'.Config::MAP_LOG.'/scores.txt');
+
+
+        //$score = round((0 + $rawData), 2);
+
+        $score = $rawData;
+        return $score;
     }
 
     private static function connectDB()
@@ -194,7 +270,7 @@ class RunManager{
             case 0:
                 $db->query("insert into system(name,value) values('version', 1);");
                 $db->query("create table simulator(name, id);");
-                $db->query("create table run(simulation, name, agent, map, tag, score, paramId, runId, timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP);");
+                $db->query("create table run(simulation, name, agent, map, tag, score, paramId, runId, status, timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP);");
 
                 $version = 1;
 
