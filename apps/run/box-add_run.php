@@ -59,7 +59,7 @@ use rrsoacis\system\Config;
 
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name="parameter_tags"
-                           placeholder="tag,nagoya,adf"
+                           placeholder="keyword"
                     >
                 </div>
             </div>
@@ -125,11 +125,13 @@ use rrsoacis\system\Config;
     });
 
 
+    document.addEventListener('DOMContentLoaded', function() {
+        $(".select2").select2();
+    });
 
     $(function () {
         // 処理
 
-        $(".select2").select2();
 
         $(".select2-search__field").css({'padding': '0px 6px', "border": "none"});
 

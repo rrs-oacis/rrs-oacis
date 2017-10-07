@@ -162,6 +162,30 @@ class RunManager{
 
     }
 
+    public static function getRun($name)
+    {
+
+        $db = self::connectDB();
+        $sth = $db->prepare("select * from run where name=:name;");
+        $sth->bindValue(':name', $name, PDO::PARAM_STR);
+        $sth->execute();
+        $run = "";
+        while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+
+            $runRawJson = @file_get_contents('http://localhost:3000/runs/' . $row["runId"] . '.json');
+            $runJson = json_decode($runRawJson, true);
+            $status = $runJson['status'];
+
+            $row["status"] = $status;
+
+            $run = $row;
+
+        }
+
+        return $run;
+
+    }
+
     //TODO function
     public static function getRuns()
     {

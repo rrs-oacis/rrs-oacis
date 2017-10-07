@@ -5,14 +5,17 @@
  * Date: 2017/10/06
  * Time: 15:07
  */
+
 use rrsoacis\system\Config;
+
 ?>
 
 <div class="box box-success">
     <div class="box-header">
         <h3 class="box-title">Run List</h3>
         <div class="box-tools pull-right">
-            <button id="run_list_update" type="button" class="btn btn-box-tool" data-toggle="tooltip" data-original-title="Reload">
+            <button id="run_list_update" type="button" class="btn btn-box-tool" data-toggle="tooltip"
+                    data-original-title="Reload">
                 <i class="fa fa-refresh"></i>
             </button>
             <button type="button" class="btn btn-box-tool" data-widget="collapse">
@@ -48,13 +51,13 @@ use rrsoacis\system\Config;
                     <td class="run_tag">None</td>
                     <td>
                         <div class="run_progress progress progress-xs">
-                            <div class="progress-bar progress-bar-danger" style="width: 0%"></div>
+                            <div class="progress-bar progress-bar-striped progress-bar-danger" style="width: 0%"></div>
                         </div>
                     </td>
                     <td class="run_status"><span class="label　label-default">None</span></td>
                     <td class="run_score">3220</td>
                     <td class="run_time">3220</td>
-                    <td ><a class="run_download" target="_blank" download="Log">Download</a></td>
+                    <td><a class="run_download" target="_blank" download="Log">Download</a></td>
                 </tr>
             </template>
         </table>
@@ -67,6 +70,8 @@ use rrsoacis\system\Config;
 
 <script>
 
+    var runUpdateList = new Set();
+
     $(function () {
 
         //$('#simulation_table').DataTable();
@@ -74,13 +79,50 @@ use rrsoacis\system\Config;
         getRunList();
 
 
-        $('#run_list_update').on('click',function(){
+        $('#run_list_update').on('click', function () {
             getRunList();
         });
 
 
-    });
+        setInterval(function () {
 
+            //console.log('---------');
+
+            for (let item of runUpdateList) {
+
+
+                //console.log(item);
+
+                fetch('<?= Config::$TOP_PATH ?>run-get_run/'+item, {
+                    method: 'GET'
+                }).then(function (response) {
+                        return response.json()
+                }).then(function (json) {
+
+                    //console.log(json);
+
+                    setProgress(
+                        document.querySelector('#runid'+item+' .run_status'),
+                        document.querySelector('#runid'+item+' .run_progress .progress-bar'),
+                        json['status']
+                    );
+
+                    if(json['status'] == 'failed' || json == 'finished'){
+                        runUpdateList.delete(item);
+                    }
+
+                });
+
+
+                //runUpdateList.splice(i, 1);
+
+            }
+
+
+        }, 10000);
+
+
+    });
 
 
     function getRunList() {
@@ -114,54 +156,24 @@ use rrsoacis\system\Config;
                         {"targets": 6, "searchable": false},
                         {"targets": 7, "searchable": false},
                         {"targets": 8, "searchable": false},
-                        {"targets": [0,3,4,5,8],"orderable": false}
+                        {"targets": [0, 3, 4, 5, 8], "orderable": false}
                     ],
-                    "order": [ 7, 'desc' ]
+                    "order": [7, 'desc']
                 });
 
                 table.draw();
 
-                //table
-                    //.rows()
-                    //.invalidate()
-                    //.draw();
-
-                //$('#simulation_table').DataTable();
-
-                /*$('#simulation_table').DataTable({
-
-                    aoColumns: [
-                        { mData: "name", sDefaultContent: "" },
-                        { mData: "agent", sDefaultContent: "" },
-                        { mData: "map", sDefaultContent: "" }
-                    ],
-
-                    bDeferRender: true,
-
-                    sServerMethod: 'GET',
-
-                    sAjaxDataProp: 'data',
-
-
-
-
-
-
-                });*/
-
+                
             });
     }
 
-    function setRunTableData(data)
-    {
+    function setRunTableData(data) {
         var tb = document.querySelector('#simulation_table tbody');
-        while (child = tb.lastChild)
-        {
+        while (child = tb.lastChild) {
             tb.removeChild(child);
         }
 
-        for(var i=0;i<data.length;i++)
-        {
+        for (var i = 0; i < data.length; i++) {
             var t = document.querySelector('#run_list_template');
 
             var simulation = data[i]['simulation'];
@@ -172,52 +184,110 @@ use rrsoacis\system\Config;
             bassURL = bassURL.split(':')[0];
 
 
-            t.content.querySelector('.run_list_tr').id = data[i]['name'];
+            t.content.querySelector('.run_list_tr').id = 'runid'+data[i]['name'];
 
-            t.content.querySelector('.run_name').innerHTML = '<a target="_blank" href="http://'+bassURL+':3000/runs/'+runId+'">' + data[i]['name'] + '</a>';
+            t.content.querySelector('.run_name').innerHTML = '<a target="_blank" href="http://' + bassURL + ':3000/runs/' + runId + '">' + data[i]['name'] + '</a>';
 
 
             t.content.querySelector('.run_agent').textContent = data[i]['agent'];
             t.content.querySelector('.run_map').textContent = data[i]['map'];
-            if(data[i]['tag']!=null || data[i]['tag']!=0){
+            if (data[i]['tag'] != null || data[i]['tag'] != 0) {
                 t.content.querySelector('.run_tag').textContent = data[i]['tag'];
             }
 
             t.content.querySelector('.run_score').textContent = data[i]['score'];
 
+            setProgress(
+                t.content.querySelector('.run_status'),
+                t.content.querySelector('.run_progress .progress-bar'),
+                data[i]['status']
+            );
 
-            if(data[i]['status']=='created'){
+            /*
+            if (data[i]['status'] == 'created') {
                 t.content.querySelector('.run_status').innerHTML = "<span class='label label-warning'>created</span>";
                 t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-warning' style='width: 10%'></div>";
                 t.content.querySelector('.run_progress').classList.add('active');
-            }else if(data[i]['status']=='submitted'){
+            } else if (data[i]['status'] == 'submitted') {
                 t.content.querySelector('.run_status').innerHTML = "<span class='label label-primary'>submitted</span>";
                 t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-primary' style='width: 25%'></div>";
                 t.content.querySelector('.run_progress').classList.add('active');
-            } else if(data[i]['status']=='running'){
+            } else if (data[i]['status'] == 'running') {
                 t.content.querySelector('.run_status').innerHTML = "<span class='label label-primary'>running</span>";
                 t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-primary' style='width: 50%'></div>";
                 t.content.querySelector('.run_progress').classList.add('active');
-            }else if(data[i]['status']=='failed'){
+            } else if (data[i]['status'] == 'failed') {
                 t.content.querySelector('.run_status').innerHTML = "<span class='label label-danger'>failed</span>";
                 t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-danger' style='width: 100%'></div>";
-            }else if(data[i]['status']=='finished'){
+            } else if (data[i]['status'] == 'finished') {
                 t.content.querySelector('.run_status').innerHTML = "<span class='label label-success'>finished</span>";
                 t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-success' style='width: 100%'></div>";
-            }
+            }*/
 
 
             t.content.querySelector('.run_time').textContent = data[i]['timestamp'];
 
 
-
-            t.content.querySelector('.run_download').href = "http://"+bassURL+":3000/Result_development/"+simulation+"/"+paramId+"/"+runId+".tar.bz2";
+            t.content.querySelector('.run_download').href = "http://" + bassURL + ":3000/Result_development/" + simulation + "/" + paramId + "/" + runId + ".tar.bz2";
 
             //t.content.querySelector('.map_list_fullname').textContent = data[i]['name'];
             //t.content.querySelector('.map_list_timestamp').textContent = data[i]['timestamp'];
 
             var clone = document.importNode(t.content, true);
             tb.appendChild(clone);
+
+
+            //SetUpdate
+            if (!(data[i]['status'] == 'failed' || data[i]['status'] == 'finished')) {
+                runUpdateList.add(data[i]['name']);
+            }
+
+        }
+
+    }
+
+    function setProgress(pElementsS,pElementsP,pStatus){
+
+        pElementsP.parentNode.classList.remove('active');
+
+        pElementsP.classList.remove('progress-bar-warning');
+        pElementsP.classList.remove('progress-bar-primary');
+        pElementsP.classList.remove('progress-bar-danger');
+        pElementsP.classList.remove('progress-bar-success');
+
+
+        if (pStatus == 'created') {
+            pElementsS.innerHTML = "<span class='label label-warning'>created</span>";
+            pElementsP.classList.add('progress-bar-warning');
+            pElementsP.style.width = '10%';
+            //pElementsP.innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-warning' style='width: 10%'></div>";
+            pElementsP.parentNode.classList.add('active');
+        } else if (pStatus == 'submitted') {
+            pElementsS.innerHTML = "<span class='label label-primary'>submitted</span>";
+            pElementsP.classList.add('progress-bar-primary');
+            pElementsP.style.width = '25%';
+            //pElementsP.innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-primary' style='width: 25%'></div>";
+            pElementsP.parentNode.classList.add('active');
+        } else if (pStatus == 'running') {
+            pElementsS.innerHTML = "<span class='label label-primary'>running</span>";
+            pElementsP.classList.add('progress-bar-primary');
+            pElementsP.style.width = '50%';
+            //pElementsP.innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-primary' style='width: 50%'></div>";
+            pElementsP.parentNode.classList.add('active');
+        } else if (pStatus == 'failed') {
+            pElementsS.innerHTML = "<span class='label label-danger'>failed</span>";
+            pElementsP.classList.add('progress-bar-danger');
+            pElementsP.style.width = '100%';
+            //pElementsP.innerHTML = "<div class='progress-bar progress-bar-danger' style='width: 100%'></div>";
+        } else if (pStatus == 'finished') {
+            pElementsS.innerHTML = "<span class='label label-success'>finished</span>";
+            pElementsP.classList.add('progress-bar-success');
+            pElementsP.style.width = '100%';
+            //pElementsP.innerHTML = "<div class='progress-bar progress-bar-success' style='width: 100%'></div>";
+        } else {
+            pElementsS.innerHTML = "<span class='label label-success'>none</span>";
+            pElementsP.classList.add('progress-bar-warning');
+            pElementsP.style.width = '0%';
         }
 
     }
@@ -226,8 +296,14 @@ use rrsoacis\system\Config;
 
 <style>
 
-    .table>thead:first-child>tr:first-child>th:focus {
+    .table > thead:first-child > tr:first-child > th:focus {
         outline: 0;
+    }
+
+    .run_progress .progress-bar{
+        transition-property: width;
+        transition-duration:4s;
+        transition-timing-function:ease;
     }
 
 </style>
