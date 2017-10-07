@@ -47,26 +47,68 @@ use rrsoacis\system\Config;
             </div>
         </div>
 
-        <!-- BEGIN : PublicKey -->
-        <div class="box box-warning">
-            <div class="box-header with-border">
-                <h3 class="box-title">
-                    Check Massage
-                    <small>Raw outputs of cluster checker</small>
-                </h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
+        <!-- BEGIN : Clusters -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Clusters</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tr>
+                                <th></th>
+                                <th>Host</th>
+                            </tr>
+                            <tr>
+                                <th style="color:<?= ($hasError["S"]?"red":"green") ?>;">Server</th>
+                                <td><?= $cluster["s_host"]?></td>
+                            </tr>
+                            <tr>
+                                <th style="color:<?= ($hasError["A"]?"red":"green") ?>;">Ambulance</th>
+                                <td><?= $cluster["a_host"]?></td>
+                            </tr>
+                            <tr>
+                                <th style="color:<?= ($hasError["F"]?"red":"green") ?>;">Fire</th>
+                                <td><?= $cluster["f_host"]?></td>
+                            </tr>
+                            <tr>
+                                <th style="color:<?= ($hasError["P"]?"red":"green") ?>;">Police</th>
+                                <td><?= $cluster["p_host"]?></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        <!-- END : Clusters -->
+
+        <!-- BEGIN : Check Message -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            Check Massage
+                            <small>Raw outputs of cluster checker</small>
+                        </h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <textarea class="form-control" rows="8" readonly><?= $checkMessage ?></textarea>
+                    </div>
+                    <!-- /.box-body -->
                 </div>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <textarea class="form-control" rows="8" readonly><?= \rrsoacis\manager\ClusterManager::getClusterRawCheckMessage($cluster["name"]) ?>
-                </textarea>
-            </div>
-            <!-- /.box-body -->
         </div>
-        <!-- END : PublicKey -->
+        <!-- END : Check Message -->
     </section>
     <!-- /.content -->
   </div>

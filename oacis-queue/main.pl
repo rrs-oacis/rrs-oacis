@@ -13,6 +13,14 @@ my $script = $ARGV[0];
 my $enqueued = 0;
 
 my $database = 'queue.db';
+if ( ! -f $database )
+{
+	my $dbi = DBI->connect("dbi:SQLite:dbname=$database");
+	$sth = $dbi->prepare('create table queue(id integer primary key, script);');
+	$sth->execute(); $sth->finish();
+	$dbi->disconnect();
+}
+
 my $dbi = DBI->connect("dbi:SQLite:dbname=$database");
 
 if ( ! -d 'scripts' )
