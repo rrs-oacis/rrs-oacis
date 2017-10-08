@@ -115,9 +115,13 @@ use rrsoacis\system\Config;
 
             console.log(json);
             //location.reload();
-            $('#add_simulation-form-overlay').hide();
 
-            getRunList();
+
+            setTimeout(function () {
+                $('#add_simulation-form-overlay').hide();
+                getRunList();
+            },2000);
+
 
         });
 
