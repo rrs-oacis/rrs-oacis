@@ -36,9 +36,52 @@ use rrsoacis\system\Config;
 
     <!-- Main content -->
     <section class="content">
-        <a href="/settings-general"><button class="btn-block btn">General</button></a><br>
-        <a href="/settings-apps"><button class="btn-block btn">Apps</button></a><br>
-        <a href="/settings-clusters"><button class="btn-block btn">Clusters</button></a><br>
+	<div class="row">
+
+	<div class="col-md-3 col-sm-6 col-xs-12">
+        <a href="/settings-general">
+	<div class="info-box">
+	<span class="info-box-icon bg-green"><i class="fa fa-cogs"></i></span>
+	<div class="info-box-content">
+	<span class="info-box-text">General</span>
+	</div>
+	<!-- /.info-box-content -->
+	</div>
+	<!-- /.info-box -->
+	</a>
+	</div>
+	<!-- /.col -->
+
+	<div class="col-md-3 col-sm-6 col-xs-12">
+        <a href="/settings-apps">
+	<div class="info-box">
+	<span class="info-box-icon bg-red"><i class="fa fa-window-restore"></i></span>
+	<div class="info-box-content">
+	<span class="info-box-text">Apps</span>
+	</div>
+	<!-- /.info-box-content -->
+	</div>
+	<!-- /.info-box -->
+	</a>
+	</div>
+	<!-- /.col -->
+
+	<div class="col-md-3 col-sm-6 col-xs-12">
+	<a href="/settings-clusters">
+	<div class="info-box">
+	<span class="info-box-icon bg-aqua"><i class="fa fa-server"></i></span>
+	<div class="info-box-content">
+	<span class="info-box-text">Clusters</span>
+	</div>
+	<!-- /.info-box-content -->
+	</div>
+	<!-- /.info-box -->
+	</a>
+	</div>
+	<!-- /.col -->
+
+	</div>
+	<!-- /.row -->
     </section>
     <!-- /.content -->
   </div>
