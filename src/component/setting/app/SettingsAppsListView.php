@@ -8,6 +8,13 @@ use rrsoacis\manager\AppManager;
 <?php $title="Apps"; ?>
 <?php include Config::$SRC_REAL_URL.'component/common/head.php';?>
 
+    <style>
+        .linked-row{
+            cursor:pointer;
+        }
+
+    </style>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
@@ -93,5 +100,7 @@ use rrsoacis\manager\AppManager;
 <!-- ./wrapper -->
 
 <?php include Config::$SRC_REAL_URL.'component/common/footerscript.php';?>
+
+
 
 </body>
