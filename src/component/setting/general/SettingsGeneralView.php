@@ -45,7 +45,7 @@ use rrsoacis\manager\AccessManager;
                 <h3 class="box-title">
                     Version
                 </h3>
-                <div class="pull-right">
+                <div class="box-tools">
                     <?php
                     ?>
                     <?php if ($gitcheck_ret == 0) { ?>
@@ -73,7 +73,7 @@ use rrsoacis\manager\AccessManager;
                 <h3 class="box-title">
                     Restrict Access
                 </h3>
-                <div class="pull-right">
+                <div class="box-tools">
                     <?php if (AccessManager::filterEnabled()) { ?>
                         <a href="<?=Config::$TOP_PATH ?>/settings-restrict_set/0">
                             <button class="btn btn-warning">Disable</button>

@@ -47,7 +47,70 @@ class ClusterManager
     {
         $workspace = Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME."/".$name;
         exec('cd '.$workspace.'; timeout 5 ../../script/rrscluster check', $out, $ret);
-        return implode("\n", $out);
+        $messages = implode("\n", $out);
+        $checkMessageArray = preg_grep("/^@.\d/", $out);
+
+        $hasError = [];
+        $javaVer = [];
+        foreach (["S", "A", "F", "P"] as $alias)
+        {
+            $hasError[$alias] = false;
+            $javaVer[$alias] = "";
+        }
+
+        foreach ($checkMessageArray as $msg)
+        {
+            $errorCode = preg_replace('/^@(.\d)/', '${1}', $msg);
+            $node = substr($errorCode, 0, 1);
+            $code = intval(substr($errorCode, 1));
+            if ($code == 0)
+            { $javaVer[$node] = preg_replace('/^@.\d (.+)$/', '${1}', $msg); }
+            else
+            { $hasError[$node] = true; }
+        }
+
+        $errorCount = 0;
+        foreach (["S", "A", "F", "P"] as $alias)
+        {
+            if ($javaVer[$alias] == "")
+            { $hasError[$alias] = true; }
+
+            if ($hasError[$alias])
+            { $errorCount++; }
+        }
+
+        $db = self::connectDB();
+        if ($errorCount <= 0)
+        {
+            $sth = $db->prepare("update cluster set check_status=0 where name=:name;");
+            $sth->bindValue(':name', $name, PDO::PARAM_STR);
+            $sth->execute();
+        }
+        else
+        {
+            $sth = $db->prepare("update cluster set check_status=2 where name=:name;");
+            $sth->bindValue(':name', $name, PDO::PARAM_STR);
+            $sth->execute();
+        }
+
+
+        return $messages;
+    }
+
+    public static function updateAllStatus()
+    {
+        $db = self::connectDB();
+        $db->query("update cluster set check_status=1;");
+
+        foreach (self::getClusters() as $cluster)
+        {
+            $scriptId = uniqid();
+
+            $script = "#!/bin/bash\n\n";
+            $script .= 'php '.realpath(dirname(__FILE__)).'/update_status.php \''.$cluster["name"].'\' >>/tmp/t';
+            file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
+            exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' >/dev/null &');
+        }
     }
 
     public static function getMainHostGroup()
@@ -230,7 +293,9 @@ class ClusterManager
                 $db->query("create table cluster(name, a_host, f_host, p_host);");
             case 1:
                 $db->query("alter table cluster add s_host;");
-                $version = 2;
+            case 2:
+                $db->query("alter table cluster add check_status default 1;");
+                $version = 3;
 
                 $sth = $db->prepare("update system set value=:value where name='clusterVersion';");
                 $sth->bindValue(':value', $version, PDO::PARAM_INT);

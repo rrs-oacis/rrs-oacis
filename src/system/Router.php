@@ -34,6 +34,7 @@ class Router
             $router->controller('/settings-app_enable', 'rrsoacis\\component\\setting\\app\\SettingsAppEnableController');
             $router->controller('/settings-clusters', 'rrsoacis\\component\\setting\\cluster\\SettingsClustersListController');
             $router->controller('/settings-cluster', 'rrsoacis\\component\\setting\\cluster\\SettingsClusterController');
+            $router->controller('/settings-cluster_statusupdate', 'rrsoacis\\component\\setting\\cluster\\SettingsClusterUpdateStatusController');
             $router->controller('/settings-cluster_update', 'rrsoacis\\component\\setting\\cluster\\SettingsClusterUpdateController');
             $router->controller('/settings-cluster_remove', 'rrsoacis\\component\\setting\\cluster\\SettingsClusterRemoveController');
             $router->controller('/settings-general', 'rrsoacis\\component\\setting\\general\\SettingsGeneralController');
