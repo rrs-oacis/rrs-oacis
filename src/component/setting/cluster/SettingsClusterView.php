@@ -60,22 +60,27 @@ use rrsoacis\system\Config;
                             <tr>
                                 <th></th>
                                 <th>Host</th>
+                                <th>javac</th>
                             </tr>
                             <tr>
                                 <th style="color:<?= ($hasError["S"]?"red":"green") ?>;">Server</th>
                                 <td><?= $cluster["s_host"]?></td>
+                                <td><?= $javaVer["S"]?></td>
                             </tr>
                             <tr>
                                 <th style="color:<?= ($hasError["A"]?"red":"green") ?>;">Ambulance</th>
                                 <td><?= $cluster["a_host"]?></td>
+                                <td><?= $javaVer["A"]?></td>
                             </tr>
                             <tr>
                                 <th style="color:<?= ($hasError["F"]?"red":"green") ?>;">Fire</th>
                                 <td><?= $cluster["f_host"]?></td>
+                                <td><?= $javaVer["F"]?></td>
                             </tr>
                             <tr>
                                 <th style="color:<?= ($hasError["P"]?"red":"green") ?>;">Police</th>
                                 <td><?= $cluster["p_host"]?></td>
+                                <td><?= $javaVer["P"]?></td>
                             </tr>
                         </table>
                     </div>

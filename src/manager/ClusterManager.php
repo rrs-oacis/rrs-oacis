@@ -46,7 +46,7 @@ class ClusterManager
     public static function getClusterRawCheckMessage($name)
     {
         $workspace = Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME."/".$name;
-        exec('cd '.$workspace.'; ../../script/rrscluster check', $out, $ret);
+        exec('cd '.$workspace.'; timeout 5 ../../script/rrscluster check', $out, $ret);
         return implode("\n", $out);
     }
 
