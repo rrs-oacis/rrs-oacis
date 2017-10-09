@@ -1,4 +1,5 @@
 <?php
+
 namespace rrsoacis\apps\run;
 
 use rrsoacis\system\Config;
@@ -9,20 +10,22 @@ use rrsoacis\manager\DatabaseManager;
 
 use \PDO;
 
-class RunManager{
+class RunManager
+{
 
     const SimulatorName = "RO_Run";
 
-    public static function addRuns($agents,$maps,$tag,$count){
-        //TODO
+    public static function addRuns($agents, $maps, $tag, $count)
+    {
+
         self::createRunSimulator();
 
-        foreach($agents as $agent){
+        foreach ($agents as $agent) {
 
-            foreach($maps as $map){
+            foreach ($maps as $map) {
 
-                for ($i=0;$i<$count;$i++){
-                    self::run($agent,$map,$tag);
+                for ($i = 0; $i < $count; $i++) {
+                    self::run($agent, $map, $tag);
                 }
 
             }
@@ -30,34 +33,33 @@ class RunManager{
         }
 
 
-
     }
 
 
-    public static function createRunSimulator(){
+    public static function createRunSimulator()
+    {
 
 
         $db = self::connectDB();
         $simulatorId = "";
 
         $sth = $db->query("select * from simulator;");
-        while($row = $sth->fetch(PDO::FETCH_ASSOC))
-        {
-            if(isset($row["name"]) && isset($row["id"])){
+        while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+            if (isset($row["name"]) && isset($row["id"])) {
                 $simulatorId = $row["id"];
             }
         }
 
-        if($simulatorId!="")return;
+        if ($simulatorId != "") return;
 
-        $simulatorName = self::SimulatorName .'_'. uniqid();
+        $simulatorName = self::SimulatorName . '_' . uniqid();
 
 
-        $tmpFileOut = '/tmp/rrsoacis-out-'.uniqid();
-        $tmpFileIn = '/tmp/rrsoacis-in-'.uniqid();
-        system("sudo -i -u oacis ".Config::$OACISCLI_PATH." simulator_template -o ".$tmpFileOut." 2>&1");
-        $simulator = json_decode ( file_get_contents($tmpFileOut), true );
-        system("rm -f ".$tmpFileOut);
+        $tmpFileOut = '/tmp/rrsoacis-out-' . uniqid();
+        $tmpFileIn = '/tmp/rrsoacis-in-' . uniqid();
+        system("sudo -i -u oacis " . Config::$OACISCLI_PATH . " simulator_template -o " . $tmpFileOut . " 2>&1");
+        $simulator = json_decode(file_get_contents($tmpFileOut), true);
+        system("rm -f " . $tmpFileOut);
         $simulator['name'] = $simulatorName;
         $simulator['command'] = "/home/oacis/rrs-oacis/rrsenv/script/runNGC_MT.sh";
         $simulator['executable_on_ids'][] = ClusterManager::getMainHostGroup();
@@ -96,12 +98,12 @@ class RunManager{
         $simulator['parameter_definitions'][] = $parameter1;
 
         file_put_contents($tmpFileIn, json_encode($simulator));
-        system("sudo -i -u oacis ".Config::$OACISCLI_PATH." create_simulator -i ".$tmpFileIn." -o ".$tmpFileOut);
-        system("rm -f ".$tmpFileIn);
+        system("sudo -i -u oacis " . Config::$OACISCLI_PATH . " create_simulator -i " . $tmpFileIn . " -o " . $tmpFileOut);
+        system("rm -f " . $tmpFileIn);
 
-        if(file_exists($tmpFileOut)){
-            $simulatorId = json_decode ( file_get_contents($tmpFileOut), true )['simulator_id'];
-            system("rm -f ".$tmpFileOut);
+        if (file_exists($tmpFileOut)) {
+            $simulatorId = json_decode(file_get_contents($tmpFileOut), true)['simulator_id'];
+            system("rm -f " . $tmpFileOut);
 
             $db = self::connectDB();
 
@@ -115,7 +117,8 @@ class RunManager{
 
     }
 
-    public static function run($agentName,$mapName,$tag){
+    public static function run($agentName, $mapName, $tag)
+    {
 
         $agent = AgentManager::getAgentByAlias($agentName);
         $map = MapManager::getMapByAlias($mapName);
@@ -125,13 +128,11 @@ class RunManager{
         $simulatorId = "";
 
         $sth = $db->query("select * from simulator;");
-        while($row = $sth->fetch(PDO::FETCH_ASSOC))
-        {
-            if(isset($row["name"]) && isset($row["id"])){
+        while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+            if (isset($row["name"]) && isset($row["id"])) {
                 $simulatorId = $row["id"];
             }
         }
-
 
 
         $scriptId = uniqid();
@@ -148,16 +149,15 @@ class RunManager{
         $sth->execute();
 
         $script = "#!/bin/bash\n\n";
-        $script .= Config::$OACISCLI_PATH." create_parameter_sets";
-        $script .= ' -s '.$simulatorId;
-        $script .= ' -i \'{"MAP":"'.$map['name'].'","F":"'.$agent['name'].'","P":"'.$agent['name'].'","A":"'.$agent['name'].'","UID":"'.$scriptId.'"}\'';
-        $script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"'.ClusterManager::getMainHostGroup().'","host_parameters":null}\'';
-        $script .= ' -o /tmp/out_'.$scriptId.'.json';
+        $script .= Config::$OACISCLI_PATH . " create_parameter_sets";
+        $script .= ' -s ' . $simulatorId;
+        $script .= ' -i \'{"MAP":"' . $map['name'] . '","F":"' . $agent['name'] . '","P":"' . $agent['name'] . '","A":"' . $agent['name'] . '","UID":"' . $scriptId . '"}\'';
+        $script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"' . ClusterManager::getMainHostGroup() . '","host_parameters":null}\'';
+        $script .= ' -o /tmp/out_' . $scriptId . '.json';
         $script .= "\n";
-        $script .= 'php '.realpath(dirname(__FILE__)).'/update_runid.php \''.$scriptId.'\' /tmp/out_'.$scriptId.'.json';
-        file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
-        exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' >/dev/null &');
-
+        $script .= 'php ' . realpath(dirname(__FILE__)) . '/update_runid.php \'' . $scriptId . '\' /tmp/out_' . $scriptId . '.json';
+        file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/' . $scriptId, $script);
+        exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl ' . $scriptId . ' >/dev/null &');
 
 
     }
@@ -170,7 +170,7 @@ class RunManager{
         $sth->bindValue(':name', $name, PDO::PARAM_STR);
         $sth->execute();
         $run = "";
-        while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 
             $runRawJson = @file_get_contents('http://localhost:3000/runs/' . $row["runId"] . '.json');
             $runJson = json_decode($runRawJson, true);
@@ -194,21 +194,22 @@ class RunManager{
 
         $sth = $db->query("select * from run;");
         $runs = [];
-        while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 
-            $status = '';
 
-            if(isset($row['status']) && ($row['status'] == 'failed' || $row['status'] == 'finished') ) {
+            if (isset($row['status']) && ($row['status'] === 'failed' || $row['status'] === 'finished')) {
 
-                $status = $row["status"];
+                //$status = $row['status'];
 
-            }else{
+            } else {
+
 
                 $runRawJson = @file_get_contents('http://localhost:3000/runs/' . $row["runId"] . '.json');
                 $runJson = json_decode($runRawJson, true);
                 $status = $runJson['status'];
 
                 $row["status"] = $status;
+
 
                 //Update
                 $sthU = $db->prepare("update run set status=:status where name=:name;");
@@ -219,43 +220,45 @@ class RunManager{
 
             }
 
-            if(!isset($row["score"])){
+
+            if (!isset($row["score"])) {
 
 
                 $score = false;
 
-                if($status == 'failed' || $status == 'finished'){
+                if ($row['status'] == 'failed' || $row['status'] == 'finished') {
 
-                    $score = self::getScores($row["simulation"],$row["paramId"],$row["runId"]);
+                    $score = self::getScores($row["simulation"], $row["paramId"], $row["runId"]);
 
-                    if($status == 'failed' && !$score){
+                    if ($row['status'] === 'failed' && !$score) {
                         $score = -1;
 
                         //Update
                         $sthU = $db->prepare("update run set score=:score where name=:name;");
-                        $sthU->bindValue(':score', $score, PDO::PARAM_INT);
+                        $sthU->bindValue(':score', (int)$score, PDO::PARAM_INT);
                         $sthU->bindValue(':name', $row['name'], PDO::PARAM_STR);
+                        $sthU->execute();
 
-                    }else if($score){
+                    } else if ($score) {
 
                         //Update
                         $sthU = $db->prepare("update run set score=:score where name=:name;");
-                        $sthU->bindValue(':score', $score, PDO::PARAM_INT);
+                        $sthU->bindValue(':score', (int)$score, PDO::PARAM_INT);
                         $sthU->bindValue(':name', $row['name'], PDO::PARAM_STR);
+                        $sthU->execute();
 
-                    }else if(!$score){
+                    } else if (!$score) {
                         $score = 'none';
                     }
 
 
                     $row["score"] = $score;
 
-                }else{
+                } else {
 
                     $row["score"] = 'none';
 
                 }
-
 
 
             }
@@ -270,7 +273,7 @@ class RunManager{
 
     public static function getScores($simulatorID, $parameterSetID, $runID)
     {
-        $rawData = @file_get_contents('http://127.0.0.1:3000/Result_development/'.$simulatorID.'/'.$parameterSetID.'/'.$runID.'/'.Config::MAP_LOG.'/final-score.txt');
+        $rawData = @file_get_contents('http://127.0.0.1:3000/Result_development/' . $simulatorID . '/' . $parameterSetID . '/' . $runID . '/' . Config::MAP_LOG . '/final-score.txt');
 
 
         //$score = round((0 + $rawData), 2);
@@ -284,13 +287,11 @@ class RunManager{
         $db = DatabaseManager::getDatabase();
         $connectedAppVersion = 0;
         $sth = $db->query("select value from system where name='version';");
-        while($row = $sth->fetch(PDO::FETCH_ASSOC))
-        {
+        while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
             $connectedAppVersion = $row['value'];
         }
 
-        switch ($connectedAppVersion)
-        {
+        switch ($connectedAppVersion) {
             case 0:
                 $db->query("insert into system(name,value) values('version', 1);");
                 $db->query("create table simulator(name, id);");
