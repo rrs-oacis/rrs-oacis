@@ -10,7 +10,18 @@ class SettingsClustersListController extends AbstractController
 {
     public function get()
     {
-			  ClusterManager::updateAllStatus();
+        $clusters = ClusterManager::getClusters();
+        $needUpdate = false;
+        foreach ($clusters as $cluster)
+        {
+            if ($cluster["check_status"] == 1)
+            { $needUpdate = true; }
+        }
+
+        if ($needUpdate)
+        {
+            ClusterManager::updateAllStatus();
+        }
 
         include(Config::$SRC_REAL_URL . 'component/setting/cluster/SettingsClustersListView.php');
     }
