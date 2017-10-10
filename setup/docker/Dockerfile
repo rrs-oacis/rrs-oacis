@@ -21,9 +21,10 @@ RUN usermod -aG sudo oacis
 
 #Perl
 ENV PERL_MM_USE_DEFAULT 1
+RUN cpan -i Net::OpenSSH
+RUN cpan -i IO::Pty
 RUN cpan -i DBI
 RUN cpan -i DBD::SQLite
-RUN cpan -i Net::OpenSSH
 
 #Config files
 COPY supplement/rrsoacis_fpm.conf /etc/php/7.0/fpm/pool.d/

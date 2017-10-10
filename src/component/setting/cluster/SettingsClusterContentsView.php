@@ -16,6 +16,9 @@ use rrsoacis\system\Config;
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Clusters</h3>
+                <div class="box-tools">
+                    <a href="javascript:refreshContents()"><button class="btn btn-info">Update</button></a>
+                </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">

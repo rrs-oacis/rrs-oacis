@@ -38,11 +38,13 @@ use rrsoacis\system\Config;
     </section>
 
     <!-- Main content -->
-    <section class="content" id="main-contents">
-        <h1 class="text-center"> <i class="fa fa-refresh fa-spin"></i> </h1>
-    </section>
+    <section class="content" id="main-contents"> </section>
       <script type="text/javascript">
-          simpleimport("main-contents","/settings-cluster_contents/<?= $clusterName ?>");
+          var refreshContents = function () {
+              document.getElementById("main-contents").innerHTML = '<h1 class="text-center"> <i class="fa fa-refresh fa-spin"></i> </h1>';
+              simpleimport("main-contents","/settings-cluster_contents/<?= $clusterName ?>");
+          }
+          refreshContents();
       </script>
     <!-- /.content -->
   </div>
