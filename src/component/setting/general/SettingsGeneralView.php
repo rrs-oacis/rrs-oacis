@@ -40,31 +40,36 @@ use rrsoacis\manager\AccessManager;
     <!-- Main content -->
     <section class="content">
         <!-- Version -->
-        <div class="box box-solid">
+        <div class="box box-solid" id="version-box">
             <div class="box-header">
                 <h3 class="box-title">
                     Version
                 </h3>
                 <div class="box-tools">
-                    <?php
-                    ?>
-                    <?php if ($gitcheck_ret == 0) { ?>
-                        <a href="<?=Config::$TOP_PATH ?>/settings-version_update">
-                            <button class="btn btn-info">Update</button>
-                        </a>
-                    <?php } else { ?>
-                            <button class="btn">Latest version</button>
-                    <?php } ?>
+                    <button class="btn">
+                        <i class="fa fa-refresh fa-spin"></i> Loading...
+                    </button>
                 </div>
                 <div class="box-body">
                     <b> Current version </b>
-                    <pre><?= implode("\n", $gitlog_local); ?></pre>
+                    <pre>Loading...
+
+
+
+                    </pre>
 
                     <b> Latest version </b>
-                    <pre><?= implode("\n", $gitlog_remote); ?></pre>
+                    <pre>loading...
+
+
+
+                    </pre>
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            simpleimport("version-box","/settings-version_content");
+        </script>
         <!-- /Version -->
 
         <!-- Restrict Access -->

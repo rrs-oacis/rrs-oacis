@@ -39,7 +39,7 @@ use rrsoacis\system\Config;
 <script src="<?= Config::$RESOURCE_PATH?>plugins/jQuery/jquery-2.2.3.min.js"></script>
 
 <!-- simpleimport -->
-<script src="plugins/simpleimport/simpleimport.js"></script>
+<script src="<?= Config::$RESOURCE_PATH?>plugins/simpleimport/simpleimport.js"></script>
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

@@ -10,7 +10,6 @@ class SettingsClustersListController extends AbstractController
 {
     public function get()
     {
-        $clusters = ClusterManager::getClusters();
         include(Config::$SRC_REAL_URL . 'component/setting/cluster/SettingsClustersListView.php');
     }
 }

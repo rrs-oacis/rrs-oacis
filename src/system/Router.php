@@ -35,10 +35,12 @@ class Router
             $router->controller('/settings-clusters', 'rrsoacis\\component\\setting\\cluster\\SettingsClustersListController');
             $router->controller('/settings-clusters_widget', 'rrsoacis\\component\\setting\\cluster\\SettingsClustersListWidgetController');
             $router->controller('/settings-cluster', 'rrsoacis\\component\\setting\\cluster\\SettingsClusterController');
+            $router->controller('/settings-cluster_contents', 'rrsoacis\\component\\setting\\cluster\\SettingsClusterContentsController');
             $router->controller('/settings-cluster_statusupdate', 'rrsoacis\\component\\setting\\cluster\\SettingsClusterUpdateStatusController');
             $router->controller('/settings-cluster_update', 'rrsoacis\\component\\setting\\cluster\\SettingsClusterUpdateController');
             $router->controller('/settings-cluster_remove', 'rrsoacis\\component\\setting\\cluster\\SettingsClusterRemoveController');
             $router->controller('/settings-general', 'rrsoacis\\component\\setting\\general\\SettingsGeneralController');
+            $router->controller('/settings-version_content', 'rrsoacis\\component\\setting\\general\\SettingsVersionContentController');
             $router->controller('/settings-version_update', 'rrsoacis\\component\\setting\\general\\SettingsVersionUpdateController');
             $router->controller('/settings-restrict_set', 'rrsoacis\\component\\setting\\general\\SettingsRestrictAccessSetController');
             $router->controller('/settings-restrict_set_unrestrected', 'rrsoacis\\component\\setting\\general\\SettingsRestrictAccessHostsController');
