@@ -22,12 +22,13 @@ class SettingsClusterUpdateController extends AbstractController
         $f_host = $_POST['f_host'];
         $p_host = $_POST['p_host'];
         $s_host = $_POST['s_host'];
+        $hosts_pass = $_POST['hosts_pass'];
 
         if ($a_host !== ''
             && $f_host !== ''
             && $p_host !== '')
         {
-            ClusterManager::updateCluster($name, $a_host, $f_host, $p_host, $s_host);
+            ClusterManager::updateCluster($name, $a_host, $f_host, $p_host, $s_host, $hosts_pass);
         }
 
         header('location: '.Config::$TOP_PATH.'settings-clusters');

@@ -39,41 +39,17 @@ use rrsoacis\system\Config;
     <!-- Main content -->
     <section class="content">
         <!-- BEGIN : Clusters -->
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Clusters</h3>
-                        <div class="box-tools">
-                            <a href="<?= Config::$TOP_PATH."settings-cluster_statusupdate" ?>"><button class="btn btn-info">Update</button></a>
-                        </div>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
-                            <tr>
-                                <th>Name</th>
-                                <th>Host-S</th>
-                                <th>Host-A</th>
-                                <th>Host-F</th>
-                                <th>Host-P</th>
-                            </tr>
-                            <?php foreach ($clusters as $cluster) {?>
-                                <tr class="linked-row" data-href="<?= Config::$TOP_PATH."settings-cluster/".$cluster["name"] ?>">
-                                    <th style="color:<?= ($cluster["check_status"]==1 ? "gray" : ($cluster["check_status"]==0 ? "green" : "red")) ?>;"><?= $cluster["check_status"]."#".$cluster["name"]?></th>
-                                    <td><?= $cluster["s_host"]?></td>
-                                    <td><?= $cluster["a_host"]?></td>
-                                    <td><?= $cluster["f_host"]?></td>
-                                    <td><?= $cluster["p_host"]?></td>
-                                </tr>
-                            <?php }?>
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
-            </div>
-        </div>
+        <div class="row" id="cluster-list-widget"></div>
+        <script type="text/javascript">
+            var refreshClustersList = function () {
+                simpleimport("cluster-list-widget","/settings-clusters_widget",function(){
+                    var needsRefresh = document.getElementById("clusters-list-widget-needs-refresh").value;
+                    if (needsRefresh == 1) { setTimeout(refreshClustersList(), 880); }
+                    $(".linked-row").click(function() { location.href = $(this).data("href"); });
+                });
+            };
+            refreshClustersList();
+        </script>
         <!-- END : Clusters -->
 
         <!-- BEGIN : Add cluster -->
@@ -122,6 +98,15 @@ use rrsoacis\system\Config;
                             <input type="text" class="form-control" name="p_host"
                                    id="inputHostP"
                                    placeholder="user@host"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputHostsPass" class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="hosts_pass"
+                                   id="inputHostsPass"
+                                   placeholder="Hosts' password (if hosts have diffrent password, input Host-S's password and setup other hosts at cluster page)"
                                    required>
                         </div>
                     </div>

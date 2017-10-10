@@ -106,9 +106,14 @@ use rrsoacis\system\Config;
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <form action="./isettings-restrict_set_unrestrected" method="post">
+                        <form id="post-form" action="<?= Config::$TOP_PATH."settings-cluster_update" ?>" method="POST" class="form-horizontal">
                             <div class="input-group pull-right">
-                                <input class="form-control" placeholder="Host password" name="password" type="password" value="">
+                                <input type="hidden" name="name" value="<?= $cluster["name"] ?>">
+                                <input type="hidden" name="host_s" value="<?= $cluster["s_host"] ?>">
+                                <input type="hidden" name="host_a" value="<?= $cluster["a_host"] ?>">
+                                <input type="hidden" name="host_f" value="<?= $cluster["f_host"] ?>">
+                                <input type="hidden" name="host_p" value="<?= $cluster["p_host"] ?>">
+                                <input class="form-control" placeholder="Hosts password" name="hosts_pass" type="password" value="">
                                 <span class="input-group-btn"> <input class="btn" type="submit" value="Run"> </span>
                             </div>
                         </form>

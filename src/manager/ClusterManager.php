@@ -99,15 +99,36 @@ class ClusterManager
 
     public static function updateAllStatus()
     {
-        $db = self::connectDB();
-        $db->query("update cluster set check_status=1;");
-
         foreach (self::getClusters() as $cluster)
         {
-            $scriptId = uniqid();
+            self::updateStatus($cluster["name"]);
+        }
+    }
 
+    public static function updateStatus($name)
+    {
+        $cluster = self::getCluster($name);
+        if ($cluster != null)
+        {
+            $db = self::connectDB();
+            $db->query("update cluster set check_status=1 where name='".$cluster["name"]."';");
+
+            $scriptId = uniqid();
             $script = "#!/bin/bash\n\n";
             $script .= 'php '.realpath(dirname(__FILE__)).'/update_status.php \''.$cluster["name"].'\' >>/tmp/t';
+            file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
+            exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' >/dev/null &');
+        }
+    }
+
+    public static function setupHosts($name, $pass)
+    {
+        $cluster = self::getCluster($name);
+        if ($cluster != null)
+        {
+            $scriptId = uniqid();
+            $script = "#!/bin/bash\n\n";
+            $script .= 'cd /home/oacis/rrs-oacis/rrsenv/workspace/'.$cluster["name"].' ; ../../script/rrscluster setup -p \''.$pass.'\'';
             file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
             exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' >/dev/null &');
         }
@@ -152,7 +173,7 @@ class ClusterManager
     /**
      *
      * */
-    public static function updateCluster($name, $a_host, $f_host, $p_host, $s_host)
+    public static function updateCluster($name, $a_host, $f_host, $p_host, $s_host, $hosts_pass = "")
     {
         $workspaceDir = Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME;
         if (! file_exists ( $workspaceDir )) { mkdir( $workspaceDir ); }
@@ -205,6 +226,8 @@ class ClusterManager
         $sth->bindValue(':s_host', $s_host, PDO::PARAM_STR);
         $sth->execute();
 
+        self::setupHosts($name, $hosts_pass);
+        self::updateStatus($name);
         self::updateHostGroup();
     }
 
