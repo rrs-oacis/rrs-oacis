@@ -44,7 +44,7 @@ use rrsoacis\system\Config;
             var refreshClustersList = function () {
                 simpleimport("cluster-list-widget","/settings-clusters_widget",function(){
                     var needsRefresh = document.getElementById("clusters-list-widget-needs-refresh").value;
-                    if (needsRefresh == 1) { setTimeout(refreshClustersList(), 880); }
+                    if (needsRefresh == 1) { setTimeout(refreshClustersList(), 3000); }
                     $(".linked-row").click(function() { location.href = $(this).data("href"); });
                 });
             };
