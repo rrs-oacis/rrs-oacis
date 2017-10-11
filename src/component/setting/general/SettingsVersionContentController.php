@@ -14,7 +14,7 @@ class SettingsVersionContentController extends AbstractController
         $internet = ($internet == 0);
         if ($internet)
         {
-            exec("timeout 3 git fetch", $exec_out, $exec_ret);
+            exec("timeout 30 git fetch", $exec_out, $exec_ret);
             $exec_out = (count($exec_out) >= 1? $exec_out[0] : "");
             if ($exec_ret != 0
                 && (strpos($exec_out,'verification') !== false
@@ -23,7 +23,7 @@ class SettingsVersionContentController extends AbstractController
                 exec("echo StrictHostKeyChecking no >> ~/.ssh/config");
                 exec("git remote set-url origin https://github.com/rrs-oacis/rrs-oacis.git");
                 exec("git remote set-url --push origin git@github.com:rrs-oacis/rrs-oacis.git");
-                exec("timeout 3 git fetch", $exec_out, $exec_ret);
+                exec("timeout 30 git fetch", $exec_out, $exec_ret);
             }
 
             exec("test \"`git log -1 HEAD --oneline`\" != \"`git log -1 origin/master HEAD --oneline`\"", $exec_out, $gitcheck_ret);
