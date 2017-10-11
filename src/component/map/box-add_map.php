@@ -99,14 +99,14 @@ $('#mapName').val(name);
 
 		    if(json['status']){
             	toastr["success"](
-            			"<?= _l("adf.add_map_box.toastr_addmap"); ?>",
-    		    		"<?= _l("adf.add_map_box.toastr_success"); ?>");
+            			"Add Map",
+    		    		"Success");
 
 		document.querySelector('#map_post-form').reset();
             }else{
             	toastr["error"](
-                        "<?= _l("adf.add_map_box.toastr_invalid_addmap"); ?>",
-    		    		"<?= _l("adf.add_map_box.toastr_error"); ?>");
+                        "Add Map",
+    		    		"Error");
             }
 	        
 		    dispatchAddMapEvent();
