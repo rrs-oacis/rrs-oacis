@@ -33,11 +33,7 @@ use rrsoacis\manager\AccessManager;
             <pre><?= implode("\n", $gitlog_remote); ?></pre>
         <?php } else { ?>
             <b> Current version </b>
-            <pre>No internet connection
-
-
-
-            </pre>
+            <pre><?= implode("\n", $gitlog_local); ?></pre>
 
             <b> Latest version </b>
             <pre>No internet connection
