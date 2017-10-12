@@ -1,0 +1,12 @@
+[
+  {
+    "name":"AdminLTE",
+    "location":"https://adminlte.io",
+    "license":"adminlte.txt"
+  },
+  {
+    "name":"jQuery",
+    "location":"https://adminlte.io",
+    "license":"adminlte.txt"
+  }
+]

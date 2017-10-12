@@ -44,12 +44,14 @@ class Router
             $router->controller('/settings-version_update', 'rrsoacis\\component\\setting\\general\\SettingsVersionUpdateController');
             $router->controller('/settings-restrict_set', 'rrsoacis\\component\\setting\\general\\SettingsRestrictAccessSetController');
             $router->controller('/settings-restrict_set_unrestrected', 'rrsoacis\\component\\setting\\general\\SettingsRestrictAccessHostsController');
+            $router->controller('/settings-license', 'rrsoacis\\component\\setting\\license\\SettingsLicenseController');
+
 
             // Maps
             $router->controller('/maps', 'rrsoacis\\component\\map\\MapsListController');
             $router->controller('/maps_get', 'rrsoacis\\component\\map\\MapListGetController');
             $router->controller('/map_upload', 'rrsoacis\\component\\map\\MapFileUploadController');
-
+            
             // Agents
             $router->controller('/agents', 'rrsoacis\\component\\agent\\AgentListController');
             $router->controller('/agents_get', 'rrsoacis\\component\\agent\\AgentListGetController');
