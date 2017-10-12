@@ -1,0 +1,1 @@
+iCheck plugin is released under the MIT License. Feel free to use it in personal and commercial projects.

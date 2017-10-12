@@ -27,13 +27,13 @@ use rrsoacis\manager\AccessManager;
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                General
-                <small>Settings</small>
+                Open Source License
+                <small>use library</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="<?=Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i><?= rrsoacis\system\Config::APP_NAME ?></a></li>
                 <li class=""><a href="/settings">Settings</a></li>
-                <li class="active">General</li>
+                <li class="active">License</li>
             </ol>
         </section>
 
@@ -42,18 +42,25 @@ use rrsoacis\manager\AccessManager;
             <!-- Version -->
 
             <?php for ($i=0;$i< count($license); $i++){ ?>
-            <div class="box">
+            <div class="box collapsed-box">
                 <div class="box-header">
                     <h3 class="box-title">
                         <?= $license[$i]['name'] ?>
                         <small><?= $license[$i]['location']?></small>
                     </h3>
-                    <div class="box-body">
+                    <div class="box-tools pull-right">
+                        <!-- Collapse Button -->
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+
+                </div>
+                <div style="display: none;" class="box-body">
 
                         <pre><?= file_get_contents(Config::$SRC_REAL_URL.'component/setting/license/license_txt/'.$license[$i]['license']);?>
                         </pre>
 
-                    </div>
                 </div>
             </div>
 
