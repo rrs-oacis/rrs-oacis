@@ -70,80 +70,64 @@
     "license":"icheck.txt"
   },
   {
-    "name":"hoge",
-    "location":"hoge",
-    "license":"bootstrap-slider.txt"
+    "name":"input-mask",
+    "location":"https://github.com/RobinHerbots/Inputmask",
+    "license":"input-mask.txt"
   },
   {
-    "name":"hoge",
-    "location":"hoge",
-    "license":"bootstrap-slider.txt"
+    "name":"ionslider",
+    "location":"https://github.com/IonDen/ion.rangeSlider",
+    "license":"ionslider.txt"
   },
   {
-    "name":"hoge",
-    "location":"hoge",
-    "license":"bootstrap-slider.txt"
+    "name":"jvectormap",
+    "location":"http://jvectormap.com/",
+    "license":"jvectormap.txt"
   },
   {
-    "name":"hoge",
-    "location":"hoge",
-    "license":"bootstrap-slider.txt"
+    "name":"knob",
+    "location":"https://github.com/aterrien/jQuery-Knob",
+    "license":"knob.txt"
   },
   {
-    "name":"hoge",
-    "location":"hoge",
-    "license":"bootstrap-slider.txt"
+    "name":"morris",
+    "location":"http://morrisjs.github.io/morris.js/",
+    "license":"morris.txt"
   },
   {
-    "name":"hoge",
-    "location":"hoge",
-    "license":"bootstrap-slider.txt"
+    "name":"pace",
+    "location":"http://github.hubspot.com/pace/docs/welcome/",
+    "license":"pace.txt"
   },
   {
-    "name":"hoge",
-    "location":"hoge",
-    "license":"bootstrap-slider.txt"
+    "name":"select2",
+    "location":"https://select2.org/",
+    "license":"select2.txt"
   },
   {
-    "name":"hoge",
-    "location":"hoge",
-    "license":"bootstrap-slider.txt"
+    "name":"simpleimport",
+    "location":"none",
+    "license":"simpleimport.txt"
   },
   {
-    "name":"hoge",
-    "location":"hoge",
-    "license":"bootstrap-slider.txt"
+    "name":"slimScroll",
+    "location":"https://github.com/rochal/jQuery-slimScroll",
+    "license":"slimScroll.txt"
   },
   {
-    "name":"hoge",
-    "location":"hoge",
-    "license":"bootstrap-slider.txt"
+    "name":"sparkline",
+    "location":"https://omnipotent.net/jquery.sparkline/#s-about",
+    "license":"sparkline.txt"
   },
   {
-    "name":"hoge",
-    "location":"hoge",
-    "license":"bootstrap-slider.txt"
+    "name":"timepicker",
+    "location":"http://jonthornton.github.io/jquery-timepicker/",
+    "license":"timepicker.txt"
   },
   {
-    "name":"hoge",
-    "location":"hoge",
-    "license":"bootstrap-slider.txt"
-  },
-  {
-    "name":"hoge",
-    "location":"hoge",
-    "license":"bootstrap-slider.txt"
-  },
-  {
-    "name":"hoge",
-    "location":"hoge",
-    "license":"bootstrap-slider.txt"
-  },
-  {
-    "name":"hoge",
-    "location":"hoge",
-    "license":"bootstrap-slider.txt"
+    "name":"toastr",
+    "location":"https://github.com/CodeSeven/toastr",
+    "license":"toastr.txt"
   }
-
 
 ]
