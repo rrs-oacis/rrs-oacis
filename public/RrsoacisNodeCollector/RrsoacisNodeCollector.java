@@ -13,16 +13,20 @@ public class RrsoacisNodeCollector
 
     public static void main(String[] argv) throws Exception
     {
-        String command = (argv.length == 1 ? argv[0] : "s");
+        String command = (argv.length >= 1 ? argv[0] : "s");
         System.setProperty("java.net.preferIPv4Stack", "true");
 
         switch (command)
         {
             case "r":
-                receiverProc();
+                closeReceiverProc("127.0.0.1");
+                receiverProc ((argv.length == 2 ? Integer.valueOf(argv[1]) : 10));
                 break;
             case "c":
                 closeReceiverProc((argv.length == 2 ? argv[1] : "127.0.0.1"));
+                break;
+            case "e":
+                extendReceiverProc((argv.length == 2 ? argv[1] : "127.0.0.1"));
                 break;
             case "s":
             default:
@@ -115,13 +119,14 @@ public class RrsoacisNodeCollector
         //System.out.println("sendCh close");
     }
 
-    public static void receiverProc()
+    public static void receiverProc(int timeout)
     {
         new Thread(new Runnable()
         {
             @Override
             public void run()
             {
+                timeoutThread.start();
                 try
                 {
                     ServerSocketChannel conServer = ServerSocketChannel.open();
@@ -135,6 +140,10 @@ public class RrsoacisNodeCollector
                         {
                             System.exit(0);
                         }
+                        else if ((new String(recvBuf.array())).equals("ROe"))
+                        {
+                            timeoutThread.interrupt();
+                        }
                     }
                 }
                 catch (IOException e)
@@ -142,6 +151,20 @@ public class RrsoacisNodeCollector
                     e.printStackTrace();
                 }
             }
+
+            Thread timeoutThread = new Thread(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    while (true)
+                    {
+                        try { Thread.sleep(3000); }
+                        catch (InterruptedException e) { continue; }
+                        System.exit(0);
+                    }
+                }
+            });
         }).start();
 
         try
@@ -185,6 +208,19 @@ public class RrsoacisNodeCollector
             SocketChannel channel = SocketChannel.open();
             channel.connect(new InetSocketAddress(remoteAddr, RECEIVER_CONTROL_PORT));
             channel.write(ByteBuffer.wrap("ROc".getBytes()));
+        }
+        catch (IOException e)
+        {
+        }
+    }
+
+    public static void extendReceiverProc(String remoteAddr)
+    {
+        try
+        {
+            SocketChannel channel = SocketChannel.open();
+            channel.connect(new InetSocketAddress(remoteAddr, RECEIVER_CONTROL_PORT));
+            channel.write(ByteBuffer.wrap("ROe".getBytes()));
         }
         catch (IOException e)
         {
