@@ -1,24 +1,44 @@
 FROM oacis/oacis:latest
 
-#MAINTAINER kamiya <k14041kk@aitech.ac.jp> ##deprecated
-
 EXPOSE 3080 3000
 
+VOLUME ["/home/oacis/rrs-oacis/data"]
+VOLUME ["/home/oacis/rrs-oacis/rrsenv/workspace"]
+VOLUME ["/home/oacis/rrs-oacis/rrsenv/AGENT"]
+VOLUME ["/home/oacis/rrs-oacis/rrsenv/MAP"]
+VOLUME ["/home/oacis/rrs-oacis/rrsenv/LOG"]
+
+#APT
 USER root
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -y
 RUN apt-get  -y install apt-utils
+RUN apt-get  -y install sudo perl
 
+RUN usermod -aG sudo oacis
+
+#RRS-OACIS
+USER oacis
+WORKDIR /home/oacis
+RUN git clone https://github.com/rrs-oacis/rrs-oacis.git
+RUN chmod a+x ./rrs-oacis/setup/setup.sh
+RUN cp ./rrs-oacis/setup/docker/supplement/server.sh ./rrs-oacis/server.sh
+RUN chmod a+x ./rrs-oacis/server.sh
+
+WORKDIR /home/oacis/rrs-oacis
+RUN git clone https://github.com/tkmnet/rrsenv.git
+RUN ./rrsenv/init.sh
+
+#APT
+USER root
 RUN echo deb http://packages.dotdeb.org jessie all >> /etc/apt/sources.list
 RUN wget -qO - https://www.dotdeb.org/dotdeb.gpg | apt-key add -
 RUN apt-get -y update
-RUN apt-get -y install php php-mbstring php7.0-zip sqlite3 php7.0-sqlite3 php7.0-mongodb sudo perl nginx php-fpm
-RUN apt-get -y install openjdk-7-jre
+RUN apt-get -y install php php-mbstring php7.0-zip sqlite3 php7.0-sqlite3 php7.0-mongodb nginx php-fpm
+RUN apt-get -y install openjdk-7-jdk
 RUN apt-get -y remove apache2
 RUN apt-get -y autoremove
 RUN apt-get -y autoclean
-
-RUN usermod -aG sudo oacis
 
 #Perl
 ENV PERL_MM_USE_DEFAULT 1
@@ -40,25 +60,6 @@ RUN chmod a+x /usr/local/bin/update-rrsoacis
 #Resolved
 RUN echo "DNS=8.8.8.8" >> /etc/systemd/resolved.conf
 
-#RRS-OACIS
-USER oacis
-WORKDIR /home/oacis
-RUN git clone https://github.com/rrs-oacis/rrs-oacis.git
-RUN chmod a+x ./rrs-oacis/setup/setup.sh
-RUN cp ./rrs-oacis/setup/docker/supplement/server.sh ./rrs-oacis/server.sh
-RUN chmod a+x ./rrs-oacis/server.sh
-
-WORKDIR /home/oacis/rrs-oacis
-RUN git clone https://github.com/tkmnet/rrsenv.git
-RUN ./rrsenv/init.sh
-
-#Mount host volumes
-#VOLUME ["/home/oacis/rrs-oacis/data"]
-#VOLUME ["/home/oacis/rrs-oacis/rrsenv/workspace"]
-#VOLUME ["/home/oacis/rrs-oacis/rrsenv/AGENT"]
-#VOLUME ["/home/oacis/rrs-oacis/rrsenv/MAP"]
-#VOLUME ["/home/oacis/rrs-oacis/rrsenv/LOG"]
-
 #Setup
 USER oacis
 RUN /home/oacis/rrs-oacis/setup/setup.sh
@@ -69,6 +70,7 @@ RUN git pull
 WORKDIR /home/oacis/rrs-oacis
 RUN git pull
 
+#####
 USER root
 WORKDIR /home/oacis
 CMD ["/home/oacis/rrs-oacis/server.sh"]
