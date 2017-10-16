@@ -45,8 +45,27 @@ class RunManager
 
         $sth = $db->query("select * from simulator;");
         while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+
             if (isset($row["name"]) && isset($row["id"])) {
+
                 $simulatorId = $row["id"];
+
+                $context = stream_context_create(array(
+                    'http' => array('ignore_errors' => true)
+                ));
+
+
+                $simNow = file_get_contents('http://localhost:3000/simulators/' . $simulatorId,false, $context);
+
+                $is_seccess = strpos($http_response_header[0], '200');
+                if( $is_seccess === false ) {
+                    $simulatorId = '';
+                    $sthU = $db->prepare("delete from simulator where name=:name;");
+                    $sthU->bindValue(':name', $row["name"], PDO::PARAM_STR);
+                    $sthU->execute();
+                }
+
+
             }
         }
 
