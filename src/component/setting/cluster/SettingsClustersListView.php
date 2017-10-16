@@ -131,6 +131,28 @@ use rrsoacis\system\Config;
         </div>
         <!-- END : Add cluster -->
 
+        <!-- BEGIN : Node collector -->
+        <div class="box box-warning">
+            <div class="box-header with-border">
+                <h3 class="box-title">Node Collector</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="nc-body" class="box-body">
+            </divi>
+        </div>
+        <script type="text/javascript">
+            var refreshNodeCollectorList = function () {
+                simpleimport("nc-body","/settings-clusters_collector/next",function(){
+                    setTimeout(refreshNodeCollectorList, 3000);
+                });
+            };
+            refreshNodeCollectorList();
+        </script>
+        <!-- END : Node collector -->
+
         <!-- BEGIN : PublicKey -->
         <!--
         <div class="box box-warning">

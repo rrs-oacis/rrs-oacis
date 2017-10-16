@@ -2,12 +2,6 @@ FROM oacis/oacis:latest
 
 EXPOSE 3080 3000
 
-VOLUME ["/home/oacis/rrs-oacis/data"]
-VOLUME ["/home/oacis/rrs-oacis/rrsenv/workspace"]
-VOLUME ["/home/oacis/rrs-oacis/rrsenv/AGENT"]
-VOLUME ["/home/oacis/rrs-oacis/rrsenv/MAP"]
-VOLUME ["/home/oacis/rrs-oacis/rrsenv/LOG"]
-
 #APT
 USER root
 ENV DEBIAN_FRONTEND noninteractive
@@ -59,6 +53,14 @@ RUN chmod a+x /usr/local/bin/update-rrsoacis
 
 #Resolved
 RUN echo "DNS=8.8.8.8" >> /etc/systemd/resolved.conf
+
+USER oacis
+RUN mkdir /home/oacis/rrs-oacis/data
+VOLUME ["/home/oacis/rrs-oacis/data"]
+VOLUME ["/home/oacis/rrs-oacis/rrsenv/workspace"]
+VOLUME ["/home/oacis/rrs-oacis/rrsenv/AGENT"]
+VOLUME ["/home/oacis/rrs-oacis/rrsenv/MAP"]
+VOLUME ["/home/oacis/rrs-oacis/rrsenv/LOG"]
 
 #Setup
 USER oacis

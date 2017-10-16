@@ -21,6 +21,7 @@ public class RrsoacisNodeCollector
         {
             case "r":
                 closeReceiverProc("127.0.0.1");
+                try { Thread.sleep(1000); } catch (InterruptedException e) { }
                 timeout = ((argv.length == 2 ? Integer.valueOf(argv[1]) : 10));
                 receiverProc ();
                 break;
@@ -45,7 +46,6 @@ public class RrsoacisNodeCollector
         }
         catch (IOException e)
         {
-            e.printStackTrace();
         }
 
         new Thread(new Runnable()
@@ -175,6 +175,7 @@ public class RrsoacisNodeCollector
             ByteBuffer recvBuf = ByteBuffer.allocate(1024);
             while (true)
             {
+                recvCh.receive(recvBuf);
                 recvBuf.flip();
                 int limit = recvBuf.limit();
                 String recvStr = new String(recvBuf.array(), recvBuf.position(), limit, "UTF-8");
