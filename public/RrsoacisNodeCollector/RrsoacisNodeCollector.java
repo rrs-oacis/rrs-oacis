@@ -7,6 +7,7 @@ import java.util.*;
 
 public class RrsoacisNodeCollector
 {
+    private static int timeout = 10000;
     private static final int PORT = 49138;
     private static final int SENDER_CONTROL_PORT = 49238;
     private static final int RECEIVER_CONTROL_PORT = 49338;
@@ -20,7 +21,8 @@ public class RrsoacisNodeCollector
         {
             case "r":
                 closeReceiverProc("127.0.0.1");
-                receiverProc ((argv.length == 2 ? Integer.valueOf(argv[1]) : 10));
+                timeout = ((argv.length == 2 ? Integer.valueOf(argv[1]) : 10));
+                receiverProc ();
                 break;
             case "c":
                 closeReceiverProc((argv.length == 2 ? argv[1] : "127.0.0.1"));
@@ -46,7 +48,6 @@ public class RrsoacisNodeCollector
             e.printStackTrace();
         }
 
-        String broadcastAddress = getBroadcastAddress();
         new Thread(new Runnable()
         {
             @Override
@@ -78,6 +79,7 @@ public class RrsoacisNodeCollector
                         {
                             //runFlag.set(false);
                             System.out.println("");
+                            channel.close();
                             System.exit(0);
                         }
                     }
@@ -91,24 +93,22 @@ public class RrsoacisNodeCollector
 
         try
         {
-            DatagramChannel sendCh = DatagramChannel.open();
-            sendCh.socket().setBroadcast(true);
-            ByteBuffer sendBuf = ByteBuffer.wrap(("ROs#" + System.getProperty("user.name")).getBytes("UTF-8"));
-            InetSocketAddress portISA = new InetSocketAddress(broadcastAddress, PORT);
             while (true)
             {
                 //while (runFlag.get()) {
-                sendCh.send(sendBuf, portISA);
-                System.out.print(".");
-                sendBuf.clear();
+                for (InterfaceAddress address : getBroadcastAddress())
+                {
+                    DatagramChannel sendCh = DatagramChannel.open();
+                    sendCh.socket().setBroadcast(true);
+                    ByteBuffer sendBuf = ByteBuffer.wrap(("ROs#" + System.getProperty("user.name") + "@" + address.getAddress().toString().substring(1)).getBytes("UTF-8"));
+                    System.out.println(System.getProperty("user.name") + "@" + address.getAddress().toString().substring(1));
+                    InetSocketAddress portISA = new InetSocketAddress(address.getBroadcast().toString().substring(1), PORT);
+                    sendCh.send(sendBuf, portISA);
+                    sendBuf.clear();
+                    try { Thread.sleep(500); } catch (InterruptedException e) { }
+                }
 
-                try
-                {
-                    Thread.sleep(3000);
-                }
-                catch (InterruptedException e)
-                {
-                }
+                try { Thread.sleep(3000); } catch (InterruptedException e) { }
             }
         }
         catch (IOException e)
@@ -119,7 +119,7 @@ public class RrsoacisNodeCollector
         //System.out.println("sendCh close");
     }
 
-    public static void receiverProc(int timeout)
+    public static void receiverProc()
     {
         new Thread(new Runnable()
         {
@@ -159,7 +159,7 @@ public class RrsoacisNodeCollector
                 {
                     while (true)
                     {
-                        try { Thread.sleep(3000); }
+                        try { Thread.sleep(timeout * 1000); }
                         catch (InterruptedException e) { continue; }
                         System.exit(0);
                     }
@@ -175,20 +175,29 @@ public class RrsoacisNodeCollector
             ByteBuffer recvBuf = ByteBuffer.allocate(1024);
             while (true)
             {
-                InetSocketAddress remoteAddr = (InetSocketAddress) recvCh.receive(recvBuf);
                 recvBuf.flip();
                 int limit = recvBuf.limit();
                 String recvStr = new String(recvBuf.array(), recvBuf.position(), limit, "UTF-8");
                 if (recvStr.startsWith("ROs#"))
                 {
-                    String username = recvStr.replaceFirst("^ROs#", "");
-                    System.out.println(username + "@" + remoteAddr.getAddress().getHostAddress());
-                    recvBuf.clear();
+                    String hostname = recvStr.replaceFirst("^ROs#", "");
+                    String address = recvStr.replaceFirst("^ROs#.*@", "");
 
-                    // control sender
-                    SocketChannel channel = SocketChannel.open();
-                    channel.connect(new InetSocketAddress(remoteAddr.getAddress().getHostAddress(), SENDER_CONTROL_PORT));
-                    channel.write(ByteBuffer.wrap("ROc".getBytes()));
+                    try
+                    {
+                        // control sender
+                        SocketChannel channel = SocketChannel.open();
+                        channel.connect(new InetSocketAddress(address, SENDER_CONTROL_PORT));
+                        channel.write(ByteBuffer.wrap("ROc".getBytes()));
+                        channel.close();
+                    }
+                    catch (IOException e)
+                    {
+                        continue;
+                    }
+
+                    System.out.println(hostname);
+                    recvBuf.clear();
                 }
             }
 
@@ -227,8 +236,10 @@ public class RrsoacisNodeCollector
         }
     }
 
-    private static final String getBroadcastAddress()
+    private static ArrayList<InterfaceAddress> getBroadcastAddress()
     {
+        ArrayList<InterfaceAddress> addressList = new ArrayList<>();
+
         try
         {
             for (Enumeration<NetworkInterface> niEnum = NetworkInterface.getNetworkInterfaces(); niEnum.hasMoreElements(); )
@@ -243,7 +254,11 @@ public class RrsoacisNodeCollector
                             InetAddress broadcastAddress = interfaceAddress.getBroadcast();
                             if (broadcastAddress != null)
                             {
-                                return broadcastAddress.toString().substring(1);
+                                String address = broadcastAddress.toString().substring(1);
+                                if (! address.equals("0.0.0.0"))
+                                {
+                                    addressList.add(interfaceAddress);
+                                }
                             }
                         }
                     }
@@ -254,7 +269,7 @@ public class RrsoacisNodeCollector
         {
         }
 
-        return null;
+        return addressList;
     }
 }
 

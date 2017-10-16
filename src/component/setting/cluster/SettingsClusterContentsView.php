@@ -79,6 +79,7 @@ use rrsoacis\system\Config;
                         <input type="hidden" name="a_host" value="<?= $cluster["a_host"] ?>">
                         <input type="hidden" name="f_host" value="<?= $cluster["f_host"] ?>">
                         <input type="hidden" name="p_host" value="<?= $cluster["p_host"] ?>">
+                        <input type="hidden" name="archiver" value="<?= $cluster["archiver"] ?>">
                         <input class="form-control" placeholder="Hosts password" name="hosts_pass" type="password" value="">
                         <span class="input-group-btn"> <input class="btn" type="submit" value="Run"> </span>
                     </div>

@@ -38,10 +38,14 @@ use rrsoacis\system\Config;
     </section>
 
     <!-- Main content -->
-    <section class="content" id="main-contents"> </section>
+    <section class="content" id="main-contents">
+    </section>
       <script type="text/javascript">
           var refreshContents = function () {
-              document.getElementById("main-contents").innerHTML = '<h1 class="text-center"> <i class="fa fa-refresh fa-spin"></i> </h1>';
+              document.getElementById("main-contents").innerHTML = ' <div style="margin-bottom: 2em;">'
+                  + ' <div> <a href="<?=Config::$TOP_PATH ?>/settings-cluster_remove/<?= $cluster["name"] ?>">'
+                  + '<button class="btn btn-danger">Remove</button> </a> </div> </div>'
+                  + '<h1 class="text-center"> <i class="fa fa-refresh fa-spin"></i> </h1>';
               simpleimport("main-contents","/settings-cluster_contents/<?= $clusterName ?>");
           }
           refreshContents();

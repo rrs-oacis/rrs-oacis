@@ -22,6 +22,7 @@ class SettingsClusterUpdateController extends AbstractController
         $f_host = $_POST['f_host'];
         $p_host = $_POST['p_host'];
         $s_host = $_POST['s_host'];
+        $archiver = $_POST['archiver'];
         $hosts_pass = $_POST['hosts_pass'];
 
         if ($a_host !== ''
@@ -29,7 +30,7 @@ class SettingsClusterUpdateController extends AbstractController
             && $f_host !== ''
             && $p_host !== '')
         {
-            ClusterManager::updateCluster($name, $a_host, $f_host, $p_host, $s_host, $hosts_pass);
+            ClusterManager::updateCluster($name, $a_host, $f_host, $p_host, $s_host, $archiver, $hosts_pass);
         }
 
         if ($name == null)

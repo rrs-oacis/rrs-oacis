@@ -173,7 +173,7 @@ class ClusterManager
     /**
      *
      * */
-    public static function updateCluster($name, $a_host, $f_host, $p_host, $s_host, $hosts_pass = "")
+    public static function updateCluster($name, $a_host, $f_host, $p_host, $s_host, $archiver = "gzip", $hosts_pass = "")
     {
         $workspaceDir = Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME;
         if (! file_exists ( $workspaceDir )) { mkdir( $workspaceDir ); }
@@ -186,7 +186,7 @@ class ClusterManager
 
         if ($num > 0)
         {
-            $sth = $db->prepare("update cluster set a_host=:a_host, f_host=:f_host, p_host=:p_host, s_host=:s_host where name=:name;");
+            $sth = $db->prepare("update cluster set a_host=:a_host, f_host=:f_host, p_host=:p_host, s_host=:s_host, archiver=:archiver where name=:name;");
         }
         else
         {
@@ -201,10 +201,10 @@ class ClusterManager
 
             $myWorkspaceDir = Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME.'/'.$name;
             mkdir($myWorkspaceDir);
-            $config = "SERVER_SS=\"".$s_host."\"\nSERVER_C1=\"".$f_host."\"\nSERVER_C2=\"".$p_host."\"\nSERVER_C3=\"".$a_host."\"\n";
+            $config = "SERVER_SS=\"".$s_host."\"\nSERVER_C1=\"".$f_host."\"\nSERVER_C2=\"".$p_host."\"\nSERVER_C3=\"".$a_host."\"\nARCHIVER=\"".$archiver."\"\n";
             file_put_contents($myWorkspaceDir.'/config.cfg', $config);
             //------------------
-            $config = "{ 'server'=>'".$s_host."', 'fire'=>'".$f_host."', 'police'=>'".$p_host."', 'ambulance'=>'".$a_host."' }";
+            $config = "{ 'server'=>'".$s_host."', 'fire'=>'".$f_host."', 'police'=>'".$p_host."', 'ambulance'=>'".$a_host."', 'archiver'=>'".$archiver."' }";
             file_put_contents($myWorkspaceDir.'/rrscluster.cfg', $config);
             //------------------
             system("chown -R oacis:oacis ".Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME);
@@ -217,13 +217,14 @@ class ClusterManager
             $oaciscoll->insertOne($base);
             /* END : direct OACIS control */
 
-            $sth = $db->prepare("insert into cluster(name, a_host, f_host, p_host, s_host) values(:name, :a_host, :f_host, :p_host, :s_host);");
+            $sth = $db->prepare("insert into cluster(name, a_host, f_host, p_host, s_host, archiver) values(:name, :a_host, :f_host, :p_host, :s_host, :archiver);");
         }
         $sth->bindValue(':name', $name, PDO::PARAM_STR);
         $sth->bindValue(':a_host', $a_host, PDO::PARAM_STR);
         $sth->bindValue(':f_host', $f_host, PDO::PARAM_STR);
         $sth->bindValue(':p_host', $p_host, PDO::PARAM_STR);
         $sth->bindValue(':s_host', $s_host, PDO::PARAM_STR);
+        $sth->bindValue(':archiver', $archiver, PDO::PARAM_STR);
         $sth->execute();
 
         self::setupHosts($name, $hosts_pass);
@@ -318,7 +319,9 @@ class ClusterManager
                 $db->query("alter table cluster add s_host;");
             case 2:
                 $db->query("alter table cluster add check_status default 1;");
-                $version = 3;
+            case 3:
+                $db->query("alter table cluster add archiver default 'gzip';");
+                $version = 4;
 
                 $sth = $db->prepare("update system set value=:value where name='clusterVersion';");
                 $sth->bindValue(':value', $version, PDO::PARAM_INT);

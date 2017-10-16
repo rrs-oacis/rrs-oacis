@@ -102,6 +102,16 @@ use rrsoacis\system\Config;
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="inputArchiver" class="col-sm-2 control-label">Archiver</label>
+                        <div class="col-sm-10">
+                            <select id="inputArchiver" class="form-control" name="archiver">
+                                <option value="gzip" selected>gzip (gzip + tar)</option>
+                                <option value="7zip">p7zip (7za)</option>
+                                <option value="zip">zip</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="inputHostsPass" class="col-sm-2 control-label">Password</label>
                         <div class="col-sm-10">
                             <input type="password" class="form-control" name="hosts_pass"
