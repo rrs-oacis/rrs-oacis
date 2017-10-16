@@ -47,13 +47,9 @@ use rrsoacis\system\Config;
                         <h3 class="">Apps</h3>
                         <div class="box-tools">
                             <?php if ($app["enabled"]) { ?>
-                                <a href="<?=Config::$TOP_PATH ?>/settings-app_enable/<?= $app["package"] ?>/0">
-                                    <button class="btn btn-warning">Disable</button>
-                                </a>
+                                <button class="btn btn-warning" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-app_enable/<?= $app["package"] ?>/0'">Disable</button>
                             <?php } else { ?>
-                                <a href="<?=Config::$TOP_PATH ?>/settings-app_enable/<?= $app["package"] ?>/1">
-                                    <button class="btn btn-success">Enable</button>
-                                </a>
+                                <button class="btn btn-success" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-app_enable/<?= $app["package"] ?>/1'">Enable</button>
                             <?php } ?>
                         </div>
                     </div>
