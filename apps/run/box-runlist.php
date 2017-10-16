@@ -186,7 +186,11 @@ use rrsoacis\system\Config;
 
             t.content.querySelector('.run_list_tr').id = 'runid'+data[i]['name'];
 
-            t.content.querySelector('.run_name').innerHTML = '<a target="_blank" href="http://' + bassURL + ':3000/runs/' + runId + '">' + data[i]['name'] + '</a>';
+            if(runId != null){
+                t.content.querySelector('.run_name').innerHTML = '<a target="_blank" href="http://' + bassURL + ':3000/runs/' + runId + '">' + data[i]['name'] + '</a>';
+            }else{
+                t.content.querySelector('.run_name').innerHTML = data[i]['name'];
+            }
 
 
             t.content.querySelector('.run_agent').textContent = data[i]['agent'];
