@@ -9,7 +9,7 @@ use rrsoacis\system\Config;
             <div class="box-header">
                 <h3 class="box-title">Clusters</h3>
                 <div class="box-tools">
-                    <a href="<?= Config::$TOP_PATH."settings-cluster_statusupdate" ?>"><button class="btn btn-info">Update</button></a>
+                    <button class="btn btn-info" onclick="location.href='<?= Config::$TOP_PATH."settings-cluster_statusupdate" ?>'">Update</button>
                 </div>
             </div>
             <!-- /.box-header -->

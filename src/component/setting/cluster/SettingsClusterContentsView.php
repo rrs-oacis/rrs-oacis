@@ -4,9 +4,7 @@ use rrsoacis\system\Config;
 <!--<section class="content" id="main-content">-->
 <div style="margin-bottom: 2em;">
     <div>
-        <a href="<?=Config::$TOP_PATH ?>/settings-cluster_remove/<?= $cluster["name"] ?>">
-            <button class="btn btn-danger">Remove</button>
-        </a>
+        <button class="btn btn-danger" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-cluster_remove/<?= $cluster["name"] ?>'">Remove</button>
     </div>
 </div>
 
@@ -17,7 +15,7 @@ use rrsoacis\system\Config;
             <div class="box-header">
                 <h3 class="box-title">Clusters</h3>
                 <div class="box-tools">
-                    <a href="javascript:refreshContents()"><button class="btn btn-info">Update</button></a>
+                    <button class="btn btn-info" onclick="refreshContents()">Update</button>
                 </div>
             </div>
             <!-- /.box-header -->
