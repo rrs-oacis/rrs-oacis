@@ -80,13 +80,9 @@ use rrsoacis\manager\AccessManager;
                 </h3>
                 <div class="box-tools">
                     <?php if (AccessManager::filterEnabled()) { ?>
-                        <a href="<?=Config::$TOP_PATH ?>/settings-restrict_set/0">
-                            <button class="btn btn-warning">Disable</button>
-                        </a>
+                        <button class="btn btn-warning" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-restrict_set/0'">Disable</button>
                     <?php } else { ?>
-                        <a href="<?=Config::$TOP_PATH ?>/settings-restrict_set/1">
-                            <button class="btn btn-success">Enable</button>
-                        </a>
+                        <button class="btn btn-success" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-restrict_set/1'">Enable</button>
                     <?php } ?>
                 </div>
             <div class="box-body">

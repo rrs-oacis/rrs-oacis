@@ -11,17 +11,11 @@ use rrsoacis\manager\AccessManager;
         <?php
         ?>
         <?php if (!$internet) { ?>
-            <a href="<?=Config::$TOP_PATH ?>/settings-general">
-            <button class="btn">No connection</button>
-            </a>
+            <button class="btn" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-general'">No connection</button>
         <?php } else if ($gitcheck_ret == 0) { ?>
-            <a href="<?=Config::$TOP_PATH ?>/settings-version_update">
-                <button class="btn btn-info">Update</button>
-            </a>
+                <button class="btn btn-info" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-version_update'">Update</button>
         <?php } else { ?>
-            <a href="<?=Config::$TOP_PATH ?>/settings-general">
-            <button class="btn">Latest version</button>
-            </a>
+            <button class="btn" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-general'">Latest version</button>
         <?php } ?>
     </div>
     <div class="box-body">
