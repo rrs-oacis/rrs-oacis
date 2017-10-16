@@ -41,6 +41,8 @@ use rrsoacis\system\Config;
         <?php include 'box-add_agent.php';?>
 		<?php include 'box-agentlist.php';?>
 
+        <?php include 'box-agentarchivedlist.php';?>
+
     </section>
     <!-- /.content -->
   </div>

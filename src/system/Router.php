@@ -51,12 +51,15 @@ class Router
             $router->controller('/maps', 'rrsoacis\\component\\map\\MapsListController');
             $router->controller('/maps_get', 'rrsoacis\\component\\map\\MapListGetController');
             $router->controller('/map_upload', 'rrsoacis\\component\\map\\MapFileUploadController');
-            
+
             // Agents
             $router->controller('/agents', 'rrsoacis\\component\\agent\\AgentListController');
             $router->controller('/agents_get', 'rrsoacis\\component\\agent\\AgentListGetController');
+            $router->controller('/agents_archived_get', 'rrsoacis\\component\\agent\\AgentArchivedListGetController');
+
             $router->controller('/agent', 'rrsoacis\\component\\agent\\AgentController');
             $router->controller('/agent_upload', 'rrsoacis\\component\\agent\\AgentFileUploadController');
+            $router->controller('/agent_archived_change', 'rrsoacis\\component\\agent\\AgentArchivedController');
 
             //$router->controller('/result', 'rrsoacis\\component\\ResultController');
             /*

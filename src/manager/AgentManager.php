@@ -21,11 +21,28 @@ class AgentManager
         $agents = [];
         while($row = $sth->fetch(PDO::FETCH_ASSOC))
         {
-            $agents[] = $row;
+                $agents[] = $row;
+
         }
 
 		return $agents;
 	}
+
+    public static function getArchivedAgents()
+    {
+        $db = self::connectDB();
+        $sth = $db->query("select * from agent where archived = 1;");
+        $agents = [];
+        while($row = $sth->fetch(PDO::FETCH_ASSOC))
+        {
+
+                $agents[] = $row;
+
+
+        }
+
+        return $agents;
+    }
 
     public static function getAgent($name)
     {
@@ -55,6 +72,17 @@ class AgentManager
         }
 
         return $agent;
+    }
+
+    public static function setArchived($name,$archived){
+
+        $db = self::connectDB();
+
+        $sthU = $db->prepare("update agent set archived=:archived where name=:name;");
+        $sthU->bindValue(':archived', $archived, PDO::PARAM_INT);
+        $sthU->bindValue(':name', $name, PDO::PARAM_STR);
+        $sthU->execute();
+
     }
 
     /**

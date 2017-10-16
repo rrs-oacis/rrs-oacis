@@ -10,5 +10,5 @@ class AgentListGetController extends AbstractController
     {
 		echo json_encode( AgentManager::getAgents() );
 	}
-	
+
 }

@@ -36,9 +36,11 @@ use rrsoacis\system\Config;
                 </tbody>
                 <template id="agent_list_template">
                 <tr>
+
                     <td class="agent_list_name"></td>
                     <td class="agent_list_fullname"></td>
                     <td class="agent_list_timestamp"></td>
+                    
                 </tr>
                 </template>
               </table>
@@ -94,10 +96,13 @@ function setTableData(data)
     {
         var t = document.querySelector('#agent_list_template');
 
-        t.content.querySelector('.agent_list_name').textContent = data[i]['alias'];
+        //t.content.querySelector('.agent_list_name').textContent = data[i]['alias'];
+
+        t.content.querySelector('.agent_list_name').innerHTML =
+            '<a target="_blank" href="<?= Config::$TOP_PATH ?>agent/'+data[i]['name'] + '">' + data[i]['alias'] + "</a>"
         t.content.querySelector('.agent_list_fullname').textContent = data[i]['name'];
         t.content.querySelector('.agent_list_timestamp').textContent = data[i]['timestamp'];
-        //t.content.querySelector('a').href = '<?= Config::$TOP_PATH ?>agent/'+data[i]['uuid'];
+        t.content.querySelector('a').href = '<?= Config::$TOP_PATH ?>agent/'+data[i]['name'];
         /*
         if(data[i]['status'])
         {
