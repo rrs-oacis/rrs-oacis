@@ -20,18 +20,18 @@ class SettingsVersionUpdateController extends AbstractController
                 && (strpos($exec_out,'verification') !== false
                     || strpos($exec_out,'Permission') !== false))
             {
-                exec("git remote set-url origin https://github.com/rrs-oacis/rrs-oacis.git");
-                exec("git remote set-url --push origin git@github.com:rrs-oacis/rrs-oacis.git");
+                exec("cd /home/oacis/rrs-oacis; git remote set-url origin https://github.com/rrs-oacis/rrs-oacis.git");
+                exec("cd /home/oacis/rrs-oacis; git remote set-url --push origin git@github.com:rrs-oacis/rrs-oacis.git");
                 exec("timeout 30 git fetch", $exec_out, $exec_ret);
 
-                exec("cd rrsenv; git remote set-url origin https://github.com/tkmnet/rrsenv.git");
-                exec("cd rrsenv; git remote set-url --push origin git@github.com:tkmnet/rrsenv.git");
+                exec("cd /home/oacis/rrs-oacis/rrsenv; git remote set-url origin https://github.com/tkmnet/rrsenv.git");
+                exec("cd /home/oacis/rrs-oacis/rrsenv; git remote set-url --push origin git@github.com:tkmnet/rrsenv.git");
             }
 
             if ($exec_ret == 0)
             {
-                exec("git pull");
-                exec("cd rrsenv; git pull");
+                exec("cd /home/oacis/rrs-oacis; git pull");
+                exec("cd /home/oacis/rrs-oacis/rrsenv; git pull");
             }
         }
 
