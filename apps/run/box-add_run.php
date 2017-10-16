@@ -40,7 +40,7 @@ use rrsoacis\system\Config;
 
                 <div class="col-sm-10">
 
-                    <select class="form-control select2" name="parameter_maps[]" multiple="multiple"
+                    <select class="form-control select2_map" name="parameter_maps[]" multiple="multiple"
                             data-placeholder="select a map"
                             style="width: 100%;" required>
                         <?php
@@ -54,13 +54,18 @@ use rrsoacis\system\Config;
                     </select>
                 </div>
             </div>
-            <div class="form-group">
+            <div id="simulation_tags" class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Tags</label>
 
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="parameter_tags"
+                    <!--<input type="text" class="form-control" name="parameter_tags"
                            placeholder="keyword"
-                    >
+                    >-->
+                    <select class="form-control select2_tag" name="parameter_tags[]" multiple="multiple"
+                            data-placeholder="keyword"
+                            style="width: 100%;" required>
+
+                    </select>
                 </div>
             </div>
             <div class="form-group">
@@ -79,7 +84,6 @@ use rrsoacis\system\Config;
                     <option value="hoge"/>
                 </template>
             </div>
-
 
             <!-- /.box-body -->
             <div class="box-footer">
@@ -130,14 +134,32 @@ use rrsoacis\system\Config;
 
 
     document.addEventListener('DOMContentLoaded', function() {
-        $(".select2").select2();
+
     });
 
     $(function () {
         // 処理
 
+        $(".select2").select2();
+
+        $(".select2_map").select2({
+
+            dropdownCssClass:'dropdown_maps'
+
+        });
+
+
 
         $(".select2-search__field").css({'padding': '0px 6px', "border": "none"});
+
+
+        $('.select2_tag').select2({
+            data: [],
+            tags: true,
+            tokenSeparators: [',',' '],
+            placeholder: "Add your tags here",
+            dropdownCssClass:'dropdown_tags'
+        });
 
     });
 
@@ -240,7 +262,17 @@ use rrsoacis\system\Config;
         border-color: #008d4c;
     }
 
-    #simulation_maps .select2-container--default {
+    .dropdown_maps > span > ul > .select2-results__option--highlighted[aria-selected=false] {
         background-color: #008d4c;
     }
+
+    #simulation_tags .select2-selection__choice {
+        background-color: #f39c12;
+        border-color: #e08e0b;
+    }
+
+    .dropdown_tags > span > ul > .select2-results__option--highlighted[aria-selected=false] {
+        background-color: #e08e0b !important;
+    }
+
 </style>

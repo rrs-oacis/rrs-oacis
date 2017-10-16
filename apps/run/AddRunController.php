@@ -20,7 +20,16 @@ class AddRunController extends AbstractController
         $agents = $_POST['parameter_agents'];
         $maps = $_POST['parameter_maps'];
 
-        $tags = $_POST['parameter_tags'];
+        $tags_row = $_POST['parameter_tags'];
+
+        $tags = '';
+
+        for($i=0;$i<count($tags_row);$i++){
+            $tags =  $tags . $tags_row[$i];
+            if($i<count($tags_row)-1){
+                $tags = $tags . ' ';
+            }
+        }
 
         $count = $_POST['parameter_count'];
 
