@@ -187,6 +187,7 @@ class ClusterManager
         if ($num > 0)
         {
             $sth = $db->prepare("update cluster set a_host=:a_host, f_host=:f_host, p_host=:p_host, s_host=:s_host, archiver=:archiver where name=:name;");
+            $myWorkspaceDir = Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME.'/'.$name;
         }
         else
         {
@@ -201,14 +202,6 @@ class ClusterManager
 
             $myWorkspaceDir = Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME.'/'.$name;
             mkdir($myWorkspaceDir);
-            $config = "SERVER_SS=\"".$s_host."\"\nSERVER_C1=\"".$f_host."\"\nSERVER_C2=\"".$p_host."\"\nSERVER_C3=\"".$a_host."\"\nARCHIVER=\"".$archiver."\"\n";
-            file_put_contents($myWorkspaceDir.'/config.cfg', $config);
-            //------------------
-            $config = "{ 'server'=>'".$s_host."', 'fire'=>'".$f_host."', 'police'=>'".$p_host."', 'ambulance'=>'".$a_host."', 'archiver'=>'".$archiver."' }";
-            file_put_contents($myWorkspaceDir.'/rrscluster.cfg', $config);
-            //------------------
-            system("chown -R oacis:oacis ".Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME);
-            $myWorkspaceDir = '~/rrs-oacis/'.Config::WORKSPACE_DIR_NAME.'/'.$name;
 
             $base['_id'] = $name;
             $base['name'] = 'RO_'.$name;
@@ -219,6 +212,16 @@ class ClusterManager
 
             $sth = $db->prepare("insert into cluster(name, a_host, f_host, p_host, s_host, archiver) values(:name, :a_host, :f_host, :p_host, :s_host, :archiver);");
         }
+
+        $config = "SERVER_SS=\"".$s_host."\"\nSERVER_C1=\"".$f_host."\"\nSERVER_C2=\"".$p_host."\"\nSERVER_C3=\"".$a_host."\"\nARCHIVER=\"".$archiver."\"\n";
+        file_put_contents($myWorkspaceDir.'/config.cfg', $config);
+        //------------------
+        $config = "{ 'server'=>'".$s_host."', 'fire'=>'".$f_host."', 'police'=>'".$p_host."', 'ambulance'=>'".$a_host."', 'archiver'=>'".$archiver."' }";
+        file_put_contents($myWorkspaceDir.'/rrscluster.cfg', $config);
+        //------------------
+        system("chown -R oacis:oacis ".Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME);
+        $myWorkspaceDir = '~/rrs-oacis/'.Config::WORKSPACE_DIR_NAME.'/'.$name;
+
         $sth->bindValue(':name', $name, PDO::PARAM_STR);
         $sth->bindValue(':a_host', $a_host, PDO::PARAM_STR);
         $sth->bindValue(':f_host', $f_host, PDO::PARAM_STR);
