@@ -26,7 +26,7 @@ use rrsoacis\system\Config;
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <small>Agent</small>
+          <?= $agent["name"] ?>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?=Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i> Index</a></li>

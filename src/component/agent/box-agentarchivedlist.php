@@ -3,7 +3,7 @@ use rrsoacis\system\Config;
 ?>
 <div class="row">
     <div class="col-xs-12">
-        <div class="box">
+        <div class="box box-warning">
             <div class="box-header">
                 <h3 class="box-title">Agent Archived List</h3>
 

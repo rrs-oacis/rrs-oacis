@@ -1,9 +1,9 @@
 <?php
 use rrsoacis\system\Config;
 ?>
-<div class="box">
+<div class="box box-info">
   <div class="box-header with-border">
-      <h3 class="box-title">Agent</h3>
+      <h3 class="box-title">General</h3>
       <div class="box-tools">
           <?php if ($agent["archived"]==0) { ?>
 
@@ -19,13 +19,25 @@ use rrsoacis\system\Config;
   </div>
   <!-- /.box-header -->
   <div class="box-body">
-  
-  <h4>Agent name</h4>
-    <p><?= $agent["name"] ?></p>
+
+      <dl class="dl-horizontal">
+          <dt>Name</dt>
+          <dd><?= $agent["name"] ?></dd>
+          <dt>Archived</dt>
+          <dd>
+              <?php if ($agent["archived"]==1) { ?>
+                  True
+              <?php } else { ?>
+                  False
+              <?php } ?>
+
+          </dd>
 
 
-    <h4>Agent Archived</h4>
-    <p><?= $agent["archived"] ?></p>
+
+      </dl>
+
+
   </div>
 </div>
   <!-- /.box-body -->

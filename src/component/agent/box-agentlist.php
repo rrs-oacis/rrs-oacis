@@ -40,7 +40,7 @@ use rrsoacis\system\Config;
                     <td class="agent_list_name"></td>
                     <td class="agent_list_fullname"></td>
                     <td class="agent_list_timestamp"></td>
-                    
+
                 </tr>
                 </template>
               </table>
