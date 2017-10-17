@@ -4,6 +4,7 @@ use rrsoacis\system\Config;
 <!-- BEGIN : Clusters -->
 <!--<div class="row">-->
     <div class="col-xs-12">
+        <input type="hidden" id="clusters-list-widget-usedNodes" value="<?= $usedNodes ?>">
         <input type="hidden" id="clusters-list-widget-needs-refresh" value="<?= $needsRefresh ?>">
         <div class="box">
             <div class="box-header">

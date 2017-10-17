@@ -12,12 +12,18 @@ class SettingsClustersListWidgetController extends AbstractController
     {
         $clusters = ClusterManager::getClusters();
         $needsRefresh = 0;
-        foreach ($clusters as $cluster)
-        {
-           if ($cluster["check_status"] == 1)
-           { $needsRefresh = 1; }
+        $usedNodes = "";
+        foreach ($clusters as $cluster) {
+            if ($cluster["check_status"] == 1) {
+                $needsRefresh = 1;
+            }
+            $usedNodes .= $cluster["s_host"] . "\n";
+            $usedNodes .= $cluster["a_host"] . "\n";
+            $usedNodes .= $cluster["f_host"] . "\n";
+            $usedNodes .= $cluster["p_host"] . "\n";
         }
         include(Config::$SRC_REAL_URL . 'component/setting/cluster/SettingsClustersListWidgetView.php');
     }
 }
+
 ?>

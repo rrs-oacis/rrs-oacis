@@ -40,9 +40,11 @@ use rrsoacis\system\Config;
     <section class="content">
         <!-- BEGIN : Clusters -->
         <div class="row" id="cluster-list-widget"></div>
+        <input type="hidden" id="usedNodes" value="">
         <script type="text/javascript">
             var refreshClustersList = function () {
                 simpleimport("cluster-list-widget","/settings-clusters_widget",function(){
+                    document.getElementById("usedNodes").value = document.getElementById("clusters-list-widget-usedNodes").value;
                     var needsRefresh = document.getElementById("clusters-list-widget-needs-refresh").value;
                     if (needsRefresh == 1) { setTimeout(refreshClustersList, 3000); }
                     $(".linked-row").click(function() { location.href = $(this).data("href"); });
@@ -57,8 +59,6 @@ use rrsoacis\system\Config;
             <div class="box-header with-border">
                 <h3 class="box-title">Add cluster</h3>
                 <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
                 </div>
             </div>
             <!-- /.box-header -->
@@ -136,20 +136,71 @@ use rrsoacis\system\Config;
             <div class="box-header with-border">
                 <h3 class="box-title">Node Collector</h3>
                 <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
+                    <a href='<?= Config::$TOP_PATH ?>RrsoacisNodeCollector/RrsoacisNodeCollector.jar'>RrsoacisNodeCollector.jar</a>
+                    <button class="btn btn-warning" onclick="location.href='<?= Config::$TOP_PATH."settings-cluster_statusupdate" ?>'">Update</button>
                 </div>
             </div>
             <div id="nc-body" class="box-body">
-            </divi>
+            </div>
         </div>
         <script type="text/javascript">
+            var fillInputHost = function (name, input_text) {
+                document.getElementById("inputHost" + name).value = input_text;
+                updateNodeCollector();
+            }
+            var fillInputHostAll = function (input_text) {
+                fillInputHost("S", input_text);
+                fillInputHost("A", input_text);
+                fillInputHost("F", input_text);
+                fillInputHost("P", input_text);
+            }
+            var collected_nodes = "";
+            var updateNodeCollector = function () {
+                var host_list = [];
+                var used_list = [];
+                var array = collected_nodes.split(/\r\n|\r|\n/);
+                for (i = 0; i < array.length; i++) {
+                    if (array[i] != "" && host_list.indexOf(array[i]) == -1) {
+                        host_list.push(array[i]);
+                    }
+                }
+
+                used_list.push(document.getElementById("inputHostS").value);
+                used_list.push(document.getElementById("inputHostA").value);
+                used_list.push(document.getElementById("inputHostF").value);
+                used_list.push(document.getElementById("inputHostP").value);
+                Array.prototype.push.apply(used_list,
+                    document.getElementById("usedNodes").value.split(/\r\n|\r|\n/)
+                );
+
+                host_list.sort();
+                var table = "<table class='table'>"
+                for (i = 0; i < host_list.length; i++) {
+                    var used = (used_list.indexOf(host_list[i]) >= 0);
+                    table += "<tr><td>";
+                    table += host_list[i] + "</td>";
+                    table += "<td><button class='btn btn-xs "+(used?"btn-default":"btn-primary")+"' onclick='fillInputHost(\"S\", \"" + host_list[i] + "\")'>Host-S</button></td>";
+                    table += "<td><button class='btn btn-xs "+(used?"btn-default":"btn-primary")+"' onclick='fillInputHost(\"A\", \"" + host_list[i] + "\")'>Host-A</button></td>";
+                    table += "<td><button class='btn btn-xs "+(used?"btn-default":"btn-primary")+"' onclick='fillInputHost(\"F\", \"" + host_list[i] + "\")'>Host-F</button></td>";
+                    table += "<td><button class='btn btn-xs "+(used?"btn-default":"btn-primary")+"' onclick='fillInputHost(\"P\", \"" + host_list[i] + "\")'>Host-P</button></td>";
+                    table += "<td><button class='btn btn-xs "+(used?"btn-default":"btn-success")+"' onclick='fillInputHostAll(\"" + host_list[i] + "\")'>ALL</button></td>";
+                    table += "</tr>";
+                }
+                table += "</table>";
+                document.getElementById("nc-body").innerHTML = table;
+            };
             var refreshNodeCollectorList = function () {
-                simpleimport("nc-body","/settings-clusters_collector/next",function(){
+                simpleget("/settings-clusters_collector/next",function(input_text){
+                    collected_nodes = input_text;
+                    updateNodeCollector();
                     setTimeout(refreshNodeCollectorList, 3000);
                 });
             };
-            refreshNodeCollectorList();
+            simpleget("/settings-clusters_collector/start",function(input_text){
+                collected_nodes = input_text;
+                updateNodeCollector();
+                setTimeout(refreshNodeCollectorList, 3000);
+            });
         </script>
         <!-- END : Node collector -->
 
