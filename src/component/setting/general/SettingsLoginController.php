@@ -8,18 +8,8 @@ use rrsoacis\manager\AgentManager;
 
 class SettingsLoginController extends AbstractController
 {
-
-	public function post()
+	public function get()
     {
-        if (isset($_POST["password"]))
-        {
-            $sessionId = AccessManager::getSessionId($_POST["password"]);
-            if ($sessionId !== "")
-            {
-                setcookie("roid", $sessionId);
-                header('location: '.Config::$TOP_PATH);
-            }
-        }
 		include (Config::$SRC_REAL_URL . 'component/setting/general/SettingsLoginView.php');
 	}
 

@@ -30,7 +30,7 @@ use rrsoacis\system\Config;
         <div class="login-box">
             <!-- /.login-logo -->
             <div class="login-box-body">
-                <form action="<?=Config::$TOP_PATH ?>settings-login" method="post">
+                <form action="<?=Config::$TOP_PATH ?>settings-login_auth" method="post">
                     <div class="form-group has-feedback">
                         <input type="password" class="form-control" placeholder="Password" name="password">
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>

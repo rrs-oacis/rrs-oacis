@@ -23,6 +23,7 @@ class Router
             $router->controller('/', 'rrsoacis\\component\\dashboard\\RestrictedDashboardController');
             $router->controller('/index.php', 'rrsoacis\\component\\dashboard\\RestrictedDashboardController');
             $router->controller('/settings-login', 'rrsoacis\\component\\setting\\general\\SettingsLoginController');
+            $router->controller('/settings-login_auth', 'rrsoacis\\component\\setting\\general\\SettingsLoginAuthController');
 		}
 		else
         {
