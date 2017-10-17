@@ -18,12 +18,11 @@ class SettingsLoginAuthController extends AbstractController
             {
                 setcookie("roid", $sessionId);
                 header('location: '.Config::$TOP_PATH);
+                return;
             }
         }
-        else
-        {
-            header('location: '.Config::$TOP_PATH.'settings-login');
-        }
+
+        header('location: '.Config::$TOP_PATH.'settings-login');
 	}
 
 }
