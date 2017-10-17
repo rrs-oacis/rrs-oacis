@@ -71,7 +71,7 @@ use rrsoacis\system\Config;
         $('#agent_archived_list-overlay').show();
 
         fetch('<?= Config::$TOP_PATH ?>agents_archived_get', {
-            method: 'GET'
+            method: 'GET', credentials: "include"
         })
             .then(function(response) {
                 return response.json()

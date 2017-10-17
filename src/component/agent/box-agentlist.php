@@ -71,7 +71,7 @@ function getAgentList(){
 	$('#agent_list-overlay').show();
   
 	fetch('<?= Config::$TOP_PATH ?>agents_get', {
-        method: 'GET'
+        method: 'GET', credentials: "include"
       })
       .then(function(response) {
         return response.json()

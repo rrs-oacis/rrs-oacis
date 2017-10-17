@@ -83,7 +83,7 @@ $('#inputTitle').val(name);
 		e.preventDefault(); 
 		var form = document.querySelector('#post-form');
 		fetch('./agent_upload', {
-		    method: 'POST',
+		    method: 'POST', credentials: "include",
 		    body: new FormData(form)
 		  })
 		  .then(function(response) {

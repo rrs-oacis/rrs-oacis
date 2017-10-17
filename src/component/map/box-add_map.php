@@ -81,7 +81,7 @@ $('#mapName').val(name);
 		e.preventDefault(); 
 		var form = document.querySelector('#map_post-form');
 		fetch('./map_upload', {
-		    method: 'POST',
+		    method: 'POST', credentials: "include",
 		    body: new FormData(form)
 		  })
 		  .then(function(response) {

@@ -54,7 +54,7 @@ use rrsoacis\system\Config;
         form.append('parameter_name','<?= $agent["name"]?>');
 
         fetch('<?= Config::$TOP_PATH ?>agent_archived_change', {
-            method: 'POST',
+            method: 'POST', credentials: "include",
             body: form
         })
             .then(function (response) {
@@ -79,7 +79,7 @@ use rrsoacis\system\Config;
         form.append('parameter_name','<?= $agent["name"]?>');
 
         fetch('<?= Config::$TOP_PATH ?>agent_archived_change', {
-            method: 'POST',
+            method: 'POST', credentials: "include",
             body: form
         })
             .then(function (response) {
