@@ -15,7 +15,9 @@ class SettingsRestrictAccessSetController extends AbstractController
     public function get ($isEnable = 0)
     {
         if ($isEnable == 1) { AccessManager::enableFilter(); }
-        else { AccessManager::disableFilter(); }
+        else if ($isEnable == 0){ AccessManager::disableFilter(); }
+        else if ($isEnable == 3){ AccessManager::enablePasswordProtect(); }
+        else if ($isEnable == 2){ AccessManager::disablePasswordProtect(); }
 
         header('location: '.Config::$TOP_PATH.'settings-general');
     }

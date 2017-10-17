@@ -19,7 +19,10 @@ class Router
 
 		if (AccessManager::restricted())
 		{
-
+            // Index (dashboard)
+            $router->controller('/', 'rrsoacis\\component\\dashboard\\RestrictedDashboardController');
+            $router->controller('/index.php', 'rrsoacis\\component\\dashboard\\RestrictedDashboardController');
+            $router->controller('/settings-login', 'rrsoacis\\component\\setting\\general\\SettingsLoginController');
 		}
 		else
         {
@@ -45,6 +48,7 @@ class Router
             $router->controller('/settings-version_update', 'rrsoacis\\component\\setting\\general\\SettingsVersionUpdateController');
             $router->controller('/settings-restrict_set', 'rrsoacis\\component\\setting\\general\\SettingsRestrictAccessSetController');
             $router->controller('/settings-restrict_set_unrestrected', 'rrsoacis\\component\\setting\\general\\SettingsRestrictAccessHostsController');
+            $router->controller('/settings-restrict_set_password', 'rrsoacis\\component\\setting\\general\\SettingsRestrictAccessPasswordController');
             $router->controller('/settings-license', 'rrsoacis\\component\\setting\\license\\SettingsLicenseController');
 
 

@@ -72,11 +72,11 @@ use rrsoacis\manager\AccessManager;
         </script>
         <!-- /Version -->
 
-        <!-- Restrict Access -->
+        <!-- Restrict Access by hosts -->
         <div class="box box-solid">
             <div class="box-header">
                 <h3 class="box-title">
-                    Restrict Access
+                    Restrict Access by hosts
                 </h3>
                 <div class="box-tools">
                     <?php if (AccessManager::filterEnabled()) { ?>
@@ -85,22 +85,56 @@ use rrsoacis\manager\AccessManager;
                         <button class="btn btn-success" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-restrict_set/1'">Enable</button>
                     <?php } ?>
                 </div>
-            <div class="box-body">
-                <b>
-                    Unrestrict hosts
-                </b>
-                <small>
-                    Current Host: <?=getenv("REMOTE_ADDR") ?>
-                </small>
-                <form action="./settings-restrict_set_unrestrected" method="post">
-                    <div class="input-group pull-right">
-                        <input class="form-control" name="hosts" type="text" value="<?=AccessManager::getUnrestrictedHostsText() ?>">
-                        <span class="input-group-btn"> <input class="btn" type="submit" value="Set"> </span>
-                    </div>
-                </form>
+                <div class="box-body">
+                    <b>
+                        Unrestrict hosts
+                    </b>
+                    <small>
+                        Current Host: <?=getenv("REMOTE_ADDR") ?>
+                    </small>
+                    <form action="./settings-restrict_set_unrestrected" method="post">
+                        <div class="input-group pull-right">
+                            <input class="form-control" name="hosts" type="text" value="<?=AccessManager::getUnrestrictedHostsText() ?>">
+                            <span class="input-group-btn"> <input class="btn" type="submit" value="Set"> </span>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <!-- /Restrict Access -->
+        <!-- /Restrict Access by hosts -->
+
+        <!-- Restrict Access by password -->
+        <div class="box box-solid">
+            <div class="box-header">
+                <h3 class="box-title">
+                    Restrict Access by password
+                </h3>
+                <div class="box-tools">
+                    <?php if (AccessManager::passwordProtectEnabled()) { ?>
+                        <button class="btn btn-warning"
+                                onclick="location.href='<?= Config::$TOP_PATH ?>/settings-restrict_set/2'">Disable
+                        </button>
+                    <?php } else { ?>
+                        <button class="btn btn-success"
+                                onclick="location.href='<?= Config::$TOP_PATH ?>/settings-restrict_set/3'">Enable
+                        </button>
+                    <?php } ?>
+                </div>
+                <div class="box-body">
+                    <b>
+                        Password
+                    </b>
+                    <form action="./settings-restrict_set_password" method="post">
+                        <div class="input-group pull-right">
+                            <input class="form-control" name="password" type="text"
+                                   value="<?= AccessManager::getPassword() ?>">
+                            <span class="input-group-btn"> <input class="btn" type="submit" value="Set"> </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /Restrict Access by password -->
     </section>
     <!-- /.content -->
   </div>
