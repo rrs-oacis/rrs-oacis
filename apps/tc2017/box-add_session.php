@@ -86,7 +86,7 @@ $(function(){
 function getAgentParameterList(){
 
 	fetch('<?= Config::$TOP_PATH ?>agents_get', {
-        method: 'GET'
+        method: 'GET', credentials: "include"
       })
       .then(function(response) {
         return response.json()
@@ -123,7 +123,7 @@ function setAgentListOptionData(date){
 function getMapParameterList(){
 
   fetch('<?= Config::$TOP_PATH ?>maps_get', {
-        method: 'GET'
+        method: 'GET', credentials: "include"
       })
       .then(function(response) {
         return response.json()

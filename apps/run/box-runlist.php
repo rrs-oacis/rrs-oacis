@@ -94,7 +94,7 @@ use rrsoacis\system\Config;
                 //console.log(item);
 
                 fetch('<?= Config::$TOP_PATH ?>run-get_run/'+item, {
-                    method: 'GET'
+                    method: 'GET', credentials: "include"
                 }).then(function (response) {
                         return response.json()
                 }).then(function (json) {
@@ -131,7 +131,7 @@ use rrsoacis\system\Config;
         document.querySelector('#run_list-overlay').style.display = '';
 
         fetch('<?= Config::$TOP_PATH ?>run-get_runlist', {
-            method: 'GET'
+            method: 'GET', credentials: "include"
         })
             .then(function (response) {
                 return response.json()

@@ -98,7 +98,7 @@ $("#add_parameter-form").submit(function (e) {
     e.preventDefault();
     var form = document.querySelector('#add_parameter-form');
     fetch('./competition-add_session', {
-        method: 'POST',
+        method: 'POST', credentials: "include",
         body: new FormData(form)
     }).then(function (response) {
 
@@ -141,7 +141,7 @@ $(function(){
 function getAgentParameterList(){
 
 	fetch('<?= Config::$TOP_PATH ?>agents_get', {
-        method: 'GET'
+        method: 'GET', credentials: "include"
       })
       .then(function(response) {
         return response.json()
@@ -178,7 +178,7 @@ function setAgentListOptionData(date){
 function getMapParameterList(){
 
   fetch('<?= Config::$TOP_PATH ?>maps_get', {
-        method: 'GET'
+        method: 'GET', credentials: "include"
       })
       .then(function(response) {
         return response.json()
