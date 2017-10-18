@@ -246,23 +246,26 @@ class ClusterManager
         $sth = $db->query("select count(*) as num from cluster;");
         $num = $sth->fetch(PDO::FETCH_ASSOC)['num'];
 
-        // destroy HostGroup in all cases
+        // destroy HostGroup in all case
         $sth = $db->query("select value from system where name='mainHostGroupName';");
-        $name = $sth->fetch(PDO::FETCH_ASSOC)['value'];
-        if ($name !== '') // if already exist HostGroup
+        $nameText = $sth->fetch(PDO::FETCH_ASSOC)['value'];
+        if ($nameText === '') // if already exist HostGroup
         {
-            /* BEGIN : direct OACIS control */
-            // destroy HostGroup on mongo
-            $oaciscoll = $oacisdb->selectCollection("host_groups");
-            $oaciscoll->deleteMany(array("name" => self::MAIN_HOST_GROUP));
-            /* END : direct OACIS control */
-
-            $db->query("update system set value='' where name='mainHostGroupName';");
+            $name = new ObjectID();
+            $sth = $db->prepare("update system set value=:value where name='mainHostGroupName';");
+            $sth->bindValue(':value', $name, PDO::PARAM_STR);
+            $sth->execute();
         }
+        else
+        {
+            $name = new ObjectID($nameText);
+        }
+
+        $oaciscoll = $oacisdb->selectCollection("host_groups");
+        $oaciscoll->deleteMany(array("name" => self::MAIN_HOST_GROUP));
 
         if ($num > 0) // if exist cluster
         { // setup HostGroup
-            $name = new ObjectID();
 
             /* BEGIN : direct OACIS control */
             // setup HostGroup on mongo
@@ -271,7 +274,7 @@ class ClusterManager
             //"name" : "RRS-OACIS",
             //"host_ids" : [ ObjectId("593691f518d168898099a4ba"),
             //ObjectId("593696c5e011d9000a7f1674"),
-            //ObjectId("59369705e011d9000a7f1675") ],
+            //ObjectId("59369705eosts011d9000a7f1675") ],
             //"updated_at" : ISODate("2017-06-06T11:53:30.082Z"),
             //"created_at" : ISODate("2017-06-06T11:53:30.082Z")
             //}
@@ -292,10 +295,6 @@ class ClusterManager
             $oaciscoll = $oacisdb->selectCollection("host_groups");
             $oaciscoll->insertOne($hostGroup);
             /* END : direct OACIS control */
-
-            $sth = $db->prepare("update system set value=:value where name='mainHostGroupName';");
-            $sth->bindValue(':value', $name, PDO::PARAM_STR);
-            $sth->execute();
         }
     }
 
