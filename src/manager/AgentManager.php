@@ -78,6 +78,15 @@ class AgentManager
 
         $db = self::connectDB();
 
+        if($archived==0){
+
+            $agent = self::getAgent($name);
+
+            $sth = $db->prepare("update agent set archived=1 where alias=:alias;");
+            $sth->bindValue(':alias', $agent['alias'], PDO::PARAM_STR);
+            $sth->execute();
+        }
+
         $sthU = $db->prepare("update agent set archived=:archived where name=:name;");
         $sthU->bindValue(':archived', $archived, PDO::PARAM_INT);
         $sthU->bindValue(':name', $name, PDO::PARAM_STR);
