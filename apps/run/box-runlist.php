@@ -84,19 +84,26 @@ use rrsoacis\system\Config;
         });
 
 
-        setInterval(function () {
-
-            //console.log('---------');
-
-            for (let item of runUpdateList) {
+        setInterval(updateCellData, 12000);
 
 
-                //console.log(item);
+    });
+
+    function updateCellData(quick){
+        for (let item of runUpdateList) {
+
+
+            //console.log(item);
+
+            var sTime = quick ? Math.floor( Math.random()*100):Math.floor( Math.random()*10000 + Math.random()*1000);
+
+            setTimeout( function () {
+
 
                 fetch('<?= Config::$TOP_PATH ?>run-get_run/'+item, {
                     method: 'GET', credentials: "include"
                 }).then(function (response) {
-                        return response.json()
+                    return response.json()
                 }).then(function (json) {
 
                     //console.log(json);
@@ -111,18 +118,28 @@ use rrsoacis\system\Config;
                         runUpdateList.delete(item);
                     }
 
+
+                    document.querySelector('#runid'+item+' .run_score').textContent = json['score'];
+
+                    var runId = json['runId'];
+                    var bassURL = location.href.split('/')[2];
+                    bassURL = bassURL.split(':')[0];
+
+                    if(runId != null){
+                        document.querySelector('#runid'+item+' .run_name').innerHTML = '<a target="_blank" href="http://' + bassURL + ':3000/runs/' + runId + '">' + json['name'] + '</a>';
+                    }else{
+                        document.querySelector('#runid'+item+' .run_name').innerHTML = json['name'];
+                    }
+
                 });
 
 
-                //runUpdateList.splice(i, 1);
+            } , sTime );
 
-            }
+            //runUpdateList.splice(i, 1);
 
-
-        }, 10000);
-
-
-    });
+        }
+    }
 
 
     function getRunList() {
@@ -158,11 +175,54 @@ use rrsoacis\system\Config;
                         {"targets": 8, "searchable": false},
                         {"targets": [0, 3, 4, 5, 8], "orderable": false}
                     ],
-                    "order": [7, 'desc']
+                    "order": [7, 'desc'],
+                    responsive: true
                 });
+
+
+
+                console.log('aaaa');
+
+                table.on( 'draw', function (e) {
+
+                    //var rowNode = table.rows();
+
+                    runUpdateList = new Set();
+
+                    $('#simulation_table').find("tr:visible").each(function (){
+
+                        var cellData = $(this).find(".run_name").text();
+                        var cellstatus = $(this).find(".label").text();
+
+                        if (!(cellstatus == 'failed' || cellstatus == 'finished')) {
+
+                            if (cellData != '') runUpdateList.add(cellData);
+
+                        }
+
+                        /*
+                        if($(this)[0].classList.contains("run_name")){
+
+                            var cellData = $(this).text();
+
+                            runUpdateList.add(cellData);
+
+                            //console.log(cellData);
+                        }*/
+
+                        //console.log(cellData);
+                        //do something with the cell data.
+
+                    });
+
+                    console.log(runUpdateList);
+
+
+                } );
 
                 table.draw();
 
+                updateCellData(true);
                 
             });
     }
@@ -243,7 +303,7 @@ use rrsoacis\system\Config;
 
             //SetUpdate
             if (!(data[i]['status'] == 'failed' || data[i]['status'] == 'finished')) {
-                runUpdateList.add(data[i]['name']);
+                //runUpdateList.add(data[i]['name']);
             }
 
         }

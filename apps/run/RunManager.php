@@ -160,8 +160,8 @@ class RunManager
         $sth = $db->prepare("insert into run(simulation, name, agent, map, tag) values(:simulation, :name, :agent, :map, :tag);");
         $sth->bindValue(':simulation', $simulatorId, PDO::PARAM_STR);
         $sth->bindValue(':name', $scriptId, PDO::PARAM_STR);
-        $sth->bindValue(':agent', $agentName, PDO::PARAM_STR);
-        $sth->bindValue(':map', $mapName, PDO::PARAM_STR);
+        $sth->bindValue(':agent', $agent['name'], PDO::PARAM_STR);
+        $sth->bindValue(':map', $map['name'], PDO::PARAM_STR);
         $sth->bindValue(':tag', $tag, PDO::PARAM_STR);
         //$sth->bindValue(':paramId', $highlight, PDO::PARAM_INT);
         //$sth->bindValue(':runId', $scriptId, PDO::PARAM_INT);
@@ -197,6 +197,46 @@ class RunManager
 
             $row["status"] = $status;
 
+            $sthU = $db->prepare("update run set status=:status where name=:name;");
+            $sthU->bindValue(':status', $status, PDO::PARAM_STR);
+            $sthU->bindValue(':name', $row['name'], PDO::PARAM_STR);
+            $sthU->execute();
+
+            //score
+            if ($row['status'] == 'failed' || $row['status'] == 'finished') {
+
+                $score = self::getScores($row["simulation"], $row["paramId"], $row["runId"]);
+
+                if ($row['status'] === 'failed' && !$score) {
+                    $score = -1;
+
+                    //Update
+                    $sthU = $db->prepare("update run set score=:score where name=:name;");
+                    $sthU->bindValue(':score', (int)$score, PDO::PARAM_INT);
+                    $sthU->bindValue(':name', $row['name'], PDO::PARAM_STR);
+                    $sthU->execute();
+
+                } else if ($score) {
+
+                    //Update
+                    $sthU = $db->prepare("update run set score=:score where name=:name;");
+                    $sthU->bindValue(':score', (int)$score, PDO::PARAM_INT);
+                    $sthU->bindValue(':name', $row['name'], PDO::PARAM_STR);
+                    $sthU->execute();
+
+                } else if (!$score) {
+                    $score = 'none';
+                }
+
+
+                $row["score"] = $score;
+
+            } else {
+
+                $row["score"] = 'none';
+
+            }
+
             $run = $row;
 
         }
@@ -223,6 +263,7 @@ class RunManager
             } else {
 
 
+                /*
                 $runRawJson = @file_get_contents('http://localhost:3000/runs/' . $row["runId"] . '.json');
                 $runJson = json_decode($runRawJson, true);
                 $status = $runJson['status'];
@@ -236,10 +277,16 @@ class RunManager
                 $sthU->bindValue(':name', $row['name'], PDO::PARAM_STR);
                 $sthU->execute();
 
+                */
+
 
             }
 
 
+            if (!isset($row["score"])) {
+                $row["score"] = 'none';
+            }
+            /*
             if (!isset($row["score"])) {
 
 
@@ -280,7 +327,7 @@ class RunManager
                 }
 
 
-            }
+            }*/
 
             $runs[] = $row;
 

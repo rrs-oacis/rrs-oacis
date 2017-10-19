@@ -63,7 +63,7 @@ use rrsoacis\system\Config;
                     >-->
                     <select class="form-control select2_tag" name="parameter_tags[]" multiple="multiple"
                             data-placeholder="keyword"
-                            style="width: 100%;" required>
+                            style="width: 100%;" >
 
                     </select>
                 </div>
