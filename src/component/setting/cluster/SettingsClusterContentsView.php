@@ -4,7 +4,12 @@ use rrsoacis\system\Config;
 <!--<section class="content" id="main-content">-->
 <div style="margin-bottom: 2em;">
     <div>
-        <button class="btn btn-danger" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-cluster_remove/<?= $cluster["name"] ?>'">Remove</button>
+        <button class="btn btn-danger" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-cluster_remove/<?= $cluster["name"] ?>'">Remove</button> &nbsp;
+        <?php if ($cluster["check_status"] == 3) { ?>
+            <button class="btn btn-success" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-cluster_enable/<?= $cluster["name"] ?>/1'">Enable</button>
+        <?php } else { ?>
+            <button class="btn btn-warning" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-cluster_enable/<?= $cluster["name"] ?>/0'">Disable</button>
+        <?php } ?>
     </div>
 </div>
 

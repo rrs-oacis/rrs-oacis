@@ -25,7 +25,7 @@ use rrsoacis\system\Config;
                     </tr>
                     <?php foreach ($clusters as $cluster) {?>
                         <tr class="linked-row" data-href="<?= Config::$TOP_PATH."settings-cluster/".$cluster["name"] ?>">
-                            <th style="color:<?= ($cluster["check_status"]==1 ? "gray" : ($cluster["check_status"]==0 ? "green" : "red")) ?>;"><?= $cluster["name"]?></th>
+                            <th style="color:<?= ($cluster["check_status"]==2 ? "red" : ($cluster["check_status"]==0 ? "green" : ($cluster["check_status"]==3 ? "orange" : "gray"))) ?>;"><?= $cluster["name"]?></th>
                             <td><?= $cluster["s_host"]?></td>
                             <td><?= $cluster["a_host"]?></td>
                             <td><?= $cluster["f_host"]?></td>

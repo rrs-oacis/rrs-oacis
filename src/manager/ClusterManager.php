@@ -171,6 +171,22 @@ class ClusterManager
         self::updateHostGroup();
     }
 
+    public static function setEnable($clusterName)
+    {
+        $db = self::connectDB();
+        $sth = $db->prepare("update cluster set check_status=1 where name=:name;");
+        $sth->bindValue(':name', $clusterName, PDO::PARAM_STR);
+        $sth->execute();
+    }
+
+    public static function setDisable($clusterName)
+    {
+        $db = self::connectDB();
+        $sth = $db->prepare("update cluster set check_status=3 where name=:name;");
+        $sth->bindValue(':name', $clusterName, PDO::PARAM_STR);
+        $sth->execute();
+    }
+
     /**
      *
      * */

@@ -15,8 +15,17 @@ class SettingsClusterContentsController extends AbstractController
     public function get ($clusterName = null)
     {
         $cluster = ClusterManager::getCluster($clusterName);
-        $checkMessage = ClusterManager::getClusterRawCheckMessage($clusterName);
-        $checkMessageArray = preg_grep("/^@.\d/", explode("\n", $checkMessage));
+
+        if ($cluster["check_status"] == 3)
+        {
+            $checkMessage = "Disabled";
+            $checkMessageArray = [];
+        }
+        else
+        {
+            $checkMessage = ClusterManager::getClusterRawCheckMessage($clusterName);
+            $checkMessageArray = preg_grep("/^@.\d/", explode("\n", $checkMessage));
+        }
 
         $hasError = [];
         $javaVer = [];

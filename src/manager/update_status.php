@@ -45,6 +45,6 @@ if ($errorCount <= 0)
 }
 else
 {
-    system("sqlite3 \"/home/oacis/rrs-oacis/data/_main.db\" \"update cluster set check_status=2 where name='".$name."';\"");
+    system("sqlite3 \"/home/oacis/rrs-oacis/data/_main.db\" \"update cluster set check_status=2 where check_status!=3 and name='".$name."';\"");
 }
 
