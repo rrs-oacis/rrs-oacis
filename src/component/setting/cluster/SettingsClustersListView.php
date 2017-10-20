@@ -137,7 +137,7 @@ use rrsoacis\system\Config;
                 <h3 class="box-title">Node Collector</h3>
                 <div class="box-tools pull-right">
                     <a href='<?= Config::$TOP_PATH ?>RrsoacisNodeCollector/RrsoacisNodeCollector.jar'>RrsoacisNodeCollector.jar</a>
-                    <button class="btn btn-warning" onclick="location.href='<?= Config::$TOP_PATH."settings-cluster_statusupdate" ?>'">Update</button>
+                    <button class="btn btn-warning" onclick="simpleget('<?= Config::$TOP_PATH."settings-clusters_collector/reset" ?>')">Reset</button>
                 </div>
             </div>
             <div id="nc-body" class="box-body">

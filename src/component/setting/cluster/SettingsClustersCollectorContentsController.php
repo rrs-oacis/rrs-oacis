@@ -16,15 +16,16 @@ class SettingsClustersCollectorContentsController extends AbstractController
         $ronc = "/tmp/ronc.txt";
         if ($cmd === "start")
         {
-            exec("nohup java -jar /home/oacis/rrs-oacis/public/RrsoacisNodeCollector/RrsoacisNodeCollector.jar r 6 >> ".$ronc." &", $exec_out, $internet);
+            exec("nohup java -jar /home/oacis/rrs-oacis/public/RrsoacisNodeCollector/RrsoacisNodeCollector.jar r 6 >> ".$ronc." &", $exec_out, $exec_eout);
         }
         else if ($cmd === "next")
         {
-            exec("java -jar /home/oacis/rrs-oacis/public/RrsoacisNodeCollector/RrsoacisNodeCollector.jar e", $exec_out, $internet);
+            exec("java -jar /home/oacis/rrs-oacis/public/RrsoacisNodeCollector/RrsoacisNodeCollector.jar e", $exec_out, $exec_eout);
         }
         else if ($cmd === "reset")
         {
-            exec("rm -f ".$ronc, $exec_out, $internet);
+            exec("rm -f ".$ronc, $exec_out, $exec_eout);
+            exec("nohup java -jar /home/oacis/rrs-oacis/public/RrsoacisNodeCollector/RrsoacisNodeCollector.jar r 6 >> ".$ronc." &", $exec_out, $exec_eout);
         }
 
         if (file_exists($ronc))

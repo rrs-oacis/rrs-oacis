@@ -119,6 +119,7 @@ class ClusterManager
             file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
             exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' >/dev/null &');
         }
+        self::updateHostGroup();
     }
 
     public static function setupHosts($name, $pass)
@@ -203,6 +204,7 @@ class ClusterManager
             $myWorkspaceDir = Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME.'/'.$name;
             mkdir($myWorkspaceDir);
 
+            $myWorkspaceDir = '~/rrs-oacis/'.Config::WORKSPACE_DIR_NAME.'/'.$name;
             $base['_id'] = $name;
             $base['name'] = 'RO_'.$name;
             $base['work_base_dir'] = $myWorkspaceDir;
