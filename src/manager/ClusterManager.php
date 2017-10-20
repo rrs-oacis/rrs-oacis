@@ -88,7 +88,7 @@ class ClusterManager
         }
         else
         {
-            $sth = $db->prepare("update cluster set check_status=2 where name=:name;");
+            $sth = $db->prepare("update cluster set check_status=2 where name=:name and check_status!=3;");
             $sth->bindValue(':name', $name, PDO::PARAM_STR);
             $sth->execute();
         }
@@ -111,7 +111,7 @@ class ClusterManager
         if ($cluster != null)
         {
             $db = self::connectDB();
-            $db->query("update cluster set check_status=1 where name='".$cluster["name"]."';");
+            $db->query("update cluster set check_status=1 where name='".$cluster["name"]."' and check_status!=3;");
 
             $scriptId = uniqid();
             $script = "#!/bin/bash\n\n";
