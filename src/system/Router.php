@@ -79,8 +79,7 @@ class Router
 
             // auto-register connected apps
             foreach (AppManager::getConnectedApps() as $app) {
-
-                $packageName = preg_split('/[\\/]/',$app['package'])[1];
+                $packageName = preg_replace('/^rrs_oacis\/(.*)$/', '${1}', $app['package']);
 
                 $router->controller('/' . $packageName, $app['main_controller']);
                 foreach ($app['sub_controller'] as $controller) {
