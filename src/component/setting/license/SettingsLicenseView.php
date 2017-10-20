@@ -27,8 +27,7 @@ use rrsoacis\manager\AccessManager;
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Open Source License
-                <small>use library</small>
+                License terms
             </h1>
             <ol class="breadcrumb">
                 <li><a href="<?=Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i><?= rrsoacis\system\Config::APP_NAME ?></a></li>
@@ -39,7 +38,11 @@ use rrsoacis\manager\AccessManager;
 
         <!-- Main content -->
         <section class="content">
-            <!-- Version -->
+            <div class="box box-success">
+                <pre><?= file_get_contents(Config::$SRC_REAL_URL.'../LICENSE');?></pre>
+            </div>
+
+            <h4>Used libraries</h4>
 
             <?php for ($i=0;$i< count($license); $i++){ ?>
             <div class="box collapsed-box">
@@ -65,8 +68,6 @@ use rrsoacis\manager\AccessManager;
             </div>
 
             <?php  } ?>
-
-            <!-- /Version -->
 
         <!-- /.content -->
     </div>

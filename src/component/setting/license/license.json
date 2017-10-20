@@ -106,7 +106,7 @@
   },
   {
     "name":"simpleimport",
-    "location":"none",
+    "location":"https://github.com/tkmnet/simpleimport.js",
     "license":"simpleimport.txt"
   },
   {

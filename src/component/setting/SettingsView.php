@@ -80,20 +80,6 @@ use rrsoacis\system\Config;
 	</div>
 	<!-- /.col -->
 
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <a href="/settings-license">
-                <div class="info-box">
-                    <span class="info-box-icon bg-yellow"><i class="fa fa-book"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">License</span>
-                    </div>
-                    <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-            </a>
-        </div>
-        <!-- /.col -->
-
 	</div>
 	<!-- /.row -->
     </section>
@@ -103,8 +89,17 @@ use rrsoacis\system\Config;
 
   <!-- =============================================== -->
 
-  <?php include Config::$SRC_REAL_URL.'component/common/main-footer.php';?>
-  
+    <footer class="main-footer">
+        <a href="/settings-license">
+            <!-- Display on only settings page -->
+            <i class="fa fa-book"></i> LicenseTerms
+        </a>
+        <div class="pull-right hidden-xs">
+            <b>Version</b> <?= Config::APP_VERSION ?>
+        </div>
+        <br>
+    </footer>
+
   <!-- =============================================== -->
 
 </div>
