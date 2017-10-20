@@ -22,6 +22,7 @@ class SettingsClustersListWidgetController extends AbstractController
             $usedNodes .= $cluster["f_host"] . "\n";
             $usedNodes .= $cluster["p_host"] . "\n";
         }
+        ClusterManager::updateHostGroup();
         include(Config::$SRC_REAL_URL . 'component/setting/cluster/SettingsClustersListWidgetView.php');
     }
 }

@@ -240,12 +240,12 @@ class ClusterManager
     /**
      *
      * */
-    private static function updateHostGroup()
+    public static function updateHostGroup()
     {
         $oacisdb = self::connectOacisDB();
 
         $db = self::connectDB();
-        $sth = $db->query("select count(*) as num from cluster;");
+        $sth = $db->query("select count(*) as num from cluster where check_status=0;");
         $num = $sth->fetch(PDO::FETCH_ASSOC)['num'];
 
         // destroy HostGroup in all case
@@ -283,7 +283,7 @@ class ClusterManager
 
             $hostGroup["_id"] = $name;
             $hostGroup["name"] = self::MAIN_HOST_GROUP;
-            $sth = $db->query("select name from cluster;");
+            $sth = $db->query("select name from cluster where check_status=0;");
             $hostGroup["host_ids"] = [];
             $oaciscoll = $oacisdb->selectCollection("hosts");
             while($row = $sth->fetch(PDO::FETCH_ASSOC))
@@ -297,6 +297,25 @@ class ClusterManager
             $oaciscoll = $oacisdb->selectCollection("host_groups");
             $oaciscoll->insertOne($hostGroup);
             /* END : direct OACIS control */
+        }
+        else
+        {
+            $hostGroup["_id"] = $name;
+            $hostGroup["name"] = self::MAIN_HOST_GROUP;
+            $hostGroup["host_ids"] = [];
+            $oaciscoll = $oacisdb->selectCollection("hosts");
+            $hostGroup["updated_at"] = new UTCDateTime();
+            $hostGroup["created_at"] = new UTCDateTime();
+            $oaciscoll = $oacisdb->selectCollection("host_groups");
+            $oaciscoll->insertOne($hostGroup);
+        }
+
+        $sth = $db->query("select name from cluster where check_status!=0;");
+        $oaciscoll = $oacisdb->selectCollection("hosts");
+        while($row = $sth->fetch(PDO::FETCH_ASSOC))
+        {
+            $hostid = new ObjectID($row['name']);
+            $oaciscoll->updateOne(array("_id" => $hostid), array('$set' => array("host_group_ids" => array())));
         }
     }
 
