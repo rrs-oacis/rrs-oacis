@@ -20,8 +20,8 @@ class SettingsVersionUpdateController extends AbstractController
                 && (strpos($exec_out,'verification') !== false
                     || strpos($exec_out,'Permission') !== false))
             {
-                exec("cd /home/oacis/rrs_oacis; git remote set-url origin https://github.com/rrs_oacis/rrs_oacis.git");
-                exec("cd /home/oacis/rrs_oacis; git remote set-url --push origin git@github.com:rrs_oacis/rrs_oacis.git");
+                exec("cd /home/oacis/rrs-oacis; git remote set-url origin https://github.com/rrs-oacis/rrs-oacis.git");
+                exec("cd /home/oacis/rrs-oacis; git remote set-url --push origin git@github.com:rrs-oacis/rrs-oacis.git");
                 exec("timeout 30 git fetch", $exec_out, $exec_ret);
 
                 exec("cd /home/oacis/rrs-oacis/rrsenv; git remote set-url origin https://github.com/tkmnet/rrsenv.git");

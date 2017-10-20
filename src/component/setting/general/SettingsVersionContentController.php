@@ -21,8 +21,8 @@ class SettingsVersionContentController extends AbstractController
                     || strpos($exec_out,'Permission') !== false))
             {
                 exec("echo StrictHostKeyChecking no >> ~/.ssh/config");
-                exec("git remote set-url origin https://github.com/rrs_oacis/rrs_oacis.git");
-                exec("git remote set-url --push origin git@github.com:rrs_oacis/rrs_oacis.git");
+                exec("git remote set-url origin https://github.com/rrs-oacis/rrs-oacis.git");
+                exec("git remote set-url --push origin git@github.com:rrs-oacis/rrs-oacis.git");
                 exec("timeout 30 git fetch", $exec_out, $exec_ret);
             }
 

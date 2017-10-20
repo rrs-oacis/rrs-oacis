@@ -123,7 +123,7 @@ class SessionManager
         $simulator = json_decode ( file_get_contents($tmpFileOut), true );
         system("rm -f ".$tmpFileOut);
         $simulator['name'] = "RO_".$name."_".uniqid();
-        $simulator['command'] = "/home/oacis/rrs_oacis/rrsenv/script/runNGC_MT.sh";
+        $simulator['command'] = "/home/oacis/rrs-oacis/rrsenv/script/runNGC_MT.sh";
         $simulator['executable_on_ids'][] = ClusterManager::getMainHostGroup();
 
         $simulator['parameter_definitions'] = [];
@@ -210,8 +210,8 @@ class SessionManager
             $script .= ' -o /tmp/out_'.$scriptId.'.json';
             $script .= "\n";
             $script .= 'php '.realpath(dirname(__FILE__)).'/update_runid.php \''.$scriptId.'\' /tmp/out_'.$scriptId.'.json';
-            file_put_contents('/home/oacis/rrs_oacis/oacis-queue/scripts/'.$scriptId, $script);
-            exec('nohup /home/oacis/rrs_oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
+            file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
+            exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
         }
 
         return true;
@@ -239,8 +239,8 @@ class SessionManager
             $script .= Config::$OACISCLI_PATH." destroy_runs_by_ids";
             $script .= ' '.$row['runId'];
 
-            file_put_contents('/home/oacis/rrs_oacis/oacis-queue/scripts/'.$scriptId, $script);
-            exec('nohup /home/oacis/rrs_oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
+            file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
+            exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
         }
         $db->query("delete from run where session='".$sessionName."' and map='".$mapName."';");
 
@@ -279,8 +279,8 @@ class SessionManager
 	$script .= ' -o /tmp/out_'.$scriptId.'.json';
 	$script .= "\n";
 	$script .= 'php '.realpath(dirname(__FILE__)).'/update_runid.php \''.$scriptId.'\' /tmp/out_'.$scriptId.'.json';
-	file_put_contents('/home/oacis/rrs_oacis/oacis-queue/scripts/'.$scriptId, $script);
-	exec('nohup /home/oacis/rrs_oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
+	file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
+	exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
 
         return true;
     }
@@ -307,7 +307,7 @@ class SessionManager
             $sth->execute();
 
             $script = "#!/bin/bash\n\n";
-            $script .= "/home/oacis/oacis/bin/oacis_ruby /home/oacis/rrs_oacis/ruby/discard.rb ".$row['paramId'];
+            $script .= "/home/oacis/oacis/bin/oacis_ruby /home/oacis/rrs-oacis/ruby/discard.rb ".$row['paramId'];
             $script .= "\n";
             $script .= "sleep 5";
             $script .= "\n";
@@ -318,8 +318,8 @@ class SessionManager
             $script .= ' -o /tmp/out_'.$scriptId.'.json >/tmp/e 2>&1';
             $script .= "\n";
             $script .= 'php '.realpath(dirname(__FILE__)).'/update_runid.php \''.$scriptId.'\' /tmp/out_'.$scriptId.'.json';
-            file_put_contents('/home/oacis/rrs_oacis/oacis-queue/scripts/'.$scriptId, $script);
-            exec('nohup /home/oacis/rrs_oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
+            file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
+            exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
         }
 
         return true;
