@@ -27,8 +27,7 @@ use rrsoacis\manager\AppManager;
       <li><a href="<?=Config::$TOP_PATH ?>maps"><i class="fa fa-map"></i> <span>Maps</span></a></li>
         <?php
         foreach (AppManager::getConnectedApps() as $appDisplayOnSidebar) {
-
-            $packageName = preg_split('/[\\/]/',$appDisplayOnSidebar['package'])[1];
+            $packageName = preg_replace('/^rrs_oacis\/(.*)$/', '${1}', $appDisplayOnSidebar['package']);
 
             echo '<li><a href="' . Config::$TOP_PATH . $packageName . '"><i class="fa ' . $appDisplayOnSidebar['icon'] . '"></i> <span>' . $appDisplayOnSidebar['name'] . '</span></a></li>';
         }
