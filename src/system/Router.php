@@ -79,10 +79,13 @@ class Router
 
             // auto-register connected apps
             foreach (AppManager::getConnectedApps() as $app) {
-                $router->controller('/' . $app['package'], $app['main_controller']);
+
+                $packageName = preg_split('/[\\/]/',$app['package'])[1];
+
+                $router->controller('/' . $packageName, $app['main_controller']);
                 foreach ($app['sub_controller'] as $controller) {
                     if(isset($controller[0])&&isset($controller[1])){
-                        $router->controller('/' . $app['package'] . '-' . $controller[0], $controller[1]);
+                        $router->controller('/' . $packageName . '-' . $controller[0], $controller[1]);
                     }
                 }
             }

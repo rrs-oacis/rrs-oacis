@@ -116,8 +116,8 @@ class ClusterManager
             $scriptId = uniqid();
             $script = "#!/bin/bash\n\n";
             $script .= 'php '.realpath(dirname(__FILE__)).'/update_status.php \''.$cluster["name"].'\' >>/tmp/t';
-            file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
-            exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' >/dev/null &');
+            file_put_contents('/home/oacis/rrs_oacis/oacis-queue/scripts/'.$scriptId, $script);
+            exec('nohup /home/oacis/rrs_oacis/oacis-queue/main.pl '.$scriptId.' >/dev/null &');
         }
         self::updateHostGroup();
     }
@@ -129,9 +129,9 @@ class ClusterManager
         {
             $scriptId = uniqid();
             $script = "#!/bin/bash\n\n";
-            $script .= 'cd /home/oacis/rrs-oacis/rrsenv/workspace/'.$cluster["name"].' ; ../../script/rrscluster setup -p \''.$pass.'\'';
-            file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
-            exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' >/dev/null &');
+            $script .= 'cd /home/oacis/rrs_oacis/rrsenv/workspace/'.$cluster["name"].' ; ../../script/rrscluster setup -p \''.$pass.'\'';
+            file_put_contents('/home/oacis/rrs_oacis/oacis-queue/scripts/'.$scriptId, $script);
+            exec('nohup /home/oacis/rrs_oacis/oacis-queue/main.pl '.$scriptId.' >/dev/null &');
         }
     }
 
@@ -204,7 +204,7 @@ class ClusterManager
             $myWorkspaceDir = Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME.'/'.$name;
             mkdir($myWorkspaceDir);
 
-            $myWorkspaceDir = '~/rrs-oacis/'.Config::WORKSPACE_DIR_NAME.'/'.$name;
+            $myWorkspaceDir = '~/rrs_oacis/'.Config::WORKSPACE_DIR_NAME.'/'.$name;
             $base['_id'] = $name;
             $base['name'] = 'RO_'.$name;
             $base['work_base_dir'] = $myWorkspaceDir;
@@ -222,7 +222,7 @@ class ClusterManager
         file_put_contents($myWorkspaceDir.'/rrscluster.cfg', $config);
         //------------------
         system("chown -R oacis:oacis ".Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME);
-        $myWorkspaceDir = '~/rrs-oacis/'.Config::WORKSPACE_DIR_NAME.'/'.$name;
+        $myWorkspaceDir = '~/rrs_oacis/'.Config::WORKSPACE_DIR_NAME.'/'.$name;
 
         $sth->bindValue(':name', $name, PDO::PARAM_STR);
         $sth->bindValue(':a_host', $a_host, PDO::PARAM_STR);

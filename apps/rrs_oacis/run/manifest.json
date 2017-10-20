@@ -1,0 +1,12 @@
+{
+    "name" : "Run",
+    "version" : "0.0.1",
+    "description" : "run",
+    "icon" : "fa-cubes",
+    "main_controller" : "rrsoacis\\apps\\rrs_oacis\\run\\RunMainController",
+    "sub_controller" : [
+        ["add_run","rrsoacis\\apps\\rrs_oacis\\run\\AddRunController"],
+        ["get_runlist","rrsoacis\\apps\\rrs_oacis\\run\\RunListGetController"],
+        ["get_run","rrsoacis\\apps\\rrs_oacis\\run\\RunGetController"]
+    ]
+}

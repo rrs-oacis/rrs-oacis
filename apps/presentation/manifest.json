@@ -1,8 +1,0 @@
-{
-    "name" : "Presantation",
-    "version" : "0.0.1",
-    "description" : "AAAA",
-    "icon" : "fa-upload",
-    "main_controller" : "rrsoacis\\apps\\presentation\\PresentationMainController",
-    "sub_controller" : [["set_score","rrsoacis\\apps\\presentation\\SetScoreController"]]
-}

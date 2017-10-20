@@ -33,27 +33,40 @@ class AppManager
 			mkdir(Config::$SRC_REAL_URL.self::APPS_DIR,0777,true);
 		}
 
-		$files = scandir(Config::$SRC_REAL_URL.self::APPS_DIR);
+		$userFiles = scandir(Config::$SRC_REAL_URL.self::APPS_DIR);
 
 		$apps = [];
-		foreach ($files as $file)
-		{
-            if ($file === '.' || $file === '..' ) { continue; }
 
-            $manifestFile = Config::$SRC_REAL_URL.self::APPS_DIR."/".$file."/".self::APPS_MANIFEST_FILE;
-			if (file_exists($manifestFile))
-			{
-				// Jsonデータを取得
-				$json = file_get_contents($manifestFile);
-				//$json = mb_convert_encoding( $json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN' );
+        foreach ($userFiles as $userFile) {
 
-				$app = json_decode($json, true);
-                $app['package'] = $file;
-                $app['enabled'] = in_array($app['package'], $connectedApps);
 
-				$apps[] = $app;
-			}
-		}
+            if ($userFile === '.' || $userFile === '..' || $userFile === '.DS_Store' || $userFile === 'apps') {
+                continue;
+            }
+
+            $files = scandir(Config::$SRC_REAL_URL.self::APPS_DIR . "/" . $userFile);
+
+            foreach ($files as $file) {
+
+                if ($file === '.' || $file === '..') {
+                    continue;
+                }
+
+                $manifestFile = Config::$SRC_REAL_URL . self::APPS_DIR . "/" . $userFile . "/" . $file . "/" . self::APPS_MANIFEST_FILE;
+                if (file_exists($manifestFile)) {
+                    // Jsonデータを取得
+                    $json = file_get_contents($manifestFile);
+                    //$json = mb_convert_encoding( $json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN' );
+
+                    $app = json_decode($json, true);
+                    $app['package'] = $userFile . "/" . $file;
+                    $app['enabled'] = in_array($app['package'], $connectedApps);
+
+                    $apps[] = $app;
+                }
+            }
+
+        }
 
 		return $apps;
 	}
@@ -110,6 +123,7 @@ class AppManager
         }
 
         $manifestFile = Config::$SRC_REAL_URL.self::APPS_DIR."/".$packageName."/".self::APPS_MANIFEST_FILE;
+
         if (file_exists($manifestFile))
         {
             // Jsonデータを取得

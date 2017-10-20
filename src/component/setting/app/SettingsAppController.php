@@ -7,14 +7,14 @@ use rrsoacis\manager\AppManager;
 
 class SettingsAppController extends AbstractController
 {
-    public function anyIndex($param = null)
+    public function anyIndex($param = null,$param2 = null)
     {
-        self::get($param);
+        self::get($param, $param2);
     }
 
-    public function get ($param = null)
+    public function get ($param = null,$param2 = null)
     {
-        $app = AppManager::getApp($param);
+        $app = AppManager::getApp($param . "/" . $param2);
         include(Config::$SRC_REAL_URL . 'component/setting/app/SettingsAppView.php');
     }
 }

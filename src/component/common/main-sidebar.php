@@ -27,7 +27,10 @@ use rrsoacis\manager\AppManager;
       <li><a href="<?=Config::$TOP_PATH ?>maps"><i class="fa fa-map"></i> <span>Maps</span></a></li>
         <?php
         foreach (AppManager::getConnectedApps() as $appDisplayOnSidebar) {
-            echo '<li><a href="' . Config::$TOP_PATH . $appDisplayOnSidebar['package'] . '"><i class="fa ' . $appDisplayOnSidebar['icon'] . '"></i> <span>' . $appDisplayOnSidebar['name'] . '</span></a></li>';
+
+            $packageName = preg_split('/[\\/]/',$appDisplayOnSidebar['package'])[1];
+
+            echo '<li><a href="' . Config::$TOP_PATH . $packageName . '"><i class="fa ' . $appDisplayOnSidebar['icon'] . '"></i> <span>' . $appDisplayOnSidebar['name'] . '</span></a></li>';
         }
         ?>
       <li><a href="<?=Config::$TOP_PATH ?>settings"><i class="fa fa-gear"></i> <span>Settings</span></a></li>

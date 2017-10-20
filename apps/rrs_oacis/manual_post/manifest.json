@@ -1,0 +1,8 @@
+{
+    "name" : "Manual Post",
+    "version" : "0.0.1",
+    "description" : "manual post(test)",
+    "icon" : "fa-upload",
+    "main_controller" : "rrsoacis\\apps\\rrs_oacis\\manual_post\\ManualPostMainController",
+    "sub_controller" : [["add_parameter","rrsoacis\\apps\\rrs_oacis\\manual_post\\OacisAddParameterController"]]
+}

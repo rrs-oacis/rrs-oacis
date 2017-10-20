@@ -1,0 +1,13 @@
+{
+    "name" : "Competition Results 2017",
+    "version" : "0.0.1",
+    "description" : "Competition Results 2017",
+    "icon" : "fa-list-alt",
+    "main_controller" : "rrsoacis\\apps\\rrs_oacis\\results\\ResultsMainController",
+    "sub_controller" : [
+    	["result","rrsoacis\\apps\\rrs_oacis\\results\\ResultController"],
+		["map","rrsoacis\\apps\\rrs_oacis\\results\\ResultMapController"],
+        ["download","rrsoacis\\apps\\rrs_oacis\\results\\ResultDownloadController"],
+	["map_download","rrsoacis\\apps\\rrs_oacis\\results\\ResultMapDownloadController"]
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "name" : "Competition",
+    "version" : "0.0.1",
+    "description" : "competition",
+    "icon" : "fa-star",
+    "main_controller" : "rrsoacis\\apps\\rrs_oacis\\competition\\MainController",
+    "sub_controller" : [
+        ["add_session","rrsoacis\\apps\\rrs_oacis\\competition\\AddSessionController"],
+        ["add_map","rrsoacis\\apps\\rrs_oacis\\competition\\AddMapController"],
+        ["remove_map","rrsoacis\\apps\\rrs_oacis\\competition\\RemoveMapController"],
+        ["rerun","rrsoacis\\apps\\rrs_oacis\\competition\\RerunController"],
+        ["repost","rrsoacis\\apps\\rrs_oacis\\competition\\RepostController"]
+    ]
+}
