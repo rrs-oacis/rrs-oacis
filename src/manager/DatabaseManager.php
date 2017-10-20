@@ -8,7 +8,7 @@ class DatabaseManager
 {
     public static function getDatabase()
     {
-        $appName = preg_replace('/^.*\/apps\/(.*)\/.*$/', '${1}', debug_backtrace()[0]{"file"});
+        $appName = preg_replace('/^.*\/apps\/(.*)\/(.*)\/.*$/', '${2}@${1}', debug_backtrace()[0]{"file"});
 
         if (! file_exists(Config::$ROUTER_PATH."data"))
         {

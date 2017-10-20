@@ -38,28 +38,21 @@ class AppManager
 		$apps = [];
 
         foreach ($userFiles as $userFile) {
+            if ($userFile === '.' || $userFile === '..') { continue; }
+            if (! is_dir(Config::$SRC_REAL_URL.self::APPS_DIR."/".$userFile)) { continue; }
 
+            $appFiles = scandir(Config::$SRC_REAL_URL.self::APPS_DIR . "/" . $userFile);
 
-            if ($userFile === '.' || $userFile === '..' || $userFile === '.DS_Store' || $userFile === 'apps') {
-                continue;
-            }
+            foreach ($appFiles as $appFile) {
+                if ($appFile === '.' || $appFile === '..') { continue; }
+                if (! is_dir(Config::$SRC_REAL_URL.self::APPS_DIR."/".$userFile."/".$appFile)) { continue; }
 
-            $files = scandir(Config::$SRC_REAL_URL.self::APPS_DIR . "/" . $userFile);
-
-            foreach ($files as $file) {
-
-                if ($file === '.' || $file === '..') {
-                    continue;
-                }
-
-                $manifestFile = Config::$SRC_REAL_URL . self::APPS_DIR . "/" . $userFile . "/" . $file . "/" . self::APPS_MANIFEST_FILE;
+                $manifestFile = Config::$SRC_REAL_URL . self::APPS_DIR . "/" . $userFile . "/" . $appFile . "/" . self::APPS_MANIFEST_FILE;
                 if (file_exists($manifestFile)) {
-                    // Jsonデータを取得
                     $json = file_get_contents($manifestFile);
-                    //$json = mb_convert_encoding( $json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN' );
 
                     $app = json_decode($json, true);
-                    $app['package'] = $userFile . "/" . $file;
+                    $app['package'] = $userFile . "/" . $appFile;
                     $app['enabled'] = in_array($app['package'], $connectedApps);
 
                     $apps[] = $app;
@@ -92,17 +85,11 @@ class AppManager
             $manifestFile = Config::$SRC_REAL_URL.self::APPS_DIR."/".$packageName."/".self::APPS_MANIFEST_FILE;
             if (file_exists($manifestFile))
             {
-                // Jsonデータを取得
                 $json = file_get_contents($manifestFile);
-                //$json = mb_convert_encoding( $json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN' );
 
                 $app = json_decode($json, true);
                 $app['package'] = $packageName;
                 $app['enabled'] = in_array($app['package'], $connectedApps);
-                //$obj ['upload_date'] = date( "Y年m月d日 H時i分s秒", $obj ['upload_date'] );
-
-                //$agent = new Agent();
-                //$agent->setJson($json);
 
                 $apps [] = $app;
             }
@@ -126,9 +113,7 @@ class AppManager
 
         if (file_exists($manifestFile))
         {
-            // Jsonデータを取得
             $json = file_get_contents($manifestFile);
-            //$json = mb_convert_encoding( $json, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN' );
 
             $app = json_decode( $json, true );
             $app['package'] = $packageName;
@@ -139,10 +124,6 @@ class AppManager
             $sth->bindValue(':package', $app['package'], PDO::PARAM_STR);
             $sth->execute();
             $app['enabled'] = ($sth->fetch(PDO::FETCH_ASSOC)['count'] == 1);
-
-            //$obj ['upload_date'] = date( "Y年m月d日 H時i分s秒", $obj ['upload_date'] );
-            //$agent = new Agent();
-            //$agent->setJson($json);
         }
 
         return $app;
@@ -185,7 +166,10 @@ class AppManager
             case 0:
                 $db->query("insert into system(name,value) values('connectedAppVersion', 1);");
                 $db->query("create table connectedApp(package);");
-                $version = 1;
+            case 1:
+                $sth = $db->query("update connectedApp set package = 'rrs_oacis/' || package;");
+                exec("find /home/oacis/rrs-oacis/data -name '*.db' -type f ! -name '_main.db' ! -name '*@*.db' | sed -E 's/\.db$//' | xargs -I { mv {.db {@rrs_oacis.db");
+                $version = 2;
 
                 $sth = $db->prepare("update system set value=:value where name='connectedAppVersion';");
                 $sth->bindValue(':value', $version, PDO::PARAM_INT);
