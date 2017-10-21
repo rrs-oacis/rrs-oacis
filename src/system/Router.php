@@ -68,10 +68,10 @@ class Router
                     }
                 }
 
-                $this->register('/plugins/'.$app['package'], $app['main_controller']);
+                $this->register('/app/'.$app['package'], $app['main_controller']);
                 foreach ($app['sub_controller'] as $controller) {
                     if (isset($controller[0]) && isset($controller[1])) {
-                        $this->register('/plugins/'.$app['package'].'-'.$controller[0], $controller[1]);
+                        $this->register('/app/'.$app['package'].'-'.$controller[0], $controller[1]);
                     }
                 }
             }
