@@ -14,10 +14,7 @@ class SettingsPage extends AbstractPage
 
 	function body()
     {
-        self::writeContentHeader("Settings", "",
-            array(
-                '<a href="<?= Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i>RRS-OACIS</a>',
-                'Settings'));
+        self::writeContentHeader("Settings");
 
         self::beginContent();
         ?>

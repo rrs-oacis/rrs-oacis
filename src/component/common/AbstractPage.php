@@ -68,7 +68,7 @@ abstract class AbstractPage
         <?php
     }
 
-    static function writeContentHeader($contentTitle, $contentDiscription, $breadcrumbArray)
+    static function writeContentHeader($contentTitle, $contentDiscription = "", $breadcrumbArray = array())
     {
         ?>
         <section class="content-header">
@@ -78,13 +78,11 @@ abstract class AbstractPage
             </h1>
             <ol class="breadcrumb">
         <?php
+        print('<li><a href="<?= Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i>RRS-OACIS</a></li>');
         for ($i = 0; $i < count($breadcrumbArray); $i++) {
-            if (($i +1) == count($breadcrumbArray)) {
-                print('<li>'.$breadcrumbArray[$i].'</li>');
-            } else {
-                print('<li class="active">'.$breadcrumbArray[$i].'</li>');
-            }
+            print('<li>'.$breadcrumbArray[$i].'</li>');
         }
+        print('<li class="active">'.$contentTitle.'</li>');
         ?>
             </ol>
         </section>

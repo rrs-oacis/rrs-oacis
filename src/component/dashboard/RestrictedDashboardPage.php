@@ -14,10 +14,7 @@ class RestrictedDashboardPage extends AbstractPage
 
 	function body()
     {
-        self::writeContentHeader("Dashboard", "",
-            array(
-                '<a href="<?= Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i>RRS-OACIS</a>',
-                'Dashboard'));
+        self::writeContentHeader("Dashboard");
 
         self::beginContent();
         self::endContent();
