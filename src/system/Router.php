@@ -23,7 +23,7 @@ class Router
             $this->register('/', 'rrsoacis\\component\\dashboard\\DashboardPage');
 
             // Settings
-            $this->register('/settings', 'rrsoacis\\component\\setting\\SettingsController');
+            $this->register('/settings', 'rrsoacis\\component\\setting\\SettingsPage');
             $this->register('/settings-apps', 'rrsoacis\\component\\setting\\app\\SettingsAppsListController');
             $this->register('/settings-app', 'rrsoacis\\component\\setting\\app\\SettingsAppController');
             $this->register('/settings-app_enable', 'rrsoacis\\component\\setting\\app\\SettingsAppEnableController');
