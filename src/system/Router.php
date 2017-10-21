@@ -16,8 +16,7 @@ class Router
         if (AccessManager::restricted()) {
             // Index (dashboard)
             $this->register('/', 'rrsoacis\\component\\dashboard\\RestrictedDashboardPage');
-            $this->register('/settings-login', 'rrsoacis\\component\\setting\\general\\SettingsLoginController');
-            $this->register('/settings-login_auth', 'rrsoacis\\component\\setting\\general\\SettingsLoginAuthController');
+            $this->register('/settings-login', 'rrsoacis\\component\\setting\\general\\SettingsLoginPage');
         } else {
             // Index (dashboard)
             $this->register('/', 'rrsoacis\\component\\dashboard\\DashboardPage');
@@ -43,7 +42,6 @@ class Router
             $this->register('/settings-restrict_set_unrestrected', 'rrsoacis\\component\\setting\\general\\SettingsRestrictAccessHostsController');
             $this->register('/settings-restrict_set_password', 'rrsoacis\\component\\setting\\general\\SettingsRestrictAccessPasswordController');
             $this->register('/settings-license', 'rrsoacis\\component\\setting\\license\\SettingsLicensePage');
-
 
             // Maps
             $this->register('/maps', 'rrsoacis\\component\\map\\MapsListController');
