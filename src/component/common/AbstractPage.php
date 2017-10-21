@@ -6,7 +6,7 @@ use rrsoacis\system\Config;
 
 abstract class AbstractPage
 {
-    public abstract function controller();
+    public abstract function controller($params);
 
     function printPage()
     {

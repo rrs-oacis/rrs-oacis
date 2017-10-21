@@ -6,7 +6,7 @@ use rrsoacis\system\Config;
 
 class RestrictedDashboardPage extends AbstractPage
 {
-    public function controller()
+    public function controller($params)
     {
         $this->setTitle("Index");
         $this->printPage();

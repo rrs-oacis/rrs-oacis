@@ -7,7 +7,7 @@ use rrsoacis\system\Config;
 class SettingsLicensePage extends AbstractPage
 {
     private $license;
-    public function controller()
+    public function controller($params)
     {
         $this->setTitle("License");
         $license = file_get_contents(Config::$SRC_REAL_URL.'component/setting/license/license.json');

@@ -59,16 +59,6 @@ class Router
             $this->register('/agent_upload', 'rrsoacis\\component\\agent\\AgentFileUploadController');
             $this->register('/agent_archived_change', 'rrsoacis\\component\\agent\\AgentArchivedController');
 
-            //$this->register('/result', 'rrsoacis\\component\\ResultController');
-            /*
-            $this->register('/result_final', 'rrsoacis\\component\\ResultFinalController');
-            $this->register('/result_json', 'rrsoacis\\component\\ResultJsonController');
-            $this->register('/result_simple', 'rrsoacis\\component\\ResultSimpleController');
-            $this->register('/result_map', 'rrsoacis\\component\\ResultMapController');
-            $this->register('/result_download', 'rrsoacis\\component\\ResultDownloadController');
-            */
-
-
             // auto-register connected apps
             foreach (AppManager::getConnectedApps() as $app) {
                 $packageName = preg_replace('/^rrs_oacis\/(.*)$/', '${1}', $app['package']);

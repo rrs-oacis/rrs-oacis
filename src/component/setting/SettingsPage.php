@@ -6,7 +6,7 @@ use rrsoacis\system\Config;
 
 class SettingsPage extends AbstractPage
 {
-    public function controller()
+    public function controller($params)
     {
         $this->setTitle("Settings");
         $this->printPage();

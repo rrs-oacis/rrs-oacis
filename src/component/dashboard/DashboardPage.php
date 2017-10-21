@@ -6,7 +6,7 @@ use rrsoacis\system\Config;
 
 class DashboardPage extends AbstractPage
 {
-    public function controller()
+    public function controller($params)
     {
         $this->setTitle("Index");
         $this->printPage();
