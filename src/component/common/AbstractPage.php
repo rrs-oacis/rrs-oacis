@@ -79,8 +79,8 @@ abstract class AbstractPage
             <ol class="breadcrumb">
         <?php
         print('<li><a href="<?= Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i>RRS-OACIS</a></li>');
-        for ($i = 0; $i < count($breadcrumbArray); $i++) {
-            print('<li>'.$breadcrumbArray[$i].'</li>');
+        foreach ($breadcrumbArray as $breadcrumb) {
+            print('<li>'.$breadcrumb.'</li>');
         }
         print('<li class="active">'.$contentTitle.'</li>');
         ?>

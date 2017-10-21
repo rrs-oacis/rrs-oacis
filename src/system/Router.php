@@ -42,7 +42,7 @@ class Router
             $this->register('/settings-restrict_set', 'rrsoacis\\component\\setting\\general\\SettingsRestrictAccessSetController');
             $this->register('/settings-restrict_set_unrestrected', 'rrsoacis\\component\\setting\\general\\SettingsRestrictAccessHostsController');
             $this->register('/settings-restrict_set_password', 'rrsoacis\\component\\setting\\general\\SettingsRestrictAccessPasswordController');
-            $this->register('/settings-license', 'rrsoacis\\component\\setting\\license\\SettingsLicenseController');
+            $this->register('/settings-license', 'rrsoacis\\component\\setting\\license\\SettingsLicensePage');
 
 
             // Maps
