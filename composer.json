@@ -1,6 +1,6 @@
 {
-	"name" : "adf/server",
-	"license" : "MIT",
+	"name" : "rrs-oacis",
+	"license" : "BSD",
 	"authors" : [{
 			"name" : "k14041kk",
 			"email" : "k14041kk@aitech.ac.jp"
