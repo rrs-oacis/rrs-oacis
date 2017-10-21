@@ -14,7 +14,7 @@ abstract class AbstractPage
         $this->sideber();
         ?> <div class="content-wrapper"> <?php
         $this->body();
-        ?> </div<?php
+        ?> </div> <?php
         $this->footer();
     }
 
