@@ -6,8 +6,7 @@ use rrsoacis\component\common\AbstractController;
 use rrsoacis\manager\AgentManager;
 
 class DashboardController extends AbstractController{
-	
-	public function get(){
+    public function get(){
 		
 		//エージェントのリストを取得
 		//$agents = AgentLoader::getAgents();

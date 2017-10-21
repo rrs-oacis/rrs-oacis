@@ -2,6 +2,6 @@
 
 use Exception;
 
-class AgentNotFoundException extends Exception{
+class HttpMethodNotAllowedException extends Exception{
 	
 }

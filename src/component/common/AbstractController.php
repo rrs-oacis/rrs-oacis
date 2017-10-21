@@ -2,30 +2,20 @@
 
 namespace rrsoacis\component\common;
 
-use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
-
 abstract class AbstractController{
 	
 	public $resource_uri = "./";
 	
-	public function anyIndex($param= null){
-		
+	public function anyIndex(){
+
 		$resource_uri = $this->resource_uri;
-		
+
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			self::post();
+			$this->post();
 		}else{
-			if($param!=null){
-				self::getP($param);
-			}else{
-				self::get();
-			}
+            $this->get();
 		}
 		
-	}
-	
-	public function getP($param= null){
-		throw new HttpMethodNotAllowedException('[AbstractController] getP() : ' .$_SERVER ['REQUEST_URI']);
 	}
 	
 	public function get(){

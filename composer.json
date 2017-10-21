@@ -2,8 +2,8 @@
 	"name" : "rrs-oacis",
 	"license" : "BSD",
 	"authors" : [{
-			"name" : "k14041kk",
-			"email" : "k14041kk@aitech.ac.jp"
+			"name" : "RRS-OACIS Development Team",
+			"email" : "naitorescue-adk@maslab.aitech.ac.jp"
 		}
 	],
 	"autoload" : {
@@ -12,7 +12,6 @@
 		}
 	},
 	"require" : {
-		"phroute/phroute" : "^2.1",
 		"mongodb/mongodb": "^1.1"
 	}
 }
