@@ -89,6 +89,9 @@ class AppManager
 
                 $app = json_decode($json, true);
                 $app['package'] = $packageName;
+                $package = explode('/', $packageName);
+                $app['packages_user'] = str_replace('_', '-', $package[0]);
+                $app['packages_name'] = $package[1];
                 $app['enabled'] = in_array($app['package'], $connectedApps);
 
                 $apps [] = $app;
@@ -117,7 +120,9 @@ class AppManager
 
             $app = json_decode( $json, true );
             $app['package'] = $packageName;
-
+            $package = explode('/', $packageName);
+            $app['packages_user'] = str_replace('_', '-', $package[0]);
+            $app['packages_name'] = $package[1];
 
             $db = self::connectDB();
             $sth = $db->prepare("select count(*) as count from connectedApp where package=:package;");

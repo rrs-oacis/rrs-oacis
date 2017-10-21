@@ -59,12 +59,19 @@ class Router
 
             // auto-register connected apps
             foreach (AppManager::getConnectedApps() as $app) {
-                $packageName = preg_replace('/^rrs_oacis\/(.*)$/', '${1}', $app['package']);
+                if ($app['packages_user'] === "rrs-oacis") {
+                    $this->register('/'.$app['packages_name'], $app['main_controller']);
+                    foreach ($app['sub_controller'] as $controller) {
+                        if (isset($controller[0]) && isset($controller[1])) {
+                            $this->register('/'.$app['packages_name'].'-'.$controller[0], $controller[1]);
+                        }
+                    }
+                }
 
-                $this->register('/'.$packageName, $app['main_controller']);
+                $this->register('/plugins/'.$app['package'], $app['main_controller']);
                 foreach ($app['sub_controller'] as $controller) {
                     if (isset($controller[0]) && isset($controller[1])) {
-                        $this->register('/'.$packageName . '-' . $controller[0], $controller[1]);
+                        $this->register('/plugins/'.$app['package'].'-'.$controller[0], $controller[1]);
                     }
                 }
             }
