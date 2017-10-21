@@ -3,6 +3,8 @@
 namespace rrsoacis\system;
 
 use rrsoacis\component\common\AbstractController;
+use rrsoacis\component\common\AbstractPage;
+use rrsoacis\exception\HttpMethodNotAllowedException;
 use rrsoacis\exception\HttpRouteNotFoundException;
 use rrsoacis\manager\AppManager;
 use rrsoacis\manager\AccessManager;
@@ -13,12 +15,12 @@ class Router
     {
         if (AccessManager::restricted()) {
             // Index (dashboard)
-            $this->register('/', 'rrsoacis\\component\\dashboard\\RestrictedDashboardController');
+            $this->register('/', 'rrsoacis\\component\\dashboard\\RestrictedDashboardPage');
             $this->register('/settings-login', 'rrsoacis\\component\\setting\\general\\SettingsLoginController');
             $this->register('/settings-login_auth', 'rrsoacis\\component\\setting\\general\\SettingsLoginAuthController');
         } else {
             // Index (dashboard)
-            $this->register('/', 'rrsoacis\\component\\dashboard\\DashboardController');
+            $this->register('/', 'rrsoacis\\component\\dashboard\\DashboardPage');
 
             // Settings
             $this->register('/settings', 'rrsoacis\\component\\setting\\SettingsController');
@@ -106,6 +108,7 @@ class Router
                     $searchKey .= $request[$i].'/';
                 }
                 $searchKey = substr($searchKey, 0, -1);
+                $searchKey = preg_replace('/^\/*/', '/', $searchKey);
 
                 $params = array();
                 for ($i = $bindSize; $i < count($request); $i++) {
@@ -116,7 +119,7 @@ class Router
                     $class = new $this->directory[$searchKey];
                     if ($class instanceof AbstractController) {
                         call_user_func_array(array($class, "anyIndex"), $params);
-                    } else if ($class instanceof AbstractController) {
+                    } else if ($class instanceof AbstractPage) {
                         call_user_func(array($class, "controller"), $params);
                     } else {
                         throw new HttpRouteNotFoundException('[Router] routing() : ' . $searchKey);
