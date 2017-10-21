@@ -98,9 +98,9 @@ function setTableData(data)
 
         //t.content.querySelector('.agent_list_name').textContent = data[i]['alias'];
 
-        t.content.querySelector('.agent_list_name').innerHTML =
-            '<a target="_blank" href="<?= Config::$TOP_PATH ?>agent/'+data[i]['name'] + '">' + data[i]['alias'] + "</a>"
-        t.content.querySelector('.agent_list_fullname').textContent = data[i]['name'];
+        t.content.querySelector('.agent_list_name').textContent = data[i]['alias'];
+        t.content.querySelector('.agent_list_fullname').innerHTML =
+            '<a target="_blank" href="<?= Config::$TOP_PATH ?>agent/'+data[i]['name'] + '">' +  data[i]['name'] + "</a>";
         t.content.querySelector('.agent_list_timestamp').textContent = data[i]['timestamp'];
         t.content.querySelector('a').href = '<?= Config::$TOP_PATH ?>agent/'+data[i]['name'];
         /*
