@@ -101,14 +101,14 @@ $('#inputTitle').val(name);
 
             if(json['status']){
             	toastr["success"](
-                        "<?= _l("adf.add_agent_box.toastr_addagent"); ?>",
-    		    		"<?= _l("adf.add_agent_box.toastr_success"); ?>");
+                        "Add agent",
+    		    		"Success");
 
 		document.querySelector('#post-form').reset();
             }else{
             	toastr["error"](
-                        "<?= _l("adf.add_agent_box.toastr_invalid_addagent"); ?>",
-    		    		"<?= _l("adf.add_agent_box.toastr_error"); ?>");
+                        "Add agent",
+    		    		"Error");
             }
 		    
 		    dispatchAddAgentEvent();

@@ -39,7 +39,7 @@ use rrsoacis\system\Config;
     </div>
     <!-- /.box-body -->
     <div class="box-footer">
-      <button type="submit" class="btn btn-primary pull-right"><?= _l("adf.add_agent_box.input_add"); ?></button>
+      <button type="submit" class="btn btn-primary pull-right">Add</button>
     </div>
     <!-- /.box-footer -->
     <input type="hidden" name="action" value="create">

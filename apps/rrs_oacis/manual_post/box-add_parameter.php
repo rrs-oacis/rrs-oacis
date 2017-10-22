@@ -19,7 +19,7 @@ use rrsoacis\system\Config;
 
         <div class="col-sm-10">
           <input type="text" class="form-control" name="parameter_name"
-            placeholder="<?= _l("adf.add_agent_box.input_name"); ?>"
+            placeholder=""
             required>
         </div>
       </div>
@@ -28,7 +28,7 @@ use rrsoacis\system\Config;
 
         <div class="col-sm-10">
           <input type="text" class="form-control" name="parameter_simulator_id"
-            placeholder="<?= _l("adf.add_agent_box.input_no_required"); ?>"
+            placeholder=""
             >
         </div>
       </div>
@@ -37,7 +37,7 @@ use rrsoacis\system\Config;
 
         <div class="col-sm-10">
           <input type="text" class="form-control" name="parameter_host_id"
-            placeholder="<?= _l("adf.add_agent_box.input_no_required"); ?>"
+            placeholder=""
             >
         </div>
       </div>
@@ -119,9 +119,7 @@ $(".readonly").keydown(function(e){
 	    	  //$(form).find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
 	      }
 		    console.log(json);
-		    toastr["success"](
-                    "<?= _l("adf.add_agent_box.toastr_addparameter"); ?>",
-		    		"<?= _l("adf.add_agent_box.toastr_success"); ?>");
+		    toastr["success"]( "", "Success");
 
 		    //dispatchAddAgentEvent();
 		    

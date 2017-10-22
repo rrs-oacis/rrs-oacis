@@ -186,7 +186,7 @@ use rrsoacis\system\Config;
     function getAgentParameterList() {
 
         fetch('<?= Config::$TOP_PATH ?>agents_get', {
-            method: 'GET'
+            method: 'GET', credentials: "include",
         })
             .then(function (response) {
                 return response.json()
@@ -222,7 +222,7 @@ use rrsoacis\system\Config;
     function getMapParameterList() {
 
         fetch('<?= Config::$TOP_PATH ?>maps_get', {
-            method: 'GET'
+            method: 'GET', credentials: "include",
         })
             .then(function (response) {
                 return response.json()
