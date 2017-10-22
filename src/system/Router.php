@@ -26,6 +26,7 @@ class Router
             $this->register('/settings-apps', 'rrsoacis\\component\\setting\\app\\SettingsAppsListController');
             $this->register('/settings-app', 'rrsoacis\\component\\setting\\app\\SettingsAppController');
             $this->register('/settings-app_enable', 'rrsoacis\\component\\setting\\app\\SettingsAppEnableController');
+            $this->register('/settings-app_installer', 'rrsoacis\\component\\setting\\app\\SettingsAppInstallerPage');
             $this->register('/settings-clusters', 'rrsoacis\\component\\setting\\cluster\\SettingsClustersListController');
             $this->register('/settings-clusters_widget', 'rrsoacis\\component\\setting\\cluster\\SettingsClustersListWidgetController');
             $this->register('/settings-clusters_collector', 'rrsoacis\\component\\setting\\cluster\\SettingsClustersCollectorContentsController');

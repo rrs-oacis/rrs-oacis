@@ -160,7 +160,7 @@ class AppManager
         }
     }
 
-    private static function installPackage($packageName)
+    public static function installPackage($packageName)
     {
         $result = "";
 
