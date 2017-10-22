@@ -5,5 +5,5 @@
     "icon" : "fa-refresh",
     "main_controller" : "rrsoacis\\apps\\rrs_oacis\\tc2017\\MixerMainController",
     "sub_controller" : [["add_session","rrsoacis\\apps\\rrs_oacis\\tc2017\\AddSessionController"]],
-    "dependon" : [["competition","1.0.0"]]
+    "dependencies" : [["rrs_oacis/competition","0.0.1"]]
 }

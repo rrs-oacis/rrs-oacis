@@ -1,6 +1,6 @@
 <?php
 
-namespace manager\component;
+namespace rrsoacis\manager\component;
 
 
 class Agent
@@ -18,7 +18,7 @@ class Agent
         $this->timestamp = $rawMap["timestamp"];
     }
 
-    public static function agentListFactory($rawMapArray)
+    public static function arrayFactory($rawMapArray)
     {
         $array = array();
         foreach ($rawMapArray as $agent) {

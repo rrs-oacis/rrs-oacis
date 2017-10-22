@@ -9,5 +9,6 @@
 		["map","rrsoacis\\apps\\rrs_oacis\\results\\ResultMapController"],
         ["download","rrsoacis\\apps\\rrs_oacis\\results\\ResultDownloadController"],
 	["map_download","rrsoacis\\apps\\rrs_oacis\\results\\ResultMapDownloadController"]
-    ]
+    ],
+    "dependencies" : [["rrs_oacis/competition","0.0.1"]]
 }

@@ -4,5 +4,6 @@
     "description" : "AAAA",
     "icon" : "fa-upload",
     "main_controller" : "rrsoacis\\apps\\rrs_oacis\\presentation\\PresentationMainController",
-    "sub_controller" : [["set_score","rrsoacis\\apps\\rrs_oacis\\presentation\\SetScoreController"]]
+    "sub_controller" : [["set_score","rrsoacis\\apps\\rrs_oacis\\presentation\\SetScoreController"]],
+    "dependencies" : [["rrs_oacis/competition","0.0.1"]]
 }
