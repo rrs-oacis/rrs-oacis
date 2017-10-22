@@ -143,10 +143,21 @@ class AppManager
 
     public static function setDisable($packageName)
     {
-        $db = self::connectDB();
-        $sth = $db->prepare("delete from connectedApp where package=:package;");
-        $sth->bindValue(':package', $packageName, PDO::PARAM_STR);
-        $sth->execute();
+        $removable = true;
+        foreach (self::getConnectedApps() as $connectedApp) {
+            foreach ($connectedApp["dependencies"] as $dependency) {
+                if ($dependency[0] === $packageName) {
+                    $removable = false;
+                }
+            }
+        }
+
+        if ($removable) {
+            $db = self::connectDB();
+            $sth = $db->prepare("delete from connectedApp where package=:package;");
+            $sth->bindValue(':package', $packageName, PDO::PARAM_STR);
+            $sth->execute();
+        }
     }
 
     private static function installPackage($packageName)
