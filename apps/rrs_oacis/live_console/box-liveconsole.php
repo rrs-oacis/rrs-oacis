@@ -25,6 +25,16 @@ foreach($clusters as $clusterData) {
                 <div class="box-header with-border">
                     <h3 class="box-title">Cluster </h3>
                     <small><?= $cluster ?></small>
+                    <div class="box-tools pull-right">
+                        <button id="cluster_update_<?= $cluster ?>" type="button" class="btn btn-box-tool" data-toggle="tooltip"
+                                data-original-title="Reload">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -69,9 +79,13 @@ foreach($clusters as $clusterData) {
 
                     </div>
                 </div>
+                <div id="cluster-overlay_<?= $cluster ?>" class="overlay" style="display: none;">
+                    <i class="fa fa-refresh fa-spin"></i>
+                </div>
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
+
         </div>
 
 
@@ -79,10 +93,29 @@ foreach($clusters as $clusterData) {
 
     <script>
 
+        var updateFlag<?= $cluster ?> = 0;
+
         $(function () {
+
             getOut<?= $cluster ?>();
             getError<?= $cluster ?>();
+
+            updateFlag<?= $cluster ?> = 0;
+
+            $('#cluster-overlay_<?= $cluster ?>').show();
+
+            $('#cluster_update_<?= $cluster ?>').on('click', function () {
+                getOut<?= $cluster ?>();
+                getError<?= $cluster ?>();
+
+                updateFlag<?= $cluster ?> = 0;
+
+                $('#cluster-overlay_<?= $cluster ?>').show();
+            });
+
         });
+
+
 
         function getOut<?= $cluster ?>() {
 
@@ -133,6 +166,12 @@ foreach($clusters as $clusterData) {
                         elementOut.textContent = 'Not found file.';
                     }
 
+
+                    updateFlag<?= $cluster ?>++;
+
+                    if(updateFlag<?= $cluster ?>>=2){
+                        $('#cluster-overlay_<?= $cluster ?>').hide();
+                    }
 
                 });
         }
@@ -185,6 +224,12 @@ foreach($clusters as $clusterData) {
 
                     if (texts == "") {
                         elementError.textContent = 'Not found file.';
+                    }
+
+                    updateFlag<?= $cluster ?>++;
+
+                    if(updateFlag<?= $cluster ?>>=2){
+                        $('#cluster-overlay_<?= $cluster ?>').hide();
                     }
 
                 });
