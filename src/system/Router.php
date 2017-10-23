@@ -15,11 +15,11 @@ class Router
     {
         if (AccessManager::restricted()) {
             // Index (dashboard)
-            $this->register('/', 'rrsoacis\\component\\dashboard\\RestrictedDashboardPage');
+            $this->register('/', 'rrsoacis\\component\\dashboard\\RestrictedDashboardPage', 0);
             $this->register('/settings-login', 'rrsoacis\\component\\setting\\general\\SettingsLoginPage');
         } else {
             // Index (dashboard)
-            $this->register('/', 'rrsoacis\\component\\dashboard\\DashboardPage');
+            $this->register('/', 'rrsoacis\\component\\dashboard\\DashboardPage', 0);
 
             // Settings
             $this->register('/settings', 'rrsoacis\\component\\setting\\SettingsPage');
@@ -85,14 +85,16 @@ class Router
 
     public function __construct()
     {
-        $this->directory = array();
+        $this->pageMap = array();
         $this->registration();
     }
 
-    protected $directory;
-    protected function register($key = "", $page = "")
+    protected $pageMap;
+    protected $paramLimitMap;
+    protected function register($key = "", $page = "", $paramLimit = -1)
     {
-        $this->directory[$key] = $page;
+        $this->pageMap[$key] = $page;
+        $this->paramLimitMap[$key] = $paramLimit;
     }
 
     public function routing($request)
@@ -115,8 +117,11 @@ class Router
                     $params[] = $request[$i];
                 }
 
-                if (array_key_exists($searchKey, $this->directory)) {
-                    $class = new $this->directory[$searchKey];
+                if (array_key_exists($searchKey, $this->pageMap)) {
+                    $paramLimit = $this->paramLimitMap[$searchKey];
+                    if ($paramLimit != -1 && $paramLimit < count($params)) { continue; }
+
+                    $class = new $this->pageMap[$searchKey];
                     if ($class instanceof AbstractController) {
                         echo call_user_func_array(array($class, "anyIndex"), $params);
                     } else if ($class instanceof AbstractPage) {
