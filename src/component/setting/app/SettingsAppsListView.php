@@ -51,6 +51,11 @@ use rrsoacis\manager\AppManager;
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Apps</h3>
+                        <div class="box-tools">
+                            <a href="/settings-app_installer">
+                                <i class="fa fa-cloud-download" style="color:lightgray;"></i>
+                            </a>
+                        </div>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
