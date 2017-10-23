@@ -20,9 +20,9 @@ class RunManager
 
         self::createRunSimulator();
 
-        foreach ($agents as $agent) {
+        foreach ($maps as $map) {
 
-            foreach ($maps as $map) {
+            foreach ($agents as $agent) {
 
                 for ($i = 0; $i < $count; $i++) {
                     self::run($agent, $map, $tag);

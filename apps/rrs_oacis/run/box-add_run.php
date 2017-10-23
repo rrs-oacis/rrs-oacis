@@ -16,25 +16,7 @@ use rrsoacis\system\Config;
     <form id="add_simulation-form" action="./run-add_run" method="POST"
           class="form-horizontal" enctype="multipart/form-data">
         <div class="box-body">
-            <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">Agents</label>
-
-                <div class="col-sm-10">
-
-                    <select class="form-control select2" name="parameter_agents[]" multiple="multiple"
-                            data-placeholder="select a agent"
-                            style="width: 100%;" required>
-                        <?php
-                        foreach ($agents as $agent) {
-                            ?>
-                            <option><?= $agent['alias'] ?></option>
-                            <?php
-                        }
-                        ?>
-
-                    </select>
-                </div>
-            </div>
+            
             <div id="simulation_maps" class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Maps</label>
 
@@ -47,6 +29,25 @@ use rrsoacis\system\Config;
                         foreach ($maps as $map) {
                             ?>
                             <option><?= $map['alias'] ?></option>
+                            <?php
+                        }
+                        ?>
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Agents</label>
+
+                <div class="col-sm-10">
+
+                    <select class="form-control select2" name="parameter_agents[]" multiple="multiple"
+                            data-placeholder="select a agent"
+                            style="width: 100%;" required>
+                        <?php
+                        foreach ($agents as $agent) {
+                            ?>
+                            <option><?= $agent['alias'] ?></option>
                             <?php
                         }
                         ?>
