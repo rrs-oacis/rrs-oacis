@@ -52,6 +52,7 @@ class AppManager
                     $app = json_decode($json, true);
                     $app['package'] = $userFile . "/" . $appFile;
                     $app['enabled'] = in_array($app['package'], $connectedApps);
+                    $app['is_plugin'] = is_dir(Config::$SRC_REAL_URL.self::APPS_DIR."/".$app['package']."/.git");
 
                     $apps[] = $app;
                 }
@@ -88,6 +89,7 @@ class AppManager
                 $app['packages_user'] = str_replace('_', '-', $package[0]);
                 $app['packages_name'] = $package[1];
                 $app['enabled'] = in_array($app['package'], $connectedApps);
+                $app['is_plugin'] = is_dir(Config::$SRC_REAL_URL.self::APPS_DIR."/".$packageName."/.git");
 
                 $apps [] = $app;
             }
@@ -123,6 +125,7 @@ class AppManager
             $sth->bindValue(':package', $app['package'], PDO::PARAM_STR);
             $sth->execute();
             $app['enabled'] = ($sth->fetch(PDO::FETCH_ASSOC)['count'] == 1);
+            $app['is_plugin'] = is_dir(Config::$SRC_REAL_URL.self::APPS_DIR."/".$packageName."/.git");
         }
 
         return $app;

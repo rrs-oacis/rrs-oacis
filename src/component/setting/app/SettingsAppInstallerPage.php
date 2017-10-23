@@ -12,14 +12,24 @@ class SettingsAppInstallerPage extends AbstractPage
         $this->setTitle("App Installer");
         if (isset($_POST['name']) && isset($_POST['user']))
         {
-            $packageName = $_POST['user'].'/'.$_POST['name'];
-            $installResult = AppManager::installPackage($packageName);
-            if ($installResult === "") {
-                header('location: '.Config::$TOP_PATH.'settings-app/' . $packageName);
-                exit();
-            } else {
-                header('location: '.Config::$TOP_PATH.'settings-app_installer');
-                exit();
+            $packageName = str_replace("-", "_", $_POST['user']).'/'.$_POST['name'];
+            $app = AppManager::getApp($packageName);
+            if ($app == null) {
+                $installResult = AppManager::installPackage($packageName);
+                if ($installResult === "") {
+                    header('location: ' . Config::$TOP_PATH . 'settings-app/' . $packageName);
+                    exit();
+                } else {
+                    header('location: ' . Config::$TOP_PATH . 'settings-app_installer');
+                    exit();
+                }
+            } else if ($app['is_plugin']) {
+                exec("timeout 5 ping 8.8.8.8 -c 1", $exec_out, $internet);
+                $internet = ($internet == 0);
+                if ($internet) {
+                    exec("cd ".Config::$SRC_REAL_URL."apps/".$packageName."; git reset --hard HEAD; git pull");
+                    header('location: ' . Config::$TOP_PATH . 'settings-app/' . $packageName);
+                }
             }
         }
         $this->printPage();

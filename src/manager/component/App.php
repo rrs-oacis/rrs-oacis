@@ -16,6 +16,7 @@ class App
     public $packages_user;
     public $packages_name;
     public $enabled;
+    public $is_plugin;
 
     public function __construct($rawMap)
     {
@@ -30,6 +31,7 @@ class App
         $this->packages_user = $rawMap["packages_user"];
         $this->packages_name = $rawMap["packages_name"];
         $this->enabled = $rawMap["enabled"];
+        $this->is_plugin = $rawMap["is_plugin"];
     }
 
     public static function arrayFactory($rawMapArray)
