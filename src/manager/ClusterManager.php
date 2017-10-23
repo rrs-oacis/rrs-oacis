@@ -110,16 +110,19 @@ class ClusterManager
         $cluster = self::getCluster($name);
         if ($cluster != null)
         {
-            $db = self::connectDB();
-            $db->query("update cluster set check_status=1 where name='".$cluster["name"]."' and check_status!=3;");
+			if ($cluster["check_status"] != 3)
+			{
+                $db = self::connectDB();
+                $db->query("update cluster set check_status=1 where name='".$cluster["name"]."' and check_status!=3;");
 
-            $scriptId = uniqid();
-            $script = "#!/bin/bash\n\n";
-            $script .= 'php '.realpath(dirname(__FILE__)).'/update_status.php \''.$cluster["name"].'\' >>/tmp/t';
-            file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
-            exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' >/dev/null &');
-        }
-        self::updateHostGroup();
+                $scriptId = uniqid();
+                $script = "#!/bin/bash\n\n";
+                $script .= 'php '.realpath(dirname(__FILE__)).'/update_status.php \''.$cluster["name"].'\' >>/tmp/t';
+                file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
+                exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' >/dev/null &');
+        	}
+        	self::updateHostGroup();
+		}
     }
 
     public static function setupHosts($name, $pass)
