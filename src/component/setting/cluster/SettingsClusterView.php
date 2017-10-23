@@ -44,15 +44,15 @@ use rrsoacis\system\Config;
           var refreshContents = function () {
               document.getElementById("main-contents").innerHTML = ' <div style="margin-bottom: 2em;"> <div>'
                   + '<button class="btn btn-danger" '
-                  + 'onclick="location.href=\'<?=Config::$TOP_PATH ?>/settings-cluster_remove/'
+                  + 'onclick="location.href=\'/settings-cluster_remove/'
                   + '<?= $cluster["name"] ?>\'">Remove</button> &nbsp; '
                 <?php if ($cluster["check_status"] == 3) { ?>
                   + '<button class="btn btn-success" '
-                  + 'onclick="location.href=\'<?=Config::$TOP_PATH ?>/settings-cluster_enable/'
+                  + 'onclick="location.href=\'/settings-cluster_enable/'
                   + '<?= $cluster["name"] ?>/1\'">Enable</button>'
                 <?php } else { ?>
                   + '<button class="btn btn-warning" '
-                  + 'onclick="location.href=\'<?=Config::$TOP_PATH ?>/settings-cluster_enable/'
+                  + 'onclick="location.href=\'/settings-cluster_enable/'
                   + '<?= $cluster["name"] ?>/0\'">Disable</button>'
                 <?php } ?>
                   + '</div> </div> <h1 class="text-center"> <i class="fa fa-refresh fa-spin"></i> </h1>';

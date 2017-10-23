@@ -127,11 +127,8 @@ class ClusterManager
         $cluster = self::getCluster($name);
         if ($cluster != null)
         {
-            $scriptId = uniqid();
-            $script = "#!/bin/bash\n\n";
-            $script .= 'cd /home/oacis/rrs-oacis/rrsenv/workspace/'.$cluster["name"].' ; ../../script/rrscluster setup -p \''.$pass.'\'';
-            file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $script);
-            exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' >/dev/null &');
+            $script = 'cd /home/oacis/rrs-oacis/rrsenv/workspace/'.$cluster["name"].' ; ../../script/rrscluster setup -p \''.$pass.'\'';
+            ScriptManager::queueBashScript($script);
         }
     }
 
@@ -204,7 +201,6 @@ class ClusterManager
         if ($num > 0)
         {
             $sth = $db->prepare("update cluster set a_host=:a_host, f_host=:f_host, p_host=:p_host, s_host=:s_host, archiver=:archiver where name=:name;");
-            $myWorkspaceDir = Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME.'/'.$name;
         }
         else
         {
@@ -230,6 +226,8 @@ class ClusterManager
 
             $sth = $db->prepare("insert into cluster(name, a_host, f_host, p_host, s_host, archiver) values(:name, :a_host, :f_host, :p_host, :s_host, :archiver);");
         }
+
+        $myWorkspaceDir = Config::$ROUTER_PATH.Config::WORKSPACE_DIR_NAME.'/'.$name;
 
         $config = "SERVER_SS=\"".$s_host."\"\nSERVER_C1=\"".$f_host."\"\nSERVER_C2=\"".$p_host."\"\nSERVER_C3=\"".$a_host."\"\nARCHIVER=\"".$archiver."\"\n";
         file_put_contents($myWorkspaceDir.'/config.cfg', $config);

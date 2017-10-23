@@ -25,10 +25,8 @@ class SettingsClusterUpdateController extends AbstractController
         $archiver = $_POST['archiver'];
         $hosts_pass = $_POST['hosts_pass'];
 
-        if ($a_host !== ''
-            && $s_host !== ''
-            && $f_host !== ''
-            && $p_host !== '')
+        if ($a_host !== '' && $s_host !== '' && $f_host !== ''
+            && $p_host !== '' && $archiver !== "" && $hosts_pass !== "")
         {
             ClusterManager::updateCluster($name, $a_host, $f_host, $p_host, $s_host, $archiver, $hosts_pass);
         }
