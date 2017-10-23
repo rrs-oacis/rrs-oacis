@@ -47,7 +47,11 @@ class Router
             // Maps
             $this->register('/maps', 'rrsoacis\\component\\map\\MapsListController');
             $this->register('/maps_get', 'rrsoacis\\component\\map\\MapListGetController');
+            $this->register('/maps_archived_get', 'rrsoacis\\component\\map\\MapArchivedListGetController');
+
+            $this->register('/map', 'rrsoacis\\component\\map\\MapController');
             $this->register('/map_upload', 'rrsoacis\\component\\map\\MapFileUploadController');
+            $this->register('/map_archived_change', 'rrsoacis\\component\\map\\MapArchivedController');
 
             // Agents
             $this->register('/agents', 'rrsoacis\\component\\agent\\AgentListController');
@@ -114,7 +118,7 @@ class Router
                 if (array_key_exists($searchKey, $this->directory)) {
                     $class = new $this->directory[$searchKey];
                     if ($class instanceof AbstractController) {
-                        call_user_func_array(array($class, "anyIndex"), $params);
+                        echo call_user_func_array(array($class, "anyIndex"), $params);
                     } else if ($class instanceof AbstractPage) {
                         call_user_func(array($class, "controller"), $params);
                     } else {

@@ -102,7 +102,8 @@ function setMapTableData(data)
         var t = document.querySelector('#map_list_template');
 
         t.content.querySelector('.map_list_name').textContent = data[i]['alias'];
-        t.content.querySelector('.map_list_fullname').textContent = data[i]['name'];
+        t.content.querySelector('.map_list_fullname').innerHTML =
+            '<a target="_blank" href="<?= Config::$TOP_PATH ?>map/'+data[i]['name'] + '">' +  data[i]['name'] + "</a>";
         t.content.querySelector('.map_list_timestamp').textContent = data[i]['timestamp'];
 
         var clone = document.importNode(t.content, true);

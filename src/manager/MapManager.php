@@ -28,6 +28,18 @@ class MapManager
         return $maps;
     }
 
+    public static function getArchivedMaps()
+    {
+        $db = self::connectDB();
+        $sth = $db->query("select * from map where archived = 1;");
+        $maps = [];
+        while($row = $sth->fetch(PDO::FETCH_ASSOC))
+        {
+            $maps[] = $row;
+        }
+
+        return $maps;
+    }
 
     public static function getMap($name)
     {
@@ -57,6 +69,26 @@ class MapManager
         }
 
         return $map;
+    }
+
+    public static function setArchived($name,$archived){
+
+        $db = self::connectDB();
+
+        if($archived==0){
+
+            $agent = self::getMap($name);
+
+            $sth = $db->prepare("update map set archived=1 where alias=:alias;");
+            $sth->bindValue(':alias', $agent['alias'], PDO::PARAM_STR);
+            $sth->execute();
+        }
+
+        $sthU = $db->prepare("update map set archived=:archived where name=:name;");
+        $sthU->bindValue(':archived', $archived, PDO::PARAM_INT);
+        $sthU->bindValue(':name', $name, PDO::PARAM_STR);
+        $sthU->execute();
+
     }
 
     /**

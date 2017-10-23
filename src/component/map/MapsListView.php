@@ -42,6 +42,9 @@ use rrsoacis\system\Config;
 		<?php include 'box-add_map.php';?>
         <?php include 'box-maplist.php';?>
 
+        <!-- Deprecated  -->
+        <?php include 'box-maparchivedlist.php';?>
+
     </section>
     <!-- /.content -->
   </div>
