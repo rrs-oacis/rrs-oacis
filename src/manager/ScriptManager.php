@@ -34,4 +34,16 @@ class ScriptManager
         file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $throwScript);
         exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
     }
+
+    public static function queueBashScript($script)
+    {
+        $scriptId = uniqid();
+        $throwScript = "#!/bin/bash\n\n";
+        $throwScript .= "\n";
+        $throwScript .= $script;
+        $throwScript .= "\n";
+        $throwScript .= "\n";
+        file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/'.$scriptId, $throwScript);
+        exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl '.$scriptId.' > /dev/null &');
+    }
 }
