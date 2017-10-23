@@ -65,14 +65,19 @@
 $(".readonly").keydown(function(e){
     e.preventDefault();
 });
-  $('input[id=mapfile]').change(function() {
+
+
+$('input[id=mapfile]').change(function() {
+
     $('#map_photoCover').val($(this).prop('files')[0].name);
-if ($('#mapName').val() == '')
-{
-var name = $(this).prop('files')[0].name.match(/(.*)(?:\.([^.]+$))/)[1];
-$('#mapName').val(name);
-}
-  });
+    if ($('#mapName').val() == '')
+    {
+
+        var name = $(this).prop('files')[0].name.split('.')[0];
+        $('#mapName').val(name);
+
+    }
+});
 
   
   $("#map_post-form").submit(function(e){
@@ -102,7 +107,8 @@ $('#mapName').val(name);
             			"Add Map",
     		    		"Success");
 
-		document.querySelector('#map_post-form').reset();
+		    document.querySelector('#map_post-form').reset();
+
             }else{
             	toastr["error"](
                         "Add Map",
