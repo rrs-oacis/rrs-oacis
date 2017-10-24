@@ -61,6 +61,7 @@ use rrsoacis\manager\AppManager;
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <tr>
+                                <th>Package</th>
                                 <th>Name</th>
                                 <th>Ver.</th>
                                 <th>Description</th>
@@ -68,6 +69,7 @@ use rrsoacis\manager\AppManager;
                             </tr>
                             <?php foreach ($apps as $app) { ?>
                                 <tr class="linked-row" data-href="<?= Config::$TOP_PATH."settings-app/".$app["package"] ?>">
+                                    <td><?= $app["package"]?></td>
                                     <td><?= $app["name"]?></td>
                                     <td><?= $app["version"]?></td>
                                     <td><?= $app["description"]?></td>

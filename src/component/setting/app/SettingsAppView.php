@@ -57,12 +57,14 @@ use rrsoacis\system\Config;
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <tr>
+                                <th>Package</th>
                                 <th>Name</th>
                                 <th>Ver.</th>
                                 <th>Description</th>
                                 <th>Status</th>
                             </tr>
                                 <tr>
+                                    <td><?= $app["package"]?></td>
                                     <td><?= $app["name"]?></td>
                                     <td><?= $app["version"]?></td>
                                     <td><?= $app["description"]?></td>
