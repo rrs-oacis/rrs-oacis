@@ -128,5 +128,10 @@ rrsenv/
 
 /oacis-queue/scripts/
 
-/apps/
+
+/apps/*
+
+!/apps/rrs_oacis
+
+
 
