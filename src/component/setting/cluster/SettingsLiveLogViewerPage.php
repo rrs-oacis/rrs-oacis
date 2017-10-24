@@ -137,10 +137,17 @@ class SettingsLiveLogViewerPage extends AbstractPage
             var line = 0;
             var log = [];
             var load = function () {
-                simpleget('/settings-cluster_livelog/<?= $this->cluster->name ?>/<?= $this->fileName ?>?load&start='+(line+1),
+                simpleget('/settings-cluster_livelog/<?= $this->cluster->name ?>/<?= $this->fileName ?>?load&start='+line,
                 function (recv) {
-                    arr = recv.split(/\r\n|\r|\n/);
-                    for (i = 0; i < arr.length; i++) { log[line++] = arr[i]; }
+					text = recv + " ";				
+                    arr = text.split(/\r\n|\r|\n/);
+                    for (i = 0; i < arr.length; i++) {
+                        if (i == (arr.length -1)) {
+                            log[line++] = arr[i].slice(0, -1);
+                        } else {
+                            log[line++] = arr[i];
+                        }
+                    }
                     text = "";
                     for (i = 0; i < log.length; i++) {
                         text += log[i] + "<br>";
