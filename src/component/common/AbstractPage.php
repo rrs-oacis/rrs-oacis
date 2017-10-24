@@ -29,6 +29,11 @@ abstract class AbstractPage
         $this->_pageTitle = $title;
     }
 
+    public function getTitle()
+    {
+        return $this->_pageTitle;
+    }
+
     function header()
     {
         ?>

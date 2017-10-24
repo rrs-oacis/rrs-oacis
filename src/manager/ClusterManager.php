@@ -34,7 +34,7 @@ class ClusterManager
     {
         $db = self::connectDB();
         $sth = $db->query("select * from cluster where name='".$name."';");
-        $cluster = [];
+        $cluster = null;
         while($row = $sth->fetch(PDO::FETCH_ASSOC))
         {
             $cluster  = $row;

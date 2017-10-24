@@ -66,8 +66,16 @@ use rrsoacis\system\Config;
 
   <!-- =============================================== -->
 
-  <?php include Config::$SRC_REAL_URL.'component/common/main-footer.php';?>
-  
+    <footer class="main-footer">
+        <button class="btn btn-default btn-xs" onclick="window.open('/settings-cluster_livelog/<?= $cluster["name"] ?>?list','ll','menubar=no, toolbar=no, scrollbars=no')">
+            <i class="fa fa-terminal"></i> LiveLog
+        </button>
+        <div class="pull-right hidden-xs">
+            <b>Version</b> <?= Config::APP_VERSION ?>
+        </div>
+        <br>
+    </footer>
+
   <!-- =============================================== -->
 
 </div>

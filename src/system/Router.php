@@ -36,6 +36,7 @@ class Router
             $this->register('/settings-cluster_update', 'rrsoacis\\component\\setting\\cluster\\SettingsClusterUpdateController');
             $this->register('/settings-cluster_remove', 'rrsoacis\\component\\setting\\cluster\\SettingsClusterRemoveController');
             $this->register('/settings-cluster_enable', 'rrsoacis\\component\\setting\\cluster\\SettingsClusterEnableController');
+            $this->register('/settings-cluster_livelog', 'rrsoacis\\component\\setting\\cluster\\SettingsLiveLogViewerPage');
             $this->register('/settings-general', 'rrsoacis\\component\\setting\\general\\SettingsGeneralController');
             $this->register('/settings-version_content', 'rrsoacis\\component\\setting\\general\\SettingsVersionContentController');
             $this->register('/settings-version_update', 'rrsoacis\\component\\setting\\general\\SettingsVersionUpdateController');
