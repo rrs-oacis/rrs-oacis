@@ -80,12 +80,12 @@ use rrsoacis\system\Config;
 
                 $('#map_archived_list-overlay').hide();
 
-                setTableArchivedData(json);
+                setTableMapArchivedData(json);
 
             });
     }
 
-    function setTableArchivedData(data)
+    function setTableMapArchivedData(data)
     {
 
         var tb = document.querySelector('#map_archived_list tbody');

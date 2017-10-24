@@ -1,0 +1,8 @@
+{
+    "name" : "Archived",
+    "version" : "0.0.1",
+    "description" : "Display Archived Agent and Map",
+    "icon" : "fa-archive",
+    "main_controller" : "rrsoacis\\apps\\rrs_oacis\\archived\\ArchivedMainController",
+    "sub_controller" : []
+}
