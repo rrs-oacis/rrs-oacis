@@ -54,7 +54,10 @@ class SettingsLiveLogViewerPage extends AbstractPage
             $start = 1;
             if (isset($_GET["start"])) { $start += 0 + $_GET["start"]; }
             if ($runId != null) {
-                print system("tail -n +".$start." /home/oacis/rrs-oacis/rrsenv/workspace/" . $this->cluster->name . "/" . $runId ."/".$this->fileName);
+                exec("tail -n +".$start." /home/oacis/rrs-oacis/rrsenv/workspace/" . $this->cluster->name . "/" . $runId ."/".$this->fileName, $out);
+                foreach ($out as $line) {
+                    print $line . "\n";
+                }
             }
         } else {
             $this->header();
@@ -139,18 +142,15 @@ class SettingsLiveLogViewerPage extends AbstractPage
             var load = function () {
                 simpleget('/settings-cluster_livelog/<?= $this->cluster->name ?>/<?= $this->fileName ?>?load&start='+line,
                 function (recv) {
-					text = recv + " ";				
+					text = recv;
                     arr = text.split(/\r\n|\r|\n/);
-                    for (i = 0; i < arr.length; i++) {
-                        if (i == (arr.length -1)) {
-                            log[line++] = arr[i].slice(0, -1);
-                        } else {
-                            log[line++] = arr[i];
-                        }
+                    for (i = 0; i < arr.length-1; i++) {
+                        log[line++] = arr[i];
                     }
+                    line -= 1;
                     text = "";
                     for (i = 0; i < log.length; i++) {
-                        text += log[i] + "<br>";
+                        text += log[i] + "#<br>";
                     }
                     document.getElementById('term').innerHTML = text;
                     scroll();
