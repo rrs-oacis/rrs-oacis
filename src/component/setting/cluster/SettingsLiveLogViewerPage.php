@@ -150,7 +150,7 @@ class SettingsLiveLogViewerPage extends AbstractPage
                     line -= 1;
                     text = "";
                     for (i = 0; i < log.length; i++) {
-                        text += log[i] + "#<br>";
+                        text += log[i] + "<br>";
                     }
                     document.getElementById('term').innerHTML = text;
                     scroll();
