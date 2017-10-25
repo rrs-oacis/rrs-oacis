@@ -51,6 +51,7 @@ class AppManager
 
                     $app = json_decode($json, true);
                     $app['package'] = $userFile . "/" . $appFile;
+                    $app['packages_user'] = str_replace('_', '-', $userFile);
                     $app['enabled'] = in_array($app['package'], $connectedApps);
                     $app['is_plugin'] = is_dir(Config::$SRC_REAL_URL.self::APPS_DIR."/".$app['package']."/.git");
 
