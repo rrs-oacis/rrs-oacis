@@ -128,6 +128,9 @@ class SettingsLiveLogViewerPage extends AbstractPage
             <div class="pull-right" style="margin-top: -2px;">
                 <button class="btn btn-xs btn-default" onclick="location.href='/settings-cluster_livelog/<?= $this->cluster->name ?>?list'"><i class="fa fa-bars"></i></button>
             </div>
+            <div class="pull-right" style="margin-top: -2px; margin-right: 5px;">
+                <button class="btn btn-xs btn-warning" id="asbutton" onclick="as_change()">AutoScroll</button>
+            </div>
         </div>
         <?php
     }
@@ -137,13 +140,13 @@ class SettingsLiveLogViewerPage extends AbstractPage
         ?>
         </body>
         <script type="text/javascript">
+            var autoscroll_flag = true;
             var line = 0;
             var log = [];
             var load = function () {
                 simpleget('/settings-cluster_livelog/<?= $this->cluster->name ?>/<?= $this->fileName ?>?load&start='+line,
                 function (recv) {
-					text = recv;
-                    arr = text.split(/\r\n|\r|\n/);
+                    arr = recv.split(/\r\n|\r|\n/);
                     for (i = 0; i < arr.length-1; i++) {
                         log[line++] = arr[i];
                     }
@@ -153,7 +156,7 @@ class SettingsLiveLogViewerPage extends AbstractPage
                         text += log[i] + "<br>";
                     }
                     document.getElementById('term').innerHTML = text;
-                    scroll();
+                    if (autoscroll_flag) { scroll(); }
                     setTimeout(load, 3000);
                 });
             }
@@ -167,6 +170,11 @@ class SettingsLiveLogViewerPage extends AbstractPage
             }
             scroll();
             $(window).on('resize', function(){resize();});
+            var as_change = function () {
+                autoscroll_flag = !autoscroll_flag;
+                $("#asbutton").toggleClass("btn-default", !autoscroll_flag);
+                $("#asbutton").toggleClass("btn-warning", autoscroll_flag);
+            }
         </script>
         </html>
         <?php
