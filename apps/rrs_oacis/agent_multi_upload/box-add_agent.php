@@ -81,7 +81,7 @@
         <div class="box-body">
             <input id="addFile" type="file" multiple>
             <i class="fa fa-4x fa-upload"></i>
-            <p>Drag and drop or click to agent file</p>
+            <p>Drag and drop or click to Agent file</p>
 
         </div>
     </div>
@@ -129,8 +129,6 @@
                 setTimeout(() => { $(forms[i]).submit(); }, 2000*i);
 
             }
-
-            //dropZoneFile.click();
 
         });
 
@@ -375,8 +373,9 @@
         color: rgba(34, 34, 34, 0.84) !important;
     }
 
+
     .addForm div p{
-        transform: translateY(250%);
+        transform: translateY(300%);
     }
 
     .addForm div input{
