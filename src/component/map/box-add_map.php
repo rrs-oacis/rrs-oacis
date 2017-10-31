@@ -73,7 +73,10 @@ $('input[id=mapfile]').change(function() {
     if ($('#mapName').val() == '')
     {
 
-        var name = $(this).prop('files')[0].name.split('.')[0];
+        var name = $(this).prop('files')[0].name;
+
+        var name = name.replace( ".zip" , "" ) ;
+        var name = name.replace( ".tar.gz" , "" ) ;
         $('#mapName').val(name);
 
     }
