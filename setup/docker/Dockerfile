@@ -40,6 +40,7 @@ RUN cpan -i Net::OpenSSH
 RUN cpan -i IO::Pty
 RUN cpan -i DBI
 RUN cpan -i DBD::SQLite
+RUN cpan -i JSON
 
 #Config files
 COPY supplement/rrsoacis_fpm.conf /etc/php/7.0/fpm/pool.d/
