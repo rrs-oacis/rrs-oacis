@@ -73,9 +73,13 @@ class SettingsPage extends AbstractPage
         ?>
         <footer class="main-footer">
             <a href="/settings-license">
-                <!-- Display on only settings page -->
+                <!-- This link display on only settings page -->
                 <i class="fa fa-book"></i> LicenseTerms
             </a>
+					<a href="https://github.com/rrs-oacis/rrs-oacis" target="_blank" style="margin-left: 1em;">
+						<!-- This link display on only settings page -->
+						<i class="fa fa-github"></i> GitHub
+					</a>
             <div class="pull-right hidden-xs">
                 <b>Version</b> <?= Config::APP_VERSION ?>
             </div>
