@@ -15,6 +15,7 @@ class SettingsAppPage extends AbstractPage
 	{
 		if (count($params) == 2) {
 			$this->app = AppManager::getApp($params[0] . "/" . $params[1]);
+			$this->setTitle($this->app["name"]);
 			$this->printPage();
 			return;
 		}
