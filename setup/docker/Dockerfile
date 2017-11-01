@@ -65,6 +65,7 @@ VOLUME ["/home/oacis/rrs-oacis/rrsenv/LOG"]
 
 #Setup
 USER oacis
+RUN echo 1
 RUN /home/oacis/rrs-oacis/setup/setup.sh
 
 WORKDIR /home/oacis/rrs-oacis/rrsenv
