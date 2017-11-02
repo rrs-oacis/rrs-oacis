@@ -1,8 +1,0 @@
-{
-    "name" : "Manual Post (mHG)",
-    "version" : "0.0.1",
-    "description" : "manual post(test : post to main HostGroup)",
-    "icon" : "fa-upload",
-    "main_controller" : "rrsoacis\\apps\\rrs_oacis\\manual_post2\\ManualPostMainController",
-    "sub_controller" : [["add_parameter","rrsoacis\\apps\\rrs_oacis\\manual_post2\\OacisAddParameterController"]]
-}

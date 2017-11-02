@@ -1,7 +1,7 @@
 {
     "name" : "Run",
     "version" : "0.0.1",
-    "description" : "run",
+    "description" : "Run management system for simple execution",
     "icon" : "fa-cubes",
     "main_controller" : "rrsoacis\\apps\\rrs_oacis\\run\\RunMainController",
     "sub_controller" : [

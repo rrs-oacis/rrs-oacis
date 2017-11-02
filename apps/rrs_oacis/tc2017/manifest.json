@@ -1,7 +1,7 @@
 {
     "name" : "TC2017 Coordinator",
     "version" : "0.0.1",
-    "description" : "RRS 2017 TechnicalChallenge Coordinator",
+    "description" : "RRS 2017 TechnicalChallenge coordinator",
     "icon" : "fa-refresh",
     "main_controller" : "rrsoacis\\apps\\rrs_oacis\\tc2017\\MixerMainController",
     "sub_controller" : [["add_session","rrsoacis\\apps\\rrs_oacis\\tc2017\\AddSessionController"]],

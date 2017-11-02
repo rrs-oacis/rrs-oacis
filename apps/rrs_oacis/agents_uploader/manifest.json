@@ -1,0 +1,9 @@
+{
+    "name" : "Agents Uploader",
+    "version" : "0.0.1",
+    "description" : "Uploading form for adding multiple agent files serially",
+    "icon" : "fa-upload",
+    "main_controller" : "rrsoacis\\apps\\rrs_oacis\\agents_uploader\\AgentUploadMainController",
+    "sub_controller" : [
+    ]
+}

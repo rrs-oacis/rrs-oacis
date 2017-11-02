@@ -1,0 +1,9 @@
+{
+    "name" : "Maps Uploader",
+    "version" : "0.0.1",
+		"description" : "Uploading orm for adding multiple map files serially",
+    "icon" : "fa-upload",
+    "main_controller" : "rrsoacis\\apps\\rrs_oacis\\maps_uploader\\MapUploadMainController",
+    "sub_controller" : [
+    ]
+}

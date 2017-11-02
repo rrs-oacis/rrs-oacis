@@ -6,7 +6,7 @@
  * Time: 10:28
  */
 
-namespace rrsoacis\apps\rrs_oacis\archived;
+namespace rrsoacis\apps\rrs_oacis\archive;
 
 use rrsoacis\component\common\AbstractController;
 

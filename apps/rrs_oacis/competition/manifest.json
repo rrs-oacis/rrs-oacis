@@ -1,7 +1,7 @@
 {
     "name" : "Competition",
     "version" : "0.0.1",
-    "description" : "competition",
+    "description" : "Run management system for competitions",
     "icon" : "fa-star",
     "main_controller" : "rrsoacis\\apps\\rrs_oacis\\competition\\MainController",
     "sub_controller" : [
