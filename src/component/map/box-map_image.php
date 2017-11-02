@@ -63,9 +63,9 @@
 
             cBox.scrollTop = cBox.scrollTop   * (canvas.clientHeight/oldTop);
 
-            var cH = (canvas.clientHeight - cBox.clientHeight)/2.0;
+            var cH = (canvas.clientHeight - cBox.clientHeight)/2.0 - 20;
 
-            var cW = (canvas.clientWidth - cBox.clientWidth)/2.0;
+            var cW = (canvas.clientWidth - cBox.clientWidth)/2.0 - 20;
 
             canvas.style.transform = "translateY(-" +cH + "px) translateX(-" +cW + "px)";
             //canvas.style.transform = "translateY(-" +cW + "px)";
