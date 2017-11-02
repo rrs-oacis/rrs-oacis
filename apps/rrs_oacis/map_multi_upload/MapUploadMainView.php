@@ -26,12 +26,12 @@ use rrsoacis\system\Config;
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-          Map Multi Uploader
+          Maps Uploader
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?=Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i><?= rrsoacis\system\Config::APP_NAME ?></a></li>
-        <li class="active">Map Multi Uploader</li>
+        <li class="active">Maps Uploader</li>
       </ol>
     </section>
 

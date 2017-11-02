@@ -5,7 +5,7 @@ use rrsoacis\system\Config;
     <div class="col-xs-12">
         <div class="box box-warning">
             <div class="box-header">
-                <h3 class="box-title">Agent Archived List</h3>
+                <h3 class="box-title">Archived Agent List</h3>
 
                 <!--
               <div class="box-tools">

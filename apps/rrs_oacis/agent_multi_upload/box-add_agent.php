@@ -1,7 +1,7 @@
 <!-- /.box -->
 
 <div class="col-md-12" style="margin-bottom: 2em;">
-    <button id="add-all" class="btn btn-success pull-right bt-all-add">All Add</button>
+    <button id="add-all" class="btn btn-success pull-right bt-all-add">Add all</button>
 
 </div>
 
@@ -81,7 +81,7 @@
         <div class="box-body">
             <input id="addFile" type="file" multiple>
             <i class="fa fa-4x fa-upload"></i>
-            <p>Drag and drop or click to Agent file</p>
+            <p>Drag and drop or click to upload agents</p>
 
         </div>
     </div>

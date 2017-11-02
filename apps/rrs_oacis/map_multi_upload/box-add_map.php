@@ -81,7 +81,7 @@
         <div class="box-body">
             <input id="addFile" type="file" multiple>
             <i class="fa fa-4x fa-upload"></i>
-            <p>Drag and drop or click to Map file</p>
+            <p>Drag and drop or click to upload maps</p>
 
         </div>
     </div>

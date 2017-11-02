@@ -1,7 +1,7 @@
 {
-    "name" : "Map Multi Uploader",
+    "name" : "Maps Uploader",
     "version" : "0.0.1",
-    "description" : "up",
+    "description" : "Simple maps uploader",
     "icon" : "fa-upload",
     "main_controller" : "rrsoacis\\apps\\rrs_oacis\\map_multi_upload\\MapUploadMainController",
     "sub_controller" : [
