@@ -44,10 +44,37 @@
             var val = $(this).val();
 
 
+            var cBox = document.querySelector("#map_image_box .box-body");
+
             var canvas = document.getElementById("map_image");
+
+            var oldTop =canvas.clientHeight;
+            var oldLeft =canvas.clientWidth;
+
+
+            //var s = (cBox.scrollTop*1.0)/(canvas.clientHeight*1.0);
+
+
 
             canvas.style.width = val + "px";
             canvas.style.height = val + "px";
+
+
+
+            cBox.scrollTop = cBox.scrollTop   * (canvas.clientHeight/oldTop);
+
+            var cH = (canvas.clientHeight - cBox.clientHeight)/2.0;
+
+            var cW = (canvas.clientWidth - cBox.clientWidth)/2.0;
+
+            canvas.style.transform = "translateY(-" +cH + "px) translateX(-" +cW + "px)";
+            //canvas.style.transform = "translateY(-" +cW + "px)";
+
+            //cBox.scrollTop = cBox.scrollTop * s;
+
+            cBox.scrollLeft = cBox.scrollLeft * (canvas.clientWidth/oldLeft);
+
+
 
         } );
 
@@ -199,7 +226,8 @@
 
     #map_image_box .box-body{
         overflow: scroll;
-        height: 220px;
+        height: 240px;
+        width: 240px;
     }
 
     #map_image{
