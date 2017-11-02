@@ -1,7 +1,7 @@
 <!-- /.box -->
 
 <div class="col-md-12" style="margin-bottom: 2em;">
-    <button id="add-all" class="btn btn-success pull-right bt-all-add">All Add</button>
+    <button id="add-all" class="btn btn-success pull-right bt-all-add">Add all</button>
 
 </div>
 
