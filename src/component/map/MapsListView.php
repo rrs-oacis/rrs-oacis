@@ -30,8 +30,8 @@ use rrsoacis\system\Config;
         <small></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i> Index</a></li>
-        <li class="active">Maps</li>
+          <li><a href="/"><i class="fa fa-dashboard"></i> Index</a></li>
+          <li class="active">Maps</li>
       </ol>
     </section>
 
@@ -52,7 +52,22 @@ use rrsoacis\system\Config;
 
   <!-- =============================================== -->
 
-  <?php include Config::$SRC_REAL_URL . 'component/common/main-footer.php';?>
+  <?php //include Config::$SRC_REAL_URL . 'component/common/main-footer.php';?>
+
+    <footer class="main-footer">
+
+        <a href="/maps_archive">
+            <!-- This link display on only settings page -->
+            <i class="fa fa-archive"></i> Archive Maps
+        </a>
+
+        <div class="pull-right hidden-xs">
+            <b>Version</b> <?= Config::APP_VERSION ?>
+        </div>
+        <br>
+    </footer>
+
+
   
   <!-- =============================================== -->
 

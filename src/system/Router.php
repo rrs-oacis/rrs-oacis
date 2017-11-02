@@ -49,6 +49,7 @@ class Router
             $this->register('/maps', 'rrsoacis\\component\\map\\MapsListController');
             $this->register('/maps_get', 'rrsoacis\\component\\map\\MapListGetController');
             $this->register('/maps_archived_get', 'rrsoacis\\component\\map\\MapArchivedListGetController');
+            $this->register('/maps_archive', 'rrsoacis\\component\\map\\MapsArchivedListController');
 
             $this->register('/map', 'rrsoacis\\component\\map\\MapController');
             $this->register('/map_upload', 'rrsoacis\\component\\map\\MapFileUploadController');
