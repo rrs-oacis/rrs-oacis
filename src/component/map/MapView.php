@@ -7,6 +7,12 @@ use rrsoacis\system\Config;
     <?php $title="AgentList"; ?>
     <?php include Config::$SRC_REAL_URL . 'component/common/head.php';?>
 
+    <style>
+        .content{
+            overflow: hidden;
+        }
+    </style>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
@@ -40,6 +46,7 @@ use rrsoacis\system\Config;
 
             <!-- エージェントリストのbox  -->
             <?php include 'box-map.php';?>
+            <?php include 'box-map_image.php';?>
 
         </section>
         <!-- /.content -->

@@ -7,6 +7,9 @@
  */
 use rrsoacis\system\Config;
 ?>
+
+<div class="col-md-8">
+
 <div class="box box-info">
     <div class="box-header with-border">
         <h3 class="box-title">General</h3>
