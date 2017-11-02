@@ -1,7 +1,7 @@
 {
-    "name" : "Presantation",
+    "name" : "Presentation",
     "version" : "0.0.1",
-    "description" : "AAAA",
+    "description" : "Input form for presentation session of competition",
     "icon" : "fa-upload",
     "main_controller" : "rrsoacis\\apps\\rrs_oacis\\presentation\\PresentationMainController",
     "sub_controller" : [["set_score","rrsoacis\\apps\\rrs_oacis\\presentation\\SetScoreController"]],
