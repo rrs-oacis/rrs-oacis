@@ -1,11 +1,11 @@
 <?php
 namespace rrsoacis\component\setting\cluster;
 
+use rrsoacis\manager\ClusterManager;
 use rrsoacis\system\Config;
 use rrsoacis\component\common\AbstractController;
-use rrsoacis\manager\ClusterManager;
 
-class SettingsClusterController extends AbstractController
+class SettingsClusterKillController extends AbstractController
 {
     public function anyIndex($param = null)
     {
@@ -14,8 +14,8 @@ class SettingsClusterController extends AbstractController
 
     public function get ($clusterName = null)
     {
-        $cluster = ClusterManager::getCluster($clusterName);
-        include(Config::$SRC_REAL_URL . 'component/setting/cluster/SettingsClusterView.php');
+        ClusterManager::sendKillSignal($clusterName);
+        header('location: '.Config::$TOP_PATH.'settings-cluster/'.$clusterName);
     }
 }
 ?>
