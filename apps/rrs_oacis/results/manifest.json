@@ -1,7 +1,7 @@
 {
-    "name" : "Results of competition",
+    "name" : "results",
     "version" : "0.0.1",
-    "description" : "Competition Results 2017",
+    "description" : "Results of competition",
     "icon" : "fa-list-alt",
     "main_controller" : "rrsoacis\\apps\\rrs_oacis\\results\\ResultsMainController",
     "sub_controller" : [
