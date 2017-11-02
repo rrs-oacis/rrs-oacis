@@ -370,4 +370,14 @@ use rrsoacis\system\Config;
         transition-timing-function:ease;
     }
 
+    #simulation_table_wrapper .row{
+        margin-right: 0px;
+        margin-left: 0px;
+
+    }
+
+    #simulation_table_wrapper{
+        overflow-x:scroll;
+    }
+
 </style>
