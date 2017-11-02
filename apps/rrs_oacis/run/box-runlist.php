@@ -376,7 +376,7 @@ use rrsoacis\system\Config;
 
     }
 
-    #simulation_table_wrapper{
+    #simulation_table_wrapper .col-sm-12{
         overflow-x:scroll;
     }
 
