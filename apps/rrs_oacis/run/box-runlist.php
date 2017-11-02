@@ -252,9 +252,12 @@ use rrsoacis\system\Config;
                 t.content.querySelector('.run_name').innerHTML = data[i]['name'];
             }
 
+            t.content.querySelector('.run_agent').innerHTML =
+                '<a target="_blank" href="<?= Config::$TOP_PATH ?>agent/'+data[i]['agent'] + '">' +  data[i]['agent'] + "</a>";
 
-            t.content.querySelector('.run_agent').textContent = data[i]['agent'];
-            t.content.querySelector('.run_map').textContent = data[i]['map'];
+            t.content.querySelector('.run_map').innerHTML =
+                '<a target="_blank" href="<?= Config::$TOP_PATH ?>map/'+data[i]['map'] + '">' +  data[i]['map'] + "</a>";
+
             if (data[i]['tag'] != null || data[i]['tag'] != 0) {
                 t.content.querySelector('.run_tag').textContent = data[i]['tag'];
             }
@@ -266,27 +269,6 @@ use rrsoacis\system\Config;
                 t.content.querySelector('.run_progress .progress-bar'),
                 data[i]['status']
             );
-
-            /*
-            if (data[i]['status'] == 'created') {
-                t.content.querySelector('.run_status').innerHTML = "<span class='label label-warning'>created</span>";
-                t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-warning' style='width: 10%'></div>";
-                t.content.querySelector('.run_progress').classList.add('active');
-            } else if (data[i]['status'] == 'submitted') {
-                t.content.querySelector('.run_status').innerHTML = "<span class='label label-primary'>submitted</span>";
-                t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-primary' style='width: 25%'></div>";
-                t.content.querySelector('.run_progress').classList.add('active');
-            } else if (data[i]['status'] == 'running') {
-                t.content.querySelector('.run_status').innerHTML = "<span class='label label-primary'>running</span>";
-                t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-primary' style='width: 50%'></div>";
-                t.content.querySelector('.run_progress').classList.add('active');
-            } else if (data[i]['status'] == 'failed') {
-                t.content.querySelector('.run_status').innerHTML = "<span class='label label-danger'>failed</span>";
-                t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-danger' style='width: 100%'></div>";
-            } else if (data[i]['status'] == 'finished') {
-                t.content.querySelector('.run_status').innerHTML = "<span class='label label-success'>finished</span>";
-                t.content.querySelector('.run_progress').innerHTML = "<div class='progress-bar progress-bar-success' style='width: 100%'></div>";
-            }*/
 
 
             t.content.querySelector('.run_time').textContent = data[i]['timestamp'];
