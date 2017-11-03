@@ -18,7 +18,7 @@ use rrsoacis\system\Config;
 
   <!-- Left side column. contains the sidebar -->
   <?php include Config::$SRC_REAL_URL.'component/common/main-sidebar.php';?>
-  
+
   <!-- =============================================== -->
 
   <!-- Content Wrapper. Contains page content -->
@@ -204,27 +204,6 @@ use rrsoacis\system\Config;
         </script>
         <!-- END : Node collector -->
 
-        <!-- BEGIN : PublicKey -->
-        <!--
-        <div class="box box-warning">
-            <div class="box-header with-border">
-                <h3 class="box-title">
-                    Public key
-                    <small>paste to ~/.ssh/authorized_keys</small>
-                </h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="box-body">
-                <textarea class="form-control" rows="5" readonly><?php include(Config::$PUBLICKEY_PATH); ?></textarea>
-            </div>
-        </div>
-        -->
-        <!-- END : PublicKey -->
-
     </section>
     <!-- /.content -->
   </div>
@@ -233,7 +212,7 @@ use rrsoacis\system\Config;
   <!-- =============================================== -->
 
   <?php include Config::$SRC_REAL_URL.'component/common/main-footer.php';?>
-  
+
   <!-- =============================================== -->
 
 </div>
