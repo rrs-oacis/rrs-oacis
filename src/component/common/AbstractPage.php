@@ -83,7 +83,7 @@ abstract class AbstractPage
             </h1>
             <ol class="breadcrumb">
         <?php
-        print('<li><a href="<?= Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i>RRS-OACIS</a></li>');
+        print('<li><a href="'.Config::$TOP_PATH.'"><i class="fa fa-dashboard"></i>RRS-OACIS</a></li>');
         foreach ($breadcrumbArray as $breadcrumb) {
             print('<li>'.$breadcrumb.'</li>');
         }
