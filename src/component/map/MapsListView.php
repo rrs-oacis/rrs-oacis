@@ -18,7 +18,7 @@ use rrsoacis\system\Config;
 
   <!-- Left side column. contains the sidebar -->
   <?php include Config::$SRC_REAL_URL . 'component/common/main-sidebar.php';?>
-  
+
   <!-- =============================================== -->
 
   <!-- Content Wrapper. Contains page content -->
@@ -58,7 +58,7 @@ use rrsoacis\system\Config;
 
         <a href="/maps_archive">
             <!-- This link display on only settings page -->
-            <i class="fa fa-archive"></i> Archive Maps
+            <i class="fa fa-archive"></i> Archived Maps
         </a>
 
         <div class="pull-right hidden-xs">
@@ -68,7 +68,7 @@ use rrsoacis\system\Config;
     </footer>
 
 
-  
+
   <!-- =============================================== -->
 
 </div>
