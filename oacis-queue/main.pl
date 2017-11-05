@@ -12,6 +12,12 @@ chdir dirname $0;
 my $script = $ARGV[0];
 my $enqueued = 0;
 
+my $output = $ARGV[1];
+if ($output eq "")
+{
+	$output = "/dev/null";
+}
+
 my $database = 'queue.db';
 if ( ! -f $database )
 {
@@ -55,15 +61,18 @@ while ($count > 0)
     my $script = $sth->fetch()->[0];
     $sth->finish();
 
+    system('echo >>"'.$output.'"');
+    system('echo "#'.$script.'" >>"'.$output.'"');
+
     system('chmod a+x scripts/'.$script);
     system('rm -rf tmp');
     mkdir 'tmp';
     system('chown oacis:oacis tmp');
     chdir 'tmp';
-    system('sudo -i -u oacis `dirname $PWD`/scripts/'.$script);
+    system('sudo -i -u oacis `dirname $PWD`/scripts/'.$script.' >>"'.$output.'" 2>&1');
     chdir '..';
     system('rm -rf tmp');
-    system('rm -f scripts/'.$script);
+#    system('rm -f scripts/'.$script);
 
     $sth = $dbi->prepare('delete from queue where script=?;');
     $sth->bind_param(1, $script);
