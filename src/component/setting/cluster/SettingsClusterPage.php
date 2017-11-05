@@ -59,7 +59,7 @@ class SettingsClusterPage extends AbstractPage
 	{
 		?>
 		<footer class="main-footer">
-			<button class="btn btn-default btn-xs" onclick="window.open('/settings-cluster_livelog/<?= $cluster["name"] ?>?list','ll','menubar=no, toolbar=no, scrollbars=no')">
+			<button class="btn btn-default btn-xs" onclick="window.open('/settings-cluster_livelog/<?= $this->cluster["name"] ?>?list','ll','menubar=no, toolbar=no, scrollbars=no')">
 				<i class="fa fa-terminal"></i> LiveLog
 			</button>
 			<div class="pull-right hidden-xs">
