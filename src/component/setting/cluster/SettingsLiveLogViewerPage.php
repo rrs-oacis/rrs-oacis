@@ -54,7 +54,7 @@ class SettingsLiveLogViewerPage extends AbstractPage
             $start = 1;
             if (isset($_GET["start"])) { $start += 0 + $_GET["start"]; }
             if ($runId != null) {
-                exec("tail -n +".$start." /home/oacis/rrs-oacis/rrsenv/workspace/" . $this->cluster->name . "/" . $runId ."/".$this->fileName, $out);
+                exec("tail -n +".$start." /home/oacis/rrs-oacis/rrsenv/workspace/" . $this->cluster->name . "/" . $runId ."/".$this->fileName." | head -256", $out);
                 foreach ($out as $line) {
                     print $line . "\n";
                 }
