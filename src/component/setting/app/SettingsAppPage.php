@@ -35,24 +35,23 @@ class SettingsAppPage extends AbstractPage
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="box">
-					<div class="box-header">
-						<h3 class="box-title">Apps</h3>
-						<h3 class="">Apps</h3>
+					<div class="box-header with-border">
+						<h3 class="box-title">General</h3>
 						<div class="box-tools">
 							<?php if ($app["is_plugin"]) { ?>
 								<form method="post" action="/settings-app_installer" style="display: inline-block;">
 									<input type="hidden" name="user" value="<?= $app["packages_user"] ?>">
 									<input type="hidden" name="name" value="<?= $app["packages_name"] ?>">
-									<input class="btn btn-info" type="submit" value="Pull">
+									<input class="btn btn-sm btn-info" type="submit" value="Pull">
 								</form>
 							<?php } ?>
 							<?php if ($app["enabled"]) { ?>
-								<button class="btn btn-warning"
+								<button class="btn btn-sm btn-warning"
 												onclick="location.href='<?= Config::$TOP_PATH ?>/settings-app_enable/<?= $app["package"] ?>/0'">
 									Disable
 								</button>
 							<?php } else { ?>
-								<button class="btn btn-success"
+								<button class="btn btn-sm btn-success"
 												onclick="location.href='<?= Config::$TOP_PATH ?>/settings-app_enable/<?= $app["package"] ?>/1'">
 									Enable
 								</button>
