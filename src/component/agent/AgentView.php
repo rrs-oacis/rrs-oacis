@@ -39,7 +39,10 @@ use rrsoacis\system\Config;
     <section class="content">
 
 		<!-- エージェントリストのbox  -->
-    <?php include 'box-agent.php';?>
+        <?php include 'box-agent.php';?>
+
+        <?php include 'box-agent_config.php';?>
+
 
     </section>
     <!-- /.content -->

@@ -68,6 +68,8 @@ class Router
 			$this->register('/agent_upload', 'rrsoacis\\component\\agent\\AgentFileUploadController');
             $this->register('/agent_download', 'rrsoacis\\component\\agent\\AgentDownloadController');
 			$this->register('/agent_archived_change', 'rrsoacis\\component\\agent\\AgentArchivedController');
+            $this->register('/agent_config', 'rrsoacis\\component\\agent\\AgentConfigGetController');
+
 
 			// auto-register connected apps
 			foreach (AppManager::getConnectedApps() as $app) {

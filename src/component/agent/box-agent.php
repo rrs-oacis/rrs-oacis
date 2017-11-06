@@ -46,7 +46,7 @@ use rrsoacis\system\Config;
   </div>
 </div>
   <!-- /.box-body -->
-</div>
+
 
 <script>
 
