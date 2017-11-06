@@ -61,6 +61,7 @@ class Router
 			$this->register('/agents', 'rrsoacis\\component\\agent\\AgentListController');
 			$this->register('/agents_get', 'rrsoacis\\component\\agent\\AgentListGetController');
 			$this->register('/agents_archived_get', 'rrsoacis\\component\\agent\\AgentArchivedListGetController');
+            $this->register('/agents_archived', 'rrsoacis\\component\\agent\\AgentsArchivedListController');
 
 			$this->register('/agent', 'rrsoacis\\component\\agent\\AgentController');
 			$this->register('/agent_upload', 'rrsoacis\\component\\agent\\AgentFileUploadController');

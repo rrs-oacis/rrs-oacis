@@ -49,7 +49,7 @@ use rrsoacis\system\Config;
   <!-- =============================================== -->
 
   <?php include Config::$SRC_REAL_URL . 'component/common/main-footer.php';?>
-  
+
   <!-- =============================================== -->
 
 </div>

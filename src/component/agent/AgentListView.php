@@ -50,7 +50,19 @@ use rrsoacis\system\Config;
 
   <!-- =============================================== -->
 
-  <?php include Config::$SRC_REAL_URL . 'component/common/main-footer.php';?>
+  <?php //include Config::$SRC_REAL_URL . 'component/common/main-footer.php';?>
+    <footer class="main-footer">
+
+        <a href="/agents_archived">
+            <i class="fa fa-archive"></i> Archived Agents
+        </a>
+
+
+        <div class="pull-right hidden-xs">
+            <b>Version</b> <?= Config::APP_VERSION ?>
+        </div>
+        <br>
+    </footer>
   
   <!-- =============================================== -->
 
