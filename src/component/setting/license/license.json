@@ -80,11 +80,6 @@
     "license":"ionslider.txt"
   },
   {
-    "name":"jvectormap",
-    "location":"http://jvectormap.com/",
-    "license":"jvectormap.txt"
-  },
-  {
     "name":"knob",
     "location":"https://github.com/aterrien/jQuery-Knob",
     "license":"knob.txt"
@@ -93,6 +88,11 @@
     "name":"morris",
     "location":"http://morrisjs.github.io/morris.js/",
     "license":"morris.txt"
+  },
+  {
+    "name":"OpenLayers",
+    "location":"https://openlayers.org/",
+    "license":"openlayers.txt"
   },
   {
     "name":"pace",
