@@ -54,7 +54,7 @@ class SettingsLiveLogViewerPage extends AbstractPage
             $start = 1;
             if (isset($_GET["start"])) { $start += 0 + $_GET["start"]; }
             if ($runId != null) {
-                exec("tail -n +".$start." /home/oacis/rrs-oacis/rrsenv/workspace/" . $this->cluster->name . "/" . $runId ."/".$this->fileName." | head -256", $out);
+                exec("tail -n +".$start." /home/oacis/rrs-oacis/rrsenv/workspace/" . $this->cluster->name . "/" . $runId ."/".$this->fileName." | head -128", $out);
                 foreach ($out as $line) {
                     print $line . "\n";
                 }
@@ -145,6 +145,7 @@ class SettingsLiveLogViewerPage extends AbstractPage
         <script type="text/javascript">
             var autoscroll_flag = true;
             var line = 0;
+            var prevLineContent = "";
             var load = function () {
                 simpleget('/settings-cluster_livelog/<?= $this->cluster->name ?>/<?= $this->fileName ?>?load&start='+line,
                 function (recv) {
@@ -153,11 +154,12 @@ class SettingsLiveLogViewerPage extends AbstractPage
                     for (i = 0; i < arr.length -2; i++) {
 											  document.getElementById('fixedterm').innerHTML += arr[i] + "<br>";
                     }
-                    if (2 <= arr.length) {
+                    if (2 <= arr.length && prevLineContent != arr[arr.length -2]) {
                         document.getElementById('curterm').innerHTML = arr[arr.length -2];
+                        prevLineContent = arr[arr.length -2];
                     }
                     if (autoscroll_flag) { scroll(); }
-                    setTimeout(load, 3000);
+                    setTimeout(load, (arr.length <= 2 ? 3000 : 500));
                 });
             }
             load();
