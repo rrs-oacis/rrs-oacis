@@ -306,7 +306,7 @@ use rrsoacis\system\Config;
                 pElementsS.innerHTML = "<span class='label label-primary'>running</span>";
             }else{
                 pElementsS.innerHTML = "<span class='label label-primary'>running</span>"+
-                    '<button class="btn btn-default btn-xs" onclick="opneLog('+pHost+')">' +
+                    '<button class="btn btn-default btn-xs" onclick="opneLog("'+pHost+'")">' +
                     '<i class="fa fa-terminal"></i> LiveLog' +
                     '</button>';
             }
