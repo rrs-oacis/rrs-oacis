@@ -83,7 +83,10 @@ class SettingsLiveLogViewerPage extends AbstractPage
 	function body()
     {
         ?>
-        <div class="term" id="term"></div>
+        <div class="term" id="term">
+					<div id="fixedterm"></div>
+					<div id="curterm"></div>
+				</div>
         <?php
     }
 
@@ -142,17 +145,16 @@ class SettingsLiveLogViewerPage extends AbstractPage
         <script type="text/javascript">
             var autoscroll_flag = true;
             var line = 0;
-            var binded_text = "";
             var load = function () {
                 simpleget('/settings-cluster_livelog/<?= $this->cluster->name ?>/<?= $this->fileName ?>?load&start='+line,
                 function (recv) {
                     arr = recv.split(/\r\n|\r|\n/);
                     line += arr.length-2;
                     for (i = 0; i < arr.length -2; i++) {
-                        binded_text += arr[i] + "<br>";
+											  document.getElementById('fixedterm').innerHTML += arr[i] + "<br>";
                     }
                     if (2 <= arr.length) {
-                        document.getElementById('term').innerHTML = binded_text + arr[arr.length -2] + "<br>";
+                        document.getElementById('curterm').innerHTML = arr[arr.length -2];
                     }
                     if (autoscroll_flag) { scroll(); }
                     setTimeout(load, 3000);
