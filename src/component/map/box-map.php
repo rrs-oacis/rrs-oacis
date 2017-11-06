@@ -23,6 +23,11 @@ use rrsoacis\system\Config;
                 <button id="btn_comeback" class="btn btn-sm btn-success">Comeback</button>
 
             <?php } ?>
+
+            <a href="/map_download/<?=$map['name']?>">
+                <button id="btn_download" class="btn btn-sm btn-info">Download</button>
+            </a>
+
         </div>
 
     </div>
