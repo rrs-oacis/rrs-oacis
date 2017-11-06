@@ -196,6 +196,7 @@ class RunManager
             $status = $runJson['status'];
 
             $row["status"] = $status;
+            $row["host"] = $runJson['submitted_to']['id'];
 
             $sthU = $db->prepare("update run set status=:status where name=:name;");
             $sthU->bindValue(':status', $status, PDO::PARAM_STR);

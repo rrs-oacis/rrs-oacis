@@ -111,7 +111,8 @@ use rrsoacis\system\Config;
                     setProgress(
                         document.querySelector('#runid'+item+' .run_status'),
                         document.querySelector('#runid'+item+' .run_progress .progress-bar'),
-                        json['status']
+                        json['status'],
+                        json['host']
                     );
 
                     if(json['status'] == 'failed' || json == 'finished'){
@@ -181,8 +182,6 @@ use rrsoacis\system\Config;
 
 
 
-                console.log('aaaa');
-
                 table.on( 'draw', function (e) {
 
                     //var rowNode = table.rows();
@@ -199,19 +198,6 @@ use rrsoacis\system\Config;
                             if (cellData != '') runUpdateList.add(cellData);
 
                         }
-
-                        /*
-                        if($(this)[0].classList.contains("run_name")){
-
-                            var cellData = $(this).text();
-
-                            runUpdateList.add(cellData);
-
-                            //console.log(cellData);
-                        }*/
-
-                        //console.log(cellData);
-                        //do something with the cell data.
 
                     });
 
@@ -267,7 +253,8 @@ use rrsoacis\system\Config;
             setProgress(
                 t.content.querySelector('.run_status'),
                 t.content.querySelector('.run_progress .progress-bar'),
-                data[i]['status']
+                data[i]['status'],
+                null
             );
 
 
@@ -292,7 +279,7 @@ use rrsoacis\system\Config;
 
     }
 
-    function setProgress(pElementsS,pElementsP,pStatus){
+    function setProgress(pElementsS,pElementsP,pStatus,pHost){
 
         pElementsP.parentNode.classList.remove('active');
 
@@ -315,7 +302,15 @@ use rrsoacis\system\Config;
             //pElementsP.innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-primary' style='width: 25%'></div>";
             pElementsP.parentNode.classList.add('active');
         } else if (pStatus == 'running') {
-            pElementsS.innerHTML = "<span class='label label-primary'>running</span>";
+            if(pHost==null){
+                pElementsS.innerHTML = "<span class='label label-primary'>running</span>";
+            }else{
+                pElementsS.innerHTML = "<span class='label label-primary'>running</span>"+
+                    '<button class="btn btn-default btn-xs" onclick="opneLog('+pHost+')">' +
+                    '<i class="fa fa-terminal"></i> LiveLog' +
+                    '</button>';
+            }
+
             pElementsP.classList.add('progress-bar-primary');
             pElementsP.style.width = '50%';
             //pElementsP.innerHTML = "<div class='progress-bar progress-bar-striped progress-bar-primary' style='width: 50%'></div>";
@@ -336,6 +331,10 @@ use rrsoacis\system\Config;
             pElementsP.style.width = '0%';
         }
 
+    }
+    
+    function opneLog(host) {
+        window.open('/settings-cluster_livelog/'+host+'?list','ll','menubar=no, toolbar=no, scrollbars=no');
     }
 
 </script>
