@@ -8,24 +8,27 @@
 use rrsoacis\system\Config;
 ?>
 
-<div class="col-md-8">
+<div style="margin-bottom: 20px;">
+    <?php if ($map["archived"]==0) { ?>
+
+        <button id="btn_archive" class="btn btn-warning">Archive</button>
+
+    <?php } else { ?>
+
+        <button id="btn_comeback" class="btn btn-success">Comeback</button>
+
+    <?php } ?>
+</div>
+
 
 <div class="box box-info">
     <div class="box-header with-border">
         <h3 class="box-title">General</h3>
         <div class="box-tools">
-            <?php if ($map["archived"]==0) { ?>
 
-                <button id="btn_archive" class="btn btn-sm btn-warning">Archive</button>
-
-            <?php } else { ?>
-
-                <button id="btn_comeback" class="btn btn-sm btn-success">Comeback</button>
-
-            <?php } ?>
 
             <a class="btn btn-sm btn-info btn-social" href="/map_download/<?=$map['name']?>">
-                <i class="fa fa-file-zip-o"></i> Download
+                <i class="fa fa-file-zip-o"></i> Zip Download
             </a>
             
 
@@ -58,7 +61,7 @@ use rrsoacis\system\Config;
     </div>
 </div>
 <!-- /.box-body -->
-</div>
+
 
 <script>
 

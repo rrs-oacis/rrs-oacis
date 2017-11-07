@@ -1,26 +1,26 @@
 <?php
 use rrsoacis\system\Config;
 ?>
+
+<div style="margin-bottom: 20px;">
+    <?php if ($agent["archived"]==0) { ?>
+
+        <button id="btn_archive" class="btn btn-warning">Archive</button>
+
+    <?php } else { ?>
+
+        <button id="btn_comeback" class="btn btn-success">Comeback</button>
+
+    <?php } ?>
+</div>
+
 <div class="box box-info">
   <div class="box-header with-border">
       <h3 class="box-title">General</h3>
       <div class="box-tools">
 
-
-          <?php if ($agent["archived"]==0) { ?>
-
-                  <button id="btn_archive" class="btn btn-sm btn-warning">Archive</button>
-
-
-          <?php } else { ?>
-
-                  <button id="btn_comeback" class="btn btn-sm btn-success">Comeback</button>
-
-          <?php } ?>
-
-
           <a class="btn btn-sm btn-info btn-social" href="/agent_download/<?=$agent['name']?>">
-              <i class="fa fa-file-zip-o"></i> Download
+              <i class="fa fa-file-zip-o"></i> Zip Download
           </a>
 
       </div>
