@@ -13,7 +13,7 @@ use rrsoacis\manager\AccessManager;
         <?php if (!$internet) { ?>
             <button class="btn" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-general'">No connection</button>
         <?php } else if ($gitcheck_ret == 0) { ?>
-                <button class="btn btn-info" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-version_update'">Update</button>
+                <button id="update-button" class="btn btn-info" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-version_update'">Update</button>
         <?php } else { ?>
             <button class="btn" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-general'">Latest version</button>
         <?php } ?>
@@ -39,3 +39,19 @@ use rrsoacis\manager\AccessManager;
     </div>
 </div>
 <!--</div>-->
+
+<script>
+
+    $(function(){
+
+        $("#update-button").on('click',function(){
+
+            $("#update-button").html("progressing...").prop('disabled', true);
+        }
+
+
+    });
+
+
+
+</script>
