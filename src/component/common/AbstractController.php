@@ -11,9 +11,9 @@ abstract class AbstractController{
 		$resource_uri = $this->resource_uri;
 
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			$this->post();
+			return $this->post();
 		}else{
-            $this->get();
+            return $this->get();
 		}
 		
 	}
