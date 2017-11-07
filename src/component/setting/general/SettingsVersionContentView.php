@@ -15,7 +15,7 @@ use rrsoacis\manager\AccessManager;
         <?php } else if ($gitcheck_ret == 0) { ?>
                 <button id="update-button" class="btn btn-info" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-version_update'">Update</button>
         <?php } else { ?>
-            <button class="btn" onclick="location.href='<?=Config::$TOP_PATH ?>/settings-general'">Latest version</button>
+            <button class="btn" onclick="event.shiftKey?location.href='<?=Config::$TOP_PATH ?>/settings-version_update':location.href='<?=Config::$TOP_PATH ?>/settings-general'">Latest version</button>
         <?php } ?>
     </div>
     <div class="box-body">
