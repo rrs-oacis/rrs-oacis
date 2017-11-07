@@ -334,7 +334,14 @@ use rrsoacis\system\Config;
     }
     
     function opneLog(host) {
-        window.open('/settings-cluster_livelog/'+host+'?list','ll','menubar=no, toolbar=no, scrollbars=no');
+
+
+        var wx = 640;
+        var wy = 480;
+        var x = (screen.width  - wx) / 2;
+        var y = (screen.height - wy) / 2;
+
+        window.open('/settings-cluster_livelog/'+host+'?list','ll','menubar=no, toolbar=no, scrollbars=no,'+" left="+x+",top="+y+",width="+wx+",height="+wy);
     }
 
 </script>
