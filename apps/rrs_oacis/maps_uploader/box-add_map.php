@@ -1,3 +1,57 @@
+<style>
+
+    .content{
+        overflow:hidden;
+    }
+
+    .addForm{
+        border: dashed 2px rgba(130, 130, 130, 0.84) !important;
+        background-color: transparent;
+        box-shadow: none;
+        height:210px;
+
+        cursor: copy;
+
+    }
+
+    .addForm div{
+        text-align: center;
+
+    }
+
+    .addForm div i{
+        transform: translateY(100%);
+        color: rgb(130, 130, 130);
+    }
+
+    .addForm:hover{
+        background-color: #fdfdfd;
+        border: dashed 2px rgba(34, 34, 34, 0.84) !important;
+
+    }
+
+    .addForm:hover div i{
+        color: rgba(34, 34, 34, 0.84) !important;
+    }
+
+
+    .addForm div p{
+        transform: translateY(300%);
+    }
+
+    .addForm div input{
+        height: 0px;
+        width: 0px;
+        cursor: copy;
+    }
+
+    .form-area{
+
+    }
+
+</style>
+
+
 <!-- /.box -->
 
 <div class="col-md-12" style="margin-bottom: 2em;">
@@ -302,60 +356,3 @@
 
 
 </script>
-
-
-<style>
-
-    .content{
-        overflow:hidden;
-    }
-
-    .addForm{
-        border: dashed 2px rgba(130, 130, 130, 0.84) !important;
-        background-color: transparent;
-        box-shadow: none;
-        height:210px;
-
-        cursor: copy;
-
-    }
-
-    .addForm div{
-        text-align: center;
-
-    }
-
-    .addForm div i{
-        transform: translateY(100%);
-        color: rgb(130, 130, 130);
-    }
-
-    .addForm:hover{
-        background-color: #fdfdfd;
-        border: dashed 2px rgba(34, 34, 34, 0.84) !important;
-
-    }
-
-    .addForm:hover div i{
-        color: rgba(34, 34, 34, 0.84) !important;
-    }
-
-
-    .addForm div p{
-        transform: translateY(300%);
-    }
-
-    .addForm div input{
-        height: 0px;
-        width: 0px;
-        cursor: copy;
-    }
-
-    .form-area{
-
-    }
-
-
-
-
-</style>
