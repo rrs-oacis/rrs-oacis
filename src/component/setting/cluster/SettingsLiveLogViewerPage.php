@@ -110,11 +110,11 @@ class SettingsLiveLogViewerPage extends AbstractPage
                 }
                 div.term {
                     margin: 0;
-                    padding: 0;
+                    padding: 0 4px;
                     background-color: #000;
                     font-size: 1.2em;
                     color: white;
-                    height: 90%;
+                    height: calc(100% - 40px);
                     width: 100%;
                     overflow-x: auto;
                     overflow-y: scroll;
@@ -163,15 +163,15 @@ class SettingsLiveLogViewerPage extends AbstractPage
                 });
             }
             load();
-            var resize = function () {
-                $('#term').height($(window).height()-$('#head').height());
-            }
-            resize();
+            //var resize = function () {
+            //    $('#term').height($(window).height()-$('#head').height());
+            //}
+            //resize();
             var scroll = function () {
                 $('#term').animate({scrollTop: $('#term')[0].scrollHeight}, 'fast');
             }
             scroll();
-            $(window).on('resize', function(){resize();});
+            //$(window).on('resize', function(){resize();});
             var as_change = function () {
                 autoscroll_flag = !autoscroll_flag;
                 $("#asbutton").toggleClass("btn-default", !autoscroll_flag);
