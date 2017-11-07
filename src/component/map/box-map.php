@@ -24,9 +24,10 @@ use rrsoacis\system\Config;
 
             <?php } ?>
 
-            <a href="/map_download/<?=$map['name']?>">
-                <button id="btn_download" class="btn btn-sm btn-info">Download</button>
+            <a class="btn btn-sm btn-info btn-social" href="/map_download/<?=$map['name']?>">
+                <i class="fa fa-file-zip-o"></i> Download
             </a>
+            
 
         </div>
 
@@ -69,6 +70,8 @@ use rrsoacis\system\Config;
         form.append('parameter_archived', 1);
         form.append('parameter_name','<?= $map["name"]?>');
 
+        $("#btn_archive").html("progressing...").prop('disabled', true);;
+
         fetch('<?= Config::$TOP_PATH ?>map_archived_change', {
             method: 'POST', credentials: "include",
             body: form
@@ -93,6 +96,8 @@ use rrsoacis\system\Config;
         var form = new FormData();
         form.append('parameter_archived', 0);
         form.append('parameter_name','<?= $map["name"]?>');
+
+        $("#btn_comeback").html("progressing...").prop('disabled', true);;
 
         fetch('<?= Config::$TOP_PATH ?>map_archived_change', {
             method: 'POST', credentials: "include",

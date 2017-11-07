@@ -5,9 +5,12 @@ use rrsoacis\system\Config;
   <div class="box-header with-border">
       <h3 class="box-title">General</h3>
       <div class="box-tools">
+
+
           <?php if ($agent["archived"]==0) { ?>
 
                   <button id="btn_archive" class="btn btn-sm btn-warning">Archive</button>
+
 
           <?php } else { ?>
 
@@ -15,8 +18,9 @@ use rrsoacis\system\Config;
 
           <?php } ?>
 
-          <a href="/agent_download/<?=$agent['name']?>">
-              <button id="btn_download" class="btn btn-sm btn-info">Download</button>
+
+          <a class="btn btn-sm btn-info btn-social" href="/agent_download/<?=$agent['name']?>">
+              <i class="fa fa-file-zip-o"></i> Download
           </a>
 
       </div>
@@ -58,6 +62,9 @@ use rrsoacis\system\Config;
         form.append('parameter_archived', 1);
         form.append('parameter_name','<?= $agent["name"]?>');
 
+
+        $("#btn_archive").html("progressing...").prop('disabled', true);
+
         fetch('<?= Config::$TOP_PATH ?>agent_archived_change', {
             method: 'POST', credentials: "include",
             body: form
@@ -66,6 +73,7 @@ use rrsoacis\system\Config;
                 return response.json()
             })
             .then(function (json) {
+
 
                 location.reload();
 
@@ -83,6 +91,8 @@ use rrsoacis\system\Config;
         form.append('parameter_archived', 0);
         form.append('parameter_name','<?= $agent["name"]?>');
 
+        $("#btn_comeback").html("progressing...").prop('disabled', true);
+
         fetch('<?= Config::$TOP_PATH ?>agent_archived_change', {
             method: 'POST', credentials: "include",
             body: form
@@ -91,6 +101,7 @@ use rrsoacis\system\Config;
                 return response.json()
             })
             .then(function (json) {
+
 
                 location.reload();
                 //setMapListOptionData(json);
