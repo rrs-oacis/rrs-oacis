@@ -9,7 +9,7 @@ use rrsoacis\system\Config;
 
     <?php } else { ?>
 
-        <button id="btn_comeback" class="btn btn-success">Comeback</button>
+        <button id="btn_comeback" class="btn btn-success">Unarchive</button>
 
     <?php } ?>
 </div>
