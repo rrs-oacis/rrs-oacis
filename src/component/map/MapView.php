@@ -46,7 +46,7 @@ use rrsoacis\system\Config;
 
             <!-- エージェントリストのbox  -->
             <?php include 'box-map.php';?>
-            <?php //include 'box-map_image.php';?>
+            <?php include 'box-map_image.php';?>
 
         </section>
         <!-- /.content -->
