@@ -57,6 +57,7 @@ class Router
             $this->register('/map_download', 'rrsoacis\\component\\map\\MapDownloadController');
 			$this->register('/map_archived_change', 'rrsoacis\\component\\map\\MapArchivedController');
 			$this->register('/map_gml_get', 'rrsoacis\\component\\map\\MapGMLGetController');
+			$this->register('/map_image', 'rrsoacis\\component\\map\\MapImageController');
 
 			// Agents
 			$this->register('/agents', 'rrsoacis\\component\\agent\\AgentListController');

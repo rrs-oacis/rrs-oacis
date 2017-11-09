@@ -375,4 +375,8 @@ class RunManager
         return $db;
     }
 
+    public static function getDB(){
+    	return self::connectDB();
+    }
+
 }
