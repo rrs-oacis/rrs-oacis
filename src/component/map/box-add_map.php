@@ -84,9 +84,11 @@
 			document.getElementById("mapName").disabled = true;
 		} else {
 			if (document.getElementById("mapName").value == '') {
-				var name = $("#mapfile").prop('files')[0].name;
-				name = name.replace(/\.(zip|tar\.gz)$/, '', 'i');
-				document.getElementById("mapName").value = name;
+				try {
+					var name = $("#mapfile").prop('files')[0].name;
+					name = name.replace(/\.(zip|tar\.gz)$/, '', 'i');
+					document.getElementById("mapName").value = name;
+				} catch (e) {}
 			}
 			document.getElementById("mapName").disabled = false;
 		}
