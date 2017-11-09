@@ -30,7 +30,7 @@ class MapImageController extends AbstractController
 	public static function getMapImageFrom($map)
 	{
 
-		$db = RunManager::connectDB();
+		$db = RunManager::getDB();
 		$sth = $db->prepare("select * from run where map=:map and status='finished';");
 		$sth->bindValue(':map', $map, PDO::PARAM_STR);
 		$sth->execute();
