@@ -12,12 +12,22 @@ use rrsoacis\manager\MapManager;
 use rrsoacis\component\common\AbstractController;
 
 
-class MapDownloadController extends AbstractController{
+class MapDownloadController extends AbstractController
+{
 
-    public function anyIndex($param= null){
+	public function anyIndex($param = null)
+	{
+		$mapName = $param;
 
-        MapManager::all_zip($param);
+		MapManager::updateManifest($mapName);
+		$output = MapManager::getZipBinary($mapName);
+		$zipFileName = 'map_'.$mapName.'.zip';
 
-    }
+		// stream out put
+		header('Content-Type: application/zip; name="' . $zipFileName . '"');
+		header('Content-Disposition: attachment; filename="' . $zipFileName . '"');
+		header('Content-Length: ' . (strlen(bin2hex($output))/2));
+		echo $output;
+	}
 
 }
