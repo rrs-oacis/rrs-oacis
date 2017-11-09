@@ -18,7 +18,7 @@
     <!-- /.box-header -->
     <div class="box-body">
 
-			<img id="map_image" src="/map_image/<?=$map['name']?>" alt="Map image is being prepared" />
+			<img id="map_image" src="/map_image/<?=$map['name']?>" alt="Map image of <?=$map['name']?>" />
 
 		</div>
 
@@ -46,5 +46,12 @@
         height: 100%;
 				min-height: 100px;
     }
+
+		img#map_image:after{
+				content: "Map image is being prepared";
+				display: block;
+				padding: 20px 30%;
+			font-size: 22px;
+		}
 
 </style>
