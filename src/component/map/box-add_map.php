@@ -87,8 +87,8 @@
 				var name = $("#mapfile").prop('files')[0].name;
 				name = name.replace(/\.(zip|tar\.gz)$/, '', 'i');
 				document.getElementById("mapName").value = name;
-				document.getElementById("mapName").disabled = false;
 			}
+			document.getElementById("mapName").disabled = false;
 		}
 	}
 
