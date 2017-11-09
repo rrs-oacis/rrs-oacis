@@ -18,7 +18,7 @@
     <!-- /.box-header -->
     <div class="box-body">
 
-			<img id="map_image" src="/map_image/<?=$map['name']?>"　alt="Map image" />
+			<img id="map_image" src="/map_image/<?=$map['name']?>" alt="Map image is being prepared" />
 
 		</div>
 
