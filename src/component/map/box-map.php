@@ -28,8 +28,8 @@ use rrsoacis\system\Config;
 
 
             <a class="btn btn-sm btn-info btn-social" href="/map_download/<?=$map['name']?>">
-                <i class="fa fa-file-zip-o"></i> Zip Download
-            </a>
+                <i class="fa fa-file-zip-o"></i> Download Zip
+						</a>
 
 
         </div>

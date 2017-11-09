@@ -20,8 +20,8 @@ use rrsoacis\system\Config;
       <div class="box-tools">
 
           <a class="btn btn-sm btn-info btn-social" href="/agent_download/<?=$agent['name']?>">
-              <i class="fa fa-file-zip-o"></i> Zip Download
-          </a>
+              <i class="fa fa-file-zip-o"></i> Download Zip
+					</a>
 
       </div>
 
