@@ -23,6 +23,7 @@ class MapImageController extends AbstractController
 
 		//echo file_get_contents(Config::$SRC_REAL_URL.'../rrsenv/MAP/'.$param.'/map/map.gml');
 
+		header('Content-Type: image/png');
 		echo self::getMapImageFrom($param);
 
 	}
@@ -38,16 +39,14 @@ class MapImageController extends AbstractController
 		while($row = $sth->fetch(PDO::FETCH_ASSOC))
 		{
 
-			$url = "localhost:3000/Result_development/".$row["simulation"]."/".$row["paramId"]."/".$row["runId"]."/img_log/snapshot-init.png";
+			$url = "http://127.0.0.1:3000/Result_development/".$row["simulation"]."/".$row["paramId"]."/".$row["runId"]."/img_log/snapshot-init.png";
 			$runImage = @file_get_contents($url);
 
 			return $runImage;
 
-			$map[] = $row;
-
 		}
 
-		return $map;
+		return "";
 
 	}
 
