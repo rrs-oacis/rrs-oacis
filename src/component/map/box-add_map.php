@@ -37,7 +37,6 @@
 
 			<div class="form-group">
 				<label for="mapName" class="col-sm-2 control-label">Auto configuration</label>
-
 				<div class="col-sm-10">
 					<label class="radio-inline">
 						<input type="radio" onchange="updateConfigs()" id="autoconfig" name="autoconfig" value="1" checked>TRUE

@@ -129,7 +129,6 @@ class MapManager
 
 		$output = file_get_contents($zipTmpDir . $zipFileName);
 
-		// delete tmp
 		unlink($zipTmpDir . $zipFileName);
 
 		return $output;
@@ -141,7 +140,7 @@ class MapManager
 			$zip->addEmptyDir($newDir);
 		}
 
-		foreach (self::getFilesPathArray($dirPath) as $file) {
+		foreach (self::getFilePathsArray($dirPath) as $file) {
 			if (is_dir($dirPath . "/" . $file)) {
 				self::addZip($zip, $dirPath . "/" . $file, $newDir . "/" . $file);
 			} else {
@@ -150,7 +149,7 @@ class MapManager
 		}
 	}
 
-	private static function getFilesPathArray($dir_path)
+	private static function getFilePathsArray($dir_path)
 	{
 		$file_array = array();
 		if (is_dir($dir_path)) {
