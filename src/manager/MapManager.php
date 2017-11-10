@@ -100,7 +100,7 @@ class MapManager
 		$manifest = [];
 		$manifest["name"] = $map["alias"];
 
-		$manifestPath = Config::$ROUTER_PATH . Config::MAPS_DIR_NAME."/".$name."/manifest.json";
+		$manifestPath = Config::$ROUTER_PATH . Config::MAPS_DIR_NAME."/".$name."/.manifest.json";
 		file_put_contents($manifestPath, json_encode($manifest));
 	}
 

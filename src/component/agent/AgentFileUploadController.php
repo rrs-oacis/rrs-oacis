@@ -4,7 +4,6 @@ namespace rrsoacis\component\agent;
 
 use rrsoacis\manager\AgentManager;
 use ZipArchive;
-use Symfony\Component\Finder\Finder;
 
 use rrsoacis\system\Config;
 use rrsoacis\component\common\AbstractController;
@@ -87,9 +86,14 @@ class AgentFileUploadController extends AbstractController
 			}
 
 			if ($approved) {
-				if ($_POST["autoconfig"] === "1" && file_exists($fileDir . "/manifest.json")) {
-					$manifest = json_decode(file_get_contents($fileDir . "/manifest.json"), true);
-					if ($manifest["name"] !== null && $manifest["name"] !== "") {
+				if ($_POST["autoconfig"] === "1") {
+					$manifest = null;
+					if (file_exists($fileDir . "/.manifest.json")) {
+						$manifest = json_decode(file_get_contents($fileDir . "/.manifest.json"), true);
+					} else if (file_exists($fileDir . "/manifest.json")) {
+						$manifest = json_decode(file_get_contents($fileDir . "/manifest.json"), true);
+					}
+					if ($manifest !== null && $manifest["name"] !== null && $manifest["name"] !== "") {
 						$agentName = $manifest["name"];
 					}
 				}

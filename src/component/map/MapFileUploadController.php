@@ -84,9 +84,14 @@ class MapFileUploadController extends AbstractController
 			$fileDir = $check[1];
 
 			if ($approved) {
-				if ($_POST["autoconfig"] === "1" && file_exists($fileDir . "/manifest.json")) {
-					$manifest = json_decode(file_get_contents($fileDir . "/manifest.json"), true);
-					if ($manifest["name"] !== null && $manifest["name"] !== "") {
+				if ($_POST["autoconfig"] === "1") {
+					$manifest = null;
+					if (file_exists($fileDir . "/.manifest.json")) {
+						$manifest = json_decode(file_get_contents($fileDir . "/.manifest.json"), true);
+					} else if (file_exists($fileDir . "/manifest.json")) {
+						$manifest = json_decode(file_get_contents($fileDir . "/manifest.json"), true);
+					}
+					if ($manifest !== null && $manifest["name"] !== null && $manifest["name"] !== "") {
 						$mapName = $manifest["name"];
 					}
 				}
@@ -130,9 +135,14 @@ class MapFileUploadController extends AbstractController
 			$fileDir = $check[1];
 
 			if ($approved) {
-				if ($_POST["autoconfig"] === "1" && file_exists($fileDir . "/manifest.json")) {
-					$manifest = json_decode(file_get_contents($fileDir . "/manifest.json"), true);
-					if ($manifest["name"] !== null && $manifest["name"] !== "") {
+				if ($_POST["autoconfig"] === "1") {
+					$manifest = null;
+					if (file_exists($fileDir . "/.manifest.json")) {
+						$manifest = json_decode(file_get_contents($fileDir . "/.manifest.json"), true);
+					} else if (file_exists($fileDir . "/manifest.json")) {
+						$manifest = json_decode(file_get_contents($fileDir . "/manifest.json"), true);
+					}
+					if ($manifest !== null && $manifest["name"] !== null && $manifest["name"] !== "") {
 						$mapName = $manifest["name"];
 					}
 				}

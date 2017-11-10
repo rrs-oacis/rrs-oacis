@@ -101,7 +101,7 @@ class AgentManager
 		$manifest = [];
 		$manifest["name"] = $agent["alias"];
 
-		$manifestPath = Config::$ROUTER_PATH . Config::AGENTS_DIR_NAME."/".$name."/manifest.json";
+		$manifestPath = Config::$ROUTER_PATH . Config::AGENTS_DIR_NAME."/".$name."/.manifest.json";
 		file_put_contents($manifestPath, json_encode($manifest));
 	}
 
