@@ -123,6 +123,7 @@ class ClusterManager
 		if ($cluster != null) {
 			$script = 'cd /home/oacis/rrs-oacis/rrsenv/workspace/' . $cluster["name"] . ' ; ../../script/rrscluster setup -p \'' . $pass . '\'';
 			ScriptManager::queueBashScript($script);
+			self::updateStatus($name);
 		}
 	}
 
