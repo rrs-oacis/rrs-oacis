@@ -130,7 +130,7 @@ class ClusterManager
 	{
 		$cluster = self::getCluster($name);
 		if ($cluster != null) {
-			$script = 'cd /home/oacis/rrs-oacis/rrsenv/workspace/' . $cluster["name"] . ' ; ../../script/rrscluster kill';
+			$script = 'cd /home/oacis/rrs-oacis/rrsenv/workspace/' . $cluster["name"] . ' ; ../../script/rrscluster kill -f';
 			ScriptManager::queueBashScript($script);
 		}
 	}
