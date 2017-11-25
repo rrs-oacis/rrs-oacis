@@ -224,7 +224,7 @@ class ClusterManager
 			$base['_id'] = $name;
 			$base['name'] = 'RO_' . $name;
 			$base['work_base_dir'] = $myWorkspaceDir;
-			$base['mounted_work_base_dir'] = ''; //$myWorkspaceDir;
+			$base['mounted_work_base_dir'] = $myWorkspaceDir;
 			$oaciscoll->insertOne($base);
 			/* END : direct OACIS control */
 
