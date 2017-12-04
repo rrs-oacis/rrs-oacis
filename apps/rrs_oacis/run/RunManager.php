@@ -213,7 +213,7 @@ class RunManager
 
                     //Update
                     $sthU = $db->prepare("update run set score=:score where name=:name;");
-                    $sthU->bindValue(':score', (int)$score, PDO::PARAM_INT);
+                    $sthU->bindValue(':score', $score, PDO::PARAM_STR);
                     $sthU->bindValue(':name', $row['name'], PDO::PARAM_STR);
                     $sthU->execute();
 
@@ -221,7 +221,7 @@ class RunManager
 
                     //Update
                     $sthU = $db->prepare("update run set score=:score where name=:name;");
-                    $sthU->bindValue(':score', (int)$score, PDO::PARAM_INT);
+                    $sthU->bindValue(':score', $score, PDO::PARAM_STR);
                     $sthU->bindValue(':name', $row['name'], PDO::PARAM_STR);
                     $sthU->execute();
 
