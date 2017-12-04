@@ -209,7 +209,7 @@ use rrsoacis\system\Config;
                 table.draw();
 
                 updateCellData(true);
-                
+
             });
     }
 
@@ -332,7 +332,7 @@ use rrsoacis\system\Config;
         }
 
     }
-    
+
     function opneLog(host) {
 
 
@@ -366,6 +366,7 @@ use rrsoacis\system\Config;
 
     #simulation_table_wrapper .col-sm-12{
         overflow-x:scroll;
+				white-space: nowrap;
     }
 
 </style>
