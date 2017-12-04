@@ -122,6 +122,7 @@ data/
 # rrsenv
 rrsenv/
 
+/rrsoacis-init.sh
 /server.sh
 /setup.sh
 *.db
