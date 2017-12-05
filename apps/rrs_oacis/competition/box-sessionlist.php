@@ -131,7 +131,7 @@ use rrsoacis\system\Config;
                             </option>
                         <?php } ?>
                     </select>
-                    <span class="input-group-btn"> <input class="btn" type="submit" value="Add"> </span>
+                    <span class="input-group-btn"> <input class="btn btn-primary" type="submit" value="Add"> </span>
                 </div>
             </form>
         </div>
