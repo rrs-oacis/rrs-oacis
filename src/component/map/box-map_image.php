@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: k14041kk
- * Date: 2017/10/08
- * Time: 16:38
- */
 
 ?>
 <div id="map_image_box" class="box box-info">
     <div class="box-header with-border">
-        <h3 class="box-title">Map image</h3>
+        <h3 class="box-title">Preview</h3>
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
             </button>
@@ -48,9 +42,9 @@
     }
 
 		img#map_image:after{
-				content: "Map image is being prepared";
+				content: "Not generated";
 				display: block;
-				padding: 20px 30%;
+				padding: 20px 40%;
 			font-size: 22px;
 		}
 
