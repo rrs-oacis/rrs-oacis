@@ -90,6 +90,8 @@ class MapManager
 		$sth->bindValue(':name', $name, PDO::PARAM_STR);
 		$sth->bindValue(':alias', $alias, PDO::PARAM_STR);
 		$sth->execute();
+
+		self::updateMapImage($name);
 	}
 
 	public static function updateManifest($name)
@@ -102,6 +104,69 @@ class MapManager
 
 		$manifestPath = Config::$ROUTER_PATH . Config::MAPS_DIR_NAME."/".$name."/.manifest.json";
 		file_put_contents($manifestPath, json_encode($manifest));
+	}
+
+	public static function updateMapImage($name)
+	{
+		$map = self::getMap($name);
+		if ($map === null) { return; }
+
+		$scriptId = uniqid();
+		$simulatorName = self::getMapImageSimulator();
+
+		$out_filename = '/tmp/out_' . $scriptId . '.json';
+
+		$command = Config::$OACISCLI_PATH . " create_parameter_sets";
+		$command .= ' -s ' . $simulatorName;
+		$command .= ' -i \'{"MAP":"'.$map["name"].'"}\'';
+		$command .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"' . ClusterManager::getMainHostGroup() . '","host_parameters":null}\'';
+		$command .= ' -o ' . $out_filename;
+		$command .= "\n";
+		$command .= "rm -f ".$out_filename;
+
+		ScriptManager::queueBashScript($command);
+	}
+
+	public static function getMapImageSimulator()
+	{
+		$db = self::connectDB();
+		$sth = $db->query("select value from system where name='mapImageSimulator';");
+		$simulatorName = $sth->fetch(PDO::FETCH_ASSOC)['value'];
+
+		if (file_get_contents('http://127.0.0.1:3000/simulators/'.$simulatorName.'.json') === false) {
+			$tmpFileOut = '/tmp/rrsoacis-out-' . uniqid();
+			$tmpFileIn = '/tmp/rrsoacis-in-' . uniqid();
+			system("sudo -i -u oacis " . Config::$OACISCLI_PATH . " simulator_template -o " . $tmpFileOut . " 2>&1");
+			$simulator = json_decode(file_get_contents($tmpFileOut), true);
+			system("rm -f " . $tmpFileOut);
+			$simulator['name'] = "RO_MapImage_" . uniqid();
+			$simulator['command'] = '/home/oacis/rrs-oacis/rrsenv/script/rrscluster update-mapimage -c ../rrscluster.cfg -i ./_input.json -l ./';
+			$simulator['executable_on_ids'][] = ClusterManager::getMainHostGroup();
+			$simulator['support_input_json'] = true;
+
+			$simulator['parameter_definitions'] = [];
+
+			$parameter1 = [];
+			$parameter1['key'] = 'MAP';
+			$parameter1['type'] = 'String';
+			$parameter1['default'] = '';
+			$parameter1['description'] = '';
+			$simulator['parameter_definitions'][] = $parameter1;
+
+			file_put_contents($tmpFileIn, json_encode($simulator));
+			system("sudo -i -u oacis " . Config::$OACISCLI_PATH . " create_simulator -i " . $tmpFileIn . " -o " . $tmpFileOut);
+			system("rm -f " . $tmpFileIn);
+			$simulatorId = json_decode(file_get_contents($tmpFileOut), true)['simulator_id'];
+			system("rm -f " . $tmpFileOut);
+
+			$sth = $db->prepare('update system set value=:name where name="mapImageSimulator";');
+			$sth->bindValue(':name', $simulatorId, PDO::PARAM_STR);
+			$sth->execute();
+
+			return $simulatorId;
+		}
+
+		return $simulatorName;
 	}
 
 	public static function getZipBinary($name)
@@ -183,7 +248,9 @@ class MapManager
 			case 0:
 				$db->query("insert into system(name,value) values('mapVersion', 1);");
 				$db->query("create table map(name,alias,archived default 0,timestamp default (DATETIME('now','localtime')));");
-				$version = 1;
+			case 1:
+				$db->query("insert into system(name,value) values('mapImageSimulator', '');");
+				$version = 2;
 
 				$sth = $db->prepare("update system set value=:value where name='mapVersion';");
 				$sth->bindValue(':value', $version, PDO::PARAM_INT);
