@@ -35,31 +35,31 @@ use rrsoacis\system\Config;
 			</div>
 			<!-- /.box-header -->
 			<div class="box-body table-responsive no-padding">
-				<table class="table table-hover">
+				<table class="table">
 					<tr>
 						<th></th>
 						<th>Host</th>
-						<th>javac</th>
+						<th>Message</th>
 					</tr>
 					<tr>
-						<th style="color:<?= ($hasError["S"] ? "red" : "green") ?>;">Server</th>
+						<th style="color:<?= ($isDisabled ? "orange" : ($hasError["S"] ? "red" : "green")) ?>;">Server</th>
 						<td><?= $cluster["s_host"] ?></td>
-						<td><?= $javaVer["S"] ?></td>
+						<td><?= $message["S"] ?></td>
 					</tr>
 					<tr>
-						<th style="color:<?= ($hasError["A"] ? "red" : "green") ?>;">Ambulance</th>
+						<th style="color:<?= ($isDisabled ? "orange" : ($hasError["A"] ? "red" : "green")) ?>;">Ambulance</th>
 						<td><?= $cluster["a_host"] ?></td>
-						<td><?= $javaVer["A"] ?></td>
+						<td><?= $message["A"] ?></td>
 					</tr>
 					<tr>
-						<th style="color:<?= ($hasError["F"] ? "red" : "green") ?>;">Fire</th>
+						<th style="color:<?= ($isDisabled ? "orange" : ($hasError["F"] ? "red" : "green")) ?>;">Fire</th>
 						<td><?= $cluster["f_host"] ?></td>
-						<td><?= $javaVer["F"] ?></td>
+						<td><?= $message["F"] ?></td>
 					</tr>
 					<tr>
-						<th style="color:<?= ($hasError["P"] ? "red" : "green") ?>;">Police</th>
+						<th style="color:<?= ($isDisabled ? "orange" : ($hasError["P"] ? "red" : "green")) ?>;">Police</th>
 						<td><?= $cluster["p_host"] ?></td>
-						<td><?= $javaVer["P"] ?></td>
+						<td><?= $message["P"] ?></td>
 					</tr>
 				</table>
 			</div>
@@ -136,20 +136,20 @@ use rrsoacis\system\Config;
 <!-- BEGIN : Check Message -->
 <div class="row">
 	<div class="col-xs-12">
-		<div class="box box-warning">
+		<div class="box box-warning collapsed-box">
 			<div class="box-header with-border">
 				<h3 class="box-title">
 					Check Massage
 					<small>Raw outputs of cluster checker</small>
 				</h3>
 				<div class="box-tools pull-right">
-					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
 					</button>
 				</div>
 			</div>
 			<!-- /.box-header -->
 			<div class="box-body">
-				<textarea class="form-control" rows="8" readonly><?= $checkMessage ?></textarea>
+      	<textarea class="form-control" rows="8" readonly><?= $checkMessage ?></textarea>
 			</div>
 			<!-- /.box-body -->
 		</div>

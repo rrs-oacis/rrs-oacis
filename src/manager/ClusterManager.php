@@ -79,7 +79,7 @@ class ClusterManager
 
 		$db = self::connectDB();
 		if ($errorCount <= 0) {
-			$sth = $db->prepare("update cluster set check_status=0 where name=:name;");
+			$sth = $db->prepare("update cluster set check_status=0 where name=:name and check_status!=3;");
 			$sth->bindValue(':name', $name, PDO::PARAM_STR);
 			$sth->execute();
 		} else {

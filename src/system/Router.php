@@ -22,7 +22,7 @@ class Router
 			$this->register('/', 'rrsoacis\\component\\dashboard\\DashboardPage', 0);
 
 			// Settings
-			$this->register('/settings', 'rrsoacis\\component\\setting\\SettingsPage');
+			$this->register('/settings', 'rrsoacis\\component\\setting\\SettingsPage', 0);
 			$this->register('/settings-apps', 'rrsoacis\\component\\setting\\app\\SettingsAppsListController');
 			$this->register('/settings-app', 'rrsoacis\\component\\setting\\app\\SettingsAppPage');
 			$this->register('/settings-app_enable', 'rrsoacis\\component\\setting\\app\\SettingsAppEnableController');
@@ -127,6 +127,8 @@ class Router
 				for ($i = $bindSize; $i < count($request); $i++) {
 					$params[] = $request[$i];
 				}
+
+				if (count($params) > 0 && $params[count($params) -1] === "") { unset($params[count($params) -1]); }
 
 				if (array_key_exists($searchKey, $this->pageMap)) {
 					$paramLimit = $this->paramLimitMap[$searchKey];

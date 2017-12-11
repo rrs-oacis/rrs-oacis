@@ -60,7 +60,7 @@ class SettingsAppPage extends AbstractPage
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body table-responsive no-padding">
-						<table class="table table-hover">
+						<table class="table">
 							<tr>
 								<th>Name</th>
 								<th>Ver.</th>
