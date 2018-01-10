@@ -214,11 +214,13 @@ class AppManager
 					continue;
 				}
 				$installedApp = new App(self::getApp($dependency[0]));
-				$dependencyVersion = explode('.', $dependency[1]);
-				$installVersion = explode('.', $installedApp->version);
-				if ($installVersion[0] >= $dependencyVersion[0]
-					&& $installVersion[1] >= $dependencyVersion[1]
-					&& $installVersion[2] >= $dependencyVersion[2]) {
+				$dependencyVersionArray = explode('.', $dependency[1]);
+				$installedVersionArray = explode('.', $installedApp->version);
+				$dependencyVersion = $dependencyVersionArray[0]*1000000
+					+ $dependencyVersionArray[1]*1000 + $dependencyVersionArray[2];
+				$installedVersion = $installedVersionArray[0]*1000000
+					+ $installedVersionArray[1]*1000 + $installedVersionArray[2];
+				if ($installedVersion >= $dependencyVersion ) {
 				} else {
 					$result .= "Installed " . $installedApp->package . " is old version";
 				}
