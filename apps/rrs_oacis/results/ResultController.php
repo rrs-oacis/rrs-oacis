@@ -5,46 +5,32 @@ use rrsoacis\component\common\AbstractController;
 use rrsoacis\apps\rrs_oacis\results\model\ResultGeneration;
 use rrsoacis\apps\rrs_oacis\results\model\ResultTeam;
 use rrsoacis\apps\rrs_oacis\results\model\ResultHelper;
-use rrsoacis\apps\rrs_oacis\results\model\Result2016;
-use rrsoacis\apps\rrs_oacis\results\model\esultExcel;
 use rrsoacis\apps\rrs_oacis\competition\SessionManager;
 
 class ResultController extends AbstractController{
-  
+
 	public function anyIndex($param= null,$preParam= null){
 		return self::get($param,$preParam);
 	}
-	
+
 	public function get($param = null,$preParam= null){
 		error_reporting(0);
-		
+
 		//TODO Access the oasis and bring the results
 		$simulatorID = $param;
-		
-		
+
+
 		//include (Config::$SRC_REAL_URL . 'component/setting/SettingView.php');
-		$teams =[];
-		
-		$maps = Result2016::getMaps();
-		
-		if($simulatorID=='test'){
-			
-			//Test
-			$teams = Result2016::getTeams();
-			
-			
-		}else{
-			
-			$parameterSets= ResultHelper::getParameterSets($simulatorID);
-			
-			$maps = ResultHelper::getMaps($parameterSets);
-			
-			$teams = ResultHelper::getTeams($simulatorID, $parameterSets);
-			
-		}
-		
+
+		$maps = [];
+
+		$parameterSets= ResultHelper::getParameterSets($simulatorID);
+		$maps = ResultHelper::getMaps($parameterSets);
+		$teams = ResultHelper::getTeams($simulatorID, $parameterSets);
+
+
 		//ResultHelper::calPoints($teams);
-		
+
 
 		$data = SessionManager::getSessions();
 
@@ -67,13 +53,13 @@ class ResultController extends AbstractController{
 			$preSession = $preParam;
 
 			$preParameterSets= ResultHelper::getParameterSets($preParam);
-			
+
 			$preMaps = ResultHelper::getMaps($preParameterSets);
-			
+
 			$preTeams = ResultHelper::getTeams($preParam, $preParameterSets);
 
 			ResultHelper::calPoints($preTeams);
-		
+
 			ResultHelper::addRank($preTeams);
 
 			$prePoint = [];
@@ -95,7 +81,7 @@ class ResultController extends AbstractController{
 
 		$presentationDatas = SessionManager::getPresentations();
 
-		
+
 		$presentation = [];
 
 		if(isset($presentationDatas[$sessionName])){
@@ -106,7 +92,7 @@ class ResultController extends AbstractController{
 		//$presentationTeam = [];
 
 		foreach ($presentation as $key => $value){
-			
+
 			//Add point
 			//$teams[$key]->addPresentation($value);
 			if(isset($teams[$key]))$teams[$key]->addMapResult('Presentation',$value,1);
@@ -120,14 +106,14 @@ class ResultController extends AbstractController{
 		if(count($presentation)>0){
 			$maps[] = 'Presentation';
 		}
-		
+
                 ResultHelper::calPoints($teams);
 
 		/*
 		   if(count($presentationTeam)>0){
 			ResultHelper::calPoints($presentationTeam);
 		}
-		
+
 		foreach ($presentationTeam as $key => $value){
 			if(isset($teams[$key]))$teams[$key]->addMapResult('Presentation', $value->getTotalScore()['score'], $value->getTotalScore()['points']);
 		}
@@ -135,42 +121,32 @@ class ResultController extends AbstractController{
 
 
 		ResultHelper::addRank($teams);
-		
+
 		//Fix 0729
 		ResultHelper::setResultColor($teams, SessionManager::getSession($param)['highlight']);
 
 		//echo ResultGeneration::generateHTML('2018', $maps, $teams, '592fe0a36653ff00f53567c2',null);
-		
+
 		//return ResultGeneration::generateHTML('2018',$simulatorID,$maps, $teams,null,$prePoint);
 		return ResultGeneration::generateHTML('2017',$simulatorID,$maps, $teams,$preSession,null);
-  	
+
   }
-  
+
   	public function downloadHTML($param = null,$preParam= null){
-  
+
   		$simulatorID = $param;
-  	
+
   		//include (Config::$SRC_REAL_URL . 'component/setting/SettingView.php');
   		$teams =[];
-  	
-  		$maps = Result2016::getMaps();
-  	
-  		if($simulatorID=='test'){
-  		
-  			//Test
-  			$teams = Result2016::getTeams();
-  		
-  		
-  		}else{
-  		
+
   			$parameterSets= ResultHelper::getParameterSets($simulatorID);
-  		
+
   			$maps = ResultHelper::getMaps($parameterSets);
-  		
+
   			$teams = ResultHelper::getTeams($simulatorID, $parameterSets);
-  		
-  		}
-  	
+
+
+
 
 
   		$data = SessionManager::getSessions();
@@ -183,7 +159,7 @@ class ResultController extends AbstractController{
 			}
 
 		}
-  	
+
   		$preSession = null;
 		$prePoint = null;
 		if($preParam!=null){
@@ -192,13 +168,13 @@ class ResultController extends AbstractController{
 			$preSession = $preParam;
 
 			$preParameterSets= ResultHelper::getParameterSets($preParam);
-		
+
 			$preMaps = ResultHelper::getMaps($preParameterSets);
-		
+
 			$preTeams = ResultHelper::getTeams($preParam, $preParameterSets);
-		
+
 			ResultHelper::calPoints($preTeams);
-		
+
 			ResultHelper::addRank($preTeams);
 
 			$prePoint = [];
@@ -216,7 +192,7 @@ class ResultController extends AbstractController{
 
 		$presentationDatas = SessionManager::getPresentations();
 
-		
+
 		$presentation = [];
 
 		if(isset($presentationDatas[$sessionName])){
@@ -225,7 +201,7 @@ class ResultController extends AbstractController{
 
 
 		foreach ($presentation as $key => $value){
-			
+
 			//Add point
 		        $teams[$key]->addMapResult('Presentation',$value,1);
 
@@ -242,13 +218,13 @@ class ResultController extends AbstractController{
                 ResultHelper::calPoints($teams);
 
 		ResultHelper::addRank($teams);
-  	
+
   		//echo ResultGeneration::generateHTML('2018', $maps, $teams, '592fe0a36653ff00f53567c2',null);
-  	
+
   		return ResultGeneration::generateHTML('2017',$simulatorID,$maps, $teams,$preSession,null,true);
-  	
+
   	}
-  
+
 }
 
 
