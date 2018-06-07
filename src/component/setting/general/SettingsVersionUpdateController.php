@@ -1,7 +1,7 @@
 <?php
 namespace rrsoacis\component\setting\general;
 
-use manager\CoreManager;
+use rrsoacis\manager\CoreManager;
 use rrsoacis\system\Config;
 use rrsoacis\component\common\AbstractController;
 
