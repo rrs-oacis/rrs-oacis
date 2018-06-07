@@ -227,7 +227,11 @@ class ClusterManager
 			$base['mounted_work_base_dir'] = $myWorkspaceDir;
 			$oaciscoll->insertOne($base);
 			/* END : direct OACIS control */
-
+			system('echo "Host ' . $base['name'] . '" >> ~/.ssh/config');
+			system('echo "  HostName localhost" >> ~/.ssh/config');
+			system('echo "  User oacis" >> ~/.ssh/config');
+			system('echo "  IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config');
+			
 			$sth = $db->prepare("insert into cluster(name, a_host, f_host, p_host, s_host, archiver) values(:name, :a_host, :f_host, :p_host, :s_host, :archiver);");
 		}
 
