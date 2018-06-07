@@ -1,6 +1,6 @@
 <?php
 
-namespace manager;
+namespace rrsoacis\manager;
 
 
 use rrsoacis\system\Config;
