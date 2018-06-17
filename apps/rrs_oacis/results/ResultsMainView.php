@@ -27,12 +27,12 @@ use rrsoacis\apps\rrs_oacis\competition\SessionManager;
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-          Competition Results - RoboCup 2017
+          Competition Results
         <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?=Config::$TOP_PATH ?>"><i class="fa fa-dashboard"></i><?= rrsoacis\system\Config::APP_NAME ?></a></li>
-        <li class="active">Competition Results 2017</li>
+        <li class="active">Competition Results</li>
       </ol>
     </section>
 
