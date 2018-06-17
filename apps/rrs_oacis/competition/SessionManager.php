@@ -123,8 +123,9 @@ class SessionManager
         $simulator = json_decode ( file_get_contents($tmpFileOut), true );
         system("rm -f ".$tmpFileOut);
         $simulator['name'] = "RO_".$name."_".uniqid();
-        $simulator['command'] = "/home/oacis/rrs-oacis/rrsenv/script/runNGC_MT.sh";
-        $simulator['executable_on_ids'][] = ClusterManager::getMainHostGroup();
+			  $simulator['command'] = '/home/oacis/rrs-oacis/rrsenv/script/rrscluster run -c ../rrscluster.cfg -i ./_input.json -l ./';
+		    $simulator['executable_on_ids'][] = ClusterManager::getMainHostGroup();
+		    $simulator['support_input_json'] = true;
 
         $simulator['parameter_definitions'] = [];
         $parameter1 = [];
@@ -134,19 +135,19 @@ class SessionManager
         $parameter1['description'] = '';
         $simulator['parameter_definitions'][] = $parameter1;
         $parameter1 = [];
-        $parameter1['key'] = 'F';
+        $parameter1['key'] = 'AGENT_F';
         $parameter1['type'] = 'String';
         $parameter1['default'] = '';
         $parameter1['description'] = '';
         $simulator['parameter_definitions'][] = $parameter1;
         $parameter1 = [];
-        $parameter1['key'] = 'P';
+        $parameter1['key'] = 'AGENT_P';
         $parameter1['type'] = 'String';
         $parameter1['default'] = '';
         $parameter1['description'] = '';
         $simulator['parameter_definitions'][] = $parameter1;
         $parameter1 = [];
-        $parameter1['key'] = 'A';
+        $parameter1['key'] = 'AGENT_A';
         $parameter1['type'] = 'String';
         $parameter1['default'] = '';
         $parameter1['description'] = '';
@@ -205,7 +206,7 @@ class SessionManager
             $script = "#!/bin/bash\n\n";
             $script .= Config::$OACISCLI_PATH." create_parameter_sets";
             $script .= ' -s '.$sessionName;
-            $script .= ' -i \'{"MAP":"'.$mapName.'","F":"'.$agent['name'].'","P":"'.$agent['name'].'","A":"'.$agent['name'].'"}\'';
+            $script .= ' -i \'{"MAP":"'.$mapName.'","AGENT_F":"'.$agent['name'].'","AGENT_P":"'.$agent['name'].'","AGENT_A":"'.$agent['name'].'"}\'';
             $script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"'.ClusterManager::getMainHostGroup().'","host_parameters":null}\'';
             $script .= ' -o /tmp/out_'.$scriptId.'.json';
             $script .= "\n";
@@ -274,7 +275,7 @@ class SessionManager
 	$script = "#!/bin/bash\n\n";
 	$script .= Config::$OACISCLI_PATH." create_parameter_sets";
 	$script .= ' -s '.$sessionName;
-	$script .= ' -i \'{"MAP":"'.$mapName.'","F":"'.$agentName.'","P":"'.$agentName.'","A":"'.$agentName.'"}\'';
+	$script .= ' -i \'{"MAP":"'.$mapName.'","AGENT_F":"'.$agentName.'","AGENT_P":"'.$agentName.'","AGENT_A":"'.$agentName.'"}\'';
 	$script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"'.ClusterManager::getMainHostGroup().'","host_parameters":null}\'';
 	$script .= ' -o /tmp/out_'.$scriptId.'.json';
 	$script .= "\n";
@@ -313,7 +314,7 @@ class SessionManager
             $script .= "\n";
             $script .= Config::$OACISCLI_PATH." create_parameter_sets";
             $script .= ' -s '.$row['session'];
-            $script .= ' -i \'{"MAP":"'.$row['map'].'","F":"'.$row['agent'].'","P":"'.$row['agent'].'","A":"'.$row['agent'].'"}\'';
+            $script .= ' -i \'{"MAP":"'.$row['map'].'","AGENT_F":"'.$row['agent'].'","AGENT_P":"'.$row['agent'].'","AGENT_A":"'.$row['agent'].'"}\'';
             $script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"'.ClusterManager::getMainHostGroup().'","host_parameters":null}\'';
             $script .= ' -o /tmp/out_'.$scriptId.'.json >/tmp/e 2>&1';
             $script .= "\n";
