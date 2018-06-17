@@ -61,11 +61,11 @@ class ResultHelper{
 			//Fix TeamName
 			//$teamName = explode("_", $parameterSets[$i]->v->A)[0];
 
-			$tn = explode("_", $parameterSets[$i]->v->A);
+			$tn = explode("_", $parameterSets[$i]->v->AGENT_A);
 
 			$uid = $tn[count($tn)-1];
 
-			$teamName = str_replace("_".$uid,"",$parameterSets[$i]->v->A);
+			$teamName = str_replace("_".$uid,"",$parameterSets[$i]->v->AGENT_A);
 
 			$team;
 
