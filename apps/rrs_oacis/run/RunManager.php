@@ -80,7 +80,7 @@ class RunManager
         $simulator = json_decode(file_get_contents($tmpFileOut), true);
         system("rm -f " . $tmpFileOut);
         $simulator['name'] = $simulatorName;
-        $simulator['command'] = "/home/oacis/rrs-oacis/rrsenv/script/runNGC_MT.sh";
+        $simulator['command'] = "/home/oacis/rrs-oacis/rrsenv/script/rrscluster run -c ../rrscluster.cfg -i ./_input.json -l ./ -lm ALL -pre";
         $simulator['executable_on_ids'][] = ClusterManager::getMainHostGroup();
 
         $simulator['parameter_definitions'] = [];
@@ -91,19 +91,19 @@ class RunManager
         $parameter1['description'] = '';
         $simulator['parameter_definitions'][] = $parameter1;
         $parameter1 = [];
-        $parameter1['key'] = 'F';
+        $parameter1['key'] = 'AGENT_F';
         $parameter1['type'] = 'String';
         $parameter1['default'] = '';
         $parameter1['description'] = '';
         $simulator['parameter_definitions'][] = $parameter1;
         $parameter1 = [];
-        $parameter1['key'] = 'P';
+        $parameter1['key'] = 'AGENT_P';
         $parameter1['type'] = 'String';
         $parameter1['default'] = '';
         $parameter1['description'] = '';
         $simulator['parameter_definitions'][] = $parameter1;
         $parameter1 = [];
-        $parameter1['key'] = 'A';
+        $parameter1['key'] = 'AGENT_A';
         $parameter1['type'] = 'String';
         $parameter1['default'] = '';
         $parameter1['description'] = '';
@@ -170,7 +170,7 @@ class RunManager
         $script = "#!/bin/bash\n\n";
         $script .= Config::$OACISCLI_PATH . " create_parameter_sets";
         $script .= ' -s ' . $simulatorId;
-        $script .= ' -i \'{"MAP":"' . $map['name'] . '","F":"' . $agent['name'] . '","P":"' . $agent['name'] . '","A":"' . $agent['name'] . '","UID":"' . $scriptId . '"}\'';
+        $script .= ' -i \'{"MAP":"' . $map['name'] . '","AGENT_F":"' . $agent['name'] . '","AGENT_P":"' . $agent['name'] . '","AGENT_A":"' . $agent['name'] . '","UID":"' . $scriptId . '"}\'';
         $script .= ' -r \'{"num_runs":1,"mpi_procs":0,"omp_threads":0,"priority":1,"submitted_to":"' . ClusterManager::getMainHostGroup() . '","host_parameters":null}\'';
         $script .= ' -o /tmp/out_' . $scriptId . '.json';
         $script .= "\n";
