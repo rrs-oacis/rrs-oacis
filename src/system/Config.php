@@ -17,7 +17,7 @@ class Config{
     const AGENTS_DIR_NAME=  "rrsenv/AGENT";
 	const MAPS_DIR_NAME=  "rrsenv/MAP";
 
-    const MAP_LOG = 'img_log';
+    const MAP_LOG = 'extracts';
 
 	//エージェントを管理するDir 絶対パス
 	//const AGENTS_DIR=  "/home/oacis/adf/rrsenv/AGENT";
