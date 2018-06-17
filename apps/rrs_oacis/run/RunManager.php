@@ -341,12 +341,17 @@ class RunManager
 
     public static function getScores($simulatorID, $parameterSetID, $runID)
     {
-        $rawData = @file_get_contents('http://127.0.0.1:3000/Result_development/' . $simulatorID . '/' . $parameterSetID . '/' . $runID . '/' . Config::MAP_LOG . '/final-score.txt');
-
-
-        //$score = round((0 + $rawData), 2);
-
-        $score = $rawData;
+			  $score = false;
+			  $runRawJson = @file_get_contents('http://localhost:3000/runs/' . $runID . '.json');
+      
+			  if (!$runRawJson) {
+				    $rawData = @file_get_contents('http://127.0.0.1:3000/Result_development/' . $simulatorID . '/' . $parameterSetID . '/' . $runID . '/' . Config::MAP_LOG . '/final-score.txt');
+            $score = $rawData;
+				} else {
+            $runJson = json_decode($runRawJson, true);
+            $score = $runJson['result']['Score'];
+				}
+        
         return $score;
     }
 
