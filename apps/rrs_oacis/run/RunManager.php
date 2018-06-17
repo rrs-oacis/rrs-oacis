@@ -82,6 +82,7 @@ class RunManager
         $simulator['name'] = $simulatorName;
         $simulator['command'] = "/home/oacis/rrs-oacis/rrsenv/script/rrscluster run -c ../rrscluster.cfg -i ./_input.json -l ./ -lm ALL -pre";
         $simulator['executable_on_ids'][] = ClusterManager::getMainHostGroup();
+        $simulator['support_input_json'] = true;
 
         $simulator['parameter_definitions'] = [];
         $parameter1 = [];
