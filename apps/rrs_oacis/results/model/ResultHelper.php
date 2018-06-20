@@ -171,9 +171,10 @@ class ResultHelper{
 	public static function getFinalStep($simulatorID, $parameterSetID, $runID)
     {
 		//get map step file @see step_image_count.sh
-		$rawData = @file_get_contents('http://127.0.0.1:3000/Result_development/'.$simulatorID.'/'.$parameterSetID.'/'.$runID.'/'.Config::MAP_LOG.'/count.txt');
+		$rawData = @file_get_contents('http://127.0.0.1:3000/Result_development/'.$simulatorID.'/'.$parameterSetID.'/'.$runID.'/'.Config::MAP_LOG.'/scores.txt');
+		$scoreList = explode(' ', $rawData);
 
-		return $rawData;
+		return (count($scoreList) /50) +2;
 	}
 
 	public static function getMapStep4Teams($teams,$maps){
