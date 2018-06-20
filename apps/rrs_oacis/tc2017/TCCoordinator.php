@@ -38,7 +38,7 @@ class TCCoordinator
         system('cp -r '.$tdTeamDir.'/src/* '.$tmpDir.'/src/');
         system('cp '.$tdTeamDir.'/config/module.cfg '.$tmpDir.'/config/');
         system('cat '.$baseTeamDir.'/config/module.cfg >> '.$tmpDir.'/config/module.cfg');
-        system('cat '.$tdTeamDir.'/config/module.cfg | awk \'/\s*Tactics(AmbulanceTeam\.Human|PoliceForce\.Road|FireBrigade\.Building)Detector\s*:/{print $0}\' >> '.$tmpDir.'/config/module.cfg');
+        system('cat '.$tdTeamDir.'/config/module.cfg | awk \'/[\t ]*Tactics(AmbulanceTeam\.Human|PoliceForce\.Road|FireBrigade\.Building)Detector[\t ]*:/{print $0}\' >> '.$tmpDir.'/config/module.cfg');
         system('mv '.$tmpDir.' '.$agentsDir.'/'.$name);
 
         AgentManager::addAgent($name, $alias);
