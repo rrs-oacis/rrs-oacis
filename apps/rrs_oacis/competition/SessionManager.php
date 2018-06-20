@@ -122,7 +122,7 @@ class SessionManager
         system("sudo -i -u oacis ".Config::$OACISCLI_PATH." simulator_template -o ".$tmpFileOut." 2>&1");
         $simulator = json_decode ( file_get_contents($tmpFileOut), true );
         system("rm -f ".$tmpFileOut);
-        $simulator['name'] = "RO_".$name."_".uniqid();
+        $simulator['name'] = "RO_".preg_replace('/[^a-zA-Z0-9_]+/u', '', $name)."_".uniqid();
 			  $simulator['command'] = '/home/oacis/rrs-oacis/rrsenv/script/rrscluster run -c ../rrscluster.cfg -i ./_input.json -l ./';
 		    $simulator['executable_on_ids'][] = ClusterManager::getMainHostGroup();
 		    $simulator['support_input_json'] = true;
