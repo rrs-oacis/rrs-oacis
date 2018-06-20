@@ -133,7 +133,7 @@ class MapManager
 		$sth = $db->query("select value from system where name='mapImageSimulator';");
 		$simulatorName = $sth->fetch(PDO::FETCH_ASSOC)['value'];
 
-		if (file_get_contents('http://127.0.0.1:3000/simulators/'.$simulatorName.'.json') === false) {
+		if (@file_get_contents('http://127.0.0.1:3000/simulators/'.$simulatorName.'.json') === false) {
 			$tmpFileOut = '/tmp/rrsoacis-out-' . uniqid();
 			$tmpFileIn = '/tmp/rrsoacis-in-' . uniqid();
 			system("sudo -i -u oacis " . Config::$OACISCLI_PATH . " simulator_template -o " . $tmpFileOut . " 2>&1");

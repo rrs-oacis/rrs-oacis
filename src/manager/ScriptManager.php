@@ -44,7 +44,7 @@ class ScriptManager
 		$throwScript .= $script;
 		$throwScript .= "\n";
 		$throwScript .= "\n";
-		file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/' . $scriptId, $throwScript);
+		@file_put_contents('/home/oacis/rrs-oacis/oacis-queue/scripts/' . $scriptId, $throwScript);
 		exec('nohup /home/oacis/rrs-oacis/oacis-queue/main.pl ' . $scriptId . ' "' . $out . '" >/dev/null 2>&1 &');
 		usleep(200000);
 	}
