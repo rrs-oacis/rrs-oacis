@@ -95,4 +95,6 @@ while ($count > 0)
 }
 
 $dbi->disconnect();
+system("rm -f queue.pid");
+
 exit 0;
