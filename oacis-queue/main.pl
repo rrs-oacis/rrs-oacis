@@ -48,11 +48,20 @@ $sth->execute();
 my $count = $sth->fetch()->[0];
 $sth->finish();
 
-if (0 < ($count - $enqueued))
+
+if ( -f 'queue.pid')
 {
-    $dbi->disconnect();
-    exit 0;
+	my $pid = 0 + `cat queue.pid`;
+	if (0 == system("kill -0 ".$pid))
+	{
+		$dbi->disconnect();
+		exit 0;
+	}
+	system("rm -f queue.pid");
 }
+system("echo ".$$." > queue.pid");
+system("sleep 10");
+
 
 while ($count > 0)
 {
