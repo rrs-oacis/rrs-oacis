@@ -16,18 +16,20 @@ my $output = $ARGV[1];
 if ($output eq "")
 {
 	$output = "/dev/null";
+	$output = "/tmp/oq.log";
 }
 
 my $database = 'queue.db';
 if ( ! -f $database )
 {
-	my $dbi = DBI->connect("dbi:SQLite:dbname=$database");
+	my $dbi = &getDBI();
 	$sth = $dbi->prepare('create table queue(id integer primary key, script);');
 	$sth->execute(); $sth->finish();
 	$dbi->disconnect();
+	releaseDB();
 }
 
-my $dbi = DBI->connect("dbi:SQLite:dbname=$database");
+my $dbi = &getDBI();
 
 if ( ! -d 'scripts' )
 {
@@ -36,17 +38,19 @@ if ( ! -d 'scripts' )
 
 if ( -f 'scripts/'.$script && $script ne '')
 {
-    my $sth = $dbi->prepare('insert into queue(script) values(?);');
-    $sth->bind_param(1, $script);
-    $sth->execute();
-    $sth->finish();
-    $enqueued++;
+	my $sth = $dbi->prepare('insert into queue(script) values(?);');
+	$sth->bind_param(1, $script);
+	$sth->execute();
+	$sth->finish();
+	$enqueued++;
 }
 
 my $sth = $dbi->prepare('select count(*) from queue;');
 $sth->execute();
 my $count = $sth->fetch()->[0];
 $sth->finish();
+$dbi->disconnect();
+releaseDB();
 
 
 if ( -f 'queue.pid')
@@ -54,47 +58,68 @@ if ( -f 'queue.pid')
 	my $pid = 0 + `cat queue.pid`;
 	if (0 == system("kill -0 ".$pid))
 	{
-		$dbi->disconnect();
+		print '[working]'.$pid."\n";
 		exit 0;
 	}
-	system("rm -f queue.pid");
 }
 system("echo ".$$." > queue.pid");
-system("sleep 10");
+sleep(1);
 
 
+print '[remaining]'.$count."\n";
 while ($count > 0)
 {
-    my $sth = $dbi->prepare('select script from queue limit 1;');
-    $sth->execute();
-    my $script = $sth->fetch()->[0];
-    $sth->finish();
+	$dbi = &getDBI();
+	my $sth = $dbi->prepare('select script from queue limit 1;');
+	$sth->execute();
+	my $script = $sth->fetch()->[0];
+	$sth->finish();
+	$dbi->disconnect();
+	releaseDB();
 
-    system('echo >>"'.$output.'"');
-    system('echo "#'.$script.'" >>"'.$output.'"');
+	system('echo >>"'.$output.'"');
+	system('echo "#'.$script.' '.$$.'" >>"'.$output.'"');
+	print '#'.$script."\n";
 
-    system('chmod a+x scripts/'.$script);
-    system('rm -rf tmp');
-    mkdir 'tmp';
-    system('chown oacis:oacis tmp');
-    chdir 'tmp';
-    system('sudo -i -u oacis `dirname $PWD`/scripts/'.$script.' >>"'.$output.'" 2>&1');
-    chdir '..';
-    system('rm -rf tmp');
-    system('rm -f scripts/'.$script);
+	system('chmod a+x scripts/'.$script);
+	system('rm -rf tmp');
+	mkdir 'tmp';
+	system('chown oacis:oacis tmp');
+	chdir 'tmp';
+	system('../scripts/'.$script.' >>"'.$output.'" 2>&1');
+	chdir '..';
+	system('rm -rf tmp');
+	system('rm -f scripts/'.$script);
 
-    $sth = $dbi->prepare('delete from queue where script=?;');
-    $sth->bind_param(1, $script);
-    $sth->execute();
-    $sth->finish();
+	$dbi = &getDBI();
+	$sth = $dbi->prepare('delete from queue where script=?;');
+	$sth->bind_param(1, $script);
+	$sth->execute();
+	$sth->finish();
 
-    $sth = $dbi->prepare('select count(*) from queue;');
-    $sth->execute();
-    $count = $sth->fetch()->[0];
-    $sth->finish();
+	$sth = $dbi->prepare('select count(*) from queue;');
+	$sth->execute();
+	$count = $sth->fetch()->[0];
+	$sth->finish();
+	$dbi->disconnect();
+	releaseDB();
+
+	print '[remaining]'.$count."\n";
 }
 
-$dbi->disconnect();
-system("rm -f queue.pid");
+#$dbi->disconnect();
+#system("rm -f queue.pid");
 
 exit 0;
+
+
+sub getDBI()
+{
+    while (-f 'db.lock') { select undef, undef, undef, 0.1; }
+    system("echo ".$$." > db.lock");
+    $dbi = DBI->connect("dbi:SQLite:dbname=$database");
+}
+sub releaseDB()
+{
+    system("rm -f db.lock");
+}
