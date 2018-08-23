@@ -136,7 +136,7 @@ class MapManager
 		if (@file_get_contents('http://127.0.0.1:3000/simulators/'.$simulatorName.'.json') === false) {
 			$tmpFileOut = '/tmp/rrsoacis-out-' . uniqid();
 			$tmpFileIn = '/tmp/rrsoacis-in-' . uniqid();
-			system("sudo -i -u oacis " . Config::$OACISCLI_PATH . " simulator_template -o " . $tmpFileOut . " 2>&1");
+			system(Config::$OACISCLI_PATH . " simulator_template -o " . $tmpFileOut . " 2>&1");
 			$simulator = json_decode(file_get_contents($tmpFileOut), true);
 			system("rm -f " . $tmpFileOut);
 			$simulator['name'] = "RO_MapImage_" . uniqid();
@@ -154,7 +154,7 @@ class MapManager
 			$simulator['parameter_definitions'][] = $parameter1;
 
 			file_put_contents($tmpFileIn, json_encode($simulator));
-			system("sudo -i -u oacis " . Config::$OACISCLI_PATH . " create_simulator -i " . $tmpFileIn . " -o " . $tmpFileOut);
+			system(Config::$OACISCLI_PATH . " create_simulator -i " . $tmpFileIn . " -o " . $tmpFileOut);
 			system("rm -f " . $tmpFileIn);
 			$simulatorId = json_decode(file_get_contents($tmpFileOut), true)['simulator_id'];
 			system("rm -f " . $tmpFileOut);
