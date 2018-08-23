@@ -119,7 +119,7 @@ class SessionManager
     {
         $tmpFileOut = '/tmp/rrsoacis-out-'.uniqid();
         $tmpFileIn = '/tmp/rrsoacis-in-'.uniqid();
-        system(Config::$OACISCLI_PATH." simulator_template -o ".$tmpFileOut." 2>&1");
+        system("bash -l -c '" . Config::$OACISCLI_PATH." simulator_template -o ".$tmpFileOut."' 2>&1");
         $simulator = json_decode ( file_get_contents($tmpFileOut), true );
         system("rm -f ".$tmpFileOut);
         $simulator['name'] = "RO_".preg_replace('/[^a-zA-Z0-9_]+/u', '', $name)."_".uniqid();
@@ -154,7 +154,7 @@ class SessionManager
         $simulator['parameter_definitions'][] = $parameter1;
 
         file_put_contents($tmpFileIn, json_encode($simulator));
-        system(Config::$OACISCLI_PATH." create_simulator -i ".$tmpFileIn." -o ".$tmpFileOut);
+        system("bash -l -c '" . Config::$OACISCLI_PATH." create_simulator -i ".$tmpFileIn." -o ".$tmpFileOut . "'");
         system("rm -f ".$tmpFileIn);
         $simulatorId = json_decode ( file_get_contents($tmpFileOut), true )['simulator_id'];
         system("rm -f ".$tmpFileOut);
