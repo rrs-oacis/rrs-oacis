@@ -86,7 +86,7 @@ while ($count > 0)
 	mkdir 'tmp';
 	system('chown oacis:oacis tmp');
 	chdir 'tmp';
-	system('../scripts/'.$script.' >>"'.$output.'" 2>&1');
+	system('bash -l -c ../scripts/'.$script.' >>"'.$output.'" 2>&1');
 	chdir '..';
 	system('rm -rf tmp');
 	system('rm -f scripts/'.$script);
