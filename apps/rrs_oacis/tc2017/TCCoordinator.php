@@ -36,6 +36,7 @@ class TCCoordinator
 
         system('cp -r '.$baseTeamDir.' '.$tmpDir);
         system('cp -r '.$tdTeamDir.'/src/* '.$tmpDir.'/src/');
+        system('cp -r '.$tdTeamDir.'/library/team/ '.$tmpDir.'/library/tdTeam');
         system('cp '.$tdTeamDir.'/config/module.cfg '.$tmpDir.'/config/');
         system('cat '.$baseTeamDir.'/config/module.cfg >> '.$tmpDir.'/config/module.cfg');
         system('cat '.$tdTeamDir.'/config/module.cfg | awk \'/[\t ]*Tactics(AmbulanceTeam\.Human|PoliceForce\.Road|FireBrigade\.Building)Detector[\t ]*:/{print $0}\' >> '.$tmpDir.'/config/module.cfg');
