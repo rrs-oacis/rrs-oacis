@@ -36,7 +36,9 @@ RUN ./rrs-oacis/setup/setup.sh
 # tkmnet/rrsenv
 WORKDIR /home/oacis/rrs-oacis
 RUN git clone https://github.com/tkmnet/rrsenv.git
-RUN ./rrsenv/init.sh
+COPY --chown=oacis:oacis supplement/alt_rrsenv_init.sh rrsenv/
+RUN chmod u+x rrsenv/alt_rrsenv_init.sh
+RUN ./rrsenv/alt_rrsenv_init.sh
 
 # Volume
 RUN mkdir data
