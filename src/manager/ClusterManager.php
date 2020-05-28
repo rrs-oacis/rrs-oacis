@@ -89,6 +89,7 @@ class ClusterManager
 		}
 
 
+		self::updateHostGroup();
 		return $messages;
 	}
 
