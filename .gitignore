@@ -127,7 +127,6 @@ rrsenv/
 /setup.sh
 *.db
 
-/oacis-queue/scripts/
 /oacis-queue/queue.pid
 
 
