@@ -226,6 +226,7 @@ class ClusterManager
 			$base['name'] = 'RO_' . $name;
 			$base['work_base_dir'] = $myWorkspaceDir;
 			$base['mounted_work_base_dir'] = $myWorkspaceDir;
+			$base['max_num_jobs'] = 1;
 			$oaciscoll->insertOne($base);
 			/* END : direct OACIS control */
 			system('echo "Host ' . $base['name'] . '" >> ~/.ssh/config');
