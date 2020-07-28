@@ -1,125 +1,125 @@
-#!/usr/bin/perl
-#
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+#-------------------------------------------------------------------------------
 # export PERL_MM_USE_DEFAULT=1
 # cpan -i DBI
 # cpan -i DBD::SQLite
-#
+#-------------------------------------------------------------------------------
 use File::Basename;
 use DBI;
 
-chdir dirname $0;
+chdir(dirname($0));
 
-my $script = $ARGV[0];
-my $enqueued = 0;
-
+my $script_name = $ARGV[0];
 my $output = $ARGV[1];
-if ($output eq "")
+
+if (!$script_name)
 {
-	$output = "/dev/null";
-	$output = "/tmp/oq.log";
+    die('ERROR: script name is unspecified as the 1st argument.');
 }
 
-my $database = 'queue.db';
-if ( ! -f $database )
+if (!$output)
 {
-	my $dbi = &getDBI();
-	$sth = $dbi->prepare('create table queue(id integer primary key, script);');
-	$sth->execute(); $sth->finish();
-	$dbi->disconnect();
-	releaseDB();
+    $output = '/tmp/oq.log';
 }
 
-my $dbi = &getDBI();
-
-if ( ! -d 'scripts' )
+&main($script_name, $output);
+sub main
 {
-    mkdir 'scripts';
+    my ($script_name, $output) = @_;
+    my $database_name = 'queue.db';
+    my $lock_name = 'queue.lock';
+
+    my $dbi = &db_create_and_connect($database_name);
+    &db_queue($dbi, $script_name);
+
+    if (!&worker_lock($lock_name))
+    {
+        &db_disconnect($dbi);
+        exit(0);
+    }
+
+    while (1)
+    {
+        my $script_name = &db_peek($dbi);
+        if (!$script_name)
+        {
+            sleep(1);
+            next;
+        }
+
+        &worker_execute($script_name, $output);
+        &db_delete($dbi, $script_name);
+    }
+
+    &db_disconnect($dbi);
+    &worker_unlock($lock_name);
 }
 
-if ( -f 'scripts/'.$script && $script ne '')
+sub db_create_and_connect
 {
-	my $sth = $dbi->prepare('insert into queue(script) values(?);');
-	$sth->bind_param(1, $script);
-	$sth->execute();
-	$sth->finish();
-	$enqueued++;
+    my $database_name = shift(@_);
+    my $dbi = DBI->connect("dbi:SQLite:dbname=$database_name");
+    my $sth = $dbi->prepare(
+        'CREATE TABLE IF NOT EXISTS
+            queue (id INTEGER PRIMARY KEY, script_name)');
+    $sth->execute();
+    return $dbi;
 }
 
-my $sth = $dbi->prepare('select count(*) from queue;');
-$sth->execute();
-my $count = $sth->fetch()->[0];
-$sth->finish();
-$dbi->disconnect();
-releaseDB();
-
-
-if ( -f 'queue.pid')
+sub db_disconnect
 {
-	my $pid = 0 + `cat queue.pid`;
-	if (0 == system("kill -0 ".$pid))
-	{
-		print '[working]'.$pid."\n";
-		exit 0;
-	}
-}
-system("echo ".$$." > queue.pid");
-sleep(1);
-
-
-print '[remaining]'.$count."\n";
-while ($count > 0)
-{
-	$dbi = &getDBI();
-	my $sth = $dbi->prepare('select script from queue limit 1;');
-	$sth->execute();
-	my $script = $sth->fetch()->[0];
-	$sth->finish();
-	$dbi->disconnect();
-	releaseDB();
-
-	system('echo >>"'.$output.'"');
-	system('echo "#'.$script.' '.$$.'" >>"'.$output.'"');
-	print '#'.$script."\n";
-
-	system('chmod a+x scripts/'.$script);
-	system('rm -rf tmp');
-	mkdir 'tmp';
-	system('chown oacis:oacis tmp');
-	chdir 'tmp';
-	system('bash -l -c ../scripts/'.$script.' >>"'.$output.'" 2>&1');
-	chdir '..';
-	system('rm -rf tmp');
-	system('rm -f scripts/'.$script);
-
-	$dbi = &getDBI();
-	$sth = $dbi->prepare('delete from queue where script=?;');
-	$sth->bind_param(1, $script);
-	$sth->execute();
-	$sth->finish();
-
-	$sth = $dbi->prepare('select count(*) from queue;');
-	$sth->execute();
-	$count = $sth->fetch()->[0];
-	$sth->finish();
-	$dbi->disconnect();
-	releaseDB();
-
-	print '[remaining]'.$count."\n";
+    my $dbi = shift(@_);
+    $dbi->disconnect();
 }
 
-#$dbi->disconnect();
-#system("rm -f queue.pid");
-
-exit 0;
-
-
-sub getDBI()
+sub db_queue
 {
-    while (-f 'db.lock') { select undef, undef, undef, 0.1; }
-    system("echo ".$$." > db.lock");
-    $dbi = DBI->connect("dbi:SQLite:dbname=$database");
+    my ($dbi, $script_name) = @_;
+    my $sth = $dbi->prepare('INSERT INTO queue (script_name) VALUES (?)');
+    $sth->bind_param(1, $script_name);
+    $sth->execute();
 }
-sub releaseDB()
+
+sub db_peek
 {
-    system("rm -f db.lock");
+    my $dbi = shift(@_);
+    my $sth = $dbi->prepare('SELECT script_name FROM queue LIMIT 1');
+    $sth->execute();
+    my $row = $sth->fetchrow_hashref();
+    return $row ? $row->{'script_name'} : '';
+}
+
+sub db_delete
+{
+    my ($dbi, $script_name) = @_;
+    my $sth = $dbi->prepare('DELETE FROM queue WHERE script_name=?');
+    $sth->bind_param(1, $script_name);
+    $sth->execute();
+}
+
+sub worker_lock
+{
+    my $lock_name = shift(@_);
+    return mkdir($lock_name);
+}
+
+sub worker_unlock
+{
+    my $lock_name = shift(@_);
+    return rmdir($lock_name);
+}
+
+sub worker_execute
+{
+    my ($script_name, $output) = @_;
+    system("echo >> $output");
+    system("echo \\#$script_name $$ >> $output");
+
+    system("chmod u+x scripts/$script_name");
+    system('rm --force --recursive tmp && mkdir tmp');
+    system("cd tmp && bash -l -c ../scripts/$script_name 2>&1 >> $output");
+    system("rm --force scripts/$script_name");
 }

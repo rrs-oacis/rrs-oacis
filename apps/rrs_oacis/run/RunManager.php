@@ -88,32 +88,32 @@ class RunManager
         $parameter1 = [];
         $parameter1['key'] = 'MAP';
         $parameter1['type'] = 'String';
-        $parameter1['default'] = '';
+        $parameter1['default'] = 'dummy';
         $parameter1['description'] = '';
         $simulator['parameter_definitions'][] = $parameter1;
         $parameter1 = [];
         $parameter1['key'] = 'AGENT_F';
         $parameter1['type'] = 'String';
-        $parameter1['default'] = '';
+        $parameter1['default'] = 'dummy';
         $parameter1['description'] = '';
         $simulator['parameter_definitions'][] = $parameter1;
         $parameter1 = [];
         $parameter1['key'] = 'AGENT_P';
         $parameter1['type'] = 'String';
-        $parameter1['default'] = '';
+        $parameter1['default'] = 'dummy';
         $parameter1['description'] = '';
         $simulator['parameter_definitions'][] = $parameter1;
         $parameter1 = [];
         $parameter1['key'] = 'AGENT_A';
         $parameter1['type'] = 'String';
-        $parameter1['default'] = '';
+        $parameter1['default'] = 'dummy';
         $parameter1['description'] = '';
         $simulator['parameter_definitions'][] = $parameter1;
 
         $parameter1 = [];
         $parameter1['key'] = 'UID';
         $parameter1['type'] = 'String';
-        $parameter1['default'] = '';
+        $parameter1['default'] = 'dummy';
         $parameter1['description'] = '';
         $simulator['parameter_definitions'][] = $parameter1;
 

@@ -149,7 +149,7 @@ class MapManager
 			$parameter1 = [];
 			$parameter1['key'] = 'MAP';
 			$parameter1['type'] = 'String';
-			$parameter1['default'] = '';
+			$parameter1['default'] = 'dummy';
 			$parameter1['description'] = '';
 			$simulator['parameter_definitions'][] = $parameter1;
 

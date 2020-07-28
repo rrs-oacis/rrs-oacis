@@ -10,12 +10,12 @@ use rrsoacis\system\Config;
 
 class SettingsClusterUpdateController extends AbstractController
 {
-	public function post()
+    public function post()
     {
-        $name = $_POST['name'];
-        if ($name === '')
+        $name = null;
+        if (isset($_POST['name']) && $_POST['name'] !== '')
         {
-            $name = null;
+            $name = $_POST['name'];
         }
 
         $a_host = $_POST['a_host'];
@@ -35,7 +35,7 @@ class SettingsClusterUpdateController extends AbstractController
         { header('location: '.Config::$TOP_PATH.'settings-clusters'); }
         else
         { header('location: '.Config::$TOP_PATH.'settings-cluster/'.$name); }
-	}
+    }
 }
 
 ?>

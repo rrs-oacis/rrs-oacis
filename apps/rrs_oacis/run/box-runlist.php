@@ -115,8 +115,8 @@ use rrsoacis\system\Config;
                         json['host']
                     );
 
-                    if(json['status'] == 'failed' || json == 'finished'){
-                        runUpdateList.delete(item);
+                    if (json['status'] == 'failed' || json['status'] == 'finished') {
+                        if (json['score'] != 'none') runUpdateList.delete(item);
                     }
 
 
@@ -190,12 +190,13 @@ use rrsoacis\system\Config;
 
                     $('#simulation_table').find("tr:visible").each(function (){
 
-                        var cellData = $(this).find(".run_name").text();
+                        var celldata = $(this).find(".run_name").text();
                         var cellstatus = $(this).find(".label").text();
+                        var cellscore = $(this).find(".run_score").text();
 
-                        if (!(cellstatus == 'failed' || cellstatus == 'finished')) {
+                        if (!(cellstatus == 'failed' || cellstatus == 'finished') || cellscore == 'none') {
 
-                            if (cellData != '') runUpdateList.add(cellData);
+                            if (celldata != '') runUpdateList.add(celldata);
 
                         }
 
@@ -366,7 +367,7 @@ use rrsoacis\system\Config;
 
     #simulation_table_wrapper .col-sm-12{
         overflow-x:scroll;
-				white-space: nowrap;
+        white-space: nowrap;
     }
 
 </style>
