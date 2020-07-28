@@ -6,6 +6,11 @@ RUN echo deb http://packages.dotdeb.org stretch all \
 RUN curl --fail --silent --show-error \
     --location https://www.dotdeb.org/dotdeb.gpg | apt-key add -
 
+RUN if [ -e "/etc/apt/sources.list.d/jessie-backports.list" ]; then \
+    echo "deb [check-valid-until=no] \
+    http://archive.debian.org/debian jessie-backports main" \
+    > /etc/apt/sources.list.d/jessie-backports.list ; fi
+
 RUN apt-get update && \
     apt-get install --assume-yes \
         nginx php php-fpm perl sqlite3 default-jdk zip unzip \
